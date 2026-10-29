@@ -63,7 +63,7 @@ million deterministic inputs, all BF16 round trips, and SiLU(0.125).
 Observed results: 1,458,753 conversions per ref; baseline 667,067 mismatches,
 fixed zero. SiLU(0.125) changes from `0x3d87` to the expected `0x3d88`.
 
-The PR additionally includes 18 persistent pytest cases for NaNs, infinities,
+A prepared local follow-up, not yet pushed to PR #64079, adds 18 pytest cases for NaNs, infinities,
 signed zero, both even-tie directions, subnormal rounding, and finite overflow.
 They compile the same production header. On the base header: 9 failed, 9 passed;
 on the fixed header: 18 passed. This is helper coverage; the public CPU operator
