@@ -1,0 +1,14 @@
+bits=00008001 actual=0000 expected=0001
+bits=0000ffff actual=0000 expected=0001
+bits=00018000 actual=0001 expected=0002
+bits=00018001 actual=0001 expected=0002
+bits=0001ffff actual=0001 expected=0002
+bits=00028001 actual=0002 expected=0003
+bits=0002ffff actual=0002 expected=0003
+bits=00038000 actual=0003 expected=0004
+bits=00038001 actual=0003 expected=0004
+bits=0003ffff actual=0003 expected=0004
+bits=00048001 actual=0004 expected=0005
+bits=0004ffff actual=0004 expected=0005
+SiLU(0.125): fp32=0.06640117615 bf16=3d87 expected=3d88
+Checked 1458753 conversions; mismatches=667067

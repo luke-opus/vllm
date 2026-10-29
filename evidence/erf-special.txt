@@ -1,0 +1,8 @@
+{"variant":"baseline","vlen":128,"agnostic_ones":false,"returncode":1,"checks":24,"failures":0,"nan_failures":0,"sign_failures":3}
+{"variant":"baseline","vlen":128,"agnostic_ones":true,"returncode":1,"checks":24,"failures":12,"nan_failures":12,"sign_failures":3}
+{"variant":"baseline","vlen":256,"agnostic_ones":false,"returncode":1,"checks":24,"failures":0,"nan_failures":0,"sign_failures":3}
+{"variant":"baseline","vlen":256,"agnostic_ones":true,"returncode":1,"checks":24,"failures":12,"nan_failures":12,"sign_failures":3}
+{"variant":"fixed","vlen":128,"agnostic_ones":false,"returncode":0,"checks":24,"failures":0,"nan_failures":0,"sign_failures":0}
+{"variant":"fixed","vlen":128,"agnostic_ones":true,"returncode":0,"checks":24,"failures":0,"nan_failures":0,"sign_failures":0}
+{"variant":"fixed","vlen":256,"agnostic_ones":false,"returncode":0,"checks":24,"failures":0,"nan_failures":0,"sign_failures":0}
+{"variant":"fixed","vlen":256,"agnostic_ones":true,"returncode":0,"checks":24,"failures":0,"nan_failures":0,"sign_failures":0}

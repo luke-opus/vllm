@@ -1,0 +1,2 @@
+SiLU(0.125): fp32=0.06640117615 bf16=3d88 expected=3d88
+Checked 1458753 conversions; mismatches=0
