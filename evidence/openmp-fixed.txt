@@ -1,0 +1,9 @@
+......                                                                   [100%]
+=============================== warnings summary ===============================
+vllm/__init__.py:7
+  /private/var/folders/qm/rnwm2f_911j2184m9d47jkd40000gn/T/vllm-openmp-y8dnjzxl/fixed/vllm/__init__.py:7: RuntimeWarning: Failed to read commit hash:
+  No module named 'vllm._version'
+    from .version import __version__, __version_tuple__  # isort:skip
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+6 passed, 15 deselected, 1 warning in 6.47s

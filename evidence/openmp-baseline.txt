@@ -1,0 +1,118 @@
+FF....                                                                   [100%]
+=================================== FAILURES ===================================
+___ test_riscv_preloads_bundled_openmp_for_thread_binding[torch.libs--True] ____
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x11f8c6660>
+tmp_path = PosixPath('/private/var/folders/qm/rnwm2f_911j2184m9d47jkd40000gn/T/pytest-of-luke/pytest-39/test_riscv_preloads_bundled_op0')
+library_dir = 'torch.libs', ld_preload = '', append_libgomp = True
+
+    @pytest.mark.parametrize(
+        ("library_dir", "ld_preload", "append_libgomp"),
+        [
+            ("torch.libs", "", True),
+            ("torch/lib", "/opt/lib/libcustom.so", True),
+            ("torch/lib", "/opt/lib/libgomp.so.1", False),
+            ("torch/lib", "/opt/lib/libomp.so", False),
+            ("torch/lib", "/opt/lib/libiomp5.so", False),
+            (None, "/opt/lib/libcustom.so", False),
+        ],
+    )
+    def test_riscv_preloads_bundled_openmp_for_thread_binding(
+        monkeypatch: pytest.MonkeyPatch,
+        tmp_path: Path,
+        library_dir: str | None,
+        ld_preload: str,
+        append_libgomp: bool,
+    ) -> None:
+        monkeypatch.setattr(os, "environ", os.environ.copy())
+        config = VllmConfig(device_config=DeviceConfig(device="cpu"))
+        torch_pkg = tmp_path / "torch"
+        torch_pkg.mkdir()
+        libgomp = None
+        if library_dir is not None:
+            libgomp = tmp_path / library_dir / "libgomp.so.1"
+            libgomp.parent.mkdir(parents=True, exist_ok=True)
+            libgomp.touch()
+        monkeypatch.setattr(torch, "__file__", str(torch_pkg / "__init__.py"))
+        monkeypatch.setattr("platform.system", lambda: "Linux")
+        monkeypatch.setattr("platform.machine", lambda: "riscv64")
+        monkeypatch.setattr(os, "sched_getaffinity", lambda pid: {0, 1}, raising=False)
+        monkeypatch.setenv("LD_PRELOAD", ld_preload)
+    
+        CpuPlatform.check_and_update_config(config)
+    
+        expected = ld_preload
+        if append_libgomp:
+            expected = ":".join(filter(None, (ld_preload, str(libgomp))))
+>       assert os.environ["LD_PRELOAD"] == expected
+E       AssertionError: assert '' == '/private/var.../libgomp.so.1'
+E         
+E         - /private/var/folders/qm/rnwm2f_911j2184m9d47jkd40000gn/T/pytest-of-luke/pytest-39/test_riscv_preloads_bundled_op0/torch.libs/libgomp.so.1
+
+tests/platforms/test_cpu.py:53: AssertionError
+------------------------------ Captured log call -------------------------------
+WARNING  vllm.config.vllm:vllm.py:753 Model Runner V2 requires Triton; using the V1 model runner instead.
+WARNING  vllm.platforms.cpu:cpu.py:693 Failed to import from vllm._C: ModuleNotFoundError("No module named 'vllm._C'")
+_ test_riscv_preloads_bundled_openmp_for_thread_binding[torch/lib-/opt/lib/libcustom.so-True] _
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x11f8c6750>
+tmp_path = PosixPath('/private/var/folders/qm/rnwm2f_911j2184m9d47jkd40000gn/T/pytest-of-luke/pytest-39/test_riscv_preloads_bundled_op1')
+library_dir = 'torch/lib', ld_preload = '/opt/lib/libcustom.so'
+append_libgomp = True
+
+    @pytest.mark.parametrize(
+        ("library_dir", "ld_preload", "append_libgomp"),
+        [
+            ("torch.libs", "", True),
+            ("torch/lib", "/opt/lib/libcustom.so", True),
+            ("torch/lib", "/opt/lib/libgomp.so.1", False),
+            ("torch/lib", "/opt/lib/libomp.so", False),
+            ("torch/lib", "/opt/lib/libiomp5.so", False),
+            (None, "/opt/lib/libcustom.so", False),
+        ],
+    )
+    def test_riscv_preloads_bundled_openmp_for_thread_binding(
+        monkeypatch: pytest.MonkeyPatch,
+        tmp_path: Path,
+        library_dir: str | None,
+        ld_preload: str,
+        append_libgomp: bool,
+    ) -> None:
+        monkeypatch.setattr(os, "environ", os.environ.copy())
+        config = VllmConfig(device_config=DeviceConfig(device="cpu"))
+        torch_pkg = tmp_path / "torch"
+        torch_pkg.mkdir()
+        libgomp = None
+        if library_dir is not None:
+            libgomp = tmp_path / library_dir / "libgomp.so.1"
+            libgomp.parent.mkdir(parents=True, exist_ok=True)
+            libgomp.touch()
+        monkeypatch.setattr(torch, "__file__", str(torch_pkg / "__init__.py"))
+        monkeypatch.setattr("platform.system", lambda: "Linux")
+        monkeypatch.setattr("platform.machine", lambda: "riscv64")
+        monkeypatch.setattr(os, "sched_getaffinity", lambda pid: {0, 1}, raising=False)
+        monkeypatch.setenv("LD_PRELOAD", ld_preload)
+    
+        CpuPlatform.check_and_update_config(config)
+    
+        expected = ld_preload
+        if append_libgomp:
+            expected = ":".join(filter(None, (ld_preload, str(libgomp))))
+>       assert os.environ["LD_PRELOAD"] == expected
+E       AssertionError: assert '/opt/lib/libcustom.so' == '/opt/lib/lib.../libgomp.so.1'
+E         
+E         - /opt/lib/libcustom.so:/private/var/folders/qm/rnwm2f_911j2184m9d47jkd40000gn/T/pytest-of-luke/pytest-39/test_riscv_preloads_bundled_op1/torch/lib/libgomp.so.1
+E         + /opt/lib/libcustom.so
+
+tests/platforms/test_cpu.py:53: AssertionError
+=============================== warnings summary ===============================
+vllm/__init__.py:7
+  /private/var/folders/qm/rnwm2f_911j2184m9d47jkd40000gn/T/vllm-openmp-y8dnjzxl/baseline/vllm/__init__.py:7: RuntimeWarning: Failed to read commit hash:
+  No module named 'vllm._version'
+    from .version import __version__, __version_tuple__  # isort:skip
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED tests/platforms/test_cpu.py::test_riscv_preloads_bundled_openmp_for_thread_binding[torch.libs--True]
+FAILED tests/platforms/test_cpu.py::test_riscv_preloads_bundled_openmp_for_thread_binding[torch/lib-/opt/lib/libcustom.so-True]
+2 failed, 4 passed, 15 deselected, 1 warning in 8.20s

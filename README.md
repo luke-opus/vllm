@@ -1,6 +1,6 @@
 # vLLM RISC-V numerical reproducers
 
-These isolated correctness probes support PRs #64078 and #64079. They do not
+These numerical probes and configuration regressions support PRs #64078, #64079, and #64080. They do not
 build vLLM, load weights, measure performance, or validate a real RISC-V machine.
 The production method bodies and headers are read from the requested Git refs.
 No candidate fix is synthesized by the probes.
@@ -68,6 +68,35 @@ signed zero, both even-tie directions, subnormal rounding, and finite overflow.
 They compile the same production header. On the base header: 9 failed, 9 passed;
 on the fixed header: 18 passed. This is helper coverage; the public CPU operator
 test and model inference still require the target build and runtime.
+
+## OpenMP configuration (#64080)
+
+Use a Python 3.12 environment containing the checkout's `requirements/common.txt`,
+Torch 2.14.0, and pytest:
+
+```sh
+/path/to/.venv/bin/python run-openmp.py /path/to/vllm \
+  ca8dbccf204abfcdf9dcb178f7e108c06b224b0f \
+  018ef906c8cfc72cdfa21eafac157258c63373cb
+```
+
+The runner extracts each ref's real `vllm` package into separate temporary
+directories, runs the PR's six configuration cases, and preserves the original
+checkout. Observed: base 2 failed/4 passed, fixed 6 passed. Both failures are
+missing bundled-libgomp additions. The test constructs real `VllmConfig` and
+`DeviceConfig` objects and calls `CpuPlatform.check_and_update_config`. Host
+OS/architecture, affinity, Torch's package location and temporary library files
+are simulated external inputs. This is a configuration regression on macOS
+arm64, not execution of a RISC-V worker or its OpenMP runtime.
+
+## Original pre-commit configuration
+
+All applicable hooks for each PR's changed files passed with the unmodified
+repository configuration, Node LTS 26.13.0, and the pinned hook revisions.
+The BF16 run includes the prepared local 18-case follow-up and CPU CI wiring.
+See `evidence/precommit-*.txt`. Tools were bootstrapped using a locally cached
+Node distribution checked against Node's official SHA256; no hooks were
+disabled. These are local checks, not upstream CI results.
 
 ## Remaining submission requirements
 
