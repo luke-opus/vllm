@@ -1,0 +1,1 @@
+{"version": "llguidance@1.7.6 derivre@0.3.12", "native_module": "/home/vllmtest/vllm-validation/.venv/lib/python3.12/site-packages/llguidance/_lib.abi3.so", "grammar": {"grammars": [{"name": "regex", "json_schema": null, "lark_grammar": "start: /a+/"}], "max_tokens": null}}

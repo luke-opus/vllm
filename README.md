@@ -164,6 +164,16 @@ Their generated documentation previews are available under
 and [BF16 candidate](https://luke-opus.github.io/vllm/64079-candidate/getting_started/installation/cpu/).
 The original upstream PR heads are unchanged.
 
+[Runtime dependency records](runtime-dependencies/README.md) document real
+RISC-V Harmony/XGrammar/LLGuidance builds and native API checks, plus the
+observed repository/LLM import failures before the missing packages were
+installed. The subsequent repository pytest and model runs are in progress.
+
+[Current-main candidates](followups/latest-main/README.md) apply cleanly to
+`e5196e2`; they are prepared patches, not rebuilt or tested current-main commits.
+The original branches are 338 commits behind that main. The recorded upstream
+pre-run failure is a contributor trust gate; current merged-PR count is zero.
+
 Repository pytest, real-weight model evaluation on the changed
 RISC-V path, upstream CI, and the submitting human's review/test confirmation
 are separate requirements. These probes alone do not satisfy them.

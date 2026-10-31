@@ -1,0 +1,9 @@
+{
+  "filename": "llguidance-1.7.6-cp39-abi3-manylinux_2_39_riscv64.whl",
+  "sha256": "8478513d70bf96b8d58c282daf3f1c7f1b2a69a025681f32423a3fc5b80764ec",
+  "source_version": "1.7.6",
+  "source_sha256": "db7febbe412ed2015501904646750071d7e00e6df7f85c4b956ad4f206fd2df7",
+  "elf_machine": 243,
+  "extension": "llguidance/_lib.abi3.so",
+  "build": "Source-pinned Rust1.95.0, locked release, Maturin1.16.0/cargo-zigbuild0.24.0/Zig0.17.0"
+}

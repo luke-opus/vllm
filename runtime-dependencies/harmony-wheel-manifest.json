@@ -1,0 +1,9 @@
+{
+  "filename": "oss_harmony-0.0.12-cp38-abi3-manylinux_2_39_riscv64.whl",
+  "sha256": "b8e66128921074a457746a47cce40d0042a6ad208ca924f1fefa996c71b1c668",
+  "source_version": "0.0.12",
+  "source_sha256": "6a2dd2db3ecd5ac771768c0a3091a2e1ee1354cbfcd61efa1283c26f300f0fcd",
+  "elf_machine": 243,
+  "extension": "openai_harmony/openai_harmony.abi3.so",
+  "build": "Rust1.99.1, locked release, Maturin1.16.0/cargo-zigbuild0.24.0/Zig0.17.0"
+}

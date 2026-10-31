@@ -1,0 +1,15 @@
+{
+  "mode": "FRESH WEB ONLY",
+  "preview_commit": "625547ff84648745d8c46a98433f334fbb852616",
+  "result": "public reading and actual index-to-CPU-to-FAQ navigation passed for both candidate pages",
+  "gelu": {
+    "default": "GeluAndMul approximate=none; model/operator selection retained; no new CLI/env switch",
+    "url": "https://luke-opus.github.io/vllm/64078-candidate/getting_started/installation/cpu/#which-gelu-approximation-is-used-on-risc-v"
+  },
+  "bf16": {
+    "contract": "automatic software RNE and canonical quiet NaNs; no new switch or model dtype default change",
+    "url": "https://luke-opus.github.io/vllm/64079-candidate/getting_started/installation/cpu/#which-dtype-should-be-used"
+  },
+  "search": "After export base URL fix, initialization recovered; query results and opening a search result remain unverified",
+  "scope": "Local prepared wording, explicitly NOT in upstream PR heads. Does not establish code behavior, hardware or CI."
+}

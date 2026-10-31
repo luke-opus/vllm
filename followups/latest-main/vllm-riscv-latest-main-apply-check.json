@@ -1,0 +1,27 @@
+{
+  "results": [
+    {
+      "pr": 64078,
+      "main": "e5196e2959a42908313510f55fa21f213a48802e",
+      "original_patch_apply_check": true,
+      "diagnostic": "",
+      "prepared_followup_apply_check": true,
+      "followup_diagnostic": ""
+    },
+    {
+      "pr": 64079,
+      "main": "e5196e2959a42908313510f55fa21f213a48802e",
+      "original_patch_apply_check": true,
+      "diagnostic": "",
+      "prepared_followup_apply_check": true,
+      "followup_diagnostic": ""
+    },
+    {
+      "pr": 64080,
+      "main": "e5196e2959a42908313510f55fa21f213a48802e",
+      "original_patch_apply_check": true,
+      "diagnostic": ""
+    }
+  ],
+  "scope": "Temporary Git index only; original PR heads and working files unchanged. Applicability is not a rebuilt/tested current-main result."
+}

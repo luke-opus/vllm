@@ -1,0 +1,106 @@
+diff --git a/.buildkite/test_areas/misc.yaml b/.buildkite/test_areas/misc.yaml
+index 92e0e6e..cf75b60 100644
+--- a/.buildkite/test_areas/misc.yaml
++++ b/.buildkite/test_areas/misc.yaml
+@@ -850,11 +850,13 @@ steps:
+   - tests/parser
+   - tests/transformers_utils
+   - tests/config
++  - tests/platforms/test_cpu.py
+   - tests/device_allocator
+   device: cpu-small
+   commands:
+   - pytest -v -s -m 'cpu_test' multimodal
+   - pytest -v -s config
++  - pytest -v -s platforms/test_cpu.py
+   - pytest -v -s tools/test_check_test_tethering.py
+   - pytest -v -s tools/test_check_agent_files.py
+   - pytest -v -s tools/test_check_trust_remote_code.py
+diff --git a/docs/getting_started/installation/cpu.md b/docs/getting_started/installation/cpu.md
+index ebf9ebc..b14e5ee 100644
+--- a/docs/getting_started/installation/cpu.md
++++ b/docs/getting_started/installation/cpu.md
+@@ -256,6 +256,8 @@ See [AMD Zen optimizations](#amd-zen-optimizations) for detection rules, support
+ 
+ ### How to decide `VLLM_CPU_OMP_THREADS_BIND`?
+ 
++- On Linux, including RISC-V, vLLM adds PyTorch's bundled `libgomp` to `LD_PRELOAD` before spawning CPU workers when it is available. An existing OpenMP runtime in `LD_PRELOAD` is preserved; source or distribution builds of PyTorch without a bundled `libgomp` use their configured runtime.
++
+ - Default `auto` thread-binding is recommended for most cases. Ideally, each OpenMP thread will be bound to a dedicated physical core respectively, threads of each rank will be bound to the same NUMA node respectively, and the default reserved CPUs will be kept for other vLLM components. On x86, ARM, and RISC-V, `local_world_size` CPUs are reserved in total, plus one additional CPU per local rank when KV transfer is enabled. If you have any performance problems or unexpected binding behaviours, please try to bind threads as following.
+ 
+ - On a hyper-threading enabled platform with 16 logical CPU cores / 8 physical CPU cores:
+diff --git a/tests/platforms/test_cpu.py b/tests/platforms/test_cpu.py
+index 9564362..fbf4433 100644
+--- a/tests/platforms/test_cpu.py
++++ b/tests/platforms/test_cpu.py
+@@ -2,15 +2,57 @@
+ # SPDX-FileCopyrightText: Copyright contributors to the vLLM project
+ 
+ import os
++from pathlib import Path
+ from types import SimpleNamespace
+ 
+ import pytest
+ import torch
+ 
+-from vllm.config import CacheConfig, KVTransferConfig, VllmConfig
++from vllm.config import CacheConfig, DeviceConfig, KVTransferConfig, VllmConfig
+ from vllm.platforms.cpu import CpuPlatform
+ 
+ 
++@pytest.mark.parametrize(
++    ("library_dir", "ld_preload", "append_libgomp"),
++    [
++        ("torch.libs", "", True),
++        ("torch/lib", "/opt/lib/libcustom.so", True),
++        ("torch/lib", "/opt/lib/libgomp.so.1", False),
++        ("torch/lib", "/opt/lib/libomp.so", False),
++        ("torch/lib", "/opt/lib/libiomp5.so", False),
++        (None, "/opt/lib/libcustom.so", False),
++    ],
++)
++def test_riscv_preloads_bundled_openmp_for_thread_binding(
++    monkeypatch: pytest.MonkeyPatch,
++    tmp_path: Path,
++    library_dir: str | None,
++    ld_preload: str,
++    append_libgomp: bool,
++) -> None:
++    monkeypatch.setattr(os, "environ", os.environ.copy())
++    config = VllmConfig(device_config=DeviceConfig(device="cpu"))
++    torch_pkg = tmp_path / "torch"
++    torch_pkg.mkdir()
++    libgomp = None
++    if library_dir is not None:
++        libgomp = tmp_path / library_dir / "libgomp.so.1"
++        libgomp.parent.mkdir(parents=True, exist_ok=True)
++        libgomp.touch()
++    monkeypatch.setattr(torch, "__file__", str(torch_pkg / "__init__.py"))
++    monkeypatch.setattr("platform.system", lambda: "Linux")
++    monkeypatch.setattr("platform.machine", lambda: "riscv64")
++    monkeypatch.setattr(os, "sched_getaffinity", lambda pid: {0, 1}, raising=False)
++    monkeypatch.setenv("LD_PRELOAD", ld_preload)
++
++    CpuPlatform.check_and_update_config(config)
++
++    expected = ld_preload
++    if append_libgomp:
++        expected = ":".join(filter(None, (ld_preload, str(libgomp))))
++    assert os.environ["LD_PRELOAD"] == expected
++
++
+ class _FakeModel:
+     @classmethod
+     def get_mamba_state_dtype_from_config(
+diff --git a/vllm/platforms/cpu.py b/vllm/platforms/cpu.py
+index 9d13e6e..a6f9bd1 100644
+--- a/vllm/platforms/cpu.py
++++ b/vllm/platforms/cpu.py
+@@ -467,6 +467,7 @@ class CpuPlatform(Platform):
+                 CpuArchEnum.POWERPC,
+                 CpuArchEnum.X86,
+                 CpuArchEnum.S390X,
++                CpuArchEnum.RISCV,
+             )
+             and not (
+                 "libomp" in ld_preload_str

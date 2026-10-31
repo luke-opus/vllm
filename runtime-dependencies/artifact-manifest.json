@@ -1,0 +1,10 @@
+{
+  "rustup": {
+    "url": "https://static.rust-lang.org/rustup/dist/aarch64-apple-darwin/rustup-init",
+    "sha256": "f7c7e11eb2e07f006e532a8aaac77b32f4527d305ac386c0c633ca6133d35ca9"
+  },
+  "sdist": {
+    "url": "https://files.pythonhosted.org/packages/12/56/9f5b3e589e78849575f1a64e2fd717a16af6a01ba0fd2fc7476db7557587/oss_harmony-0.0.12.tar.gz",
+    "sha256": "6a2dd2db3ecd5ac771768c0a3091a2e1ee1354cbfcd61efa1283c26f300f0fcd"
+  }
+}

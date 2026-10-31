@@ -1,0 +1,9 @@
+Resolved 1 package in 141ms
+Prepared 1 package in 641ms
+Installed 1 package in 84ms
+ + llguidance==1.7.6 (from file:///home/vllmtest/vllm-validation/llguidance-1.7.6-cp39-abi3-manylinux_2_39_riscv64.whl)
+Checked 153 packages in 60ms
+All installed packages are compatible
+{"version": "llguidance@1.7.6 derivre@0.3.12", "native_module": "/home/vllmtest/vllm-validation/.venv/lib/python3.12/site-packages/llguidance/_lib.abi3.so", "grammar": {"grammars": [{"name": "regex", "json_schema": null, "lark_grammar": "start: /a+/"}], "max_tokens": null}}
+
+Real llguidance 1.7.6 native validation passed

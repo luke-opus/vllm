@@ -1,0 +1,149 @@
+diff --git a/.buildkite/hardware_tests/cpu.yaml b/.buildkite/hardware_tests/cpu.yaml
+index d4d90ee..abc0792 100644
+--- a/.buildkite/hardware_tests/cpu.yaml
++++ b/.buildkite/hardware_tests/cpu.yaml
+@@ -8,6 +8,7 @@ steps:
+   no_plugin: true
+   source_file_dependencies:
+   - csrc/cpu/
++  - tests/kernels/core/test_cpu_float_conversion.py
+   - cmake/cpu_extension.cmake
+   - CMakeLists.txt
+   - vllm/_custom_ops.py
+@@ -41,6 +42,7 @@ steps:
+   commands:
+     - |
+       bash .buildkite/scripts/hardware_ci/run-cpu-test.sh 30m "
++      pytest -v -s tests/kernels/core/test_cpu_float_conversion.py
+       pytest -x -v -s --num-shards=$$BUILDKITE_PARALLEL_JOB_COUNT --shard-id=$$BUILDKITE_PARALLEL_JOB \
+       tests/kernels/attention/test_cpu_attn.py \
+       tests/v1/attention/test_group_head_counts.py \
+diff --git a/csrc/cpu/float_convert.hpp b/csrc/cpu/float_convert.hpp
+index 0682ef4..c934ad8 100644
+--- a/csrc/cpu/float_convert.hpp
++++ b/csrc/cpu/float_convert.hpp
+@@ -10,6 +10,10 @@ inline float bf16_to_float(uint16_t bf16) {
+ 
+ inline uint16_t float_to_bf16(float fp32) {
+   uint32_t bits = std::bit_cast<uint32_t>(fp32);
++  if ((bits & 0x7fffffffU) > 0x7f800000U) {
++    return 0x7fc0U;
++  }
++  bits += 0x7fffU + ((bits >> 16) & 1U);
+   return static_cast<uint16_t>(bits >> 16);
+ }
+ 
+diff --git a/docs/getting_started/installation/cpu.md b/docs/getting_started/installation/cpu.md
+index ebf9ebc..ae39579 100644
+--- a/docs/getting_started/installation/cpu.md
++++ b/docs/getting_started/installation/cpu.md
+@@ -160,6 +160,7 @@ VLLM_USE_PRECOMPILED=1 VLLM_PRECOMPILED_WHEEL_VARIANT=cpu VLLM_TARGET_DEVICE=cpu
+ 
+ - Currently, vLLM CPU uses model default settings as `dtype`. However, due to unstable float16 support in torch CPU, it is recommended to explicitly set `dtype=bfloat16` if there are any performance or accuracy problem.  
+ - On AMD Zen CPUs (`ZenCpuPlatform`), `float16` requires AVX512-FP16, available from Venice (6th Gen EPYC) onwards. On Turin (5th Gen EPYC) and earlier only `bfloat16` and `float32` are accepted, and models declared with `float16` are auto-downcast to `bfloat16` at model load time. See [AMD Zen optimizations](#amd-zen-optimizations).
++- On RISC-V, software conversion from `float32` to `bfloat16` uses round-to-nearest-even and preserves NaNs as canonical quiet NaNs. Software conversion is selected automatically when a CPU kernel needs it, including when native vector BF16 conversion is unavailable; no additional CLI option or environment variable enables this rounding behavior. The model's default `dtype` is unchanged.
+ 
+ ### How to launch a vLLM service on CPU?
+ 
+diff --git a/tests/kernels/core/test_cpu_activation.py b/tests/kernels/core/test_cpu_activation.py
+index 110c920..01f4869 100644
+--- a/tests/kernels/core/test_cpu_activation.py
++++ b/tests/kernels/core/test_cpu_activation.py
+@@ -28,6 +28,19 @@ D = [512, 2048]
+ SEEDS = [0]
+ 
+ 
++@torch.inference_mode()
++def test_cpu_silu_and_mul_bf16_rounds_to_nearest_even() -> None:
++    """Software BF16 stores must round the FP32 activation, not truncate it."""
++    values = torch.full((1, 128), 0.125, dtype=torch.bfloat16)
++    x = torch.cat((values, torch.ones_like(values)), dim=-1)
++    out = torch.empty_like(values)
++
++    torch.ops._C.silu_and_mul(out, x)
++
++    expected = torch.nn.functional.silu(values.float()).to(torch.bfloat16)
++    torch.testing.assert_close(out, expected, atol=0, rtol=0)
++
++
+ @pytest.mark.parametrize(
+     ("activation_cls", "fn"),
+     [
+diff --git a/tests/kernels/core/test_cpu_float_conversion.py b/tests/kernels/core/test_cpu_float_conversion.py
+new file mode 100644
+index 0000000..9f8d05b
+--- /dev/null
++++ b/tests/kernels/core/test_cpu_float_conversion.py
+@@ -0,0 +1,72 @@
++# SPDX-License-Identifier: Apache-2.0
++# SPDX-FileCopyrightText: Copyright contributors to the vLLM project
++
++import ctypes
++import os
++import shlex
++import subprocess
++from pathlib import Path
++
++import pytest
++
++
++@pytest.fixture(scope="module")
++def bf16_conversion(tmp_path_factory: pytest.TempPathFactory) -> ctypes.CDLL:
++    directory = tmp_path_factory.mktemp("bf16_conversion")
++    source = directory / "conversion.cpp"
++    library = directory / "conversion.so"
++    source.write_text(
++        '#include "float_convert.hpp"\n'
++        'extern "C" uint16_t convert(uint32_t bits) {\n'
++        "  return float_to_bf16(std::bit_cast<float>(bits));\n"
++        "}\n"
++    )
++    include = Path(__file__).resolve().parents[3] / "csrc" / "cpu"
++    subprocess.run(
++        [
++            *shlex.split(os.environ.get("CXX", "c++")),
++            "-std=c++20",
++            "-shared",
++            "-fPIC",
++            f"-I{include}",
++            str(source),
++            "-o",
++            str(library),
++        ],
++        check=True,
++        capture_output=True,
++        text=True,
++    )
++    result = ctypes.CDLL(str(library))
++    result.convert.argtypes = [ctypes.c_uint32]
++    result.convert.restype = ctypes.c_uint16
++    return result
++
++
++@pytest.mark.parametrize(
++    ("bits", "expected"),
++    [
++        (0x00000000, 0x0000),
++        (0x80000000, 0x8000),
++        (0x7F800000, 0x7F80),
++        (0xFF800000, 0xFF80),
++        (0x7F800001, 0x7FC0),
++        (0xFFFFFFFF, 0x7FC0),
++        (0x7FC00000, 0x7FC0),
++        (0x3F807FFF, 0x3F80),
++        (0x3F808000, 0x3F80),
++        (0x3F808001, 0x3F81),
++        (0x3F818000, 0x3F82),
++        (0xBF808000, 0xBF80),
++        (0xBF818000, 0xBF82),
++        (0x00008000, 0x0000),
++        (0x00008001, 0x0001),
++        (0x00018000, 0x0002),
++        (0x7F7F8000, 0x7F80),
++        (0xFF7F8000, 0xFF80),
++    ],
++)
++def test_software_bf16_rounding_and_special_values(
++    bf16_conversion: ctypes.CDLL, bits: int, expected: int
++) -> None:
++    assert bf16_conversion.convert(bits) == expected

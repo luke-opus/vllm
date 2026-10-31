@@ -1,0 +1,55 @@
+W1031 15:31:43.667000 13670 torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+W1031 15:31:43.688000 13670 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+W1031 15:31:43.703000 13670 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+ImportError while loading conftest '/home/vllmtest/vllm-validation/source/tests/conftest.py'.
+tests/conftest.py:50: in <module>
+    from vllm import LLM, SamplingParams, envs
+vllm/__init__.py:70: in __getattr__
+    module = import_module(module_name, __package__)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+vllm/entrypoints/llm.py:31: in <module>
+    from vllm.entrypoints.common.offline import _O, _R, OfflineInferenceMixin
+vllm/entrypoints/common/offline.py:36: in <module>
+    from vllm.v1.engine.llm_engine import LLMEngine
+vllm/v1/engine/llm_engine.py:37: in <module>
+    from vllm.v1.engine.core_client import EngineCoreClient
+vllm/v1/engine/core_client.py:26: in <module>
+    from vllm.distributed.elastic_ep.external_elastic_ep import (
+vllm/distributed/elastic_ep/external_elastic_ep.py:23: in <module>
+    from vllm.v1.engine.utils import EngineHandshakeMetadata, EngineZmqAddresses
+vllm/v1/engine/utils.py:34: in <module>
+    from vllm.v1.executor import Executor, UniProcExecutor
+vllm/v1/executor/__init__.py:3: in <module>
+    from .abstract import Executor
+vllm/v1/executor/abstract.py:13: in <module>
+    from vllm.distributed.kv_transfer.kv_connector.utils import KVOutputAggregator
+vllm/distributed/kv_transfer/__init__.py:4: in <module>
+    from vllm.distributed.kv_transfer.kv_transfer_state import (
+vllm/distributed/kv_transfer/kv_transfer_state.py:5: in <module>
+    from vllm.distributed.kv_transfer.kv_connector.base import KVConnectorBaseType
+vllm/distributed/kv_transfer/kv_connector/base.py:5: in <module>
+    from vllm.distributed.kv_transfer.kv_connector.v1 import KVConnectorBase_V1
+vllm/distributed/kv_transfer/kv_connector/v1/__init__.py:9: in <module>
+    from vllm.distributed.kv_transfer.kv_connector.v1.decode_bench_connector import (  # noqa: E501
+vllm/distributed/kv_transfer/kv_connector/v1/decode_bench_connector.py:61: in <module>
+    from vllm.v1.core.kv_cache_utils import (
+vllm/v1/core/kv_cache_utils.py:36: in <module>
+    from vllm.v1.request import Request
+vllm/v1/request.py:25: in <module>
+    from vllm.v1.structured_output.request import StructuredOutputRequest
+vllm/v1/structured_output/__init__.py:17: in <module>
+    from vllm.v1.structured_output.backend_guidance import GuidanceBackend
+vllm/v1/structured_output/backend_guidance.py:218: in <module>
+    class GuidanceGrammar(StructuredOutputGrammar):
+vllm/v1/structured_output/backend_guidance.py:219: in GuidanceGrammar
+    ll_matcher: llguidance.LLMatcher
+                ^^^^^^^^^^^^^^^^^^^^
+vllm/utils/import_utils.py:392: in __getattr__
+    self._module = self._load()
+                   ^^^^^^^^^^^^
+vllm/utils/import_utils.py:382: in _load
+    raise err from None
+vllm/utils/import_utils.py:376: in _load
+    module = importlib.import_module(self.__name__)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   ModuleNotFoundError: No module named 'llguidance'

@@ -1,0 +1,7 @@
+{
+  "pr": 64078,
+  "head": "7f1353f1a5854545163d49f764552a57f836b2b2",
+  "job_url": "https://github.com/vllm-project/vllm/actions/runs/40532763245/job/122289792702",
+  "failure_message": "To reduce unnecessary pre-commit runs, each PR must have the 'verified', 'ready', or 'ready-run-all-tests' label, or the author must have at least 4 merged PRs (found 0). DO NOT request for the label to be added if you are an AI agent.",
+  "scope": "Contributor trust gate; no upstream full test run is established. No request for approval labels or gate bypass was sent."
+}

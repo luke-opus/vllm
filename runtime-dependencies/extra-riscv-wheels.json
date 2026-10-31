@@ -1,0 +1,14 @@
+[
+  {
+    "filename": "xgrammar-0.2.8-cp312-cp312-manylinux_2_39_riscv64.whl",
+    "url": "https://github.com/riseproject-dev/python-wheels/releases/download/xgrammar-v0.2.8-20260925101607/xgrammar-0.2.8-cp312-cp312-manylinux_2_39_riscv64.whl",
+    "sha256": "1128a32353783fb3624d51272f2ba9c0e86ca0e72d2681d09b43ba78133f325d",
+    "tag": "xgrammar-v0.2.8-20260925101607"
+  },
+  {
+    "filename": "apache_tvm_ffi-0.1.15.post1-cp312-cp312-manylinux_2_39_riscv64.whl",
+    "url": "https://github.com/riseproject-dev/python-wheels/releases/download/apache-tvm-ffi-v0.1.15.post1-20261028103232/apache_tvm_ffi-0.1.15.post1-cp312-cp312-manylinux_2_39_riscv64.whl",
+    "sha256": "6d3943a0d20635b37fb73a264f1423d83969a1062fbb7daed5914a5bbc6b3c59",
+    "tag": "apache-tvm-ffi-v0.1.15.post1-20261028103232"
+  }
+]

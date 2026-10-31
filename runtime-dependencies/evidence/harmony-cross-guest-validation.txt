@@ -1,0 +1,12 @@
+Using CPython 3.12.3 interpreter at: .venv/bin/python
+Resolved 6 packages in 3.71s
+Prepared 1 package in 475ms
+Installed 6 packages in 269ms
+ + annotated-types==0.8.0
+ + oss-harmony==0.0.12 (from file:///home/vllmtest/vllm-validation/oss_harmony-0.0.12-cp38-abi3-manylinux_2_39_riscv64.whl)
+ + pydantic==2.14.2
+ + pydantic-core==2.50.2
+ + typing-extensions==4.16.0
+ + typing-inspection==0.4.4
+{"version": "0.0.12", "native_module": "/home/vllmtest/vllm-validation/harmony-cross-check/openai_harmony/openai_harmony.abi3.so", "round_trip": "vLLM RISC-V validation", "tokens": [85, 7454, 44, 460, 50890, 19674, 19618]}
+

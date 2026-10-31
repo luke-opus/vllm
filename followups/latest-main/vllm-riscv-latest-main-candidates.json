@@ -1,0 +1,20 @@
+[
+  {
+    "pr": 64078,
+    "base": "e5196e2959a42908313510f55fa21f213a48802e",
+    "patch": "outputs/vllm-riscv-latest-main-64078.patch",
+    "scope": "Prepared current-main candidate only; not committed, pushed to PR, rebuilt or tested at this main ref"
+  },
+  {
+    "pr": 64079,
+    "base": "e5196e2959a42908313510f55fa21f213a48802e",
+    "patch": "outputs/vllm-riscv-latest-main-64079.patch",
+    "scope": "Prepared current-main candidate only; not committed, pushed to PR, rebuilt or tested at this main ref"
+  },
+  {
+    "pr": 64080,
+    "base": "e5196e2959a42908313510f55fa21f213a48802e",
+    "patch": "outputs/vllm-riscv-latest-main-64080.patch",
+    "scope": "Prepared current-main candidate only; not committed, pushed to PR, rebuilt or tested at this main ref"
+  }
+]

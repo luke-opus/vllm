@@ -1,0 +1,6 @@
+{
+  "python_source_ref": "ca8dbccf204abfcdf9dcb178f7e108c06b224b0f",
+  "cpp_ref": "174e56854703c0b9ede89e0a41f9e04dc4c59bc1",
+  "library": "/home/vllmtest/vllm-validation/build-base/_C-bf16-linked-openmp.abi3.so",
+  "isolation": "Real complete source snapshot and fixed library; independent from repository pytest source directory"
+}
