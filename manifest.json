@@ -1,0 +1,26 @@
+{
+  "64078": {
+    "head": "7f1353f1a5854545163d49f764552a57f836b2b2",
+    "build_log": "build-erf-full.log",
+    "pages": [
+      "getting_started/installation/",
+      "getting_started/installation/cpu/"
+    ]
+  },
+  "64079": {
+    "head": "174e56854703c0b9ede89e0a41f9e04dc4c59bc1",
+    "build_log": "build-bf16-full.log",
+    "pages": [
+      "getting_started/installation/",
+      "getting_started/installation/cpu/"
+    ]
+  },
+  "64080": {
+    "head": "018ef906c8cfc72cdfa21eafac157258c63373cb",
+    "build_log": "build-openmp-full.log",
+    "pages": [
+      "getting_started/installation/",
+      "getting_started/installation/cpu/"
+    ]
+  }
+}
