@@ -152,7 +152,19 @@ tool could not open the preview; Chrome was the working fallback.
 
 ## Remaining submission requirements
 
-Full vLLM CPU operator regressions, real-weight model evaluation on the changed
+Additional [complete CPU extension comparisons](full-extension/README.md) now
+reproduce and fix both numerical bugs in real registered GELU, SiLU and MoE
+operators on emulated RISC-V Linux. They use independent full libraries and
+document the identical BLAS/OpenMP/dependency adaptations. Repository pytest
+and model-entry validation are separate from these operator comparisons.
+
+Prepared [documentation/test/CI follow-ups](followups/) remain local candidates.
+Their generated documentation previews are available under
+[ERF candidate](https://luke-opus.github.io/vllm/64078-candidate/getting_started/installation/cpu/)
+and [BF16 candidate](https://luke-opus.github.io/vllm/64079-candidate/getting_started/installation/cpu/).
+The original upstream PR heads are unchanged.
+
+Repository pytest, real-weight model evaluation on the changed
 RISC-V path, upstream CI, and the submitting human's review/test confirmation
 are separate requirements. These probes alone do not satisfy them.
 

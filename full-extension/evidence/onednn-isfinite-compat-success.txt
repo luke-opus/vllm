@@ -1,0 +1,2 @@
+Cross-compiling /home/vllmtest/vllm-validation/oneDNN-3.13/src/cpu/rv64/rvv_softmax.cpp
+Compiler exit: 0

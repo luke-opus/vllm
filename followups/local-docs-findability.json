@@ -1,0 +1,17 @@
+{
+  "mode": "LOCAL CHECKOUT ONLY",
+  "result": "passed",
+  "checks": {
+    "erf": {
+      "index": "docs/getting_started/installation/README.md:10",
+      "answer": "docs/getting_started/installation/cpu.md:164-168",
+      "default": "GeluAndMul approximate=none; existing model/operator selection retained; no enablement switch"
+    },
+    "bf16": {
+      "index": "docs/getting_started/installation/README.md:10",
+      "answer": "docs/getting_started/installation/cpu.md:163",
+      "behavior": "automatic software RNE, canonical quiet NaNs, no new switch or model dtype default change"
+    }
+  },
+  "scope": "Prepared local follow-ups, not upstream PR heads. Fresh agent checked only local source; implementation not established by this docs check."
+}

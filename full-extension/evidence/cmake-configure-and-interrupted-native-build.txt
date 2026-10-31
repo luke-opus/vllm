@@ -1,0 +1,97 @@
+Waiting for provisioned compiler tools (0 seconds)
+Waiting for provisioned compiler tools (20 seconds)
+Waiting for provisioned compiler tools (41 seconds)
+Waiting for provisioned compiler tools (61 seconds)
+Waiting for provisioned compiler tools (81 seconds)
+Waiting for provisioned compiler tools (101 seconds)
+Waiting for provisioned compiler tools (121 seconds)
+Waiting for provisioned compiler tools (141 seconds)
+Waiting for provisioned compiler tools (161 seconds)
+Waiting for provisioned compiler tools (183 seconds)
+Waiting for provisioned compiler tools (203 seconds)
+Waiting for provisioned compiler tools (224 seconds)
+Waiting for provisioned compiler tools (244 seconds)
+Waiting for provisioned compiler tools (264 seconds)
+Waiting for provisioned compiler tools (284 seconds)
+Waiting for provisioned compiler tools (304 seconds)
+Waiting for provisioned compiler tools (324 seconds)
+Ubuntu clang version 18.1.3 (1ubuntu1)
+Target: riscv64-unknown-linux-gnu
+Thread model: posix
+InstalledDir: /usr/bin
+cmake version 3.28.3
+
+CMake suite maintained and supported by Kitware (kitware.com/cmake).
+-- The CXX compiler identification is Clang 18.1.3
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/clang++-18 - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Build type: Release
+-- Target device: cpu
+-- Found Python: /home/vllmtest/vllm-validation/.venv/bin/python (found version "3.12.3") found components: Interpreter Development.Module Development.SABIModule 
+-- Found python matching: /home/vllmtest/vllm-validation/.venv/bin/python.
+CMake Warning at /home/vllmtest/vllm-validation/.venv/lib/python3.12/site-packages/torch/share/cmake/Torch/TorchConfig.cmake:22 (message):
+  library kineto not found.
+Call Stack (most recent call first):
+  /home/vllmtest/vllm-validation/.venv/lib/python3.12/site-packages/torch/share/cmake/Torch/TorchConfig.cmake:119 (append_torchlib_if_found)
+  CMakeLists.txt:115 (find_package)
+
+
+-- Found Torch: /home/vllmtest/vllm-validation/.venv/lib/python3.12/site-packages/torch/lib/libtorch.so  
+-- RISC-V detected
+-- RISC-V RVV VLEN=256
+CMake Warning at cmake/cpu_extension.cmake:280 (message):
+  BF16 functionality is not available.
+Call Stack (most recent call first):
+  CMakeLists.txt:175 (include)
+
+
+-- Using oneDNN from specified source directory: /home/vllmtest/vllm-validation/oneDNN-3.13
+-- The C compiler identification is Clang 18.1.3
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/clang-18 - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- DNNL_TARGET_ARCH: RV64
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+-- Found Threads: TRUE  
+-- Found OpenMP_C: -fopenmp=libomp (found version "5.1") 
+-- Found OpenMP_CXX: -fopenmp=libomp (found version "5.1") 
+-- Found OpenMP: TRUE (found version "5.1")  
+-- Found OpenCL headers: /home/vllmtest/vllm-validation/oneDNN-3.13/third_party/opencl
+-- Performing Test CAN_COMPILE_RVV_INTRINSICS
+-- Performing Test CAN_COMPILE_RVV_INTRINSICS - Success
+-- Performing Test CAN_COMPILE_ZVFH_INTRINSICS
+-- Performing Test CAN_COMPILE_ZVFH_INTRINSICS - Success
+-- Can compile RVV Intrinsics: TRUE
+-- Can compile Zvfh Intrinsics: 1
+-- DNNL_RISCV_USE_RVV_INTRINSICS: TRUE
+-- DNNL_RISCV_USE_ZVFH_INTRINSICS: 1
+-- Using RV64 march flag: -march=rv64gcv_zvfh
+-- Found Git: /usr/bin/git (found version "2.43.0") 
+-- Enabled testing coverage: CI
+-- Enabled workload: INFERENCE
+-- Enabled primitives: MATMUL;REORDER
+-- Enabled primitive CPU ISA: ALL
+-- Enabled primitive GPU ISA: ALL
+-- Enabled GeMM kernels ISA: ALL
+-- Primitive cache is enabled
+-- CPU extension compile flags: -fopenmp;-DVLLM_CPU_EXTENSION;-march=rv64gcv_zvfh_zvl256b;-mrvv-vector-bits=zvl;-mabi=lp64d
+-- CPU OpenBLAS library: /home/vllmtest/vllm-validation/.venv/lib/python3.12/site-packages/torch/lib/libopenblas.so.0
+-- Generating CPU attention dispatch header
+-- CPU extension source files: csrc/cpu/sgl-kernels/gemm_int4.cpp;csrc/cpu/dnnl_kernels.cpp;csrc/cpu/cpu_wna16.cpp;csrc/cpu/activation.cpp;csrc/cpu/sgl-kernels/fla.cpp;csrc/cpu/utils.cpp;csrc/cpu/spec_decode_utils.cpp;csrc/cpu/layernorm.cpp;csrc/cpu/mla_decode.cpp;csrc/cpu/pos_encoding.cpp;csrc/cpu/mamba_cpu.cpp;csrc/cpu/dynamic_4bit_int_moe_cpu.cpp;csrc/cpu/cpu_fused_moe.cpp;csrc/cpu/cpu_attn.cpp;csrc/cpu/cpu_isa.cpp;csrc/cpu/sampling_kernels.cpp;csrc/cpu/fp8_quant.cpp;csrc/cpu/torch_bindings.cpp
+-- Enabling C extension.
+-- Configuring done (164.8s)
+-- Generating done (1.1s)
+-- Build files have been written to: /home/vllmtest/vllm-validation/build-base
+[1/231] Building CXX object CMakeFiles/_C.dir/csrc/cpu/sgl-kernels/gemm_int4.cpp.o
+FAILED: CMakeFiles/_C.dir/csrc/cpu/sgl-kernels/gemm_int4.cpp.o 
+/usr/bin/clang++-18 -DPy_LIMITED_API=3 -DTORCH_EXTENSION_NAME=_C -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE -DVLLM_HAS_OPENBLAS -D_C_EXPORTS -I/home/vllmtest/vllm-validation/source/csrc -I/home/vllmtest/vllm-validation/oneDNN-3.13/include -I/home/vllmtest/vllm-validation/build-base/_deps/onednn-build/include -I/home/vllmtest/vllm-validation/oneDNN-3.13/src/../include -isystem /usr/include/python3.12 -isystem /home/vllmtest/vllm-validation/.venv/lib/python3.12/site-packages/torch/include -isystem /home/vllmtest/vllm-validation/.venv/lib/python3.12/site-packages/torch/include/torch/csrc/api/include -O3 -DNDEBUG -std=gnu++20 -fPIC -fopenmp -DVLLM_CPU_EXTENSION -march=rv64gcv_zvfh_zvl256b -mrvv-vector-bits=zvl -mabi=lp64d -MD -MT CMakeFiles/_C.dir/csrc/cpu/sgl-kernels/gemm_int4.cpp.o -MF CMakeFiles/_C.dir/csrc/cpu/sgl-kernels/gemm_int4.cpp.o.d -o CMakeFiles/_C.dir/csrc/cpu/sgl-kernels/gemm_int4.cpp.o -c /home/vllmtest/vllm-validation/source/csrc/cpu/sgl-kernels/gemm_int4.cpp
+[2/231] Building CXX object CMakeFiles/dnnl_ext.dir/csrc/cpu/dnnl_helper.cpp.o
+FAILED: CMakeFiles/dnnl_ext.dir/csrc/cpu/dnnl_helper.cpp.o 
+/usr/bin/clang++-18 -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE -I/home/vllmtest/vllm-validation/source/csrc -I/home/vllmtest/vllm-validation/oneDNN-3.13/include -I/home/vllmtest/vllm-validation/build-base/_deps/onednn-build/include -I/home/vllmtest/vllm-validation/oneDNN-3.13/src -I/home/vllmtest/vllm-validation/oneDNN-3.13/src/../include -isystem /home/vllmtest/vllm-validation/.venv/lib/python3.12/site-packages/torch/include -isystem /home/vllmtest/vllm-validation/.venv/lib/python3.12/site-packages/torch/include/torch/csrc/api/include -O3 -DNDEBUG -std=gnu++20 -fopenmp -DVLLM_CPU_EXTENSION -march=rv64gcv_zvfh_zvl256b -mrvv-vector-bits=zvl -mabi=lp64d -fPIC -MD -MT CMakeFiles/dnnl_ext.dir/csrc/cpu/dnnl_helper.cpp.o -MF CMakeFiles/dnnl_ext.dir/csrc/cpu/dnnl_helper.cpp.o.d -o CMakeFiles/dnnl_ext.dir/csrc/cpu/dnnl_helper.cpp.o -c /home/vllmtest/vllm-validation/source/csrc/cpu/dnnl_helper.cpp
+ninja: build stopped: subcommand failed.

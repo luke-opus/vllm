@@ -1,0 +1,46 @@
+{
+  "base": "ca8dbccf204abfcdf9dcb178f7e108c06b224b0f",
+  "upstream_main": "e5196e2959a42908313510f55fa21f213a48802e",
+  "guest": {
+    "image_sha256": "2d48190b4de1a809879c7b2137381a24b52a3a23a65b4d4a7b3f6d7ae774b7e9",
+    "torch_sha256": "23da9af03ed3d293814721f0e9fdf50d5f49d1c4dfd922c6b547829d78783c12",
+    "torch_version": "2.14.0+cpu",
+    "python": "3.12.3",
+    "uv": "0.13.6",
+    "qemu": "11.1.2",
+    "vlen": 256,
+    "agnostic_ones": true
+  },
+  "oneDNN": {
+    "tag": "v3.13",
+    "commit": "0e2a5bfeef1bfbffc3137464606540233086ce9b"
+  },
+  "scope": "Complete CPU CMake object list cross-compiled, native target linking completed; actual public-op comparisons running in QEMU. Native silicon/model/CI not established.",
+  "compiler": {
+    "host": "Zig 0.17.0 bundled Clang",
+    "native_configure": "Clang 18.1.3",
+    "target": "riscv64-linux-gnu.2.39",
+    "RVV": "1.0 VLEN256, Zvfh, software BF16",
+    "objects_base": 229,
+    "source_objects_per_fix": 19
+  },
+  "compatibility": {
+    "oneDNN": "rvv_softmax.cpp forced include <cmath>; using std::isfinite; unchanged algorithms",
+    "OpenBLAS": "RISE wheel lacks sbgemm_; same -UVLLM_HAS_OPENBLAS fla.cpp rebuild in base/erf/bf16 invokes existing real PyTorch reference BLAS fallback",
+    "OpenMP": "LD_PRELOAD=/usr/lib/llvm-18/lib/libomp.so for Clang-built vLLM; no worker or performance proof"
+  },
+  "libraries": {
+    "base": {
+      "file": "_C-base-reference-blas.abi3.so",
+      "bytes": 213843200
+    },
+    "erf": {
+      "file": "_C-erf-reference-blas.abi3.so",
+      "bytes": 213842680
+    },
+    "bf16": {
+      "file": "_C-bf16-reference-blas.abi3.so",
+      "bytes": 213862280
+    }
+  }
+}

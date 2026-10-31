@@ -1,0 +1,10 @@
+{
+  "objects": 229,
+  "sha256": "03b606a7766ab3e7919bb79b66994808f41490e0a82adf1a3fcd20ce5a9a8222",
+  "bytes": 93528740,
+  "source_ref": "ca8dbccf204abfcdf9dcb178f7e108c06b224b0f",
+  "target": "riscv64-linux-gnu.2.39",
+  "compiler": "Zig 0.17.0 / bundled Clang",
+  "scope": "Complete native-generated CPU CMake compilation list; native linking/execution pending",
+  "dependency_compatibility": "oneDNN v3.13 rvv_softmax.cpp needs a forced header importing std::isfinite under this Clang/libstdc++ combination; all numerical implementations are unchanged"
+}

@@ -1,0 +1,273 @@
+Cross-compiling /home/vllmtest/vllm-validation/source/csrc/cpu/sgl-kernels/fla.cpp
+/Users/luke/Documents/Codex/2026-10-27/chu/work/riscv-cross/vllm-validation/source/csrc/cpu/sgl-kernels/fla.cpp:2435:9: warning: left operand of comma operator has no effect [-Wunused-value]
+ 2435 |         "fused_sigmoid_gating_delta_rule_update_kernel_impl", [&] {
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/luke/Documents/Codex/2026-10-27/chu/work/riscv-cross/vllm-validation/source/csrc/cpu/sgl-kernels/common.h:219:59: note: expanded from macro 'CPU_DISPATCH_REDUCED_FLOATING_TYPES_EXT'
+  219 |       CPU_DISPATCH_TYPE1_WITH_PARAM_REDUCED(TYPE1, float, __VA_ARGS__) \
+      |                                                           ^~~~~~~~~~~
+/Users/luke/Documents/Codex/2026-10-27/chu/work/riscv-cross/vllm-validation/source/csrc/cpu/sgl-kernels/common.h:168:14: note: expanded from macro 'CPU_DISPATCH_TYPE1_WITH_PARAM_REDUCED'
+  168 |       return __VA_ARGS__();                                        \
+      |              ^~~~~~~~~~~
+/Users/luke/Documents/Codex/2026-10-27/chu/work/riscv-cross/vllm-validation/source/csrc/cpu/sgl-kernels/fla.cpp:2469:11: note: in instantiation of function template specialization 'fused_sigmoid_gating_delta_rule_update_cpu(const at::Tensor &, const at::Tensor &, const at::Tensor &, const at::Tensor &, const at::Tensor &, const at::Tensor &, const at::Tensor &, at::Tensor &, const at::Tensor &, const at::Tensor &, bool, double, double)::(lambda)::operator()<float>' requested here
+ 2469 |     launch(float());
+      |           ^
+/Users/luke/Documents/Codex/2026-10-27/chu/work/riscv-cross/vllm-validation/source/csrc/cpu/sgl-kernels/fla.cpp:2435:9: warning: left operand of comma operator has no effect [-Wunused-value]
+ 2435 |         "fused_sigmoid_gating_delta_rule_update_kernel_impl", [&] {
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/luke/Documents/Codex/2026-10-27/chu/work/riscv-cross/vllm-validation/source/csrc/cpu/sgl-kernels/common.h:219:59: note: expanded from macro 'CPU_DISPATCH_REDUCED_FLOATING_TYPES_EXT'
+  219 |       CPU_DISPATCH_TYPE1_WITH_PARAM_REDUCED(TYPE1, float, __VA_ARGS__) \
+      |                                                           ^~~~~~~~~~~
+/Users/luke/Documents/Codex/2026-10-27/chu/work/riscv-cross/vllm-validation/source/csrc/cpu/sgl-kernels/common.h:173:14: note: expanded from macro 'CPU_DISPATCH_TYPE1_WITH_PARAM_REDUCED'
+  173 |       return __VA_ARGS__();                                        \
+      |              ^~~~~~~~~~~
+/Users/luke/Documents/Codex/2026-10-27/chu/work/riscv-cross/vllm-validation/source/csrc/cpu/sgl-kernels/fla.cpp:2435:9: warning: left operand of comma operator has no effect [-Wunused-value]
+ 2435 |         "fused_sigmoid_gating_delta_rule_update_kernel_impl", [&] {
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/luke/Documents/Codex/2026-10-27/chu/work/riscv-cross/vllm-validation/source/csrc/cpu/sgl-kernels/common.h:222:57: note: expanded from macro 'CPU_DISPATCH_REDUCED_FLOATING_TYPES_EXT'
+  222 |       CPU_DISPATCH_TYPE1_WITH_SAME_PARAM_REDUCED(TYPE1, __VA_ARGS__)   \
+      |                                                         ^~~~~~~~~~~
+/Users/luke/Documents/Codex/2026-10-27/chu/work/riscv-cross/vllm-validation/source/csrc/cpu/sgl-kernels/common.h:186:14: note: expanded from macro 'CPU_DISPATCH_TYPE1_WITH_SAME_PARAM_REDUCED'
+  186 |       return __VA_ARGS__();                                          \
+      |              ^~~~~~~~~~~
+/Users/luke/Documents/Codex/2026-10-27/chu/work/riscv-cross/vllm-validation/source/csrc/cpu/sgl-kernels/fla.cpp:2435:9: warning: left operand of comma operator has no effect [-Wunused-value]
+ 2435 |         "fused_sigmoid_gating_delta_rule_update_kernel_impl", [&] {
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/luke/Documents/Codex/2026-10-27/chu/work/riscv-cross/vllm-validation/source/csrc/cpu/sgl-kernels/common.h:222:57: note: expanded from macro 'CPU_DISPATCH_REDUCED_FLOATING_TYPES_EXT'
+  222 |       CPU_DISPATCH_TYPE1_WITH_SAME_PARAM_REDUCED(TYPE1, __VA_ARGS__)   \
+      |                                                         ^~~~~~~~~~~
+/Users/luke/Documents/Codex/2026-10-27/chu/work/riscv-cross/vllm-validation/source/csrc/cpu/sgl-kernels/common.h:191:14: note: expanded from macro 'CPU_DISPATCH_TYPE1_WITH_SAME_PARAM_REDUCED'
+  191 |       return __VA_ARGS__();                                          \
+      |              ^~~~~~~~~~~
+/Users/luke/Documents/Codex/2026-10-27/chu/work/riscv-cross/vllm-validation/source/csrc/cpu/sgl-kernels/fla.cpp:2435:9: warning: left operand of comma operator has no effect [-Wunused-value]
+ 2435 |         "fused_sigmoid_gating_delta_rule_update_kernel_impl", [&] {
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/luke/Documents/Codex/2026-10-27/chu/work/riscv-cross/vllm-validation/source/csrc/cpu/sgl-kernels/common.h:219:59: note: expanded from macro 'CPU_DISPATCH_REDUCED_FLOATING_TYPES_EXT'
+  219 |       CPU_DISPATCH_TYPE1_WITH_PARAM_REDUCED(TYPE1, float, __VA_ARGS__) \
+      |                                                           ^~~~~~~~~~~
+/Users/luke/Documents/Codex/2026-10-27/chu/work/riscv-cross/vllm-validation/source/csrc/cpu/sgl-kernels/common.h:168:14: note: expanded from macro 'CPU_DISPATCH_TYPE1_WITH_PARAM_REDUCED'
+  168 |       return __VA_ARGS__();                                        \
+      |              ^~~~~~~~~~~
+/Users/luke/Documents/Codex/2026-10-27/chu/work/riscv-cross/vllm-validation/source/csrc/cpu/sgl-kernels/fla.cpp:2471:11: note: in instantiation of function template specialization 'fused_sigmoid_gating_delta_rule_update_cpu(const at::Tensor &, const at::Tensor &, const at::Tensor &, const at::Tensor &, const at::Tensor &, const at::Tensor &, const at::Tensor &, at::Tensor &, const at::Tensor &, const at::Tensor &, bool, double, double)::(lambda)::operator()<c10::BFloat16>' requested here
+ 2471 |     launch(at::BFloat16());
+      |           ^
+/Users/luke/Documents/Codex/2026-10-27/chu/work/riscv-cross/vllm-validation/source/csrc/cpu/sgl-kernels/fla.cpp:2435:9: warning: left operand of comma operator has no effect [-Wunused-value]
+ 2435 |         "fused_sigmoid_gating_delta_rule_update_kernel_impl", [&] {
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/luke/Documents/Codex/2026-10-27/chu/work/riscv-cross/vllm-validation/source/csrc/cpu/sgl-kernels/common.h:219:59: note: expanded from macro 'CPU_DISPATCH_REDUCED_FLOATING_TYPES_EXT'
+  219 |       CPU_DISPATCH_TYPE1_WITH_PARAM_REDUCED(TYPE1, float, __VA_ARGS__) \
+      |                                                           ^~~~~~~~~~~
+/Users/luke/Documents/Codex/2026-10-27/chu/work/riscv-cross/vllm-validation/source/csrc/cpu/sgl-kernels/common.h:173:14: note: expanded from macro 'CPU_DISPATCH_TYPE1_WITH_PARAM_REDUCED'
+  173 |       return __VA_ARGS__();                                        \
+      |              ^~~~~~~~~~~
+/Users/luke/Documents/Codex/2026-10-27/chu/work/riscv-cross/vllm-validation/source/csrc/cpu/sgl-kernels/fla.cpp:2435:9: warning: left operand of comma operator has no effect [-Wunused-value]
+ 2435 |         "fused_sigmoid_gating_delta_rule_update_kernel_impl", [&] {
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/luke/Documents/Codex/2026-10-27/chu/work/riscv-cross/vllm-validation/source/csrc/cpu/sgl-kernels/common.h:222:57: note: expanded from macro 'CPU_DISPATCH_REDUCED_FLOATING_TYPES_EXT'
+  222 |       CPU_DISPATCH_TYPE1_WITH_SAME_PARAM_REDUCED(TYPE1, __VA_ARGS__)   \
+      |                                                         ^~~~~~~~~~~
+/Users/luke/Documents/Codex/2026-10-27/chu/work/riscv-cross/vllm-validation/source/csrc/cpu/sgl-kernels/common.h:186:14: note: expanded from macro 'CPU_DISPATCH_TYPE1_WITH_SAME_PARAM_REDUCED'
+  186 |       return __VA_ARGS__();                                          \
+      |              ^~~~~~~~~~~
+/Users/luke/Documents/Codex/2026-10-27/chu/work/riscv-cross/vllm-validation/source/csrc/cpu/sgl-kernels/fla.cpp:2435:9: warning: left operand of comma operator has no effect [-Wunused-value]
+ 2435 |         "fused_sigmoid_gating_delta_rule_update_kernel_impl", [&] {
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/luke/Documents/Codex/2026-10-27/chu/work/riscv-cross/vllm-validation/source/csrc/cpu/sgl-kernels/common.h:222:57: note: expanded from macro 'CPU_DISPATCH_REDUCED_FLOATING_TYPES_EXT'
+  222 |       CPU_DISPATCH_TYPE1_WITH_SAME_PARAM_REDUCED(TYPE1, __VA_ARGS__)   \
+      |                                                         ^~~~~~~~~~~
+/Users/luke/Documents/Codex/2026-10-27/chu/work/riscv-cross/vllm-validation/source/csrc/cpu/sgl-kernels/common.h:191:14: note: expanded from macro 'CPU_DISPATCH_TYPE1_WITH_SAME_PARAM_REDUCED'
+  191 |       return __VA_ARGS__();                                          \
+      |              ^~~~~~~~~~~
+/Users/luke/Documents/Codex/2026-10-27/chu/work/riscv-cross/vllm-validation/source/csrc/cpu/sgl-kernels/fla.cpp:2435:9: warning: left operand of comma operator has no effect [-Wunused-value]
+ 2435 |         "fused_sigmoid_gating_delta_rule_update_kernel_impl", [&] {
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/luke/Documents/Codex/2026-10-27/chu/work/riscv-cross/vllm-validation/source/csrc/cpu/sgl-kernels/common.h:219:59: note: expanded from macro 'CPU_DISPATCH_REDUCED_FLOATING_TYPES_EXT'
+  219 |       CPU_DISPATCH_TYPE1_WITH_PARAM_REDUCED(TYPE1, float, __VA_ARGS__) \
+      |                                                           ^~~~~~~~~~~
+/Users/luke/Documents/Codex/2026-10-27/chu/work/riscv-cross/vllm-validation/source/csrc/cpu/sgl-kernels/common.h:168:14: note: expanded from macro 'CPU_DISPATCH_TYPE1_WITH_PARAM_REDUCED'
+  168 |       return __VA_ARGS__();                                        \
+      |              ^~~~~~~~~~~
+/Users/luke/Documents/Codex/2026-10-27/chu/work/riscv-cross/vllm-validation/source/csrc/cpu/sgl-kernels/fla.cpp:2473:11: note: in instantiation of function template specialization 'fused_sigmoid_gating_delta_rule_update_cpu(const at::Tensor &, const at::Tensor &, const at::Tensor &, const at::Tensor &, const at::Tensor &, const at::Tensor &, const at::Tensor &, at::Tensor &, const at::Tensor &, const at::Tensor &, bool, double, double)::(lambda)::operator()<c10::Half>' requested here
+ 2473 |     launch(at::Half());
+      |           ^
+/Users/luke/Documents/Codex/2026-10-27/chu/work/riscv-cross/vllm-validation/source/csrc/cpu/sgl-kernels/fla.cpp:2435:9: warning: left operand of comma operator has no effect [-Wunused-value]
+ 2435 |         "fused_sigmoid_gating_delta_rule_update_kernel_impl", [&] {
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/luke/Documents/Codex/2026-10-27/chu/work/riscv-cross/vllm-validation/source/csrc/cpu/sgl-kernels/common.h:219:59: note: expanded from macro 'CPU_DISPATCH_REDUCED_FLOATING_TYPES_EXT'
+  219 |       CPU_DISPATCH_TYPE1_WITH_PARAM_REDUCED(TYPE1, float, __VA_ARGS__) \
+      |                                                           ^~~~~~~~~~~
+/Users/luke/Documents/Codex/2026-10-27/chu/work/riscv-cross/vllm-validation/source/csrc/cpu/sgl-kernels/common.h:173:14: note: expanded from macro 'CPU_DISPATCH_TYPE1_WITH_PARAM_REDUCED'
+  173 |       return __VA_ARGS__();                                        \
+      |              ^~~~~~~~~~~
+/Users/luke/Documents/Codex/2026-10-27/chu/work/riscv-cross/vllm-validation/source/csrc/cpu/sgl-kernels/fla.cpp:2435:9: warning: left operand of comma operator has no effect [-Wunused-value]
+ 2435 |         "fused_sigmoid_gating_delta_rule_update_kernel_impl", [&] {
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/luke/Documents/Codex/2026-10-27/chu/work/riscv-cross/vllm-validation/source/csrc/cpu/sgl-kernels/common.h:222:57: note: expanded from macro 'CPU_DISPATCH_REDUCED_FLOATING_TYPES_EXT'
+  222 |       CPU_DISPATCH_TYPE1_WITH_SAME_PARAM_REDUCED(TYPE1, __VA_ARGS__)   \
+      |                                                         ^~~~~~~~~~~
+/Users/luke/Documents/Codex/2026-10-27/chu/work/riscv-cross/vllm-validation/source/csrc/cpu/sgl-kernels/common.h:186:14: note: expanded from macro 'CPU_DISPATCH_TYPE1_WITH_SAME_PARAM_REDUCED'
+  186 |       return __VA_ARGS__();                                          \
+      |              ^~~~~~~~~~~
+/Users/luke/Documents/Codex/2026-10-27/chu/work/riscv-cross/vllm-validation/source/csrc/cpu/sgl-kernels/fla.cpp:2435:9: warning: left operand of comma operator has no effect [-Wunused-value]
+ 2435 |         "fused_sigmoid_gating_delta_rule_update_kernel_impl", [&] {
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/luke/Documents/Codex/2026-10-27/chu/work/riscv-cross/vllm-validation/source/csrc/cpu/sgl-kernels/common.h:222:57: note: expanded from macro 'CPU_DISPATCH_REDUCED_FLOATING_TYPES_EXT'
+  222 |       CPU_DISPATCH_TYPE1_WITH_SAME_PARAM_REDUCED(TYPE1, __VA_ARGS__)   \
+      |                                                         ^~~~~~~~~~~
+/Users/luke/Documents/Codex/2026-10-27/chu/work/riscv-cross/vllm-validation/source/csrc/cpu/sgl-kernels/common.h:191:14: note: expanded from macro 'CPU_DISPATCH_TYPE1_WITH_SAME_PARAM_REDUCED'
+  191 |       return __VA_ARGS__();                                          \
+      |              ^~~~~~~~~~~
+/Users/luke/Documents/Codex/2026-10-27/chu/work/riscv-cross/vllm-validation/source/csrc/cpu/sgl-kernels/fla.cpp:2593:9: warning: left operand of comma operator has no effect [-Wunused-value]
+ 2593 |         "fused_sigmoid_gating_delta_rule_update_spec_kernel_impl", [&] {
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/luke/Documents/Codex/2026-10-27/chu/work/riscv-cross/vllm-validation/source/csrc/cpu/sgl-kernels/common.h:219:59: note: expanded from macro 'CPU_DISPATCH_REDUCED_FLOATING_TYPES_EXT'
+  219 |       CPU_DISPATCH_TYPE1_WITH_PARAM_REDUCED(TYPE1, float, __VA_ARGS__) \
+      |                                                           ^~~~~~~~~~~
+/Users/luke/Documents/Codex/2026-10-27/chu/work/riscv-cross/vllm-validation/source/csrc/cpu/sgl-kernels/common.h:168:14: note: expanded from macro 'CPU_DISPATCH_TYPE1_WITH_PARAM_REDUCED'
+  168 |       return __VA_ARGS__();                                        \
+      |              ^~~~~~~~~~~
+/Users/luke/Documents/Codex/2026-10-27/chu/work/riscv-cross/vllm-validation/source/csrc/cpu/sgl-kernels/fla.cpp:2628:11: note: in instantiation of function template specialization 'fused_sigmoid_gating_delta_rule_update_spec_cpu(const at::Tensor &, const at::Tensor &, const at::Tensor &, const at::Tensor &, const at::Tensor &, const at::Tensor &, const at::Tensor &, at::Tensor &, const at::Tensor &, const at::Tensor &, const at::Tensor &, bool, double, double)::(lambda)::operator()<float>' requested here
+ 2628 |     launch(float());
+      |           ^
+/Users/luke/Documents/Codex/2026-10-27/chu/work/riscv-cross/vllm-validation/source/csrc/cpu/sgl-kernels/fla.cpp:2593:9: warning: left operand of comma operator has no effect [-Wunused-value]
+ 2593 |         "fused_sigmoid_gating_delta_rule_update_spec_kernel_impl", [&] {
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/luke/Documents/Codex/2026-10-27/chu/work/riscv-cross/vllm-validation/source/csrc/cpu/sgl-kernels/common.h:219:59: note: expanded from macro 'CPU_DISPATCH_REDUCED_FLOATING_TYPES_EXT'
+  219 |       CPU_DISPATCH_TYPE1_WITH_PARAM_REDUCED(TYPE1, float, __VA_ARGS__) \
+      |                                                           ^~~~~~~~~~~
+/Users/luke/Documents/Codex/2026-10-27/chu/work/riscv-cross/vllm-validation/source/csrc/cpu/sgl-kernels/common.h:173:14: note: expanded from macro 'CPU_DISPATCH_TYPE1_WITH_PARAM_REDUCED'
+  173 |       return __VA_ARGS__();                                        \
+      |              ^~~~~~~~~~~
+/Users/luke/Documents/Codex/2026-10-27/chu/work/riscv-cross/vllm-validation/source/csrc/cpu/sgl-kernels/fla.cpp:2593:9: warning: left operand of comma operator has no effect [-Wunused-value]
+ 2593 |         "fused_sigmoid_gating_delta_rule_update_spec_kernel_impl", [&] {
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/luke/Documents/Codex/2026-10-27/chu/work/riscv-cross/vllm-validation/source/csrc/cpu/sgl-kernels/common.h:222:57: note: expanded from macro 'CPU_DISPATCH_REDUCED_FLOATING_TYPES_EXT'
+  222 |       CPU_DISPATCH_TYPE1_WITH_SAME_PARAM_REDUCED(TYPE1, __VA_ARGS__)   \
+      |                                                         ^~~~~~~~~~~
+/Users/luke/Documents/Codex/2026-10-27/chu/work/riscv-cross/vllm-validation/source/csrc/cpu/sgl-kernels/common.h:186:14: note: expanded from macro 'CPU_DISPATCH_TYPE1_WITH_SAME_PARAM_REDUCED'
+  186 |       return __VA_ARGS__();                                          \
+      |              ^~~~~~~~~~~
+/Users/luke/Documents/Codex/2026-10-27/chu/work/riscv-cross/vllm-validation/source/csrc/cpu/sgl-kernels/fla.cpp:2593:9: warning: left operand of comma operator has no effect [-Wunused-value]
+ 2593 |         "fused_sigmoid_gating_delta_rule_update_spec_kernel_impl", [&] {
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/luke/Documents/Codex/2026-10-27/chu/work/riscv-cross/vllm-validation/source/csrc/cpu/sgl-kernels/common.h:222:57: note: expanded from macro 'CPU_DISPATCH_REDUCED_FLOATING_TYPES_EXT'
+  222 |       CPU_DISPATCH_TYPE1_WITH_SAME_PARAM_REDUCED(TYPE1, __VA_ARGS__)   \
+      |                                                         ^~~~~~~~~~~
+/Users/luke/Documents/Codex/2026-10-27/chu/work/riscv-cross/vllm-validation/source/csrc/cpu/sgl-kernels/common.h:191:14: note: expanded from macro 'CPU_DISPATCH_TYPE1_WITH_SAME_PARAM_REDUCED'
+  191 |       return __VA_ARGS__();                                          \
+      |              ^~~~~~~~~~~
+/Users/luke/Documents/Codex/2026-10-27/chu/work/riscv-cross/vllm-validation/source/csrc/cpu/sgl-kernels/fla.cpp:2593:9: warning: left operand of comma operator has no effect [-Wunused-value]
+ 2593 |         "fused_sigmoid_gating_delta_rule_update_spec_kernel_impl", [&] {
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/luke/Documents/Codex/2026-10-27/chu/work/riscv-cross/vllm-validation/source/csrc/cpu/sgl-kernels/common.h:219:59: note: expanded from macro 'CPU_DISPATCH_REDUCED_FLOATING_TYPES_EXT'
+  219 |       CPU_DISPATCH_TYPE1_WITH_PARAM_REDUCED(TYPE1, float, __VA_ARGS__) \
+      |                                                           ^~~~~~~~~~~
+/Users/luke/Documents/Codex/2026-10-27/chu/work/riscv-cross/vllm-validation/source/csrc/cpu/sgl-kernels/common.h:168:14: note: expanded from macro 'CPU_DISPATCH_TYPE1_WITH_PARAM_REDUCED'
+  168 |       return __VA_ARGS__();                                        \
+      |              ^~~~~~~~~~~
+/Users/luke/Documents/Codex/2026-10-27/chu/work/riscv-cross/vllm-validation/source/csrc/cpu/sgl-kernels/fla.cpp:2630:11: note: in instantiation of function template specialization 'fused_sigmoid_gating_delta_rule_update_spec_cpu(const at::Tensor &, const at::Tensor &, const at::Tensor &, const at::Tensor &, const at::Tensor &, const at::Tensor &, const at::Tensor &, at::Tensor &, const at::Tensor &, const at::Tensor &, const at::Tensor &, bool, double, double)::(lambda)::operator()<c10::BFloat16>' requested here
+ 2630 |     launch(at::BFloat16());
+      |           ^
+/Users/luke/Documents/Codex/2026-10-27/chu/work/riscv-cross/vllm-validation/source/csrc/cpu/sgl-kernels/fla.cpp:2593:9: warning: left operand of comma operator has no effect [-Wunused-value]
+ 2593 |         "fused_sigmoid_gating_delta_rule_update_spec_kernel_impl", [&] {
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/luke/Documents/Codex/2026-10-27/chu/work/riscv-cross/vllm-validation/source/csrc/cpu/sgl-kernels/common.h:219:59: note: expanded from macro 'CPU_DISPATCH_REDUCED_FLOATING_TYPES_EXT'
+  219 |       CPU_DISPATCH_TYPE1_WITH_PARAM_REDUCED(TYPE1, float, __VA_ARGS__) \
+      |                                                           ^~~~~~~~~~~
+/Users/luke/Documents/Codex/2026-10-27/chu/work/riscv-cross/vllm-validation/source/csrc/cpu/sgl-kernels/common.h:173:14: note: expanded from macro 'CPU_DISPATCH_TYPE1_WITH_PARAM_REDUCED'
+  173 |       return __VA_ARGS__();                                        \
+      |              ^~~~~~~~~~~
+/Users/luke/Documents/Codex/2026-10-27/chu/work/riscv-cross/vllm-validation/source/csrc/cpu/sgl-kernels/fla.cpp:2593:9: warning: left operand of comma operator has no effect [-Wunused-value]
+ 2593 |         "fused_sigmoid_gating_delta_rule_update_spec_kernel_impl", [&] {
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/luke/Documents/Codex/2026-10-27/chu/work/riscv-cross/vllm-validation/source/csrc/cpu/sgl-kernels/common.h:222:57: note: expanded from macro 'CPU_DISPATCH_REDUCED_FLOATING_TYPES_EXT'
+  222 |       CPU_DISPATCH_TYPE1_WITH_SAME_PARAM_REDUCED(TYPE1, __VA_ARGS__)   \
+      |                                                         ^~~~~~~~~~~
+/Users/luke/Documents/Codex/2026-10-27/chu/work/riscv-cross/vllm-validation/source/csrc/cpu/sgl-kernels/common.h:186:14: note: expanded from macro 'CPU_DISPATCH_TYPE1_WITH_SAME_PARAM_REDUCED'
+  186 |       return __VA_ARGS__();                                          \
+      |              ^~~~~~~~~~~
+/Users/luke/Documents/Codex/2026-10-27/chu/work/riscv-cross/vllm-validation/source/csrc/cpu/sgl-kernels/fla.cpp:2593:9: warning: left operand of comma operator has no effect [-Wunused-value]
+ 2593 |         "fused_sigmoid_gating_delta_rule_update_spec_kernel_impl", [&] {
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/luke/Documents/Codex/2026-10-27/chu/work/riscv-cross/vllm-validation/source/csrc/cpu/sgl-kernels/common.h:222:57: note: expanded from macro 'CPU_DISPATCH_REDUCED_FLOATING_TYPES_EXT'
+  222 |       CPU_DISPATCH_TYPE1_WITH_SAME_PARAM_REDUCED(TYPE1, __VA_ARGS__)   \
+      |                                                         ^~~~~~~~~~~
+/Users/luke/Documents/Codex/2026-10-27/chu/work/riscv-cross/vllm-validation/source/csrc/cpu/sgl-kernels/common.h:191:14: note: expanded from macro 'CPU_DISPATCH_TYPE1_WITH_SAME_PARAM_REDUCED'
+  191 |       return __VA_ARGS__();                                          \
+      |              ^~~~~~~~~~~
+/Users/luke/Documents/Codex/2026-10-27/chu/work/riscv-cross/vllm-validation/source/csrc/cpu/sgl-kernels/fla.cpp:2593:9: warning: left operand of comma operator has no effect [-Wunused-value]
+ 2593 |         "fused_sigmoid_gating_delta_rule_update_spec_kernel_impl", [&] {
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/luke/Documents/Codex/2026-10-27/chu/work/riscv-cross/vllm-validation/source/csrc/cpu/sgl-kernels/common.h:219:59: note: expanded from macro 'CPU_DISPATCH_REDUCED_FLOATING_TYPES_EXT'
+  219 |       CPU_DISPATCH_TYPE1_WITH_PARAM_REDUCED(TYPE1, float, __VA_ARGS__) \
+      |                                                           ^~~~~~~~~~~
+/Users/luke/Documents/Codex/2026-10-27/chu/work/riscv-cross/vllm-validation/source/csrc/cpu/sgl-kernels/common.h:168:14: note: expanded from macro 'CPU_DISPATCH_TYPE1_WITH_PARAM_REDUCED'
+  168 |       return __VA_ARGS__();                                        \
+      |              ^~~~~~~~~~~
+/Users/luke/Documents/Codex/2026-10-27/chu/work/riscv-cross/vllm-validation/source/csrc/cpu/sgl-kernels/fla.cpp:2632:11: note: in instantiation of function template specialization 'fused_sigmoid_gating_delta_rule_update_spec_cpu(const at::Tensor &, const at::Tensor &, const at::Tensor &, const at::Tensor &, const at::Tensor &, const at::Tensor &, const at::Tensor &, at::Tensor &, const at::Tensor &, const at::Tensor &, const at::Tensor &, bool, double, double)::(lambda)::operator()<c10::Half>' requested here
+ 2632 |     launch(at::Half());
+      |           ^
+/Users/luke/Documents/Codex/2026-10-27/chu/work/riscv-cross/vllm-validation/source/csrc/cpu/sgl-kernels/fla.cpp:2593:9: warning: left operand of comma operator has no effect [-Wunused-value]
+ 2593 |         "fused_sigmoid_gating_delta_rule_update_spec_kernel_impl", [&] {
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/luke/Documents/Codex/2026-10-27/chu/work/riscv-cross/vllm-validation/source/csrc/cpu/sgl-kernels/common.h:219:59: note: expanded from macro 'CPU_DISPATCH_REDUCED_FLOATING_TYPES_EXT'
+  219 |       CPU_DISPATCH_TYPE1_WITH_PARAM_REDUCED(TYPE1, float, __VA_ARGS__) \
+      |                                                           ^~~~~~~~~~~
+/Users/luke/Documents/Codex/2026-10-27/chu/work/riscv-cross/vllm-validation/source/csrc/cpu/sgl-kernels/common.h:173:14: note: expanded from macro 'CPU_DISPATCH_TYPE1_WITH_PARAM_REDUCED'
+  173 |       return __VA_ARGS__();                                        \
+      |              ^~~~~~~~~~~
+/Users/luke/Documents/Codex/2026-10-27/chu/work/riscv-cross/vllm-validation/source/csrc/cpu/sgl-kernels/fla.cpp:2593:9: warning: left operand of comma operator has no effect [-Wunused-value]
+ 2593 |         "fused_sigmoid_gating_delta_rule_update_spec_kernel_impl", [&] {
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/luke/Documents/Codex/2026-10-27/chu/work/riscv-cross/vllm-validation/source/csrc/cpu/sgl-kernels/common.h:222:57: note: expanded from macro 'CPU_DISPATCH_REDUCED_FLOATING_TYPES_EXT'
+  222 |       CPU_DISPATCH_TYPE1_WITH_SAME_PARAM_REDUCED(TYPE1, __VA_ARGS__)   \
+      |                                                         ^~~~~~~~~~~
+/Users/luke/Documents/Codex/2026-10-27/chu/work/riscv-cross/vllm-validation/source/csrc/cpu/sgl-kernels/common.h:186:14: note: expanded from macro 'CPU_DISPATCH_TYPE1_WITH_SAME_PARAM_REDUCED'
+  186 |       return __VA_ARGS__();                                          \
+      |              ^~~~~~~~~~~
+/Users/luke/Documents/Codex/2026-10-27/chu/work/riscv-cross/vllm-validation/source/csrc/cpu/sgl-kernels/fla.cpp:2593:9: warning: left operand of comma operator has no effect [-Wunused-value]
+ 2593 |         "fused_sigmoid_gating_delta_rule_update_spec_kernel_impl", [&] {
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/luke/Documents/Codex/2026-10-27/chu/work/riscv-cross/vllm-validation/source/csrc/cpu/sgl-kernels/common.h:222:57: note: expanded from macro 'CPU_DISPATCH_REDUCED_FLOATING_TYPES_EXT'
+  222 |       CPU_DISPATCH_TYPE1_WITH_SAME_PARAM_REDUCED(TYPE1, __VA_ARGS__)   \
+      |                                                         ^~~~~~~~~~~
+/Users/luke/Documents/Codex/2026-10-27/chu/work/riscv-cross/vllm-validation/source/csrc/cpu/sgl-kernels/common.h:191:14: note: expanded from macro 'CPU_DISPATCH_TYPE1_WITH_SAME_PARAM_REDUCED'
+  191 |       return __VA_ARGS__();                                          \
+      |              ^~~~~~~~~~~
+/Users/luke/Documents/Codex/2026-10-27/chu/work/riscv-cross/vllm-validation/source/csrc/cpu/sgl-kernels/fla.cpp:2662:81: warning: left operand of comma operator has no effect [-Wunused-value]
+ 2662 |   CPU_DISPATCH_REDUCED_FLOATING_TYPES_EXT(a.scalar_type(), A_log.scalar_type(), "fused_gdn_gating_kernel", [&] {
+      |                                                                                 ^~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/luke/Documents/Codex/2026-10-27/chu/work/riscv-cross/vllm-validation/source/csrc/cpu/sgl-kernels/common.h:219:59: note: expanded from macro 'CPU_DISPATCH_REDUCED_FLOATING_TYPES_EXT'
+  219 |       CPU_DISPATCH_TYPE1_WITH_PARAM_REDUCED(TYPE1, float, __VA_ARGS__) \
+      |                                                           ^~~~~~~~~~~
+/Users/luke/Documents/Codex/2026-10-27/chu/work/riscv-cross/vllm-validation/source/csrc/cpu/sgl-kernels/common.h:168:14: note: expanded from macro 'CPU_DISPATCH_TYPE1_WITH_PARAM_REDUCED'
+  168 |       return __VA_ARGS__();                                        \
+      |              ^~~~~~~~~~~
+/Users/luke/Documents/Codex/2026-10-27/chu/work/riscv-cross/vllm-validation/source/csrc/cpu/sgl-kernels/fla.cpp:2662:81: warning: left operand of comma operator has no effect [-Wunused-value]
+ 2662 |   CPU_DISPATCH_REDUCED_FLOATING_TYPES_EXT(a.scalar_type(), A_log.scalar_type(), "fused_gdn_gating_kernel", [&] {
+      |                                                                                 ^~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/luke/Documents/Codex/2026-10-27/chu/work/riscv-cross/vllm-validation/source/csrc/cpu/sgl-kernels/common.h:219:59: note: expanded from macro 'CPU_DISPATCH_REDUCED_FLOATING_TYPES_EXT'
+  219 |       CPU_DISPATCH_TYPE1_WITH_PARAM_REDUCED(TYPE1, float, __VA_ARGS__) \
+      |                                                           ^~~~~~~~~~~
+/Users/luke/Documents/Codex/2026-10-27/chu/work/riscv-cross/vllm-validation/source/csrc/cpu/sgl-kernels/common.h:173:14: note: expanded from macro 'CPU_DISPATCH_TYPE1_WITH_PARAM_REDUCED'
+  173 |       return __VA_ARGS__();                                        \
+      |              ^~~~~~~~~~~
+/Users/luke/Documents/Codex/2026-10-27/chu/work/riscv-cross/vllm-validation/source/csrc/cpu/sgl-kernels/fla.cpp:2662:81: warning: left operand of comma operator has no effect [-Wunused-value]
+ 2662 |   CPU_DISPATCH_REDUCED_FLOATING_TYPES_EXT(a.scalar_type(), A_log.scalar_type(), "fused_gdn_gating_kernel", [&] {
+      |                                                                                 ^~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/luke/Documents/Codex/2026-10-27/chu/work/riscv-cross/vllm-validation/source/csrc/cpu/sgl-kernels/common.h:222:57: note: expanded from macro 'CPU_DISPATCH_REDUCED_FLOATING_TYPES_EXT'
+  222 |       CPU_DISPATCH_TYPE1_WITH_SAME_PARAM_REDUCED(TYPE1, __VA_ARGS__)   \
+      |                                                         ^~~~~~~~~~~
+/Users/luke/Documents/Codex/2026-10-27/chu/work/riscv-cross/vllm-validation/source/csrc/cpu/sgl-kernels/common.h:186:14: note: expanded from macro 'CPU_DISPATCH_TYPE1_WITH_SAME_PARAM_REDUCED'
+  186 |       return __VA_ARGS__();                                          \
+      |              ^~~~~~~~~~~
+/Users/luke/Documents/Codex/2026-10-27/chu/work/riscv-cross/vllm-validation/source/csrc/cpu/sgl-kernels/fla.cpp:2662:81: warning: left operand of comma operator has no effect [-Wunused-value]
+ 2662 |   CPU_DISPATCH_REDUCED_FLOATING_TYPES_EXT(a.scalar_type(), A_log.scalar_type(), "fused_gdn_gating_kernel", [&] {
+      |                                                                                 ^~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/luke/Documents/Codex/2026-10-27/chu/work/riscv-cross/vllm-validation/source/csrc/cpu/sgl-kernels/common.h:222:57: note: expanded from macro 'CPU_DISPATCH_REDUCED_FLOATING_TYPES_EXT'
+  222 |       CPU_DISPATCH_TYPE1_WITH_SAME_PARAM_REDUCED(TYPE1, __VA_ARGS__)   \
+      |                                                         ^~~~~~~~~~~
+/Users/luke/Documents/Codex/2026-10-27/chu/work/riscv-cross/vllm-validation/source/csrc/cpu/sgl-kernels/common.h:191:14: note: expanded from macro 'CPU_DISPATCH_TYPE1_WITH_SAME_PARAM_REDUCED'
+  191 |       return __VA_ARGS__();                                          \
+      |              ^~~~~~~~~~~
+28 warnings generated.
+Compiler exit: 0

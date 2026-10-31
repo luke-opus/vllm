@@ -1,0 +1,4 @@
+/Users/luke/Documents/Codex/2026-10-27/chu/work/riscv-cross/vllm-validation/oneDNN-3.13/src/cpu/rv64/rvv_softmax.cpp:129:21: error: use of undeclared identifier 'isfinite'
+  129 |     if (len == 1 && isfinite((float)src[0])) {
+      |                     ^~~~~~~~
+1 error generated.

@@ -1,0 +1,10 @@
+Native linking base, ca8dbccf204abfcdf9dcb178f7e108c06b224b0f, reference BLAS
+Linked _C-base-reference-blas.abi3.so: 213843200 bytes
+Native linking erf, 7f1353f1a5854545163d49f764552a57f836b2b2, reference BLAS
+Linked _C-erf-reference-blas.abi3.so: 213842680 bytes
+Native linking bf16, 174e56854703c0b9ede89e0a41f9e04dc4c59bc1, reference BLAS
+Linked _C-bf16-reference-blas.abi3.so: 213862280 bytes
+Running base actual CPU operators
+Running erf actual CPU operators
+Running bf16 actual CPU operators
+Independent ERF and BF16 full CPU operator comparisons passed
