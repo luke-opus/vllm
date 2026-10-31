@@ -69,6 +69,31 @@ They compile the same production header. On the base header: 9 failed, 9 passed;
 on the fixed header: 18 passed. This is helper coverage; the public CPU operator
 test and model inference still require the target build and runtime.
 
+The same 18-case test was also compiled and executed inside Ubuntu 24.04
+RISC-V Linux under QEMU 11.1.2, using GCC 13.3 and Python 3.12.3: baseline
+9 failed/9 passed, fixed 18 passed. See `evidence/bf16-riscv-linux-pytest.txt`.
+This validates the header on the emulated Linux target, not native silicon
+or a built vLLM extension. To prepare a small offline-target test archive:
+
+```sh
+/path/to/.venv/bin/python make-bf16-pytest.py /path/to/vllm \
+  ca8dbccf204abfcdf9dcb178f7e108c06b224b0f \
+  174e56854703c0b9ede89e0a41f9e04dc4c59bc1
+```
+
+Transfer `results/bf16-pytest.tar.gz` to the target, extract it, and run the
+following from the extracted directory with a `uv` virtual environment
+containing pytest and an available C++20 compiler:
+
+```sh
+CXX=g++-13 /path/to/.venv/bin/python -m pytest --noconftest -q base/tests/kernels/core/test_cpu_float_conversion.py
+CXX=g++-13 /path/to/.venv/bin/python -m pytest --noconftest -q fixed/tests/kernels/core/test_cpu_float_conversion.py
+```
+
+The baseline command must exit 1 with 9 failed/9 passed, and the fixed command
+must exit 0 with 18 passed. The archive generator obtains both headers through
+`git show`; it never constructs a candidate fix.
+
 ## OpenMP configuration (#64080)
 
 Use a Python 3.12 environment containing the checkout's `requirements/common.txt`,
@@ -115,6 +140,15 @@ architecture anchors reported at INFO level remain visible in the captured logs.
 Local-checkout and GitHub documentation findability checks passed. The upstream
 Read the Docs preview URLs returned HTTP 404; a successful local build does not
 establish that an upstream preview or CI passed.
+
+An independent [rendered CPU documentation preview](https://luke-opus.github.io/vllm/)
+is available for all three original PR heads. Pages builds and HTTP 200 checks
+passed, and a fresh agent read all three through Chrome and verified each
+installation-index-to-CPU link. Its OpenMP question passed; GELU and BF16
+questions partially passed because explicit default/activation wording was
+missing. Clarifications are prepared locally and are not in those PR heads or
+this preview yet. Web-search queries returned no indexed results, and the web
+tool could not open the preview; Chrome was the working fallback.
 
 ## Remaining submission requirements
 

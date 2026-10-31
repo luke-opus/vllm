@@ -1,0 +1,354 @@
+g++-13 (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0
+Copyright (C) 2023 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+....FF...FF.F.FFFF                                                       [100%]
+=================================== FAILURES ===================================
+_______ test_software_bf16_rounding_and_special_values[2139095041-32704] _______
+
+bf16_conversion = <CDLL '/tmp/pytest-of-vllmtest/pytest-0/bf16_conversion0/conversion.so', handle 53ed160 at 0x362459bad0>
+bits = 2139095041, expected = 32704
+
+    @pytest.mark.parametrize(
+        ("bits", "expected"),
+        [
+            (0x00000000, 0x0000),
+            (0x80000000, 0x8000),
+            (0x7F800000, 0x7F80),
+            (0xFF800000, 0xFF80),
+            (0x7F800001, 0x7FC0),
+            (0xFFFFFFFF, 0x7FC0),
+            (0x7FC00000, 0x7FC0),
+            (0x3F807FFF, 0x3F80),
+            (0x3F808000, 0x3F80),
+            (0x3F808001, 0x3F81),
+            (0x3F818000, 0x3F82),
+            (0xBF808000, 0xBF80),
+            (0xBF818000, 0xBF82),
+            (0x00008000, 0x0000),
+            (0x00008001, 0x0001),
+            (0x00018000, 0x0002),
+            (0x7F7F8000, 0x7F80),
+            (0xFF7F8000, 0xFF80),
+        ],
+    )
+    def test_software_bf16_rounding_and_special_values(
+        bf16_conversion: ctypes.CDLL, bits: int, expected: int
+    ) -> None:
+>       assert bf16_conversion.convert(bits) == expected
+E       AssertionError: assert 32640 == 32704
+E        +  where 32640 = <_FuncPtr object at 0x362385bd10>(2139095041)
+E        +    where <_FuncPtr object at 0x362385bd10> = <CDLL '/tmp/pytest-of-vllmtest/pytest-0/bf16_conversion0/conversion.so', handle 53ed160 at 0x362459bad0>.convert
+
+bf16-pytest/base/tests/kernels/core/test_cpu_float_conversion.py:72: AssertionError
+_______ test_software_bf16_rounding_and_special_values[4294967295-32704] _______
+
+bf16_conversion = <CDLL '/tmp/pytest-of-vllmtest/pytest-0/bf16_conversion0/conversion.so', handle 53ed160 at 0x362459bad0>
+bits = 4294967295, expected = 32704
+
+    @pytest.mark.parametrize(
+        ("bits", "expected"),
+        [
+            (0x00000000, 0x0000),
+            (0x80000000, 0x8000),
+            (0x7F800000, 0x7F80),
+            (0xFF800000, 0xFF80),
+            (0x7F800001, 0x7FC0),
+            (0xFFFFFFFF, 0x7FC0),
+            (0x7FC00000, 0x7FC0),
+            (0x3F807FFF, 0x3F80),
+            (0x3F808000, 0x3F80),
+            (0x3F808001, 0x3F81),
+            (0x3F818000, 0x3F82),
+            (0xBF808000, 0xBF80),
+            (0xBF818000, 0xBF82),
+            (0x00008000, 0x0000),
+            (0x00008001, 0x0001),
+            (0x00018000, 0x0002),
+            (0x7F7F8000, 0x7F80),
+            (0xFF7F8000, 0xFF80),
+        ],
+    )
+    def test_software_bf16_rounding_and_special_values(
+        bf16_conversion: ctypes.CDLL, bits: int, expected: int
+    ) -> None:
+>       assert bf16_conversion.convert(bits) == expected
+E       AssertionError: assert 65535 == 32704
+E        +  where 65535 = <_FuncPtr object at 0x362385bd10>(4294967295)
+E        +    where <_FuncPtr object at 0x362385bd10> = <CDLL '/tmp/pytest-of-vllmtest/pytest-0/bf16_conversion0/conversion.so', handle 53ed160 at 0x362459bad0>.convert
+
+bf16-pytest/base/tests/kernels/core/test_cpu_float_conversion.py:72: AssertionError
+_______ test_software_bf16_rounding_and_special_values[1065385985-16257] _______
+
+bf16_conversion = <CDLL '/tmp/pytest-of-vllmtest/pytest-0/bf16_conversion0/conversion.so', handle 53ed160 at 0x362459bad0>
+bits = 1065385985, expected = 16257
+
+    @pytest.mark.parametrize(
+        ("bits", "expected"),
+        [
+            (0x00000000, 0x0000),
+            (0x80000000, 0x8000),
+            (0x7F800000, 0x7F80),
+            (0xFF800000, 0xFF80),
+            (0x7F800001, 0x7FC0),
+            (0xFFFFFFFF, 0x7FC0),
+            (0x7FC00000, 0x7FC0),
+            (0x3F807FFF, 0x3F80),
+            (0x3F808000, 0x3F80),
+            (0x3F808001, 0x3F81),
+            (0x3F818000, 0x3F82),
+            (0xBF808000, 0xBF80),
+            (0xBF818000, 0xBF82),
+            (0x00008000, 0x0000),
+            (0x00008001, 0x0001),
+            (0x00018000, 0x0002),
+            (0x7F7F8000, 0x7F80),
+            (0xFF7F8000, 0xFF80),
+        ],
+    )
+    def test_software_bf16_rounding_and_special_values(
+        bf16_conversion: ctypes.CDLL, bits: int, expected: int
+    ) -> None:
+>       assert bf16_conversion.convert(bits) == expected
+E       AssertionError: assert 16256 == 16257
+E        +  where 16256 = <_FuncPtr object at 0x362385bd10>(1065385985)
+E        +    where <_FuncPtr object at 0x362385bd10> = <CDLL '/tmp/pytest-of-vllmtest/pytest-0/bf16_conversion0/conversion.so', handle 53ed160 at 0x362459bad0>.convert
+
+bf16-pytest/base/tests/kernels/core/test_cpu_float_conversion.py:72: AssertionError
+_______ test_software_bf16_rounding_and_special_values[1065451520-16258] _______
+
+bf16_conversion = <CDLL '/tmp/pytest-of-vllmtest/pytest-0/bf16_conversion0/conversion.so', handle 53ed160 at 0x362459bad0>
+bits = 1065451520, expected = 16258
+
+    @pytest.mark.parametrize(
+        ("bits", "expected"),
+        [
+            (0x00000000, 0x0000),
+            (0x80000000, 0x8000),
+            (0x7F800000, 0x7F80),
+            (0xFF800000, 0xFF80),
+            (0x7F800001, 0x7FC0),
+            (0xFFFFFFFF, 0x7FC0),
+            (0x7FC00000, 0x7FC0),
+            (0x3F807FFF, 0x3F80),
+            (0x3F808000, 0x3F80),
+            (0x3F808001, 0x3F81),
+            (0x3F818000, 0x3F82),
+            (0xBF808000, 0xBF80),
+            (0xBF818000, 0xBF82),
+            (0x00008000, 0x0000),
+            (0x00008001, 0x0001),
+            (0x00018000, 0x0002),
+            (0x7F7F8000, 0x7F80),
+            (0xFF7F8000, 0xFF80),
+        ],
+    )
+    def test_software_bf16_rounding_and_special_values(
+        bf16_conversion: ctypes.CDLL, bits: int, expected: int
+    ) -> None:
+>       assert bf16_conversion.convert(bits) == expected
+E       AssertionError: assert 16257 == 16258
+E        +  where 16257 = <_FuncPtr object at 0x362385bd10>(1065451520)
+E        +    where <_FuncPtr object at 0x362385bd10> = <CDLL '/tmp/pytest-of-vllmtest/pytest-0/bf16_conversion0/conversion.so', handle 53ed160 at 0x362459bad0>.convert
+
+bf16-pytest/base/tests/kernels/core/test_cpu_float_conversion.py:72: AssertionError
+_______ test_software_bf16_rounding_and_special_values[3212935168-49026] _______
+
+bf16_conversion = <CDLL '/tmp/pytest-of-vllmtest/pytest-0/bf16_conversion0/conversion.so', handle 53ed160 at 0x362459bad0>
+bits = 3212935168, expected = 49026
+
+    @pytest.mark.parametrize(
+        ("bits", "expected"),
+        [
+            (0x00000000, 0x0000),
+            (0x80000000, 0x8000),
+            (0x7F800000, 0x7F80),
+            (0xFF800000, 0xFF80),
+            (0x7F800001, 0x7FC0),
+            (0xFFFFFFFF, 0x7FC0),
+            (0x7FC00000, 0x7FC0),
+            (0x3F807FFF, 0x3F80),
+            (0x3F808000, 0x3F80),
+            (0x3F808001, 0x3F81),
+            (0x3F818000, 0x3F82),
+            (0xBF808000, 0xBF80),
+            (0xBF818000, 0xBF82),
+            (0x00008000, 0x0000),
+            (0x00008001, 0x0001),
+            (0x00018000, 0x0002),
+            (0x7F7F8000, 0x7F80),
+            (0xFF7F8000, 0xFF80),
+        ],
+    )
+    def test_software_bf16_rounding_and_special_values(
+        bf16_conversion: ctypes.CDLL, bits: int, expected: int
+    ) -> None:
+>       assert bf16_conversion.convert(bits) == expected
+E       AssertionError: assert 49025 == 49026
+E        +  where 49025 = <_FuncPtr object at 0x362385bd10>(3212935168)
+E        +    where <_FuncPtr object at 0x362385bd10> = <CDLL '/tmp/pytest-of-vllmtest/pytest-0/bf16_conversion0/conversion.so', handle 53ed160 at 0x362459bad0>.convert
+
+bf16-pytest/base/tests/kernels/core/test_cpu_float_conversion.py:72: AssertionError
+___________ test_software_bf16_rounding_and_special_values[32769-1] ____________
+
+bf16_conversion = <CDLL '/tmp/pytest-of-vllmtest/pytest-0/bf16_conversion0/conversion.so', handle 53ed160 at 0x362459bad0>
+bits = 32769, expected = 1
+
+    @pytest.mark.parametrize(
+        ("bits", "expected"),
+        [
+            (0x00000000, 0x0000),
+            (0x80000000, 0x8000),
+            (0x7F800000, 0x7F80),
+            (0xFF800000, 0xFF80),
+            (0x7F800001, 0x7FC0),
+            (0xFFFFFFFF, 0x7FC0),
+            (0x7FC00000, 0x7FC0),
+            (0x3F807FFF, 0x3F80),
+            (0x3F808000, 0x3F80),
+            (0x3F808001, 0x3F81),
+            (0x3F818000, 0x3F82),
+            (0xBF808000, 0xBF80),
+            (0xBF818000, 0xBF82),
+            (0x00008000, 0x0000),
+            (0x00008001, 0x0001),
+            (0x00018000, 0x0002),
+            (0x7F7F8000, 0x7F80),
+            (0xFF7F8000, 0xFF80),
+        ],
+    )
+    def test_software_bf16_rounding_and_special_values(
+        bf16_conversion: ctypes.CDLL, bits: int, expected: int
+    ) -> None:
+>       assert bf16_conversion.convert(bits) == expected
+E       AssertionError: assert 0 == 1
+E        +  where 0 = <_FuncPtr object at 0x362385bd10>(32769)
+E        +    where <_FuncPtr object at 0x362385bd10> = <CDLL '/tmp/pytest-of-vllmtest/pytest-0/bf16_conversion0/conversion.so', handle 53ed160 at 0x362459bad0>.convert
+
+bf16-pytest/base/tests/kernels/core/test_cpu_float_conversion.py:72: AssertionError
+___________ test_software_bf16_rounding_and_special_values[98304-2] ____________
+
+bf16_conversion = <CDLL '/tmp/pytest-of-vllmtest/pytest-0/bf16_conversion0/conversion.so', handle 53ed160 at 0x362459bad0>
+bits = 98304, expected = 2
+
+    @pytest.mark.parametrize(
+        ("bits", "expected"),
+        [
+            (0x00000000, 0x0000),
+            (0x80000000, 0x8000),
+            (0x7F800000, 0x7F80),
+            (0xFF800000, 0xFF80),
+            (0x7F800001, 0x7FC0),
+            (0xFFFFFFFF, 0x7FC0),
+            (0x7FC00000, 0x7FC0),
+            (0x3F807FFF, 0x3F80),
+            (0x3F808000, 0x3F80),
+            (0x3F808001, 0x3F81),
+            (0x3F818000, 0x3F82),
+            (0xBF808000, 0xBF80),
+            (0xBF818000, 0xBF82),
+            (0x00008000, 0x0000),
+            (0x00008001, 0x0001),
+            (0x00018000, 0x0002),
+            (0x7F7F8000, 0x7F80),
+            (0xFF7F8000, 0xFF80),
+        ],
+    )
+    def test_software_bf16_rounding_and_special_values(
+        bf16_conversion: ctypes.CDLL, bits: int, expected: int
+    ) -> None:
+>       assert bf16_conversion.convert(bits) == expected
+E       AssertionError: assert 1 == 2
+E        +  where 1 = <_FuncPtr object at 0x362385bd10>(98304)
+E        +    where <_FuncPtr object at 0x362385bd10> = <CDLL '/tmp/pytest-of-vllmtest/pytest-0/bf16_conversion0/conversion.so', handle 53ed160 at 0x362459bad0>.convert
+
+bf16-pytest/base/tests/kernels/core/test_cpu_float_conversion.py:72: AssertionError
+_______ test_software_bf16_rounding_and_special_values[2139062272-32640] _______
+
+bf16_conversion = <CDLL '/tmp/pytest-of-vllmtest/pytest-0/bf16_conversion0/conversion.so', handle 53ed160 at 0x362459bad0>
+bits = 2139062272, expected = 32640
+
+    @pytest.mark.parametrize(
+        ("bits", "expected"),
+        [
+            (0x00000000, 0x0000),
+            (0x80000000, 0x8000),
+            (0x7F800000, 0x7F80),
+            (0xFF800000, 0xFF80),
+            (0x7F800001, 0x7FC0),
+            (0xFFFFFFFF, 0x7FC0),
+            (0x7FC00000, 0x7FC0),
+            (0x3F807FFF, 0x3F80),
+            (0x3F808000, 0x3F80),
+            (0x3F808001, 0x3F81),
+            (0x3F818000, 0x3F82),
+            (0xBF808000, 0xBF80),
+            (0xBF818000, 0xBF82),
+            (0x00008000, 0x0000),
+            (0x00008001, 0x0001),
+            (0x00018000, 0x0002),
+            (0x7F7F8000, 0x7F80),
+            (0xFF7F8000, 0xFF80),
+        ],
+    )
+    def test_software_bf16_rounding_and_special_values(
+        bf16_conversion: ctypes.CDLL, bits: int, expected: int
+    ) -> None:
+>       assert bf16_conversion.convert(bits) == expected
+E       AssertionError: assert 32639 == 32640
+E        +  where 32639 = <_FuncPtr object at 0x362385bd10>(2139062272)
+E        +    where <_FuncPtr object at 0x362385bd10> = <CDLL '/tmp/pytest-of-vllmtest/pytest-0/bf16_conversion0/conversion.so', handle 53ed160 at 0x362459bad0>.convert
+
+bf16-pytest/base/tests/kernels/core/test_cpu_float_conversion.py:72: AssertionError
+_______ test_software_bf16_rounding_and_special_values[4286545920-65408] _______
+
+bf16_conversion = <CDLL '/tmp/pytest-of-vllmtest/pytest-0/bf16_conversion0/conversion.so', handle 53ed160 at 0x362459bad0>
+bits = 4286545920, expected = 65408
+
+    @pytest.mark.parametrize(
+        ("bits", "expected"),
+        [
+            (0x00000000, 0x0000),
+            (0x80000000, 0x8000),
+            (0x7F800000, 0x7F80),
+            (0xFF800000, 0xFF80),
+            (0x7F800001, 0x7FC0),
+            (0xFFFFFFFF, 0x7FC0),
+            (0x7FC00000, 0x7FC0),
+            (0x3F807FFF, 0x3F80),
+            (0x3F808000, 0x3F80),
+            (0x3F808001, 0x3F81),
+            (0x3F818000, 0x3F82),
+            (0xBF808000, 0xBF80),
+            (0xBF818000, 0xBF82),
+            (0x00008000, 0x0000),
+            (0x00008001, 0x0001),
+            (0x00018000, 0x0002),
+            (0x7F7F8000, 0x7F80),
+            (0xFF7F8000, 0xFF80),
+        ],
+    )
+    def test_software_bf16_rounding_and_special_values(
+        bf16_conversion: ctypes.CDLL, bits: int, expected: int
+    ) -> None:
+>       assert bf16_conversion.convert(bits) == expected
+E       AssertionError: assert 65407 == 65408
+E        +  where 65407 = <_FuncPtr object at 0x362385bd10>(4286545920)
+E        +    where <_FuncPtr object at 0x362385bd10> = <CDLL '/tmp/pytest-of-vllmtest/pytest-0/bf16_conversion0/conversion.so', handle 53ed160 at 0x362459bad0>.convert
+
+bf16-pytest/base/tests/kernels/core/test_cpu_float_conversion.py:72: AssertionError
+=========================== short test summary info ============================
+FAILED bf16-pytest/base/tests/kernels/core/test_cpu_float_conversion.py::test_software_bf16_rounding_and_special_values[2139095041-32704]
+FAILED bf16-pytest/base/tests/kernels/core/test_cpu_float_conversion.py::test_software_bf16_rounding_and_special_values[4294967295-32704]
+FAILED bf16-pytest/base/tests/kernels/core/test_cpu_float_conversion.py::test_software_bf16_rounding_and_special_values[1065385985-16257]
+FAILED bf16-pytest/base/tests/kernels/core/test_cpu_float_conversion.py::test_software_bf16_rounding_and_special_values[1065451520-16258]
+FAILED bf16-pytest/base/tests/kernels/core/test_cpu_float_conversion.py::test_software_bf16_rounding_and_special_values[3212935168-49026]
+FAILED bf16-pytest/base/tests/kernels/core/test_cpu_float_conversion.py::test_software_bf16_rounding_and_special_values[32769-1]
+FAILED bf16-pytest/base/tests/kernels/core/test_cpu_float_conversion.py::test_software_bf16_rounding_and_special_values[98304-2]
+FAILED bf16-pytest/base/tests/kernels/core/test_cpu_float_conversion.py::test_software_bf16_rounding_and_special_values[2139062272-32640]
+FAILED bf16-pytest/base/tests/kernels/core/test_cpu_float_conversion.py::test_software_bf16_rounding_and_special_values[4286545920-65408]
+9 failed, 9 passed in 21.51s
+..................                                                       [100%]
+18 passed in 6.20s
+RISC-V Linux compiled-header comparison: expected baseline failures and fixed pass verified
