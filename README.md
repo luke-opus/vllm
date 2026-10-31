@@ -98,6 +98,24 @@ See `evidence/precommit-*.txt`. Tools were bootstrapped using a locally cached
 Node distribution checked against Node's official SHA256; no hooks were
 disabled. These are local checks, not upstream CI results.
 
+## Documentation builds
+
+All three complete documentation builds passed the original MkDocs configuration
+with API documentation generation enabled:
+
+```sh
+../docs-validation/.venv/bin/mkdocs build --strict --site-dir ../docs-validation/site-erf-full
+../docs-validation/.venv/bin/mkdocs build --strict --site-dir ../docs-validation/site-bf16-full
+../docs-validation/.venv/bin/mkdocs build --strict --site-dir ../docs-validation/site-openmp-full
+```
+
+Run each command from its corresponding PR checkout. Build times were 214.41,
+204.82, and 204.23 seconds. See `evidence/docs-*-strict.txt`. Existing broken
+architecture anchors reported at INFO level remain visible in the captured logs.
+Local-checkout and GitHub documentation findability checks passed. The upstream
+Read the Docs preview URLs returned HTTP 404; a successful local build does not
+establish that an upstream preview or CI passed.
+
 ## Remaining submission requirements
 
 Full vLLM CPU operator regressions, real-weight model evaluation on the changed
