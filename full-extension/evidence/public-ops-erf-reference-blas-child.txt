@@ -1,0 +1,32 @@
+{
+  "gelu_torch.float32_none": {
+    "finite": true,
+    "matches_reference": true,
+    "nan_count": 0
+  },
+  "gelu_torch.float32_tanh": {
+    "finite": true,
+    "matches_reference": true,
+    "nan_count": 0
+  },
+  "gelu_torch.bfloat16_none": {
+    "finite": true,
+    "matches_reference": true,
+    "nan_count": 0
+  },
+  "gelu_torch.bfloat16_tanh": {
+    "finite": true,
+    "matches_reference": true,
+    "nan_count": 0
+  },
+  "silu_bf16": {
+    "exact_match": false,
+    "output_bits": "0x3d87",
+    "expected_bits": "0x3d88"
+  },
+  "moe_gelu_bf16": {
+    "finite": true,
+    "nan_count": 0,
+    "exact_match": true
+  }
+}

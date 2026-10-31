@@ -15,7 +15,7 @@
     "tag": "v3.13",
     "commit": "0e2a5bfeef1bfbffc3137464606540233086ce9b"
   },
-  "scope": "Complete CPU CMake object list cross-compiled, native target linking completed; actual public-op comparisons running in QEMU. Native silicon/model/CI not established.",
+  "scope": "Complete CPU CMake list cross-compiled, native target linking and independent complete-extension operator comparisons passed in QEMU. Repository pytest, model, native silicon, upstream CI and human requirements remain separate.",
   "compiler": {
     "host": "Zig 0.17.0 bundled Clang",
     "native_configure": "Clang 18.1.3",
