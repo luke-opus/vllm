@@ -1,0 +1,202 @@
+name: Cloud-V RISC-V machine inventory
+
+"on":
+  workflow_dispatch:
+  push:
+    branches:
+      - riscv-cloud-v-inventory
+
+permissions:
+  contents: read
+
+jobs:
+  inspect-rvv:
+    if: github.repository == 'luke-opus/vllm'
+    runs-on: [self-hosted, banana-pi-f3]
+    timeout-minutes: 20
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - name: Inspect the machine and execute an RVV probe
+        env:
+          LC_ALL: C
+        run: |
+          set -euo pipefail
+          ulimit -c 0
+          probe_dir="$(mktemp -d)"
+          rvv_status="not run"
+          zvfh_status="unknown"
+          zvfhmin_status="unknown"
+          virtualization="unknown"
+          container="unknown"
+
+          finish() {
+            result=$?
+            trap - EXIT
+            {
+              echo "## RISC-V inventory result"
+              echo "- Workflow exit status: $result"
+              echo "- RVV instruction/VLEN check: $rvv_status"
+              echo "- Zvfh CPU metadata: $zvfh_status"
+              echo "- Zvfhmin CPU metadata: $zvfhmin_status"
+              echo "- Virtualization detector: $virtualization"
+              echo "- Container detection: $container"
+              echo "- Physical silicon identity: **not independently attested**."
+              echo
+              echo "A successful instruction probe establishes capabilities of the execution"
+              echo "environment. Labels, CPU metadata, device-tree strings and absence of"
+              echo "detected virtualization do not independently prove native hardware."
+              echo "This workflow does not build vLLM or validate its three PRs."
+            } >> "$GITHUB_STEP_SUMMARY"
+            rm -rf -- "$probe_dir"
+            exit "$result"
+          }
+          trap finish EXIT
+
+          echo "=== Kernel and architecture ==="
+          uname -a
+          architecture="$(uname -m)"
+          echo "architecture=$architecture"
+          echo "=== OS release ==="
+          if [[ -r /etc/os-release ]]; then
+            cat /etc/os-release
+          fi
+          echo "=== CPU information ==="
+          cat /proc/cpuinfo
+          if command -v lscpu >/dev/null 2>&1; then
+            if ! lscpu; then
+              echo "lscpu could not report additional information"
+            fi
+          fi
+          echo "=== Memory ==="
+          awk '/^(MemTotal|MemAvailable|SwapTotal):/ { print }' /proc/meminfo
+          echo "=== Device-tree identifiers, if exposed ==="
+          for node in /proc/device-tree/model /proc/device-tree/compatible; do
+            if [[ -r "$node" ]]; then
+              echo "$node"
+              tr '\0' '\n' < "$node"
+              echo
+            fi
+          done
+          echo "=== Execution context ==="
+          if command -v systemd-detect-virt >/dev/null 2>&1; then
+            virtualization="$(systemd-detect-virt 2>/dev/null || true)"
+            if [[ -z "$virtualization" ]]; then
+              virtualization="detector returned no classification"
+            fi
+            if systemd-detect-virt --container --quiet; then
+              container="detected by systemd-detect-virt"
+            else
+              container="not detected; not proof of a host environment"
+            fi
+          fi
+          if [[ -e /.dockerenv || -e /run/.containerenv ]]; then
+            container="container marker present"
+          fi
+          echo "virtualization=$virtualization"
+          echo "container=$container"
+          if [[ -r /sys/hypervisor/type ]]; then
+            cat /sys/hypervisor/type
+          fi
+          echo "native_silicon=not_independently_attested"
+
+          echo "=== Compiler inventory ==="
+          compiler=""
+          for candidate in gcc cc clang; do
+            if command -v "$candidate" >/dev/null 2>&1; then
+              echo "compiler=$(command -v "$candidate")"
+              "$candidate" --version
+              "$candidate" -dumpmachine
+              if [[ -z "$compiler" ]]; then
+                compiler="$(command -v "$candidate")"
+              fi
+            fi
+          done
+
+          if [[ "$architecture" != riscv64 ]]; then
+            echo "::error::This runner is not a riscv64 execution environment."
+            exit 1
+          fi
+          if [[ -z "$compiler" ]]; then
+            echo "::error::No existing C compiler was found; nothing will be installed."
+            exit 1
+          fi
+
+          echo "=== ISA extension metadata ==="
+          awk -F: 'tolower($1) ~ /^[[:space:]]*isa[[:space:]]*$/ {
+            gsub(/[[:space:]]/, "", $2); print tolower($2)
+          }' /proc/cpuinfo | sort -u > "$probe_dir/isa.txt"
+          cat "$probe_dir/isa.txt"
+          if [[ -s "$probe_dir/isa.txt" ]]; then
+            zvfh_status="not reported; absence is not a runtime capability test"
+            zvfhmin_status="not reported; absence is not a runtime capability test"
+            if grep -Eq '(^|_)zvfh([0-9]+p[0-9]+)?(_|$)' "$probe_dir/isa.txt"; then
+              zvfh_status="reported in at least one ISA record; not instruction-tested"
+            fi
+            if grep -Eq '(^|_)zvfhmin([0-9]+p[0-9]+)?(_|$)' "$probe_dir/isa.txt"; then
+              zvfhmin_status="reported in at least one ISA record; not instruction-tested"
+            fi
+          fi
+          echo "zvfh=$zvfh_status"
+          echo "zvfhmin=$zvfhmin_status"
+
+          cat > "$probe_dir/rvv_inventory.c" <<'C'
+          #include <signal.h>
+          #include <stdio.h>
+          #include <stdlib.h>
+          #include <unistd.h>
+
+          static void illegal_instruction(int signo) {
+            (void)signo;
+            static const char message[] = "RVV instruction raised SIGILL\n";
+            ssize_t written = write(STDERR_FILENO, message, sizeof(message) - 1);
+            (void)written;
+            _Exit(132);
+          }
+
+          int main(void) {
+            if (signal(SIGILL, illegal_instruction) == SIG_ERR) {
+              perror("signal");
+              return 1;
+            }
+            unsigned long vl, lane, vlenb;
+            __asm__ volatile(
+                "vsetvli %0, zero, e8, m1, ta, ma\n\t"
+                "vmv.v.i v8, 1\n\t"
+                "vadd.vi v8, v8, 1\n\t"
+                "vmv.x.s %1, v8\n\t"
+                "csrr %2, vlenb\n\t"
+                : "=&r"(vl), "=&r"(lane), "=&r"(vlenb)
+                :
+                : "v8");
+            printf("rvv_vlenb=%lu\nrvv_vlen_bits=%lu\n", vlenb, vlenb * 8);
+            printf("rvv_vl_e8_m1=%lu\nrvv_integer_lane=%lu\n", vl, lane);
+            if (lane != 2 || vl != vlenb) {
+              fputs("RVV instruction result is inconsistent\n", stderr);
+              return 1;
+            }
+            if (vlenb != 16 && vlenb != 32) {
+              fputs("Expected VLEN 128 or 256 for this validation plan\n", stderr);
+              return 1;
+            }
+            return 0;
+          }
+          C
+
+          echo "=== Compile and execute actual RVV instructions ==="
+          echo "selected_compiler=$compiler"
+          echo "compiler_flags=-O2 -Wall -Wextra -Werror -march=rv64gcv -mabi=lp64d"
+          rvv_status="compilation or execution did not complete successfully"
+          "$compiler" -O2 -Wall -Wextra -Werror \
+            -march=rv64gcv -mabi=lp64d \
+            "$probe_dir/rvv_inventory.c" -o "$probe_dir/rvv_inventory"
+          "$probe_dir/rvv_inventory" | tee "$probe_dir/rvv-result.txt"
+          rvv_status="passed: RVV instructions executed; VLEN is 128 or 256"
+          {
+            echo "### Executed RVV probe"
+            echo '<pre>'
+            cat "$probe_dir/rvv-result.txt"
+            echo '</pre>'
+          } >> "$GITHUB_STEP_SUMMARY"
+          echo "::notice::RVV execution succeeded. Physical hardware and Zvfh execution remain unverified by this probe."

@@ -1,0 +1,31 @@
+This branch contains the prepared workflow. Check its Actions run for the
+actual execution status; the preparation record below is not a run result.
+Local YAML parsing, trigger/permission assertions and embedded Bash syntax
+validation passed. No RISC-V instructions were executed on the host.
+
+The workflow is restricted to luke-opus/vllm, using the documented Cloud-V
+labels [self-hosted, banana-pi-f3]. It accepts workflow_dispatch and pushes
+to the dedicated riscv-cloud-v-inventory branch only. No pull_request event,
+checkout action, third-party action, secret, sudo or software installation
+is used. Permissions are contents: read; the job timeout is 20 minutes.
+
+After the Cloud-V App is installed and its runner is available, the workflow
+at .github/workflows/native-rvv-inventory.yml on this dedicated fork branch
+can execute. A push to this branch requests the job.
+GitHub's manual-dispatch UI additionally requires the workflow to exist on
+the repository's default branch. The upstream PR branches are unaffected.
+
+The probe requires a real riscv64 execution environment, an existing C
+compiler supporting -march=rv64gcv -mabi=lp64d, successful RVV integer
+instructions and VLEN 128 or 256. Source and binary stay in a temporary
+directory and are removed. Results remain in the job log and step summary.
+
+Zvfh and Zvfhmin are reported separately from /proc/cpuinfo metadata.
+They are not executed by this probe. Missing metadata is unknown rather
+than a successful hardware qualification. A Docker/virtualized runner or
+no detected virtualization cannot independently prove physical silicon.
+Provider/board identity evidence and further target-specific testing are
+still needed before calling the machine native RISC-V validation evidence.
+
+This is machine inventory, not a vLLM build, regression test, benchmark,
+PR CI pass or confirmation that any pending contribution requirement is met.
