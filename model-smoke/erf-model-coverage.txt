@@ -1,0 +1,85 @@
+ERF changed-path model candidate audit (2026-11-01 Asia/Shanghai)
+
+Scope
+Base: ca8dbccf204abfcdf9dcb178f7e108c06b224b0f
+ERF PR head: 7f1353f1a5854545163d49f764552a57f836b2b2
+The model implementations and activation dispatch files cited below are
+unchanged between these refs (verified with git diff). Line numbers were
+checked against the PR checkout; links use the immutable upstream base.
+
+Question: Is there an unmodified, publicly trained checkpoint at roughly
+2 GB or less that reaches the modified RVV er() through a real CPU model
+entry point, within a 4 GB QEMU guest / 16 GB host budget?
+
+Finding: No suitable checkpoint was found among the candidates and built-in
+model routes checked here. This is not an exhaustive search of Hugging Face
+models, nor proof that no such checkpoint exists. No weights, activation
+configuration, model dimensions or backend dispatch were changed for this audit.
+
+Relevant path
+CPU fused MoE exact GELU calls FP32Vec16.er():
+https://github.com/vllm-project/vllm/blob/ca8dbccf204abfcdf9dcb178f7e108c06b224b0f/csrc/cpu/cpu_fused_moe_activations.hpp#L125-L143
+
+An AST scan found 42 literal FusedMoEFactory calls in model implementations.
+34 omit activation and use its default "silu". The eight remaining calls
+are Nemotron-H, Gemma4, Exaone MoE, Bailing MoE v3, Step3.5, Intern-S2-Mobius,
+GPT-OSS, and the Transformers adapter using **kwargs. Their activation
+selection was inspected. Default:
+https://github.com/vllm-project/vllm/blob/ca8dbccf204abfcdf9dcb178f7e108c06b224b0f/vllm/model_executor/layers/fused_moe/layer.py#L119
+
+Candidate exclusions
+
+1. Moondream3 has exact GELU, but its fused route requires x.is_cuda.
+   CPU falls back to an expert loop using torch.nn.functional.gelu.
+   The official model card also lists 9B BF16 parameters (approximately
+   18 GB of parameter storage before runtime overhead), outside this budget.
+   Code:
+   https://github.com/vllm-project/vllm/blob/ca8dbccf204abfcdf9dcb178f7e108c06b224b0f/vllm/model_executor/models/moondream3.py#L505-L521
+   https://github.com/vllm-project/vllm/blob/ca8dbccf204abfcdf9dcb178f7e108c06b224b0f/vllm/model_executor/models/moondream3.py#L570-L573
+   Official card: https://huggingface.co/moondream/moondream3-preview
+
+2. Nomic Embed Text v2 MoE is a relevant small trained candidate: its official
+   card gives 475M total parameters, and the config specifies float32 and
+   GELU (approximately 1.9 GB of parameter storage, not a measured download).
+   However, NomicMoE converts the activation to gelu_no_mul. That activation
+   uses F.gelu, not the RVV er() under review. The model's direct fused_experts
+   route is also distinct from CPUUnquantizedExperts; CPU model execution was
+   not attempted or claimed. Running it would not establish this ERF coverage.
+   Code:
+   https://github.com/vllm-project/vllm/blob/ca8dbccf204abfcdf9dcb178f7e108c06b224b0f/vllm/model_executor/models/bert_with_rope.py#L255
+   https://github.com/vllm-project/vllm/blob/ca8dbccf204abfcdf9dcb178f7e108c06b224b0f/vllm/model_executor/models/bert_with_rope.py#L332-L339
+   https://github.com/vllm-project/vllm/blob/ca8dbccf204abfcdf9dcb178f7e108c06b224b0f/vllm/model_executor/layers/fused_moe/activation.py#L398-L399
+   Official config: https://huggingface.co/nomic-ai/nomic-embed-text-v2-moe/raw/main/config.json
+   Official card: https://huggingface.co/nomic-ai/nomic-embed-text-v2-moe
+
+3. Intern-S2-Mobius passes config.hidden_act into the factory, but its official
+   text_config.hidden_act is "silu". Its vision GELU-tanh is a separate path.
+   https://github.com/vllm-project/vllm/blob/ca8dbccf204abfcdf9dcb178f7e108c06b224b0f/vllm/model_executor/models/interns2_mobius.py#L105-L117
+   Official config: https://huggingface.co/internlm/Intern-S2-Mobius/raw/main/config.json
+
+4. Other explicit/dynamic factory selections do not supply exact gated GELU:
+   Gemma4 uses gelu_tanh; Step3.5 uses silu or swiglustep; Exaone and Bailing
+   use silu; GPT-OSS uses swigluoai. Nemotron-H selects a non-gated activation;
+   the checked Nemotron-3-Nano config specifies mlp_hidden_act="relu2".
+   https://github.com/vllm-project/vllm/blob/ca8dbccf204abfcdf9dcb178f7e108c06b224b0f/vllm/model_executor/models/gemma4.py#L674
+   https://github.com/vllm-project/vllm/blob/ca8dbccf204abfcdf9dcb178f7e108c06b224b0f/vllm/model_executor/models/step3p5.py#L358-L371
+   https://github.com/vllm-project/vllm/blob/ca8dbccf204abfcdf9dcb178f7e108c06b224b0f/vllm/model_executor/models/exaone_moe.py#L138
+   https://github.com/vllm-project/vllm/blob/ca8dbccf204abfcdf9dcb178f7e108c06b224b0f/vllm/model_executor/models/bailing_moe_v3.py#L1207
+   https://github.com/vllm-project/vllm/blob/ca8dbccf204abfcdf9dcb178f7e108c06b224b0f/vllm/model_executor/models/gpt_oss.py#L400
+   https://github.com/vllm-project/vllm/blob/ca8dbccf204abfcdf9dcb178f7e108c06b224b0f/vllm/model_executor/models/nemotron_h.py#L244
+   Official config: https://huggingface.co/nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B-BF16/raw/main/config.json
+   Official config: https://huggingface.co/stepfun-ai/Step-3.5-Flash/raw/main/config.json
+
+5. The Transformers MoE adapter chooses silu or swigluoai, not exact GELU:
+   https://github.com/vllm-project/vllm/blob/ca8dbccf204abfcdf9dcb178f7e108c06b224b0f/vllm/model_executor/models/transformers/moe.py#L261-L265
+
+6. Dense GeluAndMul on RISC-V uses forward_native (F.gelu), so a dense GELU
+   checkpoint does not automatically exercise the modified C++ implementation:
+   https://github.com/vllm-project/vllm/blob/ca8dbccf204abfcdf9dcb178f7e108c06b224b0f/vllm/model_executor/layers/activation.py#L447-L469
+
+Validation boundary
+The separate complete-extension and repository-test records reproduce the
+exact-GELU numerical defect and its fix. The Pythia smoke model does not cover
+that ERF path. This candidate audit does not close the changed-path trained-model
+validation gap. Official model URLs above were read during this audit; their
+main branches may change later, unlike the fixed source links.

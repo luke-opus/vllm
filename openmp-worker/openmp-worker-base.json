@@ -1,0 +1,288 @@
+{
+  "variant": "base",
+  "model": "EleutherAI/pythia-14m",
+  "revision": "cf967c0a9a04383db6f7b1108d86b2962634b4ac",
+  "architecture": "actual riscv64 Linux/QEMU",
+  "parent_pid": 1175,
+  "expected_libgomp": "/home/vllmtest/vllm-validation/.venv/lib/python3.12/site-packages/torch/lib/libgomp.so.1",
+  "worker": {
+    "pid": 1353,
+    "worker_class": "vllm.v1.worker.cpu_worker.CPUWorker",
+    "device": "cpu",
+    "LD_PRELOAD": "",
+    "startup_LD_PRELOAD": "",
+    "OMP_NUM_THREADS": "1",
+    "GOMP_CPU_AFFINITY": "",
+    "OMP_PLACES": "{0}",
+    "OMP_PROC_BIND": "true",
+    "torch_num_threads": 1,
+    "affinity": [
+      0
+    ],
+    "loaded_openmp": [
+      "/home/vllmtest/vllm-validation/.venv/lib/python3.12/site-packages/torch/lib/libgomp.so.1",
+      "/usr/lib/llvm-18/lib/libomp.so.5"
+    ]
+  },
+  "outputs": [
+    {
+      "prompt": "The capital of France is",
+      "prompt_token_ids": [
+        510,
+        5347,
+        273,
+        6181,
+        310
+      ],
+      "token_ids": [
+        253,
+        1986,
+        2077,
+        13
+      ],
+      "text": " the United States,",
+      "cumulative_logprob": -7.261757850646973,
+      "finish_reason": "length",
+      "stop_reason": null,
+      "logprobs": [
+        {
+          "253": {
+            "logprob": -1.7403361797332764,
+            "rank": 1,
+            "decoded_token": " the"
+          },
+          "247": {
+            "logprob": -2.4903361797332764,
+            "rank": 2,
+            "decoded_token": " a"
+          },
+          "275": {
+            "logprob": -3.8653361797332764,
+            "rank": 3,
+            "decoded_token": " in"
+          },
+          "581": {
+            "logprob": -4.1153364181518555,
+            "rank": 4,
+            "decoded_token": " one"
+          },
+          "271": {
+            "logprob": -4.1153364181518555,
+            "rank": 5,
+            "decoded_token": " an"
+          }
+        },
+        {
+          "1986": {
+            "logprob": -3.542553186416626,
+            "rank": 1,
+            "decoded_token": " United"
+          },
+          "5112": {
+            "logprob": -4.167552947998047,
+            "rank": 2,
+            "decoded_token": " French"
+          },
+          "2846": {
+            "logprob": -4.167552947998047,
+            "rank": 3,
+            "decoded_token": " city"
+          },
+          "2448": {
+            "logprob": -4.480052947998047,
+            "rank": 4,
+            "decoded_token": " American"
+          },
+          "5347": {
+            "logprob": -4.542552947998047,
+            "rank": 5,
+            "decoded_token": " capital"
+          }
+        },
+        {
+          "2077": {
+            "logprob": -0.5542812347412109,
+            "rank": 1,
+            "decoded_token": " States"
+          },
+          "11491": {
+            "logprob": -1.554281234741211,
+            "rank": 2,
+            "decoded_token": " Kingdom"
+          },
+          "14726": {
+            "logprob": -1.741781234741211,
+            "rank": 3,
+            "decoded_token": " Nations"
+          },
+          "8365": {
+            "logprob": -4.491781234741211,
+            "rank": 4,
+            "decoded_token": " Arab"
+          },
+          "4687": {
+            "logprob": -6.866781234741211,
+            "rank": 5,
+            "decoded_token": " Republic"
+          }
+        },
+        {
+          "13": {
+            "logprob": -1.4245872497558594,
+            "rank": 1,
+            "decoded_token": ","
+          },
+          "15": {
+            "logprob": -1.4870872497558594,
+            "rank": 2,
+            "decoded_token": "."
+          },
+          "285": {
+            "logprob": -1.9245872497558594,
+            "rank": 3,
+            "decoded_token": " and"
+          },
+          "275": {
+            "logprob": -3.3620872497558594,
+            "rank": 4,
+            "decoded_token": " in"
+          },
+          "28": {
+            "logprob": -3.7370872497558594,
+            "rank": 5,
+            "decoded_token": ";"
+          }
+        }
+      ]
+    },
+    {
+      "prompt": "A computer can",
+      "prompt_token_ids": [
+        34,
+        4382,
+        476
+      ],
+      "token_ids": [
+        320,
+        908,
+        281,
+        897
+      ],
+      "text": " be used to use",
+      "cumulative_logprob": -7.850759029388428,
+      "finish_reason": "length",
+      "stop_reason": null,
+      "logprobs": [
+        {
+          "320": {
+            "logprob": -1.621185541152954,
+            "rank": 1,
+            "decoded_token": " be"
+          },
+          "897": {
+            "logprob": -2.496185541152954,
+            "rank": 2,
+            "decoded_token": " use"
+          },
+          "2736": {
+            "logprob": -3.808685541152954,
+            "rank": 3,
+            "decoded_token": " detect"
+          },
+          "1361": {
+            "logprob": -3.996185541152954,
+            "rank": 4,
+            "decoded_token": " help"
+          },
+          "1239": {
+            "logprob": -4.058685302734375,
+            "rank": 5,
+            "decoded_token": " read"
+          }
+        },
+        {
+          "908": {
+            "logprob": -2.1582224369049072,
+            "rank": 1,
+            "decoded_token": " used"
+          },
+          "27881": {
+            "logprob": -2.3457224369049072,
+            "rank": 2,
+            "decoded_token": " programmed"
+          },
+          "2104": {
+            "logprob": -3.2207224369049072,
+            "rank": 3,
+            "decoded_token": " able"
+          },
+          "1119": {
+            "logprob": -3.5332224369049072,
+            "rank": 4,
+            "decoded_token": " found"
+          },
+          "247": {
+            "logprob": -3.6582224369049072,
+            "rank": 5,
+            "decoded_token": " a"
+          }
+        },
+        {
+          "281": {
+            "logprob": -1.1641919612884521,
+            "rank": 1,
+            "decoded_token": " to"
+          },
+          "347": {
+            "logprob": -1.7891919612884521,
+            "rank": 2,
+            "decoded_token": " as"
+          },
+          "275": {
+            "logprob": -2.039191961288452,
+            "rank": 3,
+            "decoded_token": " in"
+          },
+          "323": {
+            "logprob": -2.414191961288452,
+            "rank": 4,
+            "decoded_token": " for"
+          },
+          "15": {
+            "logprob": -3.289191961288452,
+            "rank": 5,
+            "decoded_token": "."
+          }
+        },
+        {
+          "897": {
+            "logprob": -2.9071590900421143,
+            "rank": 1,
+            "decoded_token": " use"
+          },
+          "8415": {
+            "logprob": -3.0946590900421143,
+            "rank": 2,
+            "decoded_token": " solve"
+          },
+          "1239": {
+            "logprob": -3.2821590900421143,
+            "rank": 3,
+            "decoded_token": " read"
+          },
+          "2736": {
+            "logprob": -3.5321590900421143,
+            "rank": 4,
+            "decoded_token": " detect"
+          },
+          "2289": {
+            "logprob": -3.7196590900421143,
+            "rank": 5,
+            "decoded_token": " access"
+          }
+        }
+      ]
+    }
+  ],
+  "scope": "One spawned CPUWorker, two prompts and four tokens each; no physical hardware or performance claim"
+}

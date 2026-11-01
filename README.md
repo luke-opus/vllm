@@ -164,6 +164,10 @@ ERF base 2 failed/2 passed versus fixed 4 passed, and BF16 base 1 failed versus
 fixed 1 passed, using the real package, complete extensions and root fixtures.
 [Linux OpenMP checks](openmp-linux/README.md) show real bundled-library preload
 selection and inheritance into a fresh child with successful operator loading.
+[Spawned CPUWorker comparisons](openmp-worker/README.md) now also pass through
+the real `LLM` entry point: both process return codes are zero, the fixed
+worker starts with bundled libgomp, and all generated tokens/text/logprobs
+are identical between the base and fixed platform configurations.
 [Pythia-14m model evidence](model-smoke/README.md) records real `LLM`/CPUWorker
 generation, observed CPU attention operations and the exact reference-comparison
 limits. These records do not establish native hardware or upstream CI success.
@@ -185,10 +189,14 @@ have completed; their separate evidence is linked above.
 The original branches are 338 commits behind that main. The recorded upstream
 pre-run failure is a contributor trust gate; current merged-PR count is zero.
 
-Broader model evaluation, ERF changed-path model coverage, complete OpenMP worker
-validation, native RVV hardware, upstream CI, and the submitting human's
+Broader model evaluation, ERF changed-path model coverage, native RVV hardware,
+upstream CI, and the submitting human's
 review/test confirmation remain separate requirements. Prepared follow-up source
 patches have not been pushed to the three PR branches. This evidence does not
 mean every submission requirement is satisfied.
+
+The [ERF model-route audit](model-smoke/erf-model-coverage.txt) records why the
+checked small public checkpoints do not exercise the changed kernel through
+their existing CPU model paths. It is not an exhaustive model-catalog search.
 
 Prepared with OpenAI Codex assistance. The three upstream PRs remain drafts.

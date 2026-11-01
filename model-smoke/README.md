@@ -81,5 +81,7 @@ and reference comparison finished. The original terminal session's final exit
 code was not retained; no recovered exit-zero claim is made.
 
 Native silicon, broader accuracy evaluation, ERF changed-path model coverage,
-OpenMP spawned-worker validation, upstream CI and human review/test confirmation
-remain separate requirements.
+upstream CI and human review/test confirmation remain separate requirements.
+Subsequent [OpenMP spawned-worker comparisons](../openmp-worker/README.md) have
+their own completed base/fixed record. The [ERF candidate audit](erf-model-coverage.txt)
+documents the model-route coverage limitation.

@@ -52,3 +52,7 @@ is retained as the historical execution coordinator, not a generic launcher:
 its HTTP address and `/proc/13975` wait were specific to the original session.
 It restored the source file in `finally`. Per-process logs and return codes
 are included. No native-silicon, full-worker or performance result is implied.
+
+A subsequent [real spawned CPUWorker comparison](../openmp-worker/README.md)
+completed both variants successfully and preserved all model outputs exactly.
+That separate record includes startup preload and actual affinity observations.

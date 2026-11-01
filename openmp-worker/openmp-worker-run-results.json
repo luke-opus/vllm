@@ -1,0 +1,58 @@
+{
+  "base_python_source": "ca8dbccf204abfcdf9dcb178f7e108c06b224b0f",
+  "fixed_cpu_source": "018ef906c8cfc72cdfa21eafac157258c63373cb",
+  "constant_cpp_ref": "174e56854703c0b9ede89e0a41f9e04dc4c59bc1",
+  "constant_library_sha256": "a13aadd18a4f7d9ccf275f983e12d425b92965d33fc0b9e39b65029f9af570ad",
+  "environment": {
+    "CC": "/usr/bin/gcc-13",
+    "CXX": "/usr/bin/g++-13",
+    "TORCHINDUCTOR_COMPILE_THREADS": "1",
+    "TORCHINDUCTOR_CACHE_DIR": "/home/vllmtest/vllm-validation/inductor-cache",
+    "VLLM_TARGET_DEVICE": "cpu",
+    "VLLM_PLUGINS": "",
+    "VLLM_ENABLE_V1_MULTIPROCESSING": "0",
+    "VLLM_WORKER_MULTIPROC_METHOD": "spawn",
+    "VLLM_WORKER_SHUTDOWN_TIMEOUT_SECONDS": "60",
+    "VLLM_CPU_OMP_THREADS_BIND": "0",
+    "VLLM_CPU_CI_ENV": "0",
+    "VLLM_NO_USAGE_STATS": "1",
+    "HF_HUB_OFFLINE": "1",
+    "HF_HUB_DISABLE_TELEMETRY": "1",
+    "OMP_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1",
+    "TOKENIZERS_PARALLELISM": "false",
+    "PYTHONPATH": "/home/vllmtest/vllm-validation/model-source"
+  },
+  "variants": [
+    {
+      "variant": "base",
+      "cpu_source_sha256": "bfa74a5c08f4186b57a3bb83cf1c08fbe1bf35b5522c02020fc1d602dca12f50",
+      "command": [
+        "/home/vllmtest/vllm-validation/.venv/bin/python",
+        "/home/vllmtest/vllm-validation/check-openmp-worker.py",
+        "base",
+        "--root",
+        "/home/vllmtest/vllm-validation"
+      ],
+      "returncode": 0,
+      "timed_out": false,
+      "log": "openmp-worker-base.txt"
+    },
+    {
+      "variant": "fixed",
+      "cpu_source_sha256": "38b312b1392f8a9d14a028bf51be6dce42974c90619306d07ee9abb0f2e5575e",
+      "command": [
+        "/home/vllmtest/vllm-validation/.venv/bin/python",
+        "/home/vllmtest/vllm-validation/check-openmp-worker.py",
+        "fixed",
+        "--root",
+        "/home/vllmtest/vllm-validation"
+      ],
+      "returncode": 0,
+      "timed_out": false,
+      "log": "openmp-worker-fixed.txt"
+    }
+  ],
+  "exact_output_comparison": "passed: tokens, text and all returned logprobs are identical",
+  "source_restored": true
+}
