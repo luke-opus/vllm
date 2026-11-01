@@ -1,0 +1,44 @@
+{
+  "model": "EleutherAI/pythia-14m",
+  "revision": "cf967c0a9a04383db6f7b1108d86b2962634b4ac",
+  "scope": "Two-prompt greedy smoke comparison, four tokens each; not native hardware or an accuracy benchmark",
+  "reference_tokens": [
+    [
+      253,
+      1986,
+      2077,
+      15
+    ],
+    [
+      320,
+      908,
+      281,
+      897
+    ]
+  ],
+  "vllm_tokens": [
+    [
+      253,
+      1986,
+      2077,
+      13
+    ],
+    [
+      320,
+      908,
+      281,
+      897
+    ]
+  ],
+  "operator_counts": {
+    "_C::init_cpu_memory_env": 1,
+    "_C::create_onednn_mm_handler": 26,
+    "_C::cpu_attn_has_isa": 1,
+    "_C::compute_slot_mapping_kernel_impl": 4,
+    "_C::get_scheduler_metadata": 4,
+    "_C::cpu_attn_reshape_and_cache": 24,
+    "_C::cpu_attention_with_kv_cache": 24,
+    "_C::greedy_argmax": 4
+  },
+  "reference_comparison": "check_logprobs_close passed"
+}

@@ -1,0 +1,26 @@
+/home/vllmtest/vllm-validation/.venv/lib/python3.12/site-packages/pytest_asyncio/plugin.py:300: PytestDeprecationWarning: The configuration option "asyncio_default_fixture_loop_scope" is unset.
+The event loop scope for asynchronous fixtures will default to the "fixture" caching scope. Future versions of pytest-asyncio will default the loop scope for asynchronous fixtures to "function" scope. Set the default fixture loop scope explicitly in order to avoid unexpected behavior in the future. Valid fixture loop scopes are: "function", "class", "module", "package", "session"
+
+  warnings.warn(PytestDeprecationWarning(_DEFAULT_FIXTURE_LOOP_SCOPE_UNSET))
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-9.2.0, pluggy-1.7.0 -- /home/vllmtest/vllm-validation/.venv/bin/python
+cachedir: .pytest_cache
+rootdir: /home/vllmtest/vllm-validation/source
+configfile: pyproject.toml
+plugins: asyncio-1.4.1, anyio-4.15.1
+asyncio: mode=Mode.STRICT, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collecting ... collected 60 items / 56 deselected / 4 selected
+
+tests/kernels/core/test_cpu_activation.py::test_cpu_gelu_and_mul[none-dtype0] PASSED [ 25%]
+tests/kernels/core/test_cpu_activation.py::test_cpu_gelu_and_mul[none-dtype1] PASSED [ 50%]
+tests/kernels/core/test_cpu_activation.py::test_cpu_gelu_and_mul[tanh-dtype0] PASSED [ 75%]
+tests/kernels/core/test_cpu_activation.py::test_cpu_gelu_and_mul[tanh-dtype1] PASSED [100%]
+
+=============================== warnings summary ===============================
+vllm/__init__.py:7
+  /home/vllmtest/vllm-validation/source/vllm/__init__.py:7: RuntimeWarning: Failed to read commit hash:
+  No module named 'vllm._version'
+    from .version import __version__, __version_tuple__  # isort:skip
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+================= 4 passed, 56 deselected, 1 warning in 14.70s =================

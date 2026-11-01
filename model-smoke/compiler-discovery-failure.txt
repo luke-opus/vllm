@@ -1,0 +1,311 @@
+/home/vllmtest/vllm-validation/model-source/vllm/__init__.py:7: RuntimeWarning: Failed to read commit hash:
+No module named 'vllm._version'
+  from .version import __version__, __version_tuple__  # isort:skip
+W1031 15:55:26.560000 13975 .venv/lib/python3.12/site-packages/torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+W1031 15:55:26.636000 13975 .venv/lib/python3.12/site-packages/torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+W1031 15:55:26.659000 13975 .venv/lib/python3.12/site-packages/torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+Loading weights:   0%|          | 0/76 [00:00<?, ?it/s]Loading weights:   1%|▏         | 1/76 [00:00<00:30,  2.46it/s]Loading weights:   4%|▍         | 3/76 [00:00<00:11,  6.59it/s]Loading weights:  12%|█▏        | 9/76 [00:00<00:03, 19.73it/s]Loading weights:  16%|█▌        | 12/76 [00:00<00:03, 20.94it/s]Loading weights:  21%|██        | 16/76 [00:00<00:02, 23.61it/s]Loading weights:  26%|██▋       | 20/76 [00:01<00:02, 27.45it/s]Loading weights:  34%|███▍      | 26/76 [00:01<00:02, 24.85it/s]Loading weights:  41%|████      | 31/76 [00:01<00:01, 29.82it/s]Loading weights:  53%|█████▎    | 40/76 [00:01<00:00, 42.07it/s]Loading weights:  63%|██████▎   | 48/76 [00:01<00:00, 50.82it/s]Loading weights:  82%|████████▏ | 62/76 [00:01<00:00, 73.17it/s]Loading weights: 100%|██████████| 76/76 [00:01<00:00, 42.74it/s]
+[transformers] Ignoring clean_up_tokenization_spaces=True for BPE tokenizer GPTNeoXTokenizer. The clean_up_tokenization post-processing step is designed for WordPiece tokenizers and is destructive for BPE (it strips spaces before punctuation). Set clean_up_tokenization_spaces=False to suppress this warning, or set clean_up_tokenization_spaces_for_bpe_even_though_it_will_corrupt_output=True to force cleanup anyway.
+USDT:2026-10-31 15:58:44 13975:13975 SyncActivityProfilerHandler.cpp:39] profiler_start
+(MainProcess pid=13975) INFO 10-31 15:58:49 [startup.py:96] non-default args: {'dtype': 'bfloat16', 'max_model_len': 128, 'distributed_executor_backend': 'uni', 'block_size': 32, 'enable_prefix_caching': False, 'kv_cache_memory_bytes': 67108864, 'max_num_batched_tokens': 128, 'max_num_seqs': 2, 'disable_log_stats': True, 'enforce_eager': True, 'enable_chunked_prefill': False, 'model': '/home/vllmtest/vllm-validation/pythia-14m'}
+(MainProcess pid=13975) WARNING 10-31 15:58:49 [arg_utils.py:1989] The global random seed is set to 0. Since VLLM_ENABLE_V1_MULTIPROCESSING is set to False, this may affect the random state of the Python process that launched vLLM.
+W1031 16:04:14.113000 13975 .venv/lib/python3.12/site-packages/torch/_library/triton.py:53] Triton not available, find_triton_kernels = []
+(MainProcess pid=13975) INFO 10-31 16:04:14 [model.py:751] Resolved architecture: GPTNeoXForCausalLM
+(MainProcess pid=13975) WARNING 10-31 16:04:14 [model.py:2523] Casting torch.float16 to torch.bfloat16.
+(MainProcess pid=13975) INFO 10-31 16:04:14 [model.py:2177] Using max model len 128
+(MainProcess pid=13975) WARNING 10-31 16:04:15 [arg_utils.py:3065] This model does not officially support disabling chunked prefill. Disabling this manually may cause the engine to crash or produce incorrect outputs.
+(MainProcess pid=13975) INFO 10-31 16:04:15 [arg_utils.py:3104] Chunked prefill is not supported forRISC-V CPUs; disabling it for V1 backend.
+(MainProcess pid=13975) INFO 10-31 16:04:15 [arg_utils.py:3110] Prefix caching is not supported for RISC-V CPUs; disabling it for V1 backend.
+(MainProcess pid=13975) WARNING 10-31 16:04:15 [vllm.py:753] Model Runner V2 requires Triton; using the V1 model runner instead.
+(MainProcess pid=13975) WARNING 10-31 16:04:15 [vllm.py:1779] Enforce eager set, disabling torch.compile, CUDAGraphs, and JIT kernel warmup. This is equivalent to setting -cc.mode=none -cc.cudagraph_mode=none and --kernel_config.enable_jit_warmup=False
+(MainProcess pid=13975) WARNING 10-31 16:04:15 [vllm.py:1803] Inductor compilation was disabled by user settings, optimizations settings that are only active during inductor compilation will be ignored.
+(MainProcess pid=13975) INFO 10-31 16:04:15 [kernel.py:480] Final IR op priority after setting platform defaults: IrOpPriorityConfig(rms_norm=['native'], fused_add_rms_norm=['native'], gelu_and_mul_sparse=['native'])
+(MainProcess pid=13975) INFO 10-31 16:04:15 [compilation.py:317] Enabled custom fusions: norm_quant, act_quant
+(MainProcess pid=13975) INFO 10-31 16:04:42 [core.py:146] Initializing a V1 LLM engine (vdev) with config: model='/home/vllmtest/vllm-validation/pythia-14m', speculative_config=None, tokenizer='/home/vllmtest/vllm-validation/pythia-14m', skip_tokenizer_init=False, tokenizer_mode=auto, revision=None, tokenizer_revision=None, trust_remote_code=False, dtype=torch.bfloat16, max_seq_len=128, download_dir=None, load_format=auto, tensor_parallel_size=1, pipeline_parallel_size=1, data_parallel_size=1, decode_context_parallel_size=1, dcp_comm_backend=ag_rs, disable_custom_all_reduce=True, quantization=None, quantization_config=None, enforce_eager=True, aux_output_config=AuxOutputConfig(enable_return_routed_experts=False, max_bytes=None), kv_cache_dtype=auto, device_config=cpu, structured_outputs_config=StructuredOutputsConfig(backend='auto', disable_any_whitespace=False, disable_additional_properties=False, reasoning_parser='', reasoning_parser_plugin='', enable_in_reasoning=False), observability_config=ObservabilityConfig(show_hidden_metrics_for_version=None, otlp_traces_endpoint=None, collect_detailed_traces=None, per_request_spec_decode_metrics='none', kv_cache_metrics=False, kv_cache_metrics_sample=0.01, custom_histogram_buckets=None, cudagraph_metrics=False, enable_layerwise_nvtx_tracing=False, enable_mfu_metrics=False, enable_mm_processor_stats=False, enable_logging_iteration_details=False, jit_monitor_mode='warn', jit_monitor_verbose=False), seed=0, served_model_name=/home/vllmtest/vllm-validation/pythia-14m, enable_prefix_caching=False, enable_chunked_prefill=False, pooler_config=None, compilation_config={'mode': <CompilationMode.NONE: 0>, 'debug_dump_path': None, 'cache_dir': '', 'compile_cache_save_format': 'binary', 'backend': 'inductor', 'custom_ops': ['all'], 'ir_enable_torch_wrap': False, 'splitting_ops': [], 'compile_mm_encoder': False, 'cudagraph_mm_encoder': False, 'encoder_cudagraph_token_budgets': [], 'encoder_cudagraph_max_vision_items_per_batch': 0, 'encoder_cudagraph_max_frames_per_batch': None, 'cudagraph_decoder_replay': True, 'decoder_replay_cudagraph_capture_sizes': [], 'decoder_replay_trim_threshold': 768, 'compile_sizes': None, 'compile_ranges_endpoints': [128], 'inductor_compile_config': {'enable_auto_functionalized_v2': False}, 'inductor_passes': {}, 'cudagraph_mode': <CUDAGraphMode.NONE: 0>, 'cudagraph_num_of_warmups': 0, 'cudagraph_capture_sizes': [], 'cudagraph_copy_inputs': False, 'cudagraph_specialize_lora': True, 'use_inductor_graph_partition': False, 'pass_config': {'fuse_norm_quant': True, 'fuse_act_quant': True, 'fuse_attn_quant': False, 'fuse_allreduce_rms': False, 'enable_qk_norm_rope_fusion': False, 'fuse_rope_kvcache_cat_mla': False, 'fuse_act_padding': False, 'fuse_qk_norm_rope_kvcache': False}, 'max_cudagraph_capture_size': None, 'dynamic_shapes_config': {'type': <DynamicShapesType.BACKED: 'backed'>, 'evaluate_guards': False, 'assume_32_bit_indexing': False}, 'local_cache_dir': None, 'fast_moe_cold_start': False, 'static_all_moe_layers': []}, kernel_config=KernelConfig(ir_op_priority=IrOpPriorityConfig(rms_norm=['native'], fused_add_rms_norm=['native'], gelu_and_mul_sparse=['native']), enable_flashinfer_autotune=True, enable_rocm_segmented_attn_autotune=False, enable_cutedsl_warmup=True, enable_jit_warmup=False, monokernel=False, moe_backend='auto', sparse_indexer_topk_backend='auto', linear_backend='auto', linear_backend_per_quant=None)
+/home/vllmtest/vllm-validation/model-source/vllm/triton_utils/dispatcher.py:201: FutureWarning: `torch.distributed.reduce_op` is deprecated, please use `torch.distributed.ReduceOp` instead
+  if hasattr(value, "__dict__"):
+/home/vllmtest/vllm-validation/model-source/vllm/triton_utils/dispatcher.py:202: FutureWarning: `torch.distributed.reduce_op` is deprecated, please use `torch.distributed.ReduceOp` instead
+  replacement = lookup(vars(value).get("kernel"))
+[W1031 16:05:21.947500466 utils.cpp:73] Warning: NUMA binding: Using MEMBIND policy for memory allocation on the NUMA nodes (0). Memory allocations will be strictly bound to these NUMA nodes. (function init_cpu_memory_env)
+(MainProcess pid=13975) WARNING 10-31 16:05:21 [cpu_worker.py:101] libtcmalloc is not found in LD_PRELOAD. For best performance, please follow the section `set LD_PRELOAD` in https://docs.vllm.ai/en/latest/getting_started/installation/cpu/ to setup required pre-loaded libraries.
+(MainProcess pid=13975) INFO 10-31 16:05:21 [parallel_state.py:1929] world_size=1 rank=0 local_rank=0 distributed_init_method=file:///tmp/vllm_dist_eace3016599543b4908981379d8961e3 backend=gloo
+(MainProcess pid=13975) INFO 10-31 16:05:22 [parallel_state.py:2385] rank 0 in world size 1 is assigned as DP rank 0, PP rank 0, PCP rank 0, TP rank 0, ETP rank 0, EP rank N/A, EPLB rank N/A
+(MainProcess pid=13975) INFO 10-31 16:05:23 [cpu_model_runner.py:68] Starting to load model /home/vllmtest/vllm-validation/pythia-14m...
+(MainProcess pid=13975) INFO 10-31 16:05:24 [base.py:124] Using Transformers modeling backend.
+(MainProcess pid=13975) INFO 10-31 16:05:28 [base.py:579] Found: attention (GPTNeoXAttention) -> attention interface
+(MainProcess pid=13975) INFO 10-31 16:05:35 [base_loader.py:82] Initializing model took 11.656501 seconds
+(MainProcess pid=13975) INFO 10-31 16:05:35 [weight_utils.py:1144] Filesystem type for checkpoints: EXT4. Checkpoint size: 0.03 GiB. Available RAM: 2.77 GiB.
+(MainProcess pid=13975) INFO 10-31 16:05:35 [weight_utils.py:1167] Auto-prefetch is disabled because the filesystem (EXT4) is not a recognized network FS (NFS/Lustre). If you want to force prefetching, start vLLM with --safetensors-load-strategy=prefetch.
+Loading safetensors checkpoint shards:   0% Completed | 0/1 [00:00<?, ?it/s]
+(MainProcess pid=13975) WARNING 10-31 16:05:35 [utils.py:333] Attempted to load weight lm_head.weight with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=13975) WARNING 10-31 16:05:36 [utils.py:333] Attempted to load weight model.embed_in.weight with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=13975) WARNING 10-31 16:05:36 [utils.py:333] Attempted to load weight model.final_layer_norm.bias with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=13975) WARNING 10-31 16:05:36 [utils.py:333] Attempted to load weight model.final_layer_norm.weight with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=13975) WARNING 10-31 16:05:36 [utils.py:333] Attempted to load weight model.layers.0.attention.dense.bias with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=13975) WARNING 10-31 16:05:36 [utils.py:333] Attempted to load weight model.layers.0.attention.dense.weight with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=13975) WARNING 10-31 16:05:36 [utils.py:333] Attempted to load weight model.layers.0.attention.query_key_value.bias with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=13975) WARNING 10-31 16:05:36 [utils.py:333] Attempted to load weight model.layers.0.attention.query_key_value.weight with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=13975) WARNING 10-31 16:05:36 [utils.py:333] Attempted to load weight model.layers.0.input_layernorm.bias with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=13975) WARNING 10-31 16:05:36 [utils.py:333] Attempted to load weight model.layers.0.input_layernorm.weight with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=13975) WARNING 10-31 16:05:36 [utils.py:333] Attempted to load weight model.layers.0.mlp.dense_4h_to_h.bias with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=13975) WARNING 10-31 16:05:36 [utils.py:333] Attempted to load weight model.layers.0.mlp.dense_4h_to_h.weight with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=13975) WARNING 10-31 16:05:36 [utils.py:333] Attempted to load weight model.layers.0.mlp.dense_h_to_4h.bias with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=13975) WARNING 10-31 16:05:36 [utils.py:333] Attempted to load weight model.layers.0.mlp.dense_h_to_4h.weight with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=13975) WARNING 10-31 16:05:36 [utils.py:333] Attempted to load weight model.layers.0.post_attention_layernorm.bias with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=13975) WARNING 10-31 16:05:36 [utils.py:333] Attempted to load weight model.layers.0.post_attention_layernorm.weight with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=13975) WARNING 10-31 16:05:36 [utils.py:333] Attempted to load weight model.layers.1.attention.dense.bias with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=13975) WARNING 10-31 16:05:36 [utils.py:333] Attempted to load weight model.layers.1.attention.dense.weight with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=13975) WARNING 10-31 16:05:36 [utils.py:333] Attempted to load weight model.layers.1.attention.query_key_value.bias with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=13975) WARNING 10-31 16:05:36 [utils.py:333] Attempted to load weight model.layers.1.attention.query_key_value.weight with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=13975) WARNING 10-31 16:05:36 [utils.py:333] Attempted to load weight model.layers.1.input_layernorm.bias with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=13975) WARNING 10-31 16:05:36 [utils.py:333] Attempted to load weight model.layers.1.input_layernorm.weight with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=13975) WARNING 10-31 16:05:36 [utils.py:333] Attempted to load weight model.layers.1.mlp.dense_4h_to_h.bias with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=13975) WARNING 10-31 16:05:36 [utils.py:333] Attempted to load weight model.layers.1.mlp.dense_4h_to_h.weight with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=13975) WARNING 10-31 16:05:36 [utils.py:333] Attempted to load weight model.layers.1.mlp.dense_h_to_4h.bias with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=13975) WARNING 10-31 16:05:36 [utils.py:333] Attempted to load weight model.layers.1.mlp.dense_h_to_4h.weight with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=13975) WARNING 10-31 16:05:36 [utils.py:333] Attempted to load weight model.layers.1.post_attention_layernorm.bias with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=13975) WARNING 10-31 16:05:36 [utils.py:333] Attempted to load weight model.layers.1.post_attention_layernorm.weight with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=13975) WARNING 10-31 16:05:36 [utils.py:333] Attempted to load weight model.layers.2.attention.dense.bias with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=13975) WARNING 10-31 16:05:36 [utils.py:333] Attempted to load weight model.layers.2.attention.dense.weight with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=13975) WARNING 10-31 16:05:36 [utils.py:333] Attempted to load weight model.layers.2.attention.query_key_value.bias with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=13975) WARNING 10-31 16:05:36 [utils.py:333] Attempted to load weight model.layers.2.attention.query_key_value.weight with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=13975) WARNING 10-31 16:05:36 [utils.py:333] Attempted to load weight model.layers.2.input_layernorm.bias with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=13975) WARNING 10-31 16:05:37 [utils.py:333] Attempted to load weight model.layers.2.input_layernorm.weight with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=13975) WARNING 10-31 16:05:37 [utils.py:333] Attempted to load weight model.layers.2.mlp.dense_4h_to_h.bias with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=13975) WARNING 10-31 16:05:37 [utils.py:333] Attempted to load weight model.layers.2.mlp.dense_4h_to_h.weight with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=13975) WARNING 10-31 16:05:37 [utils.py:333] Attempted to load weight model.layers.2.mlp.dense_h_to_4h.bias with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=13975) WARNING 10-31 16:05:37 [utils.py:333] Attempted to load weight model.layers.2.mlp.dense_h_to_4h.weight with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=13975) WARNING 10-31 16:05:37 [utils.py:333] Attempted to load weight model.layers.2.post_attention_layernorm.bias with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=13975) WARNING 10-31 16:05:37 [utils.py:333] Attempted to load weight model.layers.2.post_attention_layernorm.weight with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=13975) WARNING 10-31 16:05:37 [utils.py:333] Attempted to load weight model.layers.3.attention.dense.bias with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=13975) WARNING 10-31 16:05:37 [utils.py:333] Attempted to load weight model.layers.3.attention.dense.weight with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=13975) WARNING 10-31 16:05:37 [utils.py:333] Attempted to load weight model.layers.3.attention.query_key_value.bias with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=13975) WARNING 10-31 16:05:37 [utils.py:333] Attempted to load weight model.layers.3.attention.query_key_value.weight with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=13975) WARNING 10-31 16:05:37 [utils.py:333] Attempted to load weight model.layers.3.input_layernorm.bias with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=13975) WARNING 10-31 16:05:37 [utils.py:333] Attempted to load weight model.layers.3.input_layernorm.weight with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=13975) WARNING 10-31 16:05:37 [utils.py:333] Attempted to load weight model.layers.3.mlp.dense_4h_to_h.bias with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=13975) WARNING 10-31 16:05:37 [utils.py:333] Attempted to load weight model.layers.3.mlp.dense_4h_to_h.weight with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=13975) WARNING 10-31 16:05:37 [utils.py:333] Attempted to load weight model.layers.3.mlp.dense_h_to_4h.bias with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=13975) WARNING 10-31 16:05:37 [utils.py:333] Attempted to load weight model.layers.3.mlp.dense_h_to_4h.weight with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=13975) WARNING 10-31 16:05:37 [utils.py:333] Attempted to load weight model.layers.3.post_attention_layernorm.bias with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=13975) WARNING 10-31 16:05:37 [utils.py:333] Attempted to load weight model.layers.3.post_attention_layernorm.weight with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=13975) WARNING 10-31 16:05:37 [utils.py:333] Attempted to load weight model.layers.4.attention.dense.bias with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=13975) WARNING 10-31 16:05:37 [utils.py:333] Attempted to load weight model.layers.4.attention.dense.weight with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=13975) WARNING 10-31 16:05:37 [utils.py:333] Attempted to load weight model.layers.4.attention.query_key_value.bias with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=13975) WARNING 10-31 16:05:37 [utils.py:333] Attempted to load weight model.layers.4.attention.query_key_value.weight with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=13975) WARNING 10-31 16:05:37 [utils.py:333] Attempted to load weight model.layers.4.input_layernorm.bias with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=13975) WARNING 10-31 16:05:37 [utils.py:333] Attempted to load weight model.layers.4.input_layernorm.weight with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=13975) WARNING 10-31 16:05:37 [utils.py:333] Attempted to load weight model.layers.4.mlp.dense_4h_to_h.bias with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=13975) WARNING 10-31 16:05:37 [utils.py:333] Attempted to load weight model.layers.4.mlp.dense_4h_to_h.weight with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=13975) WARNING 10-31 16:05:37 [utils.py:333] Attempted to load weight model.layers.4.mlp.dense_h_to_4h.bias with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=13975) WARNING 10-31 16:05:37 [utils.py:333] Attempted to load weight model.layers.4.mlp.dense_h_to_4h.weight with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=13975) WARNING 10-31 16:05:37 [utils.py:333] Attempted to load weight model.layers.4.post_attention_layernorm.bias with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=13975) WARNING 10-31 16:05:37 [utils.py:333] Attempted to load weight model.layers.4.post_attention_layernorm.weight with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=13975) WARNING 10-31 16:05:37 [utils.py:333] Attempted to load weight model.layers.5.attention.dense.bias with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=13975) WARNING 10-31 16:05:37 [utils.py:333] Attempted to load weight model.layers.5.attention.dense.weight with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=13975) WARNING 10-31 16:05:37 [utils.py:333] Attempted to load weight model.layers.5.attention.query_key_value.bias with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=13975) WARNING 10-31 16:05:37 [utils.py:333] Attempted to load weight model.layers.5.attention.query_key_value.weight with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=13975) WARNING 10-31 16:05:37 [utils.py:333] Attempted to load weight model.layers.5.input_layernorm.bias with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=13975) WARNING 10-31 16:05:37 [utils.py:333] Attempted to load weight model.layers.5.input_layernorm.weight with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=13975) WARNING 10-31 16:05:37 [utils.py:333] Attempted to load weight model.layers.5.mlp.dense_4h_to_h.bias with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=13975) WARNING 10-31 16:05:37 [utils.py:333] Attempted to load weight model.layers.5.mlp.dense_4h_to_h.weight with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=13975) WARNING 10-31 16:05:37 [utils.py:333] Attempted to load weight model.layers.5.mlp.dense_h_to_4h.bias with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=13975) WARNING 10-31 16:05:37 [utils.py:333] Attempted to load weight model.layers.5.mlp.dense_h_to_4h.weight with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=13975) WARNING 10-31 16:05:37 [utils.py:333] Attempted to load weight model.layers.5.post_attention_layernorm.bias with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=13975) WARNING 10-31 16:05:37 [utils.py:333] Attempted to load weight model.layers.5.post_attention_layernorm.weight with dtype torch.float16 into parameter with dtype torch.bfloat16
+Loading safetensors checkpoint shards: 100% Completed | 1/1 [00:02<00:00,  2.11s/it]
+Loading safetensors checkpoint shards: 100% Completed | 1/1 [00:02<00:00,  2.12s/it]
+
+(MainProcess pid=13975) INFO 10-31 16:05:37 [default_loader.py:506] Loading weights took 2.19 seconds
+(MainProcess pid=13975) WARNING 10-31 16:05:39 [utils.py:656] Failed to create oneDNN linear, fallback to torch linear. Exception: could not create a primitive descriptor for the matmul primitive. Run workload with environment variable ONEDNN_VERBOSE=all to get additional diagnostic information.
+(MainProcess pid=13975) INFO 10-31 16:05:42 [utils.py:381] Using LBHNC KV cache layout.
+(MainProcess pid=13975) INFO 10-31 16:05:42 [cpu_worker.py:261] Explicitly set (0.06/3.81) GiB for KV cache on node 0.
+(MainProcess pid=13975) INFO 10-31 16:05:42 [kv_cache_utils.py:1147] CPU KV cache size: 21,824 tokens, Maximum concurrency for 128 tokens per request: 170.50x
+(MainProcess pid=13975) INFO 10-31 16:05:44 [core.py:419] init engine (profile, create kv cache, warmup model) took 2.55 s
+(MainProcess pid=13975) WARNING 10-31 16:05:46 [cpu_worker.py:127] CPU backend doesn't allow to use `torch.set_num_threads` after the thread binding, skip it.
+(MainProcess pid=13975) INFO 10-31 16:05:48 [hf.py:736] Detected the chat template content format to be 'string'. You can set `--chat-template-content-format` to override this.
+(MainProcess pid=13975) WARNING 10-31 16:05:48 [cpu_worker.py:127] CPU backend doesn't allow to use `torch.set_num_threads` after the thread binding, skip it.
+(MainProcess pid=13975) WARNING 10-31 16:05:48 [cpu_worker.py:127] CPU backend doesn't allow to use `torch.set_num_threads` after the thread binding, skip it.
+(MainProcess pid=13975) WARNING 10-31 16:05:48 [cpu_worker.py:127] CPU backend doesn't allow to use `torch.set_num_threads` after the thread binding, skip it.
+[rank0]:C1031 16:07:21.924000 13975 .venv/lib/python3.12/site-packages/torch/_inductor/scheduler.py:2608] [0/0] Error in codegen for ComputedBuffer(name='buf4', layout=FixedLayout('cpu', torch.int64, size=[u1], stride=[1]), data=Reduction(
+[rank0]:C1031 16:07:21.924000 13975 .venv/lib/python3.12/site-packages/torch/_inductor/scheduler.py:2608] [0/0]   'cpu',
+[rank0]:C1031 16:07:21.924000 13975 .venv/lib/python3.12/site-packages/torch/_inductor/scheduler.py:2608] [0/0]   torch.int64,
+[rank0]:C1031 16:07:21.924000 13975 .venv/lib/python3.12/site-packages/torch/_inductor/scheduler.py:2608] [0/0]   def inner_fn(index, rindex):
+[rank0]:C1031 16:07:21.924000 13975 .venv/lib/python3.12/site-packages/torch/_inductor/scheduler.py:2608] [0/0]       i0 = index
+[rank0]:C1031 16:07:21.924000 13975 .venv/lib/python3.12/site-packages/torch/_inductor/scheduler.py:2608] [0/0]       r0_0 = rindex
+[rank0]:C1031 16:07:21.924000 13975 .venv/lib/python3.12/site-packages/torch/_inductor/scheduler.py:2608] [0/0]       tmp0 = ops.load(arg1_1, r0_0 + 50304 * i0)
+[rank0]:C1031 16:07:21.924000 13975 .venv/lib/python3.12/site-packages/torch/_inductor/scheduler.py:2608] [0/0]       tmp1 = ops.load(arg3_1, i0)
+[rank0]:C1031 16:07:21.924000 13975 .venv/lib/python3.12/site-packages/torch/_inductor/scheduler.py:2608] [0/0]       tmp2 = tmp0 >= tmp1
+[rank0]:C1031 16:07:21.924000 13975 .venv/lib/python3.12/site-packages/torch/_inductor/scheduler.py:2608] [0/0]       tmp3 = ops.to_dtype(tmp2, torch.int64, src_dtype=torch.bool, use_compute_types=True)
+[rank0]:C1031 16:07:21.924000 13975 .venv/lib/python3.12/site-packages/torch/_inductor/scheduler.py:2608] [0/0]       return tmp3
+[rank0]:C1031 16:07:21.924000 13975 .venv/lib/python3.12/site-packages/torch/_inductor/scheduler.py:2608] [0/0]   ,
+[rank0]:C1031 16:07:21.924000 13975 .venv/lib/python3.12/site-packages/torch/_inductor/scheduler.py:2608] [0/0]   ranges=[u1],
+[rank0]:C1031 16:07:21.924000 13975 .venv/lib/python3.12/site-packages/torch/_inductor/scheduler.py:2608] [0/0]   reduction_ranges=[50304],
+[rank0]:C1031 16:07:21.924000 13975 .venv/lib/python3.12/site-packages/torch/_inductor/scheduler.py:2608] [0/0]   reduction_type=sum,
+[rank0]:C1031 16:07:21.924000 13975 .venv/lib/python3.12/site-packages/torch/_inductor/scheduler.py:2608] [0/0]   origin_node=sum_1,
+[rank0]:C1031 16:07:21.924000 13975 .venv/lib/python3.12/site-packages/torch/_inductor/scheduler.py:2608] [0/0]   origins=OrderedSet([sum_1, ge_2]),
+[rank0]:C1031 16:07:21.924000 13975 .venv/lib/python3.12/site-packages/torch/_inductor/scheduler.py:2608] [0/0]   stack_traces = {,
+[rank0]:C1031 16:07:21.924000 13975 .venv/lib/python3.12/site-packages/torch/_inductor/scheduler.py:2608] [0/0]     File "/home/vllmtest/vllm-validation/model-source/vllm/v1/sample/ops/logprobs.py", line 27, in batched_count_greater_than,
+[rank0]:C1031 16:07:21.924000 13975 .venv/lib/python3.12/site-packages/torch/_inductor/scheduler.py:2608] [0/0]       return (x >= values).sum(-1),
+[rank0]:C1031 16:07:21.924000 13975 .venv/lib/python3.12/site-packages/torch/_inductor/scheduler.py:2608] [0/0]              ^^^^^^^^^^^^^^^^^^^^^,
+[rank0]:C1031 16:07:21.924000 13975 .venv/lib/python3.12/site-packages/torch/_inductor/scheduler.py:2608] [0/0]   ,
+[rank0]:C1031 16:07:21.924000 13975 .venv/lib/python3.12/site-packages/torch/_inductor/scheduler.py:2608] [0/0]   },
+[rank0]:C1031 16:07:21.924000 13975 .venv/lib/python3.12/site-packages/torch/_inductor/scheduler.py:2608] [0/0]   stack_traces = {,
+[rank0]:C1031 16:07:21.924000 13975 .venv/lib/python3.12/site-packages/torch/_inductor/scheduler.py:2608] [0/0]     File "/home/vllmtest/vllm-validation/model-source/vllm/v1/sample/ops/logprobs.py", line 27, in batched_count_greater_than,
+[rank0]:C1031 16:07:21.924000 13975 .venv/lib/python3.12/site-packages/torch/_inductor/scheduler.py:2608] [0/0]       return (x >= values).sum(-1),
+[rank0]:C1031 16:07:21.924000 13975 .venv/lib/python3.12/site-packages/torch/_inductor/scheduler.py:2608] [0/0]               ^^^^^^^^^^^^^^^^^^^^,
+[rank0]:C1031 16:07:21.924000 13975 .venv/lib/python3.12/site-packages/torch/_inductor/scheduler.py:2608] [0/0]   ,
+[rank0]:C1031 16:07:21.924000 13975 .venv/lib/python3.12/site-packages/torch/_inductor/scheduler.py:2608] [0/0]   }
+[rank0]:C1031 16:07:21.924000 13975 .venv/lib/python3.12/site-packages/torch/_inductor/scheduler.py:2608] [0/0] ), _split_size=None, _original_inner_fn=None, _original_ranges=None, _original_reduction_ranges=None)
+(MainProcess pid=13975) ERROR 10-31 16:07:23 [dump_input.py:72] Dumping input data for V1 LLM engine (vdev) with config: model='/home/vllmtest/vllm-validation/pythia-14m', speculative_config=None, tokenizer='/home/vllmtest/vllm-validation/pythia-14m', skip_tokenizer_init=False, tokenizer_mode=auto, revision=None, tokenizer_revision=None, trust_remote_code=False, dtype=torch.bfloat16, max_seq_len=128, download_dir=None, load_format=auto, tensor_parallel_size=1, pipeline_parallel_size=1, data_parallel_size=1, decode_context_parallel_size=1, dcp_comm_backend=ag_rs, disable_custom_all_reduce=True, quantization=None, quantization_config=None, enforce_eager=True, aux_output_config=AuxOutputConfig(enable_return_routed_experts=False, max_bytes=None), kv_cache_dtype=auto, device_config=cpu, structured_outputs_config=StructuredOutputsConfig(backend='auto', disable_any_whitespace=False, disable_additional_properties=False, reasoning_parser='', reasoning_parser_plugin='', enable_in_reasoning=False), observability_config=ObservabilityConfig(show_hidden_metrics_for_version=None, otlp_traces_endpoint=None, collect_detailed_traces=None, per_request_spec_decode_metrics='none', kv_cache_metrics=False, kv_cache_metrics_sample=0.01, custom_histogram_buckets=None, cudagraph_metrics=False, enable_layerwise_nvtx_tracing=False, enable_mfu_metrics=False, enable_mm_processor_stats=False, enable_logging_iteration_details=False, jit_monitor_mode='warn', jit_monitor_verbose=False), seed=0, served_model_name=/home/vllmtest/vllm-validation/pythia-14m, enable_prefix_caching=False, enable_chunked_prefill=False, pooler_config=None, compilation_config={'mode': <CompilationMode.NONE: 0>, 'debug_dump_path': None, 'cache_dir': '', 'compile_cache_save_format': 'binary', 'backend': 'inductor', 'custom_ops': ['all'], 'ir_enable_torch_wrap': False, 'splitting_ops': [], 'compile_mm_encoder': False, 'cudagraph_mm_encoder': False, 'encoder_cudagraph_token_budgets': [], 'encoder_cudagraph_max_vision_items_per_batch': 0, 'encoder_cudagraph_max_frames_per_batch': None, 'cudagraph_decoder_replay': True, 'decoder_replay_cudagraph_capture_sizes': [], 'decoder_replay_trim_threshold': 768, 'compile_sizes': None, 'compile_ranges_endpoints': [128], 'inductor_compile_config': {'enable_auto_functionalized_v2': False}, 'inductor_passes': {}, 'cudagraph_mode': <CUDAGraphMode.NONE: 0>, 'cudagraph_num_of_warmups': 0, 'cudagraph_capture_sizes': [], 'cudagraph_copy_inputs': False, 'cudagraph_specialize_lora': True, 'use_inductor_graph_partition': False, 'pass_config': {'fuse_norm_quant': True, 'fuse_act_quant': True, 'fuse_attn_quant': False, 'fuse_allreduce_rms': False, 'enable_qk_norm_rope_fusion': False, 'fuse_rope_kvcache_cat_mla': False, 'fuse_act_padding': False, 'fuse_qk_norm_rope_kvcache': False}, 'max_cudagraph_capture_size': None, 'dynamic_shapes_config': {'type': <DynamicShapesType.BACKED: 'backed'>, 'evaluate_guards': False, 'assume_32_bit_indexing': False}, 'local_cache_dir': None, 'fast_moe_cold_start': False, 'static_all_moe_layers': []}, kernel_config=KernelConfig(ir_op_priority=IrOpPriorityConfig(rms_norm=['native'], fused_add_rms_norm=['native'], gelu_and_mul_sparse=['native']), enable_flashinfer_autotune=True, enable_rocm_segmented_attn_autotune=False, enable_cutedsl_warmup=True, enable_jit_warmup=False, monokernel=False, moe_backend='auto', sparse_indexer_topk_backend='auto', linear_backend='auto', linear_backend_per_quant=None), 
+(MainProcess pid=13975) ERROR 10-31 16:07:23 [dump_input.py:79] Dumping scheduler output for model execution: SchedulerOutput(scheduled_new_reqs=[NewRequestData(req_id=0-ba494edf,prompt_token_ids_len=5,prefill_token_ids_len=None,mm_features=[],sampling_params=SamplingParams(n=1, presence_penalty=0.0, frequency_penalty=0.0, repetition_penalty=1.0, temperature=0.0, watermarking=False, top_p=1.0, top_k=0, min_p=0.0, seed=None, stop=[], stop_token_ids=[], bad_words=[], thinking_token_budget=None, include_stop_str_in_output=False, ignore_eos=False, max_tokens=4, min_tokens=0, logprobs=5, prompt_logprobs=None, skip_special_tokens=True, spaces_between_special_tokens=True, structured_outputs=None, extra_args=None),block_ids=([1],),num_computed_tokens=0,lora_request=None,prompt_embeds_shape=None), NewRequestData(req_id=1-acc29208,prompt_token_ids_len=3,prefill_token_ids_len=None,mm_features=[],sampling_params=SamplingParams(n=1, presence_penalty=0.0, frequency_penalty=0.0, repetition_penalty=1.0, temperature=0.0, watermarking=False, top_p=1.0, top_k=0, min_p=0.0, seed=None, stop=[], stop_token_ids=[], bad_words=[], thinking_token_budget=None, include_stop_str_in_output=False, ignore_eos=False, max_tokens=4, min_tokens=0, logprobs=5, prompt_logprobs=None, skip_special_tokens=True, spaces_between_special_tokens=True, structured_outputs=None, extra_args=None),block_ids=([2],),num_computed_tokens=0,lora_request=None,prompt_embeds_shape=None)], scheduled_cached_reqs=CachedRequestData(req_ids=[],resumed_req_ids=set(),new_token_ids_lens=[],all_token_ids_lens={},new_block_ids=[],num_computed_tokens=[],num_output_tokens=[]), num_scheduled_tokens={0-ba494edf: 5, 1-acc29208: 3}, total_num_scheduled_tokens=8, scheduled_spec_decode_tokens={}, scheduled_encoder_inputs={}, finished_req_ids=[], free_encoder_mm_hashes=[], encoder_input_updates={}, scheduled_encoder_input_stats=null, preempted_req_ids=[], has_structured_output_requests=false, pending_structured_output_tokens=false, num_invalid_spec_tokens=null, kv_connector_metadata=null, has_sync_kv_loads=false, aux_output_connector_metadata=null, ec_connector_metadata=null, ec_manager_metadata=null, new_block_ids_to_zero=null, kv_cache_block_copies=null, kv_connector_block_state=null, num_spec_tokens_to_schedule=0, num_common_prefix_blocks=[], skip_drafts=false)
+USDT:2026-10-31 16:07:23 13975:13975 SyncActivityProfilerHandler.cpp:46] profiler_stop
+[rank0]: Traceback (most recent call last):
+[rank0]:   File "/home/vllmtest/vllm-validation/check-real-model.py", line 66, in <module>
+[rank0]:     requests = llm.generate(
+[rank0]:                ^^^^^^^^^^^^^
+[rank0]:   File "/home/vllmtest/vllm-validation/model-source/vllm/entrypoints/llm.py", line 472, in generate
+[rank0]:     return self._run_completion(
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/home/vllmtest/vllm-validation/model-source/vllm/entrypoints/common/offline.py", line 363, in _run_completion
+[rank0]:     return self._run_engine(use_tqdm=use_tqdm, output_type=output_type)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/home/vllmtest/vllm-validation/model-source/vllm/entrypoints/common/offline.py", line 611, in _run_engine
+[rank0]:     step_outputs = self.llm_engine.step()
+[rank0]:                    ^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/home/vllmtest/vllm-validation/model-source/vllm/v1/engine/llm_engine.py", line 327, in step
+[rank0]:     outputs = self.engine_core.get_output()
+[rank0]:               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/home/vllmtest/vllm-validation/model-source/vllm/v1/engine/core_client.py", line 409, in get_output
+[rank0]:     outputs, model_executed = self.engine_core.step_fn()
+[rank0]:                               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/home/vllmtest/vllm-validation/model-source/vllm/v1/engine/core.py", line 693, in step
+[rank0]:     model_output = self.model_executor.sample_tokens(grammar_output)
+[rank0]:                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/home/vllmtest/vllm-validation/model-source/vllm/v1/executor/uniproc_executor.py", line 137, in sample_tokens
+[rank0]:     return self.collective_rpc(
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/home/vllmtest/vllm-validation/model-source/vllm/v1/executor/uniproc_executor.py", line 103, in collective_rpc
+[rank0]:     result = run_method(self.driver_worker, method, args, kwargs)
+[rank0]:              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/home/vllmtest/vllm-validation/model-source/vllm/v1/serial_utils.py", line 508, in run_method
+[rank0]:     return func(*args, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/home/vllmtest/vllm-validation/.venv/lib/python3.12/site-packages/torch/utils/_contextlib.py", line 124, in decorate_context
+[rank0]:     return func(*args, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/home/vllmtest/vllm-validation/model-source/vllm/v1/worker/gpu_worker.py", line 1337, in sample_tokens
+[rank0]:     return self.model_runner.sample_tokens(grammar_output)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/home/vllmtest/vllm-validation/.venv/lib/python3.12/site-packages/torch/utils/_contextlib.py", line 124, in decorate_context
+[rank0]:     return func(*args, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/home/vllmtest/vllm-validation/model-source/vllm/v1/worker/gpu_model_runner.py", line 4306, in sample_tokens
+[rank0]:     sampler_output = self._sample(logits, spec_decode_metadata)
+[rank0]:                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/home/vllmtest/vllm-validation/model-source/vllm/v1/worker/gpu_model_runner.py", line 3414, in _sample
+[rank0]:     return self.sampler(
+[rank0]:            ^^^^^^^^^^^^^
+[rank0]:   File "/home/vllmtest/vllm-validation/.venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1783, in _wrapped_call_impl
+[rank0]:     return self._call_impl(*args, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/home/vllmtest/vllm-validation/.venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1794, in _call_impl
+[rank0]:     return forward_call(*args, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/home/vllmtest/vllm-validation/model-source/vllm/v1/sample/sampler.py", line 191, in forward
+[rank0]:     logprobs_tensors = self.gather_logprobs(
+[rank0]:                        ^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/home/vllmtest/vllm-validation/model-source/vllm/v1/sample/sampler.py", line 412, in gather_logprobs
+[rank0]:     token_ranks = batched_count_greater_than(logprobs, token_logprobs)
+[rank0]:                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/home/vllmtest/vllm-validation/.venv/lib/python3.12/site-packages/torch/_dynamo/eval_frame.py", line 1278, in compile_wrapper
+[rank0]:     raise e.remove_dynamo_frames() from None  # see TORCHDYNAMO_VERBOSE=1
+[rank0]:     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/home/vllmtest/vllm-validation/.venv/lib/python3.12/site-packages/torch/_inductor/compile_fx.py", line 1192, in _compile_fx_inner
+[rank0]:     raise InductorError(e, currentframe()).with_traceback(
+[rank0]:   File "/home/vllmtest/vllm-validation/.venv/lib/python3.12/site-packages/torch/_inductor/compile_fx.py", line 1169, in _compile_fx_inner
+[rank0]:     mb_compiled_graph = fx_codegen_and_compile(
+[rank0]:                         ^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/home/vllmtest/vllm-validation/.venv/lib/python3.12/site-packages/torch/_inductor/compile_fx.py", line 2001, in fx_codegen_and_compile
+[rank0]:     return scheme.codegen_and_compile(gm, example_inputs, inputs_to_check, graph_kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/home/vllmtest/vllm-validation/.venv/lib/python3.12/site-packages/torch/_inductor/compile_fx.py", line 1749, in codegen_and_compile
+[rank0]:     compiled_module = graph.compile_to_module()
+[rank0]:                       ^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/home/vllmtest/vllm-validation/.venv/lib/python3.12/site-packages/torch/_inductor/graph.py", line 3060, in compile_to_module
+[rank0]:     return self._compile_to_module()
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/home/vllmtest/vllm-validation/.venv/lib/python3.12/site-packages/torch/_inductor/graph.py", line 3066, in _compile_to_module
+[rank0]:     self.codegen_with_cpp_wrapper() if self.cpp_wrapper else self.codegen()
+[rank0]:                                                              ^^^^^^^^^^^^^^
+[rank0]:   File "/home/vllmtest/vllm-validation/.venv/lib/python3.12/site-packages/torch/_inductor/graph.py", line 3002, in codegen
+[rank0]:     self.scheduler.codegen()
+[rank0]:   File "/home/vllmtest/vllm-validation/.venv/lib/python3.12/site-packages/torch/_inductor/scheduler.py", line 10015, in codegen
+[rank0]:     self._codegen_partitions()
+[rank0]:   File "/home/vllmtest/vllm-validation/.venv/lib/python3.12/site-packages/torch/_inductor/scheduler.py", line 10167, in _codegen_partitions
+[rank0]:     self._codegen(partition)
+[rank0]:   File "/home/vllmtest/vllm-validation/.venv/lib/python3.12/site-packages/torch/_inductor/scheduler.py", line 10363, in _codegen
+[rank0]:     self.get_backend(device).codegen_node(node)
+[rank0]:   File "/home/vllmtest/vllm-validation/.venv/lib/python3.12/site-packages/torch/_inductor/codegen/cpp.py", line 5909, in codegen_node
+[rank0]:     cpp_kernel_proxy.codegen_nodes(nodes)
+[rank0]:   File "/home/vllmtest/vllm-validation/.venv/lib/python3.12/site-packages/torch/_inductor/codegen/cpp.py", line 4959, in codegen_nodes
+[rank0]:     self.codegen_functions(fn_list, var_sizes_list)
+[rank0]:   File "/home/vllmtest/vllm-validation/.venv/lib/python3.12/site-packages/torch/_inductor/codegen/cpp.py", line 4741, in codegen_functions
+[rank0]:     scalar_kernel = codegen_kernel(self.kernel_cls)
+[rank0]:                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/home/vllmtest/vllm-validation/.venv/lib/python3.12/site-packages/torch/_inductor/codegen/cpp.py", line 4711, in codegen_kernel
+[rank0]:     run(kernel)
+[rank0]:   File "/home/vllmtest/vllm-validation/.venv/lib/python3.12/site-packages/torch/_inductor/codegen/cpp.py", line 4724, in run
+[rank0]:     fn(vars, reduction_vars)
+[rank0]:   File "/home/vllmtest/vllm-validation/.venv/lib/python3.12/site-packages/torch/_inductor/codegen/cpp.py", line 4940, in fn
+[rank0]:     return node.codegen(index_vars)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/home/vllmtest/vllm-validation/.venv/lib/python3.12/site-packages/torch/_inductor/scheduler.py", line 2606, in codegen
+[rank0]:     self._body(*index_vars)
+[rank0]:   File "/home/vllmtest/vllm-validation/.venv/lib/python3.12/site-packages/torch/_inductor/loop_body.py", line 577, in __call__
+[rank0]:     result = self.root_block()
+[rank0]:              ^^^^^^^^^^^^^^^^^
+[rank0]:   File "/home/vllmtest/vllm-validation/.venv/lib/python3.12/site-packages/torch/_inductor/loop_body.py", line 683, in __call__
+[rank0]:     return InterpreterShim(graph, submodules).run(V.get_ops_handler())
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/home/vllmtest/vllm-validation/.venv/lib/python3.12/site-packages/torch/_inductor/loop_body.py", line 64, in run
+[rank0]:     return super().run(*args, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/home/vllmtest/vllm-validation/.venv/lib/python3.12/site-packages/torch/fx/interpreter.py", line 197, in run
+[rank0]:     self.env[node] = self.run_node(node)
+[rank0]:                      ^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/home/vllmtest/vllm-validation/.venv/lib/python3.12/site-packages/torch/_inductor/loop_body.py", line 60, in run_node
+[rank0]:     return super().run_node(n)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/home/vllmtest/vllm-validation/.venv/lib/python3.12/site-packages/torch/fx/interpreter.py", line 294, in run_node
+[rank0]:     return getattr(self, n.op)(n.target, args, kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/home/vllmtest/vllm-validation/.venv/lib/python3.12/site-packages/torch/fx/interpreter.py", line 402, in call_method
+[rank0]:     return getattr(self_obj, target)(*args_tail, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "<string>", line 341, in reduction
+[rank0]:   File "/home/vllmtest/vllm-validation/.venv/lib/python3.12/site-packages/torch/_inductor/ops_handler.py", line 1085, in _default
+[rank0]:     return getattr(self._inner, name)(*args, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/home/vllmtest/vllm-validation/.venv/lib/python3.12/site-packages/torch/_inductor/codegen/common.py", line 3054, in reduction
+[rank0]:     return self.kernel.reduction(dtype, src_dtype, reduction_type, value)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/home/vllmtest/vllm-validation/.venv/lib/python3.12/site-packages/torch/_inductor/codegen/cpp.py", line 2545, in reduction
+[rank0]:     self._gen_parallel_reduction_buffers(acc, acc_type, reduction_type, init_dtype)
+[rank0]:   File "/home/vllmtest/vllm-validation/.venv/lib/python3.12/site-packages/torch/_inductor/codegen/cpp.py", line 2170, in _gen_parallel_reduction_buffers
+[rank0]:     reduction_prefix_array(
+[rank0]:   File "/home/vllmtest/vllm-validation/.venv/lib/python3.12/site-packages/torch/_inductor/codegen/cpp.py", line 341, in reduction_prefix_array
+[rank0]:     if cpp_builder.is_msvc_cl()
+[rank0]:        ^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/home/vllmtest/vllm-validation/.venv/lib/python3.12/site-packages/torch/_inductor/cpp_builder.py", line 687, in is_msvc_cl
+[rank0]:     return _is_msvc_cl(get_cpp_compiler())
+[rank0]:                        ^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/home/vllmtest/vllm-validation/.venv/lib/python3.12/site-packages/torch/_inductor/cpp_builder.py", line 437, in get_cpp_compiler
+[rank0]:     compiler = cpp_compiler_search(search)
+[rank0]:                ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/home/vllmtest/vllm-validation/.venv/lib/python3.12/site-packages/torch/_inductor/cpp_builder.py", line 146, in cpp_compiler_search
+[rank0]:     raise exc.InvalidCxxCompiler
+[rank0]: torch._inductor.exc.InductorError: InvalidCxxCompiler: No working C++ compiler found in torch._inductor.config.cpp.cxx: (None, 'g++')
+
+[rank0]: Set TORCHDYNAMO_VERBOSE=1 for the internal stack trace (please do this especially if you're reporting a bug to PyTorch). For even more developer context, set TORCH_LOGS="+dynamo"
+

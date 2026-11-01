@@ -1,0 +1,18 @@
+[
+  {
+    "variant": "base",
+    "ref": "ca8dbccf204abfcdf9dcb178f7e108c06b224b0f",
+    "path": "vllm/platforms/cpu.py",
+    "file": "cpu-platform-openmp-base.py",
+    "git_blob": "6b0d2958f85c3c384e23dd583bd907d4a47fa6d0",
+    "sha256": "bfa74a5c08f4186b57a3bb83cf1c08fbe1bf35b5522c02020fc1d602dca12f50"
+  },
+  {
+    "variant": "fixed",
+    "ref": "018ef906c8cfc72cdfa21eafac157258c63373cb",
+    "path": "vllm/platforms/cpu.py",
+    "file": "cpu-platform-openmp-fixed.py",
+    "git_blob": "ec4c34a6057e61f5cb863dd588f2b7ba90cee823",
+    "sha256": "38b312b1392f8a9d14a028bf51be6dce42974c90619306d07ee9abb0f2e5575e"
+  }
+]

@@ -77,8 +77,8 @@ complete-extension operator comparisons, not a run of the repository pytest
 suite or a model/serving test. Only VLEN 256 with agnostic ones was used here;
 the earlier isolated source-method probes also covered VLEN 128 and other policies.
 
-Full repository pytest, real-weight `LLM` validation, native RVV hardware,
-upstream CI and human submission requirements remain separate gates. A pinned
-public Pythia-14m model has been downloaded; no model result is claimed here.
-Dense CPU GELU uses Torch's native path, so its model smoke test alone would
-not establish coverage of the ERF fix.
+Subsequent [selected repository pytest runs](../repository-tests/README.md) and
+a [real-weight `LLM` smoke comparison](../model-smoke/README.md) have their own
+records. Native RVV hardware, upstream CI and human submission requirements
+remain separate gates. Dense CPU GELU uses Torch's native path, so that model
+smoke test does not establish coverage of the ERF fix.

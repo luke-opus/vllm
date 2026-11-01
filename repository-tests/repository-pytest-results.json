@@ -1,0 +1,62 @@
+[
+  {
+    "fix": "erf",
+    "variant": "base",
+    "command": [
+      "/home/vllmtest/vllm-validation/.venv/bin/python",
+      "-m",
+      "pytest",
+      "-v",
+      "/home/vllmtest/vllm-validation/source/tests/kernels/core/test_cpu_activation.py",
+      "-k",
+      "test_cpu_gelu_and_mul"
+    ],
+    "returncode": 1,
+    "log": "repository-pytest-erf-base.txt"
+  },
+  {
+    "fix": "erf",
+    "variant": "erf",
+    "command": [
+      "/home/vllmtest/vllm-validation/.venv/bin/python",
+      "-m",
+      "pytest",
+      "-v",
+      "/home/vllmtest/vllm-validation/source/tests/kernels/core/test_cpu_activation.py",
+      "-k",
+      "test_cpu_gelu_and_mul"
+    ],
+    "returncode": 0,
+    "log": "repository-pytest-erf-erf.txt"
+  },
+  {
+    "fix": "bf16",
+    "variant": "base",
+    "command": [
+      "/home/vllmtest/vllm-validation/.venv/bin/python",
+      "-m",
+      "pytest",
+      "-v",
+      "/home/vllmtest/vllm-validation/source/tests/kernels/core/test_cpu_activation.py",
+      "-k",
+      "rounds_to_nearest_even"
+    ],
+    "returncode": 1,
+    "log": "repository-pytest-bf16-base.txt"
+  },
+  {
+    "fix": "bf16",
+    "variant": "bf16",
+    "command": [
+      "/home/vllmtest/vllm-validation/.venv/bin/python",
+      "-m",
+      "pytest",
+      "-v",
+      "/home/vllmtest/vllm-validation/source/tests/kernels/core/test_cpu_activation.py",
+      "-k",
+      "rounds_to_nearest_even"
+    ],
+    "returncode": 0,
+    "log": "repository-pytest-bf16-bf16.txt"
+  }
+]

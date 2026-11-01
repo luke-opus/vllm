@@ -1,0 +1,12 @@
+[
+  {
+    "variant": "base",
+    "returncode": 0,
+    "log": "native-openmp-config-base.txt"
+  },
+  {
+    "variant": "fixed",
+    "returncode": 0,
+    "log": "native-openmp-config-fixed.txt"
+  }
+]

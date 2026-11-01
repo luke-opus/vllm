@@ -1,0 +1,6 @@
+{
+  "model": "EleutherAI/pythia-14m",
+  "revision": "cf967c0a9a04383db6f7b1108d86b2962634b4ac",
+  "sha256": "20f30e69b6c48fa2ceb4935386ca43be13e996e82411b51575fec1f61fa378c9",
+  "files": 6
+}

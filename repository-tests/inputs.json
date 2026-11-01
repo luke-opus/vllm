@@ -1,0 +1,18 @@
+[
+  {
+    "variant": "erf",
+    "ref": "7f1353f1a5854545163d49f764552a57f836b2b2",
+    "path": "tests/kernels/core/test_cpu_activation.py",
+    "file": "test_cpu_activation-erf.py",
+    "git_blob": "5a3fb9ad55745cf525c0f9cf301759decab190f5",
+    "sha256": "08247d785b6304a712e918dde354b601f07034297b595ea61588fd0c75297707"
+  },
+  {
+    "variant": "bf16",
+    "ref": "174e56854703c0b9ede89e0a41f9e04dc4c59bc1",
+    "path": "tests/kernels/core/test_cpu_activation.py",
+    "file": "test_cpu_activation-bf16.py",
+    "git_blob": "01f48694e80d84ba90aafa12077014cb10979654",
+    "sha256": "e1ab4ecb31f706cbbc9ed9266e763ea707416c80b514b93658aa44e2bac59728"
+  }
+]

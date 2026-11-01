@@ -1,0 +1,15 @@
+{
+  "variant": "base",
+  "architecture": "actual riscv64 Linux/QEMU",
+  "preload": "",
+  "child": {
+    "LD_PRELOAD": "",
+    "threads": 1,
+    "silu_bits": "0x3d88",
+    "loaded_openmp": [
+      "/home/vllmtest/vllm-validation/.venv/lib/python3.12/site-packages/torch/lib/libgomp.so.1",
+      "/usr/lib/llvm-18/lib/libomp.so.5"
+    ]
+  },
+  "scope": "real configuration and child operator/library inheritance; not a vLLM worker, native silicon, or performance proof"
+}

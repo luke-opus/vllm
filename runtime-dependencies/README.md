@@ -67,6 +67,7 @@ Its native RISC-V module and `LLMatcher.grammar_from_regex("a+")` both passed;
 all 153 installed packages passed `uv pip check`.
 
 Repository pytest and the independent real-weight LLM run were then restarted
-after fixing the diagnosed dependencies. They remain in progress; this record
-does not assert their success. No tests, tolerance thresholds or vLLM backend
-objects were replaced to bypass the imports.
+after fixing the diagnosed dependencies. Their completed, separately scoped
+results are in [repository-tests](../repository-tests/README.md) and
+[model-smoke](../model-smoke/README.md). No tests, tolerance thresholds or vLLM
+backend objects were replaced to bypass the imports.

@@ -1,0 +1,22 @@
+/home/vllmtest/vllm-validation/model-source/vllm/__init__.py:7: RuntimeWarning: Failed to read commit hash:
+No module named 'vllm._version'
+  from .version import __version__, __version_tuple__  # isort:skip
+W1031 16:09:36.248000 14394 .venv/lib/python3.12/site-packages/torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+W1031 16:09:36.258000 14394 .venv/lib/python3.12/site-packages/torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+W1031 16:09:36.264000 14394 .venv/lib/python3.12/site-packages/torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+Model Runner V2 requires Triton; using the V1 model runner instead.
+{
+  "variant": "base",
+  "architecture": "actual riscv64 Linux/QEMU",
+  "preload": "",
+  "child": {
+    "LD_PRELOAD": "",
+    "threads": 1,
+    "silu_bits": "0x3d88",
+    "loaded_openmp": [
+      "/home/vllmtest/vllm-validation/.venv/lib/python3.12/site-packages/torch/lib/libgomp.so.1",
+      "/usr/lib/llvm-18/lib/libomp.so.5"
+    ]
+  },
+  "scope": "real configuration and child operator/library inheritance; not a vLLM worker, native silicon, or performance proof"
+}

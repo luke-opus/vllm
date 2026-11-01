@@ -1,0 +1,46 @@
+/home/vllmtest/vllm-validation/.venv/lib/python3.12/site-packages/pytest_asyncio/plugin.py:300: PytestDeprecationWarning: The configuration option "asyncio_default_fixture_loop_scope" is unset.
+The event loop scope for asynchronous fixtures will default to the "fixture" caching scope. Future versions of pytest-asyncio will default the loop scope for asynchronous fixtures to "function" scope. Set the default fixture loop scope explicitly in order to avoid unexpected behavior in the future. Valid fixture loop scopes are: "function", "class", "module", "package", "session"
+
+  warnings.warn(PytestDeprecationWarning(_DEFAULT_FIXTURE_LOOP_SCOPE_UNSET))
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-9.2.0, pluggy-1.7.0 -- /home/vllmtest/vllm-validation/.venv/bin/python
+cachedir: .pytest_cache
+rootdir: /home/vllmtest/vllm-validation/source
+configfile: pyproject.toml
+plugins: asyncio-1.4.1, anyio-4.15.1
+asyncio: mode=Mode.STRICT, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collecting ... collected 59 items / 58 deselected / 1 selected
+
+tests/kernels/core/test_cpu_activation.py::test_cpu_silu_and_mul_bf16_rounds_to_nearest_even FAILED [100%]
+
+=================================== FAILURES ===================================
+______________ test_cpu_silu_and_mul_bf16_rounds_to_nearest_even _______________
+
+    @torch.inference_mode()
+    def test_cpu_silu_and_mul_bf16_rounds_to_nearest_even() -> None:
+        """Software BF16 stores must round the FP32 activation, not truncate it."""
+        values = torch.full((1, 128), 0.125, dtype=torch.bfloat16)
+        x = torch.cat((values, torch.ones_like(values)), dim=-1)
+        out = torch.empty_like(values)
+    
+        torch.ops._C.silu_and_mul(out, x)
+    
+        expected = torch.nn.functional.silu(values.float()).to(torch.bfloat16)
+>       torch.testing.assert_close(out, expected, atol=0, rtol=0)
+E       AssertionError: Tensor-likes are not equal!
+E       
+E       Mismatched elements: 128 / 128 (100.0%)
+E       Greatest absolute difference: 0.00048828125 at index (0, 0)
+E       Greatest relative difference: 0.007354736328125 at index (0, 0)
+
+tests/kernels/core/test_cpu_activation.py:41: AssertionError
+=============================== warnings summary ===============================
+vllm/__init__.py:7
+  /home/vllmtest/vllm-validation/source/vllm/__init__.py:7: RuntimeWarning: Failed to read commit hash:
+  No module named 'vllm._version'
+    from .version import __version__, __version_tuple__  # isort:skip
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED tests/kernels/core/test_cpu_activation.py::test_cpu_silu_and_mul_bf16_rounds_to_nearest_even
+================= 1 failed, 58 deselected, 1 warning in 10.60s =================

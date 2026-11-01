@@ -1,9 +1,10 @@
 # vLLM RISC-V numerical reproducers
 
-These numerical probes and configuration regressions support PRs #64078, #64079, and #64080. They do not
-build vLLM, load weights, measure performance, or validate a real RISC-V machine.
-The production method bodies and headers are read from the requested Git refs.
-No candidate fix is synthesized by the probes.
+These validation records support draft PRs #64078, #64079, and #64080.
+The original isolated probes below are supplemented by complete CPU extension
+builds, selected repository tests, actual Linux child loading and a real-weight
+model smoke comparison. Target execution uses QEMU, not physical RISC-V silicon.
+Production source is read from the exact Git refs; no candidate fix is synthesized.
 
 ## Requirements
 
@@ -67,7 +68,7 @@ A prepared local follow-up, not yet pushed to PR #64079, adds 18 pytest cases fo
 signed zero, both even-tie directions, subnormal rounding, and finite overflow.
 They compile the same production header. On the base header: 9 failed, 9 passed;
 on the fixed header: 18 passed. This is helper coverage; the public CPU operator
-test and model inference still require the target build and runtime.
+test and model inference have separate results linked below.
 
 The same 18-case test was also compiled and executed inside Ubuntu 24.04
 RISC-V Linux under QEMU 11.1.2, using GCC 13.3 and Python 3.12.3: baseline
@@ -147,7 +148,8 @@ passed, and a fresh agent read all three through Chrome and verified each
 installation-index-to-CPU link. Its OpenMP question passed; GELU and BF16
 questions partially passed because explicit default/activation wording was
 missing. Clarifications are prepared locally and are not in those PR heads or
-this preview yet. Web-search queries returned no indexed results, and the web
+the original-head previews. Separate candidate previews are linked below.
+Web-search queries returned no indexed results, and the web
 tool could not open the preview; Chrome was the working fallback.
 
 ## Remaining submission requirements
@@ -155,8 +157,16 @@ tool could not open the preview; Chrome was the working fallback.
 Additional [complete CPU extension comparisons](full-extension/README.md) now
 reproduce and fix both numerical bugs in real registered GELU, SiLU and MoE
 operators on emulated RISC-V Linux. They use independent full libraries and
-document the identical BLAS/OpenMP/dependency adaptations. Repository pytest
-and model-entry validation are separate from these operator comparisons.
+document the identical BLAS/OpenMP/dependency adaptations.
+
+[Selected repository pytest regressions](repository-tests/README.md) now show
+ERF base 2 failed/2 passed versus fixed 4 passed, and BF16 base 1 failed versus
+fixed 1 passed, using the real package, complete extensions and root fixtures.
+[Linux OpenMP checks](openmp-linux/README.md) show real bundled-library preload
+selection and inheritance into a fresh child with successful operator loading.
+[Pythia-14m model evidence](model-smoke/README.md) records real `LLM`/CPUWorker
+generation, observed CPU attention operations and the exact reference-comparison
+limits. These records do not establish native hardware or upstream CI success.
 
 Prepared [documentation/test/CI follow-ups](followups/) remain local candidates.
 Their generated documentation previews are available under
@@ -167,15 +177,18 @@ The original upstream PR heads are unchanged.
 [Runtime dependency records](runtime-dependencies/README.md) document real
 RISC-V Harmony/XGrammar/LLGuidance builds and native API checks, plus the
 observed repository/LLM import failures before the missing packages were
-installed. The subsequent repository pytest and model runs are in progress.
+installed. The subsequent selected repository tests and model smoke comparison
+have completed; their separate evidence is linked above.
 
 [Current-main candidates](followups/latest-main/README.md) apply cleanly to
 `e5196e2`; they are prepared patches, not rebuilt or tested current-main commits.
 The original branches are 338 commits behind that main. The recorded upstream
 pre-run failure is a contributor trust gate; current merged-PR count is zero.
 
-Repository pytest, real-weight model evaluation on the changed
-RISC-V path, upstream CI, and the submitting human's review/test confirmation
-are separate requirements. These probes alone do not satisfy them.
+Broader model evaluation, ERF changed-path model coverage, complete OpenMP worker
+validation, native RVV hardware, upstream CI, and the submitting human's
+review/test confirmation remain separate requirements. Prepared follow-up source
+patches have not been pushed to the three PR branches. This evidence does not
+mean every submission requirement is satisfied.
 
 Prepared with OpenAI Codex assistance. The three upstream PRs remain drafts.
