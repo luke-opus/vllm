@@ -75,6 +75,11 @@
     "sha256": "f95d5bb2e08fc2b7ef30b595f5beeea1790e69990c6c22f4b72f9851a9eef1e2"
   },
   {
+    "path": "source/pr-checklist-full-manual-addendum.txt",
+    "bytes": 2453,
+    "sha256": "8fe18319a41e6b69cf682790cbdd45204b128d2b403b807863c40081850e3053"
+  },
+  {
     "path": "source/erf-frozen-source.json",
     "bytes": 1122,
     "sha256": "18f8a64a6efb0d3e575e70675e0fc0b5abb9963479c63736dbdd8aae6e685d6f"

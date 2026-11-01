@@ -1,0 +1,116 @@
+name: Fork Linux pre-commit evidence
+
+"on":
+  push:
+    branches: [riscv-precommit-evidence]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: fork-riscv-precommit-evidence
+  cancel-in-progress: false
+
+jobs:
+  full-pre-commit:
+    if: github.repository == 'luke-opus/vllm' && github.ref == 'refs/heads/riscv-precommit-evidence'
+    name: Full manual hooks (${{ matrix.variant }})
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - variant: base
+            revision: e0d00e4b8eb0c89ec30921d0695cfdd409e9c211
+            tree: 27deae2ec766f48dda760397bc6c4d0872ceedf9
+          - variant: erf
+            revision: ec0fbf5e9b3e9d796ccae667a437f2e97c3f9cde
+            tree: 94453352d881e58ebf423b67d7ccea2ba449eef5
+          - variant: bf16
+            revision: 6592612016059859dff1e93bd534edc1a5737615
+            tree: 8b860fc3eba99f6eccfe4b473c00a829b7ea9af3
+          - variant: openmp
+            revision: dfdc85947fe914d04906f5d0206c020c208bd400
+            tree: 2cc5383ab7ca9209554779029edb9ccc31a41432
+    steps:
+      - name: Check out the exact tested source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ matrix.revision }}
+          path: source
+          fetch-depth: 1
+          persist-credentials: false
+      - name: Set up the official workflow's Python version
+        uses: astral-sh/setup-uv@68559e99cc807c1eb7e9238fd43a15bba460eec2 # v10.3.3
+        with:
+          python-version: "3.12"
+      - name: Record source and runner identity
+        working-directory: source
+        shell: bash
+        env:
+          EXPECTED_REVISION: ${{ matrix.revision }}
+          EXPECTED_TREE: ${{ matrix.tree }}
+          VARIANT: ${{ matrix.variant }}
+        run: |
+          set -euo pipefail
+          mkdir -p "$GITHUB_WORKSPACE/evidence"
+          test "$(git rev-parse HEAD)" = "$EXPECTED_REVISION"
+          test "$(git rev-parse 'HEAD^{tree}')" = "$EXPECTED_TREE"
+          test -z "${SKIP:-}"
+          test -z "$(git status --porcelain)"
+          {
+            printf 'variant=%s\nsource_commit=%s\nsource_tree=%s\n' "$VARIANT" "$EXPECTED_REVISION" "$EXPECTED_TREE"
+            printf 'workflow_commit=%s\nrun_id=%s\nattempt=%s\n' "$GITHUB_SHA" "$GITHUB_RUN_ID" "$GITHUB_RUN_ATTEMPT"
+            printf 'ImageOS=%s\nImageVersion=%s\n' "${ImageOS:-unset}" "${ImageVersion:-unset}"
+            uname -a
+            cat /etc/os-release
+            uv --version
+            uv python find 3.12
+            uvx pre-commit --version
+            docker --version
+            docker info
+          } > "$GITHUB_WORKSPACE/evidence/provenance.txt" 2>&1
+          sha256sum .pre-commit-config.yaml .github/workflows/pre-commit.yml > "$GITHUB_WORKSPACE/evidence/config-before.sha256"
+          cat "$GITHUB_WORKSPACE/evidence/provenance.txt"
+          cat "$GITHUB_WORKSPACE/evidence/config-before.sha256"
+      - name: Run the unchanged official all-files manual command
+        working-directory: source
+        shell: bash
+        run: |
+          set -euo pipefail
+          evidence="$GITHUB_WORKSPACE/evidence"
+          printf '%s\n' 'uvx pre-commit run --show-diff-on-failure --color=always --all-files --hook-stage manual' > "$evidence/command.txt"
+          set +e
+          uvx pre-commit run --show-diff-on-failure --color=always --all-files --hook-stage manual 2>&1 | tee "$evidence/pre-commit.log"
+          pipeline_status=("${PIPESTATUS[@]}")
+          set -e
+          printf 'pre_commit_exit=%s\ntee_exit=%s\n' "${pipeline_status[0]}" "${pipeline_status[1]}" > "$evidence/exit-status.txt"
+          git diff --binary --no-ext-diff > "$evidence/changes.patch"
+          git status --porcelain=v1 > "$evidence/status-after.txt"
+          sha256sum .pre-commit-config.yaml .github/workflows/pre-commit.yml > "$evidence/config-after.sha256"
+          cat "$evidence/exit-status.txt"
+          {
+            echo '## Supplemental fork check'
+            echo 'The tested source/config is pinned; the command matches the upstream all-files/manual job.'
+            echo "pre-commit exit: ${pipeline_status[0]}; log capture exit: ${pipeline_status[1]}."
+            echo 'This GitHub-hosted Linux result does not satisfy the upstream self-hosted eligibility gate or RISC-V hardware validation.'
+          } >> "$GITHUB_STEP_SUMMARY"
+          if [[ "${pipeline_status[0]}" != 0 ]]; then
+            exit "${pipeline_status[0]}"
+          fi
+          test "${pipeline_status[1]}" = 0
+          cmp "$evidence/config-before.sha256" "$evidence/config-after.sha256"
+          if [[ -n "$(git status --porcelain=v1 --untracked-files=no)" ]]; then
+            echo 'Tracked source changes remain after a zero pre-commit exit.'
+            exit 1
+          fi
+      - name: Preserve raw results, including failures
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: fork-precommit-${{ matrix.variant }}-${{ github.run_id }}-${{ github.run_attempt }}
+          path: evidence/
+          if-no-files-found: error
+          retention-days: 30

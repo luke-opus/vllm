@@ -1,0 +1,41 @@
+2026-11-01 full manual-hook verification addendum
+================================================
+
+The prior record covered applicable changed-file hooks and normal commit hooks.
+After the user asked about the upstream pre-commit failure, inspection confirmed
+that the official workflow invokes the broader all-files/manual stage. A separate
+fork validation branch was therefore used to execute that exact command on the
+pinned baseline and all three unchanged PR heads. It did not change upstream
+workflow guards, labels, permissions or source commits.
+
+Run: https://github.com/luke-opus/vllm/actions/runs/41283200026
+Workflow commit: 90a7bbc95260d2c889880e636e79d145ce5e8e4e
+Actual source checkouts:
+  base   e0d00e4b8eb0c89ec30921d0695cfdd409e9c211
+  ERF    ec0fbf5e9b3e9d796ccae667a437f2e97c3f9cde
+  BF16   6592612016059859dff1e93bd534edc1a5737615
+  OpenMP dfdc85947fe914d04906f5d0206c020c208bd400
+
+Each job ran the original configuration and command:
+  uvx pre-commit run --show-diff-on-failure --color=always --all-files --hook-stage manual
+
+All four actual pre-commit exits were 0, all four tee exits were 0, and each
+log has 33 Passed selected manual hooks with no Failed/Skipped result. Git
+status-after.txt and changes.patch are empty on all four. Source commit/tree
+checks, original configuration hashes before/after, actual runner identity and
+Docker availability are recorded. Root independently checked all artifact ZIP
+digests against GitHub metadata, CRCs, extracted file bytes, source identities,
+config hashes against original Git blobs, exits and hook-result lines.
+
+This adds complete manual-stage evidence, including dependency locks, full mypy
+and Docker graph checks. It does not reinterpret the earlier changed-file runs
+as all-files runs. The original configuration selects Rust local hooks and
+signoff in other stages; their exclusion from manual is configured upstream,
+not an added SKIP or changed threshold. No automatic changes were written back.
+
+The runner is hosted Ubuntu 24.04 x86-64, not the upstream self-hosted image or
+physical RISC-V hardware. Original upstream pre-run eligibility still fails,
+upstream pre-commit/format checks remain skipped, and RTD is stopped by that
+prerequisite. Native hardware, ERF changed-path model coverage, and actual human
+review/test confirmation remain unmet. Existing drafts and unchecked Testing
+and Validation remain appropriate. No new upstream PR or re-review was requested.

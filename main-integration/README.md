@@ -35,7 +35,7 @@ declaration include, real LLVM OpenMP linkage, and the existing Torch BLAS
 fallback selected for `fla.cpp` because the installed OpenBLAS lacks `sbgemm_`.
 No dummy symbol, replacement backend or lazy loader is used.
 
-Original-config hooks and normal commit/sign-off hooks passed. Three complete
+Original-config changed-file hooks and normal commit/sign-off hooks passed. Three complete
 strict MkDocs builds with API generation passed, each recording 3,026 API
 entries. See [check results](source/candidate-check-results.json), raw build
 logs and [independent local documentation discovery](source/docs-local-fresh.txt).
@@ -52,6 +52,38 @@ and the upstream contributor-eligibility pre-run failure. Format/lint checks wer
 skipped. Each RTD build stopped in `docs/pre_run_check.sh` on that same failed
 check before dependency installation or MkDocs execution. These are genuine
 unsatisfied upstream gates, not successful CI or an observed MkDocs error.
+
+## Complete manual pre-commit on Linux
+
+The earlier local changed-file checks are now supplemented by the full original
+CI command on four fresh GitHub-hosted Ubuntu 24.04 x86-64 jobs:
+
+```sh
+uvx pre-commit run --show-diff-on-failure --color=always --all-files --hook-stage manual
+```
+
+[Run 41283200026](https://github.com/luke-opus/vllm/actions/runs/41283200026)
+completed successfully on 2026-11-01. The [raw fork records](fork-precommit/)
+preserve original artifacts, logs, source and configuration identities, and
+actual exits. Each job's 33 selected manual hooks passed, with no failed or
+skipped selected hooks. All four pre-commit exits are 0 and all four final Git
+status/diff files are empty. The baseline and candidate source identities are
+the exact commits/trees above. No hook was disabled and no configuration or
+generated lockfile/formatting changes were pushed back into the source PRs.
+
+The run's workflow commit is
+`90a7bbc95260d2c889880e636e79d145ce5e8e4e`; the tested commits are independently
+verified checkouts recorded in each artifact, not inferred from that workflow
+head. The artifact ZIP SHA256 values match GitHub's digests, extracted bytes
+match the ZIP entries, and configuration hashes match the original Git objects
+before and after execution. Docker was available for the graph-generation hook.
+The original manual stage naturally excludes the configuration's local Rust
+and commit-message hooks; existing source DCO/local-hook evidence remains separate.
+
+This is supplemental execution in the user's fork on hosted Linux, not the
+upstream self-hosted runner. The upstream contributor-eligibility gate and RTD
+status described above remain unresolved; this run also supplies no native
+RISC-V, model or human-review evidence.
 
 ## Actual repository tests
 

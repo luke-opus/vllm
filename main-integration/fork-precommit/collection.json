@@ -1,0 +1,27 @@
+{
+  "run_id": 41283200026,
+  "artifact_download": {
+    "command": "gh run download 41283200026 --repo luke-opus/vllm --dir artifacts",
+    "exit": 0
+  },
+  "job_log_first_attempt": {
+    "job_ids": [
+      124779155200,
+      124779155313,
+      124779155329,
+      124779155761
+    ],
+    "each_exit": 1,
+    "reported_error": "the response contains terminal escape sequences; pass --allow-escape-sequences to output it anyway",
+    "preservation": "Original stdout files kept unchanged in collection-attempts/; no workflow rerun. The official gh api --allow-escape-sequences option is used only to save original ANSI-containing logs to files."
+  },
+  "job_log_second_attempt": {
+    "each_exit": 0,
+    "argument": "--allow-escape-sequences",
+    "scope": "Original ANSI-containing job logs saved to files, not executed."
+  },
+  "archive_verification": {
+    "four_zip_sha256_match_API_digest": true,
+    "all_extracted_files_match_independently_downloaded_zip": true
+  }
+}

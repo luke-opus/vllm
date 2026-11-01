@@ -1,0 +1,739 @@
+{
+  "collected_and_verified_utc": "2026-11-01T07:10:23.395129+00:00",
+  "run_id": 41283200026,
+  "run_url": "https://github.com/luke-opus/vllm/actions/runs/41283200026",
+  "workflow_commit": "90a7bbc95260d2c889880e636e79d145ce5e8e4e",
+  "run_status": "completed",
+  "run_conclusion": "success",
+  "run_attempt": 1,
+  "command": "uvx pre-commit run --show-diff-on-failure --color=always --all-files --hook-stage manual",
+  "results": [
+    {
+      "variant": "base",
+      "source_commit": "e0d00e4b8eb0c89ec30921d0695cfdd409e9c211",
+      "source_tree": "27deae2ec766f48dda760397bc6c4d0872ceedf9",
+      "job_id": 124779155313,
+      "job_url": "https://github.com/luke-opus/vllm/actions/runs/41283200026/job/124779155313",
+      "job_status": "completed",
+      "job_conclusion": "success",
+      "manual_step": {
+        "name": "Run the unchanged official all-files manual command",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 5,
+        "started_at": "2026-11-01T07:03:09Z",
+        "completed_at": "2026-11-01T07:05:36Z"
+      },
+      "manual_step_elapsed_seconds": 147.0,
+      "artifact_id": 13074046993,
+      "artifact_name": "fork-precommit-base-41283200026-1",
+      "artifact_digest": "sha256:0e1e4e1859cc10d66fddfbb245b4fc77cba20826b9024f5fca03e46f84c37c9d",
+      "archive_digest_verified": true,
+      "artifact_files_match_archive": true,
+      "pre_commit_exit": 0,
+      "tee_exit": 0,
+      "configuration_unchanged_and_matches_exact_source": {
+        ".pre-commit-config.yaml": "1462d59ae0902b59de1e5d418c020b29150234721804ec3f169dd793b15945a8",
+        ".github/workflows/pre-commit.yml": "065bc5c38aba5f708b0799332816774baa5f30cba87b0af32dde353ed3451bb9"
+      },
+      "tracked_diff_bytes": 0,
+      "status_after_bytes": 0,
+      "passed_manual_hooks": 33,
+      "failed_manual_hooks": 0,
+      "skipped_manual_hooks": 0,
+      "hook_results": [
+        {
+          "hook": "ruff check",
+          "result": "Passed"
+        },
+        {
+          "hook": "ruff format",
+          "result": "Passed"
+        },
+        {
+          "hook": "typos",
+          "result": "Passed"
+        },
+        {
+          "hook": "clang-format",
+          "result": "Passed"
+        },
+        {
+          "hook": "markdownlint-cli2",
+          "result": "Passed"
+        },
+        {
+          "hook": "Lint GitHub Actions workflow files",
+          "result": "Passed"
+        },
+        {
+          "hook": "shellcheck",
+          "result": "Passed"
+        },
+        {
+          "hook": "pip-compile",
+          "result": "Passed"
+        },
+        {
+          "hook": "pip-compile-rocm",
+          "result": "Passed"
+        },
+        {
+          "hook": "pip-compile-xpu",
+          "result": "Passed"
+        },
+        {
+          "hook": "pip-compile-cpu",
+          "result": "Passed"
+        },
+        {
+          "hook": "pip-compile-docs",
+          "result": "Passed"
+        },
+        {
+          "hook": "check json",
+          "result": "Passed"
+        },
+        {
+          "hook": "reformat test/nightly-torch.txt to be in sync with test/cuda.in",
+          "result": "Passed"
+        },
+        {
+          "hook": "Check auto-label rules still match real files",
+          "result": "Passed"
+        },
+        {
+          "hook": "Check agent instruction files and skills",
+          "result": "Passed"
+        },
+        {
+          "hook": "Check every Buildkite step declares an explicit key",
+          "result": "Passed"
+        },
+        {
+          "hook": "Check new tests are wired into Buildkite CI",
+          "result": "Passed"
+        },
+        {
+          "hook": "Run mypy for the oldest supported Python version",
+          "result": "Passed"
+        },
+        {
+          "hook": "Lint PNG exports from excalidraw",
+          "result": "Passed"
+        },
+        {
+          "hook": "Check SPDX headers",
+          "result": "Passed"
+        },
+        {
+          "hook": "Check root lazy imports",
+          "result": "Passed"
+        },
+        {
+          "hook": "Check for spaces in all filenames",
+          "result": "Passed"
+        },
+        {
+          "hook": "Update Dockerfile dependency graph",
+          "result": "Passed"
+        },
+        {
+          "hook": "Test non-root entrypoint wrapper",
+          "result": "Passed"
+        },
+        {
+          "hook": "Check for forbidden imports",
+          "result": "Passed"
+        },
+        {
+          "hook": "Prevent new 'torch.cuda' APIs call",
+          "result": "Passed"
+        },
+        {
+          "hook": "Validate configuration has default values and that each field has a docstring",
+          "result": "Passed"
+        },
+        {
+          "hook": "Validate docker/versions.json matches Dockerfile",
+          "result": "Passed"
+        },
+        {
+          "hook": "Check .dockerignore does not exclude tracked files",
+          "result": "Passed"
+        },
+        {
+          "hook": "Check for boolean ops in with-statements",
+          "result": "Passed"
+        },
+        {
+          "hook": "Check for hardcoded trust_remote_code=True",
+          "result": "Passed"
+        },
+        {
+          "hook": "Suggestion",
+          "result": "Passed"
+        }
+      ],
+      "runner_name": "GitHub Actions 1000000089",
+      "labels": [
+        "ubuntu-24.04"
+      ],
+      "image_os": "ubuntu24",
+      "image_version": "20261026.354.1",
+      "uv_version": "uv 0.13.6 (x86_64-unknown-linux-gnu)",
+      "pre_commit_version": "pre-commit 4.7.0",
+      "python_discovery": "/usr/bin/python3.12",
+      "docker_version": "Docker version 28.0.4, build b8034c0"
+    },
+    {
+      "variant": "erf",
+      "source_commit": "ec0fbf5e9b3e9d796ccae667a437f2e97c3f9cde",
+      "source_tree": "94453352d881e58ebf423b67d7ccea2ba449eef5",
+      "job_id": 124779155329,
+      "job_url": "https://github.com/luke-opus/vllm/actions/runs/41283200026/job/124779155329",
+      "job_status": "completed",
+      "job_conclusion": "success",
+      "manual_step": {
+        "name": "Run the unchanged official all-files manual command",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 5,
+        "started_at": "2026-11-01T07:03:09Z",
+        "completed_at": "2026-11-01T07:06:24Z"
+      },
+      "manual_step_elapsed_seconds": 195.0,
+      "artifact_id": 13074103125,
+      "artifact_name": "fork-precommit-erf-41283200026-1",
+      "artifact_digest": "sha256:d267bc06ef4c9aba3848098e6542c190af4981934b9d9cc81b332975e5fa36a2",
+      "archive_digest_verified": true,
+      "artifact_files_match_archive": true,
+      "pre_commit_exit": 0,
+      "tee_exit": 0,
+      "configuration_unchanged_and_matches_exact_source": {
+        ".pre-commit-config.yaml": "1462d59ae0902b59de1e5d418c020b29150234721804ec3f169dd793b15945a8",
+        ".github/workflows/pre-commit.yml": "065bc5c38aba5f708b0799332816774baa5f30cba87b0af32dde353ed3451bb9"
+      },
+      "tracked_diff_bytes": 0,
+      "status_after_bytes": 0,
+      "passed_manual_hooks": 33,
+      "failed_manual_hooks": 0,
+      "skipped_manual_hooks": 0,
+      "hook_results": [
+        {
+          "hook": "ruff check",
+          "result": "Passed"
+        },
+        {
+          "hook": "ruff format",
+          "result": "Passed"
+        },
+        {
+          "hook": "typos",
+          "result": "Passed"
+        },
+        {
+          "hook": "clang-format",
+          "result": "Passed"
+        },
+        {
+          "hook": "markdownlint-cli2",
+          "result": "Passed"
+        },
+        {
+          "hook": "Lint GitHub Actions workflow files",
+          "result": "Passed"
+        },
+        {
+          "hook": "shellcheck",
+          "result": "Passed"
+        },
+        {
+          "hook": "pip-compile",
+          "result": "Passed"
+        },
+        {
+          "hook": "pip-compile-rocm",
+          "result": "Passed"
+        },
+        {
+          "hook": "pip-compile-xpu",
+          "result": "Passed"
+        },
+        {
+          "hook": "pip-compile-cpu",
+          "result": "Passed"
+        },
+        {
+          "hook": "pip-compile-docs",
+          "result": "Passed"
+        },
+        {
+          "hook": "check json",
+          "result": "Passed"
+        },
+        {
+          "hook": "reformat test/nightly-torch.txt to be in sync with test/cuda.in",
+          "result": "Passed"
+        },
+        {
+          "hook": "Check auto-label rules still match real files",
+          "result": "Passed"
+        },
+        {
+          "hook": "Check agent instruction files and skills",
+          "result": "Passed"
+        },
+        {
+          "hook": "Check every Buildkite step declares an explicit key",
+          "result": "Passed"
+        },
+        {
+          "hook": "Check new tests are wired into Buildkite CI",
+          "result": "Passed"
+        },
+        {
+          "hook": "Run mypy for the oldest supported Python version",
+          "result": "Passed"
+        },
+        {
+          "hook": "Lint PNG exports from excalidraw",
+          "result": "Passed"
+        },
+        {
+          "hook": "Check SPDX headers",
+          "result": "Passed"
+        },
+        {
+          "hook": "Check root lazy imports",
+          "result": "Passed"
+        },
+        {
+          "hook": "Check for spaces in all filenames",
+          "result": "Passed"
+        },
+        {
+          "hook": "Update Dockerfile dependency graph",
+          "result": "Passed"
+        },
+        {
+          "hook": "Test non-root entrypoint wrapper",
+          "result": "Passed"
+        },
+        {
+          "hook": "Check for forbidden imports",
+          "result": "Passed"
+        },
+        {
+          "hook": "Prevent new 'torch.cuda' APIs call",
+          "result": "Passed"
+        },
+        {
+          "hook": "Validate configuration has default values and that each field has a docstring",
+          "result": "Passed"
+        },
+        {
+          "hook": "Validate docker/versions.json matches Dockerfile",
+          "result": "Passed"
+        },
+        {
+          "hook": "Check .dockerignore does not exclude tracked files",
+          "result": "Passed"
+        },
+        {
+          "hook": "Check for boolean ops in with-statements",
+          "result": "Passed"
+        },
+        {
+          "hook": "Check for hardcoded trust_remote_code=True",
+          "result": "Passed"
+        },
+        {
+          "hook": "Suggestion",
+          "result": "Passed"
+        }
+      ],
+      "runner_name": "GitHub Actions 1000000088",
+      "labels": [
+        "ubuntu-24.04"
+      ],
+      "image_os": "ubuntu24",
+      "image_version": "20261026.354.1",
+      "uv_version": "uv 0.13.6 (x86_64-unknown-linux-gnu)",
+      "pre_commit_version": "pre-commit 4.7.0",
+      "python_discovery": "/usr/bin/python3.12",
+      "docker_version": "Docker version 28.0.4, build b8034c0"
+    },
+    {
+      "variant": "bf16",
+      "source_commit": "6592612016059859dff1e93bd534edc1a5737615",
+      "source_tree": "8b860fc3eba99f6eccfe4b473c00a829b7ea9af3",
+      "job_id": 124779155200,
+      "job_url": "https://github.com/luke-opus/vllm/actions/runs/41283200026/job/124779155200",
+      "job_status": "completed",
+      "job_conclusion": "success",
+      "manual_step": {
+        "name": "Run the unchanged official all-files manual command",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 5,
+        "started_at": "2026-11-01T07:03:10Z",
+        "completed_at": "2026-11-01T07:06:27Z"
+      },
+      "manual_step_elapsed_seconds": 197.0,
+      "artifact_id": 13073823897,
+      "artifact_name": "fork-precommit-bf16-41283200026-1",
+      "artifact_digest": "sha256:8ba77be54ca012c45aafdf4d8f2a90f54e3f0903ff88a3749db4db28a3c0cbe4",
+      "archive_digest_verified": true,
+      "artifact_files_match_archive": true,
+      "pre_commit_exit": 0,
+      "tee_exit": 0,
+      "configuration_unchanged_and_matches_exact_source": {
+        ".pre-commit-config.yaml": "1462d59ae0902b59de1e5d418c020b29150234721804ec3f169dd793b15945a8",
+        ".github/workflows/pre-commit.yml": "065bc5c38aba5f708b0799332816774baa5f30cba87b0af32dde353ed3451bb9"
+      },
+      "tracked_diff_bytes": 0,
+      "status_after_bytes": 0,
+      "passed_manual_hooks": 33,
+      "failed_manual_hooks": 0,
+      "skipped_manual_hooks": 0,
+      "hook_results": [
+        {
+          "hook": "ruff check",
+          "result": "Passed"
+        },
+        {
+          "hook": "ruff format",
+          "result": "Passed"
+        },
+        {
+          "hook": "typos",
+          "result": "Passed"
+        },
+        {
+          "hook": "clang-format",
+          "result": "Passed"
+        },
+        {
+          "hook": "markdownlint-cli2",
+          "result": "Passed"
+        },
+        {
+          "hook": "Lint GitHub Actions workflow files",
+          "result": "Passed"
+        },
+        {
+          "hook": "shellcheck",
+          "result": "Passed"
+        },
+        {
+          "hook": "pip-compile",
+          "result": "Passed"
+        },
+        {
+          "hook": "pip-compile-rocm",
+          "result": "Passed"
+        },
+        {
+          "hook": "pip-compile-xpu",
+          "result": "Passed"
+        },
+        {
+          "hook": "pip-compile-cpu",
+          "result": "Passed"
+        },
+        {
+          "hook": "pip-compile-docs",
+          "result": "Passed"
+        },
+        {
+          "hook": "check json",
+          "result": "Passed"
+        },
+        {
+          "hook": "reformat test/nightly-torch.txt to be in sync with test/cuda.in",
+          "result": "Passed"
+        },
+        {
+          "hook": "Check auto-label rules still match real files",
+          "result": "Passed"
+        },
+        {
+          "hook": "Check agent instruction files and skills",
+          "result": "Passed"
+        },
+        {
+          "hook": "Check every Buildkite step declares an explicit key",
+          "result": "Passed"
+        },
+        {
+          "hook": "Check new tests are wired into Buildkite CI",
+          "result": "Passed"
+        },
+        {
+          "hook": "Run mypy for the oldest supported Python version",
+          "result": "Passed"
+        },
+        {
+          "hook": "Lint PNG exports from excalidraw",
+          "result": "Passed"
+        },
+        {
+          "hook": "Check SPDX headers",
+          "result": "Passed"
+        },
+        {
+          "hook": "Check root lazy imports",
+          "result": "Passed"
+        },
+        {
+          "hook": "Check for spaces in all filenames",
+          "result": "Passed"
+        },
+        {
+          "hook": "Update Dockerfile dependency graph",
+          "result": "Passed"
+        },
+        {
+          "hook": "Test non-root entrypoint wrapper",
+          "result": "Passed"
+        },
+        {
+          "hook": "Check for forbidden imports",
+          "result": "Passed"
+        },
+        {
+          "hook": "Prevent new 'torch.cuda' APIs call",
+          "result": "Passed"
+        },
+        {
+          "hook": "Validate configuration has default values and that each field has a docstring",
+          "result": "Passed"
+        },
+        {
+          "hook": "Validate docker/versions.json matches Dockerfile",
+          "result": "Passed"
+        },
+        {
+          "hook": "Check .dockerignore does not exclude tracked files",
+          "result": "Passed"
+        },
+        {
+          "hook": "Check for boolean ops in with-statements",
+          "result": "Passed"
+        },
+        {
+          "hook": "Check for hardcoded trust_remote_code=True",
+          "result": "Passed"
+        },
+        {
+          "hook": "Suggestion",
+          "result": "Passed"
+        }
+      ],
+      "runner_name": "GitHub Actions 1000000090",
+      "labels": [
+        "ubuntu-24.04"
+      ],
+      "image_os": "ubuntu24",
+      "image_version": "20261026.354.1",
+      "uv_version": "uv 0.13.6 (x86_64-unknown-linux-gnu)",
+      "pre_commit_version": "pre-commit 4.7.0",
+      "python_discovery": "/usr/bin/python3.12",
+      "docker_version": "Docker version 28.0.4, build b8034c0"
+    },
+    {
+      "variant": "openmp",
+      "source_commit": "dfdc85947fe914d04906f5d0206c020c208bd400",
+      "source_tree": "2cc5383ab7ca9209554779029edb9ccc31a41432",
+      "job_id": 124779155761,
+      "job_url": "https://github.com/luke-opus/vllm/actions/runs/41283200026/job/124779155761",
+      "job_status": "completed",
+      "job_conclusion": "success",
+      "manual_step": {
+        "name": "Run the unchanged official all-files manual command",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 5,
+        "started_at": "2026-11-01T07:03:10Z",
+        "completed_at": "2026-11-01T07:07:26Z"
+      },
+      "manual_step_elapsed_seconds": 256.0,
+      "artifact_id": 13073742784,
+      "artifact_name": "fork-precommit-openmp-41283200026-1",
+      "artifact_digest": "sha256:4ee4b0e98f447648671def018ba8c5888dd70fbb92f7edc8cbe7d479504bd6af",
+      "archive_digest_verified": true,
+      "artifact_files_match_archive": true,
+      "pre_commit_exit": 0,
+      "tee_exit": 0,
+      "configuration_unchanged_and_matches_exact_source": {
+        ".pre-commit-config.yaml": "1462d59ae0902b59de1e5d418c020b29150234721804ec3f169dd793b15945a8",
+        ".github/workflows/pre-commit.yml": "065bc5c38aba5f708b0799332816774baa5f30cba87b0af32dde353ed3451bb9"
+      },
+      "tracked_diff_bytes": 0,
+      "status_after_bytes": 0,
+      "passed_manual_hooks": 33,
+      "failed_manual_hooks": 0,
+      "skipped_manual_hooks": 0,
+      "hook_results": [
+        {
+          "hook": "ruff check",
+          "result": "Passed"
+        },
+        {
+          "hook": "ruff format",
+          "result": "Passed"
+        },
+        {
+          "hook": "typos",
+          "result": "Passed"
+        },
+        {
+          "hook": "clang-format",
+          "result": "Passed"
+        },
+        {
+          "hook": "markdownlint-cli2",
+          "result": "Passed"
+        },
+        {
+          "hook": "Lint GitHub Actions workflow files",
+          "result": "Passed"
+        },
+        {
+          "hook": "shellcheck",
+          "result": "Passed"
+        },
+        {
+          "hook": "pip-compile",
+          "result": "Passed"
+        },
+        {
+          "hook": "pip-compile-rocm",
+          "result": "Passed"
+        },
+        {
+          "hook": "pip-compile-xpu",
+          "result": "Passed"
+        },
+        {
+          "hook": "pip-compile-cpu",
+          "result": "Passed"
+        },
+        {
+          "hook": "pip-compile-docs",
+          "result": "Passed"
+        },
+        {
+          "hook": "check json",
+          "result": "Passed"
+        },
+        {
+          "hook": "reformat test/nightly-torch.txt to be in sync with test/cuda.in",
+          "result": "Passed"
+        },
+        {
+          "hook": "Check auto-label rules still match real files",
+          "result": "Passed"
+        },
+        {
+          "hook": "Check agent instruction files and skills",
+          "result": "Passed"
+        },
+        {
+          "hook": "Check every Buildkite step declares an explicit key",
+          "result": "Passed"
+        },
+        {
+          "hook": "Check new tests are wired into Buildkite CI",
+          "result": "Passed"
+        },
+        {
+          "hook": "Run mypy for the oldest supported Python version",
+          "result": "Passed"
+        },
+        {
+          "hook": "Lint PNG exports from excalidraw",
+          "result": "Passed"
+        },
+        {
+          "hook": "Check SPDX headers",
+          "result": "Passed"
+        },
+        {
+          "hook": "Check root lazy imports",
+          "result": "Passed"
+        },
+        {
+          "hook": "Check for spaces in all filenames",
+          "result": "Passed"
+        },
+        {
+          "hook": "Update Dockerfile dependency graph",
+          "result": "Passed"
+        },
+        {
+          "hook": "Test non-root entrypoint wrapper",
+          "result": "Passed"
+        },
+        {
+          "hook": "Check for forbidden imports",
+          "result": "Passed"
+        },
+        {
+          "hook": "Prevent new 'torch.cuda' APIs call",
+          "result": "Passed"
+        },
+        {
+          "hook": "Validate configuration has default values and that each field has a docstring",
+          "result": "Passed"
+        },
+        {
+          "hook": "Validate docker/versions.json matches Dockerfile",
+          "result": "Passed"
+        },
+        {
+          "hook": "Check .dockerignore does not exclude tracked files",
+          "result": "Passed"
+        },
+        {
+          "hook": "Check for boolean ops in with-statements",
+          "result": "Passed"
+        },
+        {
+          "hook": "Check for hardcoded trust_remote_code=True",
+          "result": "Passed"
+        },
+        {
+          "hook": "Suggestion",
+          "result": "Passed"
+        }
+      ],
+      "runner_name": "GitHub Actions 1000000091",
+      "labels": [
+        "ubuntu-24.04"
+      ],
+      "image_os": "ubuntu24",
+      "image_version": "20261026.354.1",
+      "uv_version": "uv 0.13.6 (x86_64-unknown-linux-gnu)",
+      "pre_commit_version": "pre-commit 4.7.0",
+      "python_discovery": "/usr/bin/python3.12",
+      "docker_version": "Docker version 28.0.4, build b8034c0"
+    }
+  ],
+  "comparison": {
+    "base_failed_hooks": [],
+    "candidate_only_failed_hooks": {
+      "erf": [],
+      "bf16": [],
+      "openmp": []
+    },
+    "same_selected_hook_sequence": true,
+    "scope": "All four exact snapshots passed the unchanged official all-files/manual command on the user fork hosted Linux runner. This is supplemental execution, not upstream eligibility or upstream runner execution; original configuration excludes Rust local-stage and commit-msg hooks from manual."
+  },
+  "limits": [
+    "Actions run/check head is workflow commit; tested source identities were separately verified from each artifact and raw job log.",
+    "Successful hook stdout is normally suppressed by pre-commit. Docker daemon availability and the Docker graph hook Passed result are observed, but no separate container render trace is available.",
+    "No claim of RISC-V physical hardware, model testing, human review, or upstream CI success."
+  ]
+}

@@ -9,7 +9,8 @@ Production source is read from the exact Git refs; no candidate fix is synthesiz
 The [pinned-main integration records](main-integration/README.md) cover upstream
 `e0d00e4b8eb0c89ec30921d0695cfdd409e9c211` and the three updated draft heads.
 They include independently rebuilt production units, actual repository and
-default CPU model/worker comparisons, exact source-archive reproduction, and
+default CPU model/worker comparisons, full manual pre-commit on hosted Linux,
+exact source-archive reproduction, and
 retained failures. Earlier-base records below remain separate. QEMU execution
 does not establish native hardware, upstream CI, or human review.
 
