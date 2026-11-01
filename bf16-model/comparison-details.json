@@ -1,0 +1,335 @@
+{
+  "scope": "Descriptive statistics on this paired run; no accuracy improvement or numerical equivalence claim",
+  "same_prefix_common_returned_logprob_values": 39,
+  "same_prefix_max_abs_logprob_difference": 0.3876380920410156,
+  "same_prefix_mean_abs_logprob_difference": 0.0811952367807046,
+  "steps_with_top5_set_changes": 1,
+  "comparisons": [
+    {
+      "prompt": "The capital of France is",
+      "base_tokens": [
+        253,
+        1986,
+        2077,
+        15
+      ],
+      "fixed_tokens": [
+        253,
+        1986,
+        2077,
+        13
+      ],
+      "base_text": " the United States.",
+      "fixed_text": " the United States,",
+      "matching_tokens": 3,
+      "steps": [
+        {
+          "step": 0,
+          "same_generated_prefix": true,
+          "common_returned_tokens": [
+            "247",
+            "253",
+            "271",
+            "275",
+            "581"
+          ],
+          "common_returned_logprob_abs_differences": {
+            "247": 0.08054757118225098,
+            "253": 0.018047451972961426,
+            "271": 0.018047332763671875,
+            "275": 0.04445242881774902,
+            "581": 0.08054733276367188
+          },
+          "max_abs_difference": 0.08054757118225098,
+          "mean_abs_difference": 0.04832842350006104,
+          "top5_set_equal": true,
+          "base_top5": [
+            "247",
+            "253",
+            "271",
+            "275",
+            "581"
+          ],
+          "fixed_top5": [
+            "247",
+            "253",
+            "271",
+            "275",
+            "581"
+          ],
+          "all_returned_token_set_equal": true
+        },
+        {
+          "step": 1,
+          "same_generated_prefix": true,
+          "common_returned_tokens": [
+            "1986",
+            "2448",
+            "2846",
+            "5112"
+          ],
+          "common_returned_logprob_abs_differences": {
+            "1986": 0.1239621639251709,
+            "2448": 0.1239619255065918,
+            "2846": 0.0635380744934082,
+            "5112": 0.3739619255065918
+          },
+          "max_abs_difference": 0.3739619255065918,
+          "mean_abs_difference": 0.17135602235794067,
+          "top5_set_equal": false,
+          "base_top5": [
+            "1986",
+            "2448",
+            "2846",
+            "5112",
+            "9890"
+          ],
+          "fixed_top5": [
+            "1986",
+            "2448",
+            "2846",
+            "5112",
+            "5347"
+          ],
+          "all_returned_token_set_equal": false
+        },
+        {
+          "step": 2,
+          "same_generated_prefix": true,
+          "common_returned_tokens": [
+            "2077",
+            "4687",
+            "8365",
+            "11491",
+            "14726"
+          ],
+          "common_returned_logprob_abs_differences": {
+            "2077": 0.035000383853912354,
+            "4687": 0.027499675750732422,
+            "8365": 0.09750032424926758,
+            "11491": 0.08999967575073242,
+            "14726": 0.027499675750732422
+          },
+          "max_abs_difference": 0.09750032424926758,
+          "mean_abs_difference": 0.05549994707107544,
+          "top5_set_equal": true,
+          "base_top5": [
+            "2077",
+            "4687",
+            "8365",
+            "11491",
+            "14726"
+          ],
+          "fixed_top5": [
+            "2077",
+            "4687",
+            "8365",
+            "11491",
+            "14726"
+          ],
+          "all_returned_token_set_equal": true
+        },
+        {
+          "step": 3,
+          "same_generated_prefix": true,
+          "common_returned_tokens": [
+            "13",
+            "15",
+            "28",
+            "275",
+            "285"
+          ],
+          "common_returned_logprob_abs_differences": {
+            "13": 0.04963064193725586,
+            "15": 0.07536935806274414,
+            "28": 0.01286935806274414,
+            "275": 0.01286935806274414,
+            "285": 0.01286935806274414
+          },
+          "max_abs_difference": 0.07536935806274414,
+          "mean_abs_difference": 0.03272161483764648,
+          "top5_set_equal": true,
+          "base_top5": [
+            "13",
+            "15",
+            "28",
+            "275",
+            "285"
+          ],
+          "fixed_top5": [
+            "13",
+            "15",
+            "28",
+            "275",
+            "285"
+          ],
+          "all_returned_token_set_equal": true
+        }
+      ]
+    },
+    {
+      "prompt": "A computer can",
+      "base_tokens": [
+        320,
+        908,
+        281,
+        897
+      ],
+      "fixed_tokens": [
+        320,
+        908,
+        281,
+        897
+      ],
+      "base_text": " be used to use",
+      "fixed_text": " be used to use",
+      "matching_tokens": 4,
+      "steps": [
+        {
+          "step": 0,
+          "same_generated_prefix": true,
+          "common_returned_tokens": [
+            "320",
+            "897",
+            "1239",
+            "1361",
+            "2736"
+          ],
+          "common_returned_logprob_abs_differences": {
+            "320": 0.0036122798919677734,
+            "897": 0.0036122798919677734,
+            "1239": 0.003612041473388672,
+            "1361": 0.0036122798919677734,
+            "2736": 0.05888772010803223
+          },
+          "max_abs_difference": 0.05888772010803223,
+          "mean_abs_difference": 0.014667320251464843,
+          "top5_set_equal": true,
+          "base_top5": [
+            "320",
+            "897",
+            "1239",
+            "1361",
+            "2736"
+          ],
+          "fixed_top5": [
+            "320",
+            "897",
+            "1239",
+            "1361",
+            "2736"
+          ],
+          "all_returned_token_set_equal": true
+        },
+        {
+          "step": 1,
+          "same_generated_prefix": true,
+          "common_returned_tokens": [
+            "247",
+            "908",
+            "1119",
+            "2104",
+            "27881"
+          ],
+          "common_returned_logprob_abs_differences": {
+            "247": 0.0035028457641601562,
+            "908": 0.06600284576416016,
+            "1119": 0.0035028457641601562,
+            "2104": 0.06600284576416016,
+            "27881": 0.0035028457641601562
+          },
+          "max_abs_difference": 0.06600284576416016,
+          "mean_abs_difference": 0.028502845764160158,
+          "top5_set_equal": true,
+          "base_top5": [
+            "247",
+            "908",
+            "1119",
+            "2104",
+            "27881"
+          ],
+          "fixed_top5": [
+            "247",
+            "908",
+            "1119",
+            "2104",
+            "27881"
+          ],
+          "all_returned_token_set_equal": true
+        },
+        {
+          "step": 2,
+          "same_generated_prefix": true,
+          "common_returned_tokens": [
+            "15",
+            "275",
+            "281",
+            "323",
+            "347"
+          ],
+          "common_returned_logprob_abs_differences": {
+            "15": 0.3876380920410156,
+            "275": 0.20013809204101562,
+            "281": 0.2998619079589844,
+            "323": 0.11236190795898438,
+            "347": 0.3876380920410156
+          },
+          "max_abs_difference": 0.3876380920410156,
+          "mean_abs_difference": 0.2775276184082031,
+          "top5_set_equal": true,
+          "base_top5": [
+            "15",
+            "275",
+            "281",
+            "323",
+            "347"
+          ],
+          "fixed_top5": [
+            "15",
+            "275",
+            "281",
+            "323",
+            "347"
+          ],
+          "all_returned_token_set_equal": true
+        },
+        {
+          "step": 3,
+          "same_generated_prefix": true,
+          "common_returned_tokens": [
+            "897",
+            "1239",
+            "2289",
+            "2736",
+            "8415"
+          ],
+          "common_returned_logprob_abs_differences": {
+            "897": 0.03899025917053223,
+            "1239": 0.03899025917053223,
+            "2289": 0.03899025917053223,
+            "2736": 0.03899025917053223,
+            "8415": 0.03899025917053223
+          },
+          "max_abs_difference": 0.03899025917053223,
+          "mean_abs_difference": 0.03899025917053223,
+          "top5_set_equal": true,
+          "base_top5": [
+            "897",
+            "1239",
+            "2289",
+            "2736",
+            "8415"
+          ],
+          "fixed_top5": [
+            "897",
+            "1239",
+            "2289",
+            "2736",
+            "8415"
+          ],
+          "all_returned_token_set_equal": true
+        }
+      ]
+    }
+  ]
+}

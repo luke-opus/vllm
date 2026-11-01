@@ -172,6 +172,14 @@ are identical between the base and fixed platform configurations.
 generation, observed CPU attention operations and the exact reference-comparison
 limits. These records do not establish native hardware or upstream CI success.
 
+A separate [paired BF16 model comparison](bf16-model/README.md) now runs both
+the base and BF16-fixed full extensions with identical weights, configuration
+and runtime dependencies. Both processes and the driver exit zero; 7/8 tokens
+match, one period changes to a comma, and one returned top-5 set changes.
+The complete returned logprobs and descriptive differences are retained.
+This establishes observed model behavior, not numerical equivalence or improved
+accuracy. Independent artifact and source-restoration checks also passed.
+
 Prepared [documentation/test/CI follow-ups](followups/) remain local candidates.
 Their generated documentation previews are available under
 [ERF candidate](https://luke-opus.github.io/vllm/64078-candidate/getting_started/installation/cpu/)
@@ -188,6 +196,14 @@ have completed; their separate evidence is linked above.
 `e5196e2`; they are prepared patches, not rebuilt or tested current-main commits.
 The original branches are 338 commits behind that main. The recorded upstream
 pre-run failure is a contributor trust gate; current merged-PR count is zero.
+
+[Native header test preparation](cloud-v-header/README.md) contains actual-header
+BF16/ERF harnesses and an inactive Cloud-V workflow candidate. As of November 1,
+2026, the separate [initial inventory job](https://github.com/luke-opus/vllm/actions/runs/41271135929)
+has no assigned runner. After almost 15 minutes queued, that inventory run was
+cancelled and retried once with the same revision; attempt 2 is also queued.
+Installation and prepared scripts do not establish hardware execution. The
+header workflow candidate has not been activated.
 
 Broader model evaluation, ERF changed-path model coverage, native RVV hardware,
 upstream CI, and the submitting human's

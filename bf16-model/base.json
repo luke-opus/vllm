@@ -1,0 +1,306 @@
+{
+  "variant": "base",
+  "model": "EleutherAI/pythia-14m",
+  "revision": "cf967c0a9a04383db6f7b1108d86b2962634b4ac",
+  "parameters": {
+    "model": "/home/vllmtest/vllm-validation/pythia-14m",
+    "dtype": "bfloat16",
+    "max_model_len": 128,
+    "max_num_seqs": 2,
+    "max_num_batched_tokens": 128,
+    "block_size": 32,
+    "enforce_eager": true,
+    "tensor_parallel_size": 1,
+    "distributed_executor_backend": "uni",
+    "kv_cache_memory_bytes": 67108864,
+    "seed": 0,
+    "enable_prefix_caching": false,
+    "enable_chunked_prefill": false
+  },
+  "worker": {
+    "class": "vllm.v1.worker.cpu_worker.CPUWorker",
+    "pid": 2539,
+    "device": "cpu",
+    "torch_threads": 1,
+    "affinity": [
+      0,
+      1
+    ],
+    "LD_PRELOAD": "",
+    "loaded_openmp": [
+      "/home/vllmtest/vllm-validation/.venv/lib/python3.12/site-packages/torch/lib/libgomp.so.1",
+      "/usr/lib/llvm-18/lib/libomp.so.5"
+    ]
+  },
+  "operator_counts": {
+    "_C::init_cpu_memory_env": 1,
+    "_C::create_onednn_mm_handler": 26,
+    "_C::cpu_attn_has_isa": 1,
+    "_C::compute_slot_mapping_kernel_impl": 4,
+    "_C::get_scheduler_metadata": 4,
+    "_C::cpu_attn_reshape_and_cache": 24,
+    "_C::cpu_attention_with_kv_cache": 24,
+    "_C::greedy_argmax": 4
+  },
+  "outputs": [
+    {
+      "prompt": "The capital of France is",
+      "prompt_token_ids": [
+        510,
+        5347,
+        273,
+        6181,
+        310
+      ],
+      "token_ids": [
+        253,
+        1986,
+        2077,
+        15
+      ],
+      "text": " the United States.",
+      "cumulative_logprob": -7.107973396778107,
+      "finish_reason": "length",
+      "stop_reason": null,
+      "logprobs": [
+        {
+          "253": {
+            "logprob": -1.7583836317062378,
+            "rank": 1,
+            "decoded_token": " the"
+          },
+          "247": {
+            "logprob": -2.5708837509155273,
+            "rank": 2,
+            "decoded_token": " a"
+          },
+          "275": {
+            "logprob": -3.8208837509155273,
+            "rank": 3,
+            "decoded_token": " in"
+          },
+          "271": {
+            "logprob": -4.133383750915527,
+            "rank": 4,
+            "decoded_token": " an"
+          },
+          "581": {
+            "logprob": -4.195883750915527,
+            "rank": 5,
+            "decoded_token": " one"
+          }
+        },
+        {
+          "1986": {
+            "logprob": -3.418591022491455,
+            "rank": 1,
+            "decoded_token": " United"
+          },
+          "5112": {
+            "logprob": -3.793591022491455,
+            "rank": 2,
+            "decoded_token": " French"
+          },
+          "2846": {
+            "logprob": -4.231091022491455,
+            "rank": 3,
+            "decoded_token": " city"
+          },
+          "2448": {
+            "logprob": -4.356091022491455,
+            "rank": 4,
+            "decoded_token": " American"
+          },
+          "9890": {
+            "logprob": -4.418591022491455,
+            "rank": 5,
+            "decoded_token": " Italian"
+          }
+        },
+        {
+          "2077": {
+            "logprob": -0.5192808508872986,
+            "rank": 1,
+            "decoded_token": " States"
+          },
+          "11491": {
+            "logprob": -1.6442809104919434,
+            "rank": 2,
+            "decoded_token": " Kingdom"
+          },
+          "14726": {
+            "logprob": -1.7692809104919434,
+            "rank": 3,
+            "decoded_token": " Nations"
+          },
+          "8365": {
+            "logprob": -4.394280910491943,
+            "rank": 4,
+            "decoded_token": " Arab"
+          },
+          "4687": {
+            "logprob": -6.894280910491943,
+            "rank": 5,
+            "decoded_token": " Republic"
+          }
+        },
+        {
+          "15": {
+            "logprob": -1.4117178916931152,
+            "rank": 1,
+            "decoded_token": "."
+          },
+          "13": {
+            "logprob": -1.4742178916931152,
+            "rank": 2,
+            "decoded_token": ","
+          },
+          "285": {
+            "logprob": -1.9117178916931152,
+            "rank": 3,
+            "decoded_token": " and"
+          },
+          "275": {
+            "logprob": -3.3492178916931152,
+            "rank": 4,
+            "decoded_token": " in"
+          },
+          "28": {
+            "logprob": -3.7242178916931152,
+            "rank": 5,
+            "decoded_token": ";"
+          }
+        }
+      ]
+    },
+    {
+      "prompt": "A computer can",
+      "prompt_token_ids": [
+        34,
+        4382,
+        476
+      ],
+      "token_ids": [
+        320,
+        908,
+        281,
+        897
+      ],
+      "text": " be used to use",
+      "cumulative_logprob": -7.520272254943848,
+      "finish_reason": "length",
+      "stop_reason": null,
+      "logprobs": [
+        {
+          "320": {
+            "logprob": -1.6175732612609863,
+            "rank": 1,
+            "decoded_token": " be"
+          },
+          "897": {
+            "logprob": -2.4925732612609863,
+            "rank": 2,
+            "decoded_token": " use"
+          },
+          "2736": {
+            "logprob": -3.8675732612609863,
+            "rank": 3,
+            "decoded_token": " detect"
+          },
+          "1361": {
+            "logprob": -3.9925732612609863,
+            "rank": 4,
+            "decoded_token": " help"
+          },
+          "1239": {
+            "logprob": -4.055073261260986,
+            "rank": 5,
+            "decoded_token": " read"
+          }
+        },
+        {
+          "908": {
+            "logprob": -2.092219591140747,
+            "rank": 1,
+            "decoded_token": " used"
+          },
+          "27881": {
+            "logprob": -2.342219591140747,
+            "rank": 2,
+            "decoded_token": " programmed"
+          },
+          "2104": {
+            "logprob": -3.154719591140747,
+            "rank": 3,
+            "decoded_token": " able"
+          },
+          "1119": {
+            "logprob": -3.529719591140747,
+            "rank": 4,
+            "decoded_token": " found"
+          },
+          "247": {
+            "logprob": -3.654719591140747,
+            "rank": 5,
+            "decoded_token": " a"
+          }
+        },
+        {
+          "281": {
+            "logprob": -0.8643300533294678,
+            "rank": 1,
+            "decoded_token": " to"
+          },
+          "347": {
+            "logprob": -2.1768300533294678,
+            "rank": 2,
+            "decoded_token": " as"
+          },
+          "275": {
+            "logprob": -2.2393300533294678,
+            "rank": 3,
+            "decoded_token": " in"
+          },
+          "323": {
+            "logprob": -2.3018300533294678,
+            "rank": 4,
+            "decoded_token": " for"
+          },
+          "15": {
+            "logprob": -3.6768300533294678,
+            "rank": 5,
+            "decoded_token": "."
+          }
+        },
+        {
+          "897": {
+            "logprob": -2.9461493492126465,
+            "rank": 1,
+            "decoded_token": " use"
+          },
+          "8415": {
+            "logprob": -3.1336493492126465,
+            "rank": 2,
+            "decoded_token": " solve"
+          },
+          "1239": {
+            "logprob": -3.3211493492126465,
+            "rank": 3,
+            "decoded_token": " read"
+          },
+          "2736": {
+            "logprob": -3.5711493492126465,
+            "rank": 4,
+            "decoded_token": " detect"
+          },
+          "2289": {
+            "logprob": -3.7586493492126465,
+            "rank": 5,
+            "decoded_token": " access"
+          }
+        }
+      ]
+    }
+  ],
+  "scope": "QEMU smoke comparison; all returned top-5/chosen-token logprobs, not full vocabulary; inline BF16 conversion not directly instrumented"
+}

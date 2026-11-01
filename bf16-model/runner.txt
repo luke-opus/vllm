@@ -1,0 +1,7 @@
+Verifying pinned trained weights and existing fixed object inputs
+Linking complete base DSO with identical real LLVM OpenMP
+Running base: real LLM/Pythia-14m BF16, two prompts x four tokens
+base finished: returncode=0
+Running fixed: real LLM/Pythia-14m BF16, two prompts x four tokens
+fixed finished: returncode=0
+Comparison completed and source restored

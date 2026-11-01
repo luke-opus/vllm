@@ -1,0 +1,12 @@
+Tool:
+v0.0.0-20250119115933-03d0035246f3+dirty
+installed by building from source
+built with go1.27.3 compiler for darwin/arm64
+
+Command:
+work/pre-commit-cache/repob7ziy0zy/golangenv-default/bin/actionlint -config-file outputs/cloud-v-actionlint.yaml outputs/cloud-v-header-workflow.yml
+Exit status: 0
+
+Bash syntax check:
+bash -n outputs/cloud-v-header/run.sh
+Exit status: 0

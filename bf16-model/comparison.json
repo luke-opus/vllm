@@ -1,0 +1,121 @@
+{
+  "base_ref": "ca8dbccf204abfcdf9dcb178f7e108c06b224b0f",
+  "fixed_ref": "174e56854703c0b9ede89e0a41f9e04dc4c59bc1",
+  "constant_cpu_sha256": "bfa74a5c08f4186b57a3bb83cf1c08fbe1bf35b5522c02020fc1d602dca12f50",
+  "variants": [
+    {
+      "variant": "base",
+      "library": "/home/vllmtest/vllm-validation/bf16-model-comparison/_C-base-linked-openmp.abi3.so",
+      "library_sha256": "509db9d7439d43ba7adbe1529a192f511171746c286ea28e79b0d260e895ade6",
+      "command": [
+        "/home/vllmtest/vllm-validation/.venv/bin/python",
+        "/home/vllmtest/vllm-validation/bf16-model-comparison/check-model.py",
+        "base",
+        "--root",
+        "/home/vllmtest/vllm-validation"
+      ],
+      "returncode": 0,
+      "seconds": 211.60228178900002
+    },
+    {
+      "variant": "fixed",
+      "library": "/home/vllmtest/vllm-validation/build-base/_C-bf16-linked-openmp.abi3.so",
+      "library_sha256": "a13aadd18a4f7d9ccf275f983e12d425b92965d33fc0b9e39b65029f9af570ad",
+      "command": [
+        "/home/vllmtest/vllm-validation/.venv/bin/python",
+        "/home/vllmtest/vllm-validation/bf16-model-comparison/check-model.py",
+        "fixed",
+        "--root",
+        "/home/vllmtest/vllm-validation"
+      ],
+      "returncode": 0,
+      "seconds": 216.1168890859999
+    }
+  ],
+  "comparison": {
+    "tokens_equal": [
+      false,
+      true
+    ],
+    "all_returned_outputs_exactly_equal": false,
+    "base_tokens": [
+      [
+        253,
+        1986,
+        2077,
+        15
+      ],
+      [
+        320,
+        908,
+        281,
+        897
+      ]
+    ],
+    "fixed_tokens": [
+      [
+        253,
+        1986,
+        2077,
+        13
+      ],
+      [
+        320,
+        908,
+        281,
+        897
+      ]
+    ],
+    "note": "Observational comparison: no newly introduced numerical tolerance or claim that base must fail"
+  },
+  "base_link_command": ": && /usr/bin/clang++-18 -fPIC -O3 -DNDEBUG   -shared  -o /home/vllmtest/vllm-validation/bf16-model-comparison/_C-base-linked-openmp.abi3.so /home/vllmtest/vllm-validation/bf16-model-comparison/base-objects/build-base/CMakeFiles/dnnl_ext.dir/csrc/cpu/dnnl_helper.cpp.o /home/vllmtest/vllm-validation/bf16-model-comparison/base-objects/build-base/CMakeFiles/_C.dir/csrc/cpu/sgl-kernels/gemm_int4.cpp.o /home/vllmtest/vllm-validation/bf16-model-comparison/base-objects/build-base/CMakeFiles/_C.dir/csrc/cpu/dnnl_kernels.cpp.o /home/vllmtest/vllm-validation/bf16-model-comparison/base-objects/build-base/CMakeFiles/_C.dir/csrc/cpu/cpu_wna16.cpp.o /home/vllmtest/vllm-validation/bf16-model-comparison/base-objects/build-base/CMakeFiles/_C.dir/csrc/cpu/activation.cpp.o /home/vllmtest/vllm-validation/bf16-model-comparison/base-objects/build-base/CMakeFiles/_C.dir/csrc/cpu/sgl-kernels/fla.cpp.o /home/vllmtest/vllm-validation/bf16-model-comparison/base-objects/build-base/CMakeFiles/_C.dir/csrc/cpu/utils.cpp.o /home/vllmtest/vllm-validation/bf16-model-comparison/base-objects/build-base/CMakeFiles/_C.dir/csrc/cpu/spec_decode_utils.cpp.o /home/vllmtest/vllm-validation/bf16-model-comparison/base-objects/build-base/CMakeFiles/_C.dir/csrc/cpu/layernorm.cpp.o /home/vllmtest/vllm-validation/bf16-model-comparison/base-objects/build-base/CMakeFiles/_C.dir/csrc/cpu/mla_decode.cpp.o /home/vllmtest/vllm-validation/bf16-model-comparison/base-objects/build-base/CMakeFiles/_C.dir/csrc/cpu/pos_encoding.cpp.o /home/vllmtest/vllm-validation/bf16-model-comparison/base-objects/build-base/CMakeFiles/_C.dir/csrc/cpu/mamba_cpu.cpp.o /home/vllmtest/vllm-validation/bf16-model-comparison/base-objects/build-base/CMakeFiles/_C.dir/csrc/cpu/dynamic_4bit_int_moe_cpu.cpp.o /home/vllmtest/vllm-validation/bf16-model-comparison/base-objects/build-base/CMakeFiles/_C.dir/csrc/cpu/cpu_fused_moe.cpp.o /home/vllmtest/vllm-validation/bf16-model-comparison/base-objects/build-base/CMakeFiles/_C.dir/csrc/cpu/cpu_attn.cpp.o /home/vllmtest/vllm-validation/bf16-model-comparison/base-objects/build-base/CMakeFiles/_C.dir/csrc/cpu/cpu_isa.cpp.o /home/vllmtest/vllm-validation/bf16-model-comparison/base-objects/build-base/CMakeFiles/_C.dir/csrc/cpu/sampling_kernels.cpp.o /home/vllmtest/vllm-validation/bf16-model-comparison/base-objects/build-base/CMakeFiles/_C.dir/csrc/cpu/fp8_quant.cpp.o /home/vllmtest/vllm-validation/bf16-model-comparison/base-objects/build-base/CMakeFiles/_C.dir/csrc/cpu/torch_bindings.cpp.o  -Wl,-rpath,/home/vllmtest/vllm-validation/.venv/lib/python3.12/site-packages/torch/lib:  -lnuma  /home/vllmtest/vllm-validation/.venv/lib/python3.12/site-packages/torch/lib/libc10.so  -lnuma  /home/vllmtest/vllm-validation/.venv/lib/python3.12/site-packages/torch/lib/libtorch.so  _deps/onednn-build/src/libdnnl.a  -ldl  /home/vllmtest/vllm-validation/.venv/lib/python3.12/site-packages/torch/lib/libc10.so  -Wl,--no-as-needed,\"/home/vllmtest/vllm-validation/.venv/lib/python3.12/site-packages/torch/lib/libtorch_cpu.so\" -Wl,--as-needed  /home/vllmtest/vllm-validation/.venv/lib/python3.12/site-packages/torch/lib/libc10.so  -Wl,--no-as-needed,\"/home/vllmtest/vllm-validation/.venv/lib/python3.12/site-packages/torch/lib/libtorch.so\" -Wl,--as-needed -L/usr/lib/llvm-18/lib -Wl,-rpath,/usr/lib/llvm-18/lib -lomp && :",
+  "common_onednn_sha256": "7d2a8be27c186a7f1604e25a6011822e090f695c49b50598aef60f978d5024b3",
+  "matching_dynamic_runtime": {
+    "base": [
+      "libnuma.so.1",
+      "libc10.so",
+      "libtorch.so",
+      "libtorch_cpu.so",
+      "libomp.so.5",
+      "libstdc++.so.6",
+      "libm.so.6",
+      "libgcc_s.so.1",
+      "libc.so.6",
+      "ld-linux-riscv64-lp64d.so.1",
+      "/home/vllmtest/vllm-validation/.venv/lib/python3.12/site-packages/torch/lib::/usr/lib/llvm-18/lib"
+    ],
+    "fixed": [
+      "libnuma.so.1",
+      "libc10.so",
+      "libtorch.so",
+      "libtorch_cpu.so",
+      "libomp.so.5",
+      "libstdc++.so.6",
+      "libm.so.6",
+      "libgcc_s.so.1",
+      "libc.so.6",
+      "ld-linux-riscv64-lp64d.so.1",
+      "/home/vllmtest/vllm-validation/.venv/lib/python3.12/site-packages/torch/lib::/usr/lib/llvm-18/lib"
+    ]
+  },
+  "constant_environment": {
+    "CC": "/usr/bin/gcc-13",
+    "CXX": "/usr/bin/g++-13",
+    "TORCHINDUCTOR_COMPILE_THREADS": "1",
+    "TORCHINDUCTOR_CACHE_DIR": "/home/vllmtest/vllm-validation/inductor-cache",
+    "VLLM_TARGET_DEVICE": "cpu",
+    "VLLM_PLUGINS": "",
+    "VLLM_ENABLE_V1_MULTIPROCESSING": "0",
+    "VLLM_CPU_OMP_THREADS_BIND": "0",
+    "VLLM_CPU_CI_ENV": "0",
+    "VLLM_NO_USAGE_STATS": "1",
+    "HF_HUB_OFFLINE": "1",
+    "HF_HUB_DISABLE_TELEMETRY": "1",
+    "OMP_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1",
+    "TOKENIZERS_PARALLELISM": "false",
+    "PYTHONPATH": "/home/vllmtest/vllm-validation/model-source"
+  },
+  "link_restored": true,
+  "cpu_source_restored": true
+}

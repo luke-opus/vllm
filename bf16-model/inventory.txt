@@ -1,0 +1,51 @@
+Sun Nov  1 04:06:16 UTC 2026
+Linux vllm-riscv-validation 7.0.0-38-generic #38.1~24.04.1-Ubuntu SMP PREEMPT_DYNAMIC Mon Sep 28 09:57:57 UTC riscv64 riscv64 riscv64 GNU/Linux
+processor	: 0
+hart		: 0
+isa		: rv64imafdcvh_zicbom_zicbop_zicboz_ziccrse_zicntr_zicond_zicsr_zifencei_zihintntl_zihintpause_zihpm_zimop_zaamo_zalrsc_zawrs_zfa_zfhmin_zca_zcb_zcd_zcmop_zba_zbb_zbs_zkt_zvbb_zve32f_zve32x_zve64d_zve64f_zve64x_zvfh_zvfhmin_zvkb_zvkt_smnpm_smstateen_sscofpmf_ssnpm_sstc_svade_svinval_svnapot_svpbmt
+mmu		: sv39
+mvendorid	: 0x0
+marchid		: 0x2a
+mimpid		: 0x0
+hart isa	: rv64imafdcvh_zicbom_zicbop_zicboz_ziccrse_zicntr_zicond_zicsr_zifencei_zihintntl_zihintpause_zihpm_zimop_zaamo_zalrsc_zawrs_zfa_zfhmin_zca_zcb_zcd_zcmop_zba_zbb_zbs_zkt_zvbb_zve32f_zve32x_zve64d_zve64f_zve64x_zvfh_zvfhmin_zvkb_zvkt_smnpm_smstateen_sscofpmf_ssnpm_sstc_svade_svinval_svnapot_svpbmt
+
+processor	: 1
+hart		: 1
+isa		: rv64imafdcvh_zicbom_zicbop_zicboz_ziccrse_zicntr_zicond_zicsr_zifencei_zihintntl_zihintpause_zihpm_zimop_zaamo_zalrsc_zawrs_zfa_zfhmin_zca_zcb_zcd_zcmop_zba_zbb_zbs_zkt_zvbb_zve32f_zve32x_zve64d_zve64f_zve64x_zvfh_zvfhmin_zvkb_zvkt_smnpm_smstateen_sscofpmf_ssnpm_sstc_svade_svinval_svnapot_svpbmt
+mmu		: sv39
+mvendorid	: 0x0
+marchid		: 0x2a
+mimpid		: 0x0
+hart isa	: rv64imafdcvh_zicbom_zicbop_zicboz_ziccrse_zicntr_zicond_zicsr_zifencei_zihintntl_zihintpause_zihpm_zimop_zaamo_zalrsc_zawrs_zfa_zfhmin_zca_zcb_zcd_zcmop_zba_zbb_zbs_zkt_zvbb_zve32f_zve32x_zve64d_zve64f_zve64x_zvfh_zvfhmin_zvkb_zvkt_smnpm_smstateen_sscofpmf_ssnpm_sstc_svade_svinval_svnapot_svpbmt
+
+{
+  "architectures": [
+    "GPTNeoXForCausalLM"
+  ],
+  "attention_bias": true,
+  "attention_dropout": 0.0,
+  "bos_token_id": 0,
+  "classifier_dropout": 0.1,
+  "eos_token_id": 0,
+  "hidden_act": "gelu",
+  "hidden_dropout": 0.0,
+  "hidden_size": 128,
+  "initializer_range": 0.02,
+  "intermediate_size": 512,
+  "layer_norm_eps": 1e-05,
+  "max_position_embeddings": 2048,
+  "model_type": "gpt_neox",
+  "num_attention_heads": 4,
+  "num_hidden_layers": 6,
+  "rope_scaling": null,
+  "rotary_emb_base": 10000,
+  "rotary_pct": 0.25,
+  "tie_word_embeddings": false,
+  "torch_dtype": "float16",
+  "transformers_version": "4.40.0",
+  "use_cache": true,
+  "use_parallel_residual": true,
+  "vocab_size": 50304
+}
+371fdfe466354dc07ba54b1385dc43cf593db481e4240625af81c89a7c0d9b2a  cross-base-reference-blas-objects.tar.gz
+b0a44f813e7ba39f28af7bebd159d8ca3a5edad44c3778ee370e5dde11c95510  cross-bf16-reference-blas-objects.tar.gz

@@ -1,0 +1,62 @@
+{
+  "recorded_utc": "2026-11-01T04:12:17.336070+00:00",
+  "notes": [
+    "No hardware execution is established by these queued states.",
+    "The first run was cancelled after almost15minutes without an assigned runner, then retried once at the same commit.",
+    "The header workflow candidate is inactive."
+  ],
+  "observations": [
+    {
+      "observation": "Before one retry",
+      "id": 41271135929,
+      "html_url": "https://github.com/luke-opus/vllm/actions/runs/41271135929",
+      "head_sha": "142f3174e351622f0361c23ad4d1c70863626089",
+      "status": "queued",
+      "conclusion": null,
+      "run_attempt": 1,
+      "created_at": "2026-11-01T03:56:55Z",
+      "updated_at": "2026-11-01T03:56:55Z",
+      "run_started_at": "2026-11-01T03:56:55Z",
+      "jobs": [
+        {
+          "id": 124743980197,
+          "status": "queued",
+          "conclusion": null,
+          "runner_id": 0,
+          "runner_name": "",
+          "labels": [
+            "self-hosted",
+            "banana-pi-f3"
+          ],
+          "steps": []
+        }
+      ]
+    },
+    {
+      "observation": "After retry accepted",
+      "id": 41271135929,
+      "html_url": "https://github.com/luke-opus/vllm/actions/runs/41271135929",
+      "head_sha": "142f3174e351622f0361c23ad4d1c70863626089",
+      "status": "queued",
+      "conclusion": null,
+      "run_attempt": 2,
+      "created_at": "2026-11-01T03:56:55Z",
+      "updated_at": "2026-11-01T04:11:55Z",
+      "run_started_at": "2026-11-01T04:11:54Z",
+      "jobs": [
+        {
+          "id": 124746899838,
+          "status": "queued",
+          "conclusion": null,
+          "runner_id": null,
+          "runner_name": null,
+          "labels": [
+            "self-hosted",
+            "banana-pi-f3"
+          ],
+          "steps": []
+        }
+      ]
+    }
+  ]
+}

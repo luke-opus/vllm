@@ -1,0 +1,52 @@
+BF16 model comparison: coverage boundary
+
+The test uses the real LLM entry point, real CPUWorker and unchanged trained
+EleutherAI/pythia-14m weights/config at revision
+cf967c0a9a04383db6f7b1108d86b2962634b4ac. The model has hidden size 128 and four
+attention heads (head size 32); both runs use BF16 and block size 32. All six
+local model-file SHA256 values are checked against model-files.json.
+
+The Python model-source remains base ca8dbccf204abfcdf9dcb178f7e108c06b224b0f.
+Only the complete C++ extension symlink changes between the independently
+built base and BF16-only 174e56854703c0b9ede89e0a41f9e04dc4c59bc1 versions.
+Both use the same previously documented oneDNN declaration/reference-BLAS
+adaptations and the same actual LLVM OpenMP dependency/rpath. cpu.py, model
+weights/config, environment, executor and generation settings stay constant.
+
+Observed operator counts are retained in base.json/fixed.json if the runs
+complete. They establish calls to cpu_attention_with_kv_cache and
+cpu_attn_reshape_and_cache. They do not record the runtime ISA argument or
+directly instrument the inlined float_to_bf16 helper. The following source
+relationship supports changed-path coverage, rather than supplying a direct
+inline-call measurement:
+
+1. The real CPU attention selector selects RVV for RISC-V plus available RVV,
+   block size divisible by 32 and head size 32. The compiled-ISA check is
+   _C.cpu_attn_has_isa("rvv").
+   https://github.com/vllm-project/vllm/blob/174e56854703c0b9ede89e0a41f9e04dc4c59bc1/vllm/v1/attention/backends/cpu_attn.py#L502-L529
+   https://github.com/vllm-project/vllm/blob/174e56854703c0b9ede89e0a41f9e04dc4c59bc1/vllm/v1/attention/backends/cpu_attn.py#L532-L568
+2. cpu_attention_with_kv_cache dispatches on the actual query dtype and
+   scheduler metadata ISA, constructing AttentionMainLoop<attn_impl>.
+   https://github.com/vllm-project/vllm/blob/174e56854703c0b9ede89e0a41f9e04dc4c59bc1/csrc/cpu/cpu_attn.cpp#L277-L285
+3. The RVV specialization retains query_t=scalar_t and FP32 partial-output
+   buffers; the shared final output converts to query_t.
+   https://github.com/vllm-project/vllm/blob/174e56854703c0b9ede89e0a41f9e04dc4c59bc1/csrc/cpu/cpu_attn_rvv.hpp#L261-L286
+   https://github.com/vllm-project/vllm/blob/174e56854703c0b9ede89e0a41f9e04dc4c59bc1/csrc/cpu/cpu_attn_impl.hpp#L2243-L2275
+4. VecTypeTrait<c10::BFloat16> selects BF16Vec16. Without Zvfbfmin, its FP32
+   constructor retains the FP32 value and save() invokes float_to_bf16 for
+   each element. The recorded build targets RVV/Zvfh/VLEN256 without Zvfbfmin.
+   https://github.com/vllm-project/vllm/blob/174e56854703c0b9ede89e0a41f9e04dc4c59bc1/csrc/cpu/cpu_attn_impl.hpp#L1088-L1091
+   https://github.com/vllm-project/vllm/blob/174e56854703c0b9ede89e0a41f9e04dc4c59bc1/csrc/cpu/cpu_types_riscv_impl.hpp#L292-L314
+   https://github.com/vllm-project/vllm/blob/174e56854703c0b9ede89e0a41f9e04dc4c59bc1/csrc/cpu/cpu_types_riscv_impl.hpp#L1013-L1019
+5. The BF16-only PR changes float_to_bf16 from truncation to RNE plus NaN
+   canonicalization. No injected adversarial input or synthetic model weights
+   are used here. This smoke model need not produce a greedy-token difference.
+   https://github.com/vllm-project/vllm/blob/ca8dbccf204abfcdf9dcb178f7e108c06b224b0f/csrc/cpu/float_convert.hpp#L11-L14
+   https://github.com/vllm-project/vllm/blob/174e56854703c0b9ede89e0a41f9e04dc4c59bc1/csrc/cpu/float_convert.hpp#L11-L18
+
+The test is an observational base/fixed smoke comparison, not a benchmark,
+accuracy evaluation, full-vocabulary distribution comparison, native-silicon
+validation, upstream CI or human test/review confirmation. It records every
+returned top-5/chosen-token logprob without applying a new numerical tolerance.
+The earlier HF comparison is a separate record and is not reused as a matching
+base/fixed result here. ERF exact-GELU coverage is outside this comparison.

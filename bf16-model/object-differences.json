@@ -1,0 +1,62 @@
+{
+  "object_count": 19,
+  "identical_objects": [
+    "build-base/CMakeFiles/_C.dir/csrc/cpu/utils.cpp.o",
+    "build-base/CMakeFiles/_C.dir/csrc/cpu/fp8_quant.cpp.o",
+    "build-base/CMakeFiles/_C.dir/csrc/cpu/dynamic_4bit_int_moe_cpu.cpp.o",
+    "build-base/CMakeFiles/_C.dir/csrc/cpu/cpu_isa.cpp.o",
+    "build-base/CMakeFiles/_C.dir/csrc/cpu/spec_decode_utils.cpp.o",
+    "build-base/CMakeFiles/_C.dir/csrc/cpu/torch_bindings.cpp.o",
+    "build-base/CMakeFiles/_C.dir/csrc/cpu/sampling_kernels.cpp.o",
+    "build-base/CMakeFiles/_C.dir/csrc/cpu/sgl-kernels/fla.cpp.o",
+    "build-base/CMakeFiles/_C.dir/csrc/cpu/sgl-kernels/gemm_int4.cpp.o",
+    "build-base/CMakeFiles/dnnl_ext.dir/csrc/cpu/dnnl_helper.cpp.o"
+  ],
+  "changed_objects": [
+    {
+      "name": "build-base/CMakeFiles/_C.dir/csrc/cpu/cpu_attn.cpp.o",
+      "base_sha256": "e9078804c7424509967033dc8c7e97dd889435dc2d0fc80569ffbcff2fe9393f",
+      "fixed_sha256": "a1ef01e399a5303fe7cfd6b9423618f85f0aff13b35432752a967ca56f5ba6df"
+    },
+    {
+      "name": "build-base/CMakeFiles/_C.dir/csrc/cpu/cpu_fused_moe.cpp.o",
+      "base_sha256": "538ffbe7138e5790fb8d1e87bd7d8f3965d0d1566f83bf4242b9925b63170cf6",
+      "fixed_sha256": "2885397e3d807f359678f9fd954f775676fac5b0033e61b7f73fe4480f152a71"
+    },
+    {
+      "name": "build-base/CMakeFiles/_C.dir/csrc/cpu/dnnl_kernels.cpp.o",
+      "base_sha256": "a0ce3533de8e278d11044ee7f3c433f4ac1b6169be41dac1594d77019d9a2aa5",
+      "fixed_sha256": "6f24e51e93af4cddb2438d7b434f631027f16f065b558088bd2f0b7ece1643eb"
+    },
+    {
+      "name": "build-base/CMakeFiles/_C.dir/csrc/cpu/activation.cpp.o",
+      "base_sha256": "7611c2f5e64f6e8ecf9f73663c08ea86cd318a656ac8787780e4ed42d18e6b1c",
+      "fixed_sha256": "8b395bdbd818f867a9e0079b986f183a56c7322dde76dfd67891aaa702e66064"
+    },
+    {
+      "name": "build-base/CMakeFiles/_C.dir/csrc/cpu/layernorm.cpp.o",
+      "base_sha256": "edd4e1ec92d7e103bf77224bf79efb67aec7109bebb474f0ba421943519af456",
+      "fixed_sha256": "1fbb6082ee2f2a595b8c42bafaa1c295fe7f41f0a365efe2cd970c192c71a6e8"
+    },
+    {
+      "name": "build-base/CMakeFiles/_C.dir/csrc/cpu/mamba_cpu.cpp.o",
+      "base_sha256": "0326de67c385713605b3afbd6e32b6e83f38ebcf1603b7c466d6d047dc2585bd",
+      "fixed_sha256": "28e0d4e31edf95fdd723706302ca12f4f7d0c8bc08fafd769d74fbd350e78515"
+    },
+    {
+      "name": "build-base/CMakeFiles/_C.dir/csrc/cpu/mla_decode.cpp.o",
+      "base_sha256": "ec4f80059dbb80edec80a375a2a1b32ced9d02993936308b9daf332ef430fabf",
+      "fixed_sha256": "57500bd9a405b6222baa0511b91799a75b79d475c74f0b728b8d84312e51b332"
+    },
+    {
+      "name": "build-base/CMakeFiles/_C.dir/csrc/cpu/pos_encoding.cpp.o",
+      "base_sha256": "26b092f18189fb65186fc89b37eacfb0656e28652f774a66f02505e85a926ac3",
+      "fixed_sha256": "7dc8a461e54191fda3477cc11a2e76b184ea92944d72562c93c2d93ccc6391db"
+    },
+    {
+      "name": "build-base/CMakeFiles/_C.dir/csrc/cpu/cpu_wna16.cpp.o",
+      "base_sha256": "c86f30b2f01c6b20f767ab6b570dc9a9f1c061ca021bae8b30fc49532d0461f9",
+      "fixed_sha256": "d0f26b0c2c4ea36068cc1751d6555c2e2db01f1e205df648684337228bfadb4a"
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+[
+  {
+    "variant": "base",
+    "source_ref": "ca8dbccf204abfcdf9dcb178f7e108c06b224b0f",
+    "object_archive_sha256": "371fdfe466354dc07ba54b1385dc43cf593db481e4240625af81c89a7c0d9b2a",
+    "objects": 19,
+    "manifest": "work/validation-public/full-extension/evidence/cross-base-reference-blas-manifest.json",
+    "build_mode": "existing PyTorch reference BLAS fallback"
+  },
+  {
+    "variant": "bf16",
+    "source_ref": "174e56854703c0b9ede89e0a41f9e04dc4c59bc1",
+    "object_archive_sha256": "b0a44f813e7ba39f28af7bebd159d8ca3a5edad44c3778ee370e5dde11c95510",
+    "objects": 19,
+    "manifest": "work/validation-public/full-extension/evidence/cross-bf16-reference-blas-manifest.json",
+    "build_mode": "existing PyTorch reference BLAS fallback"
+  }
+]
