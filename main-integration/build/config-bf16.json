@@ -1,0 +1,43 @@
+{
+  "variant": "bf16",
+  "source_prefix": "main-source-bf16",
+  "source_identity": {
+    "variant": "bf16",
+    "main_commit": "e0d00e4b8eb0c89ec30921d0695cfdd409e9c211",
+    "index_tree": "8b860fc3eba99f6eccfe4b473c00a829b7ea9af3",
+    "archive": "main-source-bf16.tar.gz",
+    "sha256": "a0e956d990d50a69928d2db91a11155b5ff427db1c2ddc6c67438792d894dd96",
+    "size": 47716930,
+    "tracked_files": 8777,
+    "source_manifest": "work/main-integration/bf16-frozen-source.json",
+    "scope": "Independent original patch plus existing followups on pinned main; hooks passed. Docs and build/runtime validation still in progress."
+  },
+  "mirror": "/Users/luke/Documents/Codex/2026-10-27/chu/work/main-integration/build/mirror",
+  "guest_root": "/home/vllmtest/vllm-validation/main-integration-build",
+  "sysroot": "/Users/luke/Documents/Codex/2026-10-27/chu/work/riscv-cross/sysroot",
+  "zig": "/Users/luke/Documents/Codex/2026-10-10/xian-2/work/cross-tools/ziglang/zig",
+  "path_mappings": {
+    "/home/vllmtest/vllm-validation/main-integration-build": "/Users/luke/Documents/Codex/2026-10-27/chu/work/main-integration/build/mirror",
+    "/home/vllmtest/vllm-validation/main-venv": "/Users/luke/Documents/Codex/2026-10-27/chu/work/riscv-cross/vllm-validation/.venv",
+    "/home/vllmtest/vllm-validation/oneDNN-3.13": "/Users/luke/Documents/Codex/2026-10-27/chu/work/riscv-cross/vllm-validation/oneDNN-3.13"
+  },
+  "script_sha256": {
+    "guest-cache-audit.py": "00785d6eb68fc004e7f913754d23f834c047a07e418fc55ce241c91fe6560d46",
+    "guest-configure.py": "f19a542f77ccce2c8f1ed651e8da4fc5c073f5a9ac01d0b41b809ee28c52f56b",
+    "guest-link.py": "8904e4f1c8619001a422502b9063a19ccf27f87f061b4e03948f7349282bb9e8",
+    "guest-load-check.py": "372318dda497076c0fa2f605f601d57261038c6425b8500985b5aa334aa3c4e5",
+    "package.py": "228e5a50e8cdcf291a0a8dd634f60a0dbb00b062b62e7de5b54d7c671df0f0e3",
+    "replay.py": "fec45a5e887d616149c44c8307e768f2e0c97c72963a38697dd9bc326f2d66a5"
+  },
+  "environment_inputs": {
+    "compat_math_sha256": "a57fe7517299ec452e825f7a3dea7db789ccc921115085e783239682e6b6dc50",
+    "host_torch_include": {
+      "files": 9433,
+      "sha256": "627653e3272aad9cf6dab16b8a34832174728aec29d48ce4d0d39d22fed866e1"
+    },
+    "target": "riscv64-linux-gnu.2.39",
+    "isa": "generic_rv64+m+a+f+d+c+v+zicsr+zifencei+zvfh+zvl256b",
+    "sysroot_origin": "Existing unchanged target GCC 13/sysroot snapshot from original complete build",
+    "compiler_origin": "Existing Zig 0.17.0 used for original complete build"
+  }
+}

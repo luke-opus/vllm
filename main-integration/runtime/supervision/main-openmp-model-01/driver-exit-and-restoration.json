@@ -1,0 +1,49 @@
+{
+  "driver_process": {
+    "command": [
+      "/home/vllmtest/vllm-validation/main-venv/bin/python",
+      "/home/vllmtest/vllm-validation/main-integration-runtime/run-main-model-pair.py",
+      "--execute",
+      "--run-id",
+      "main-openmp-model-01",
+      "--timeout",
+      "3600",
+      "--kind",
+      "openmp"
+    ],
+    "cwd": "/home/vllmtest/vllm-validation/main-integration-runtime",
+    "timed_out": false,
+    "interrupted": false,
+    "actual_returncode": 1,
+    "pid": 10432,
+    "seconds": 433.98235049899995
+  },
+  "independent_restoration_audit": [
+    {
+      "checks": [
+        {
+          "path": "/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-openmp-model-01/source/vllm/_C.abi3.so",
+          "expected": {
+            "kind": "absent"
+          },
+          "passed": true
+        },
+        {
+          "path": "/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-openmp-model-01/source/vllm/platforms/cpu.py",
+          "expected": {
+            "kind": "file",
+            "sha256": "bbee9ca1e3840e7933c116083b3231aaa73f5b624b1a04e853db0239a899c56e",
+            "mode": 33188
+          },
+          "passed": true
+        }
+      ],
+      "passed": true,
+      "name": "base"
+    }
+  ],
+  "passed": false,
+  "scope": "External exit/restoration observer; not assertions executed by the driver",
+  "driver_report_sha256": "b0c603aa2d18b28e634971207c515c8b792a6f186a15b23ad106ea94953e49c5",
+  "driver_report_completed": false
+}

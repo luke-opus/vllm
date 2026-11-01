@@ -1,0 +1,101 @@
+{
+  "base_ref": "e0d00e4b8eb0c89ec30921d0695cfdd409e9c211",
+  "guest_validation_root": "/home/vllmtest/vllm-validation",
+  "sources": {
+    "base": {
+      "commit": "e0d00e4b8eb0c89ec30921d0695cfdd409e9c211",
+      "archive": "main-source-base.tar.gz",
+      "sha256": "4e29a49187b1b2b04f5b064fc39f4ef4fd9161898db692a88b7cf2e9d7cb69c6",
+      "size": 47999299,
+      "members": 9914,
+      "tracked_files": 8776,
+      "command": "git archive --format=tar --prefix=main-source-base/ e0d00e4b8eb0c89ec30921d0695cfdd409e9c211 | gzip -n",
+      "scope": "Unmodified pinned upstream main source; no candidate changes; prepared for independent current-main builds."
+    },
+    "erf": {
+      "variant": "erf",
+      "main_commit": "e0d00e4b8eb0c89ec30921d0695cfdd409e9c211",
+      "index_tree": "94453352d881e58ebf423b67d7ccea2ba449eef5",
+      "archive": "main-source-erf.tar.gz",
+      "sha256": "bb718659a9cb31de4c550b3c56d93c9021cef5a80eeab928e5846902dc87c804",
+      "size": 47715582,
+      "tracked_files": 8776,
+      "source_manifest": "work/main-integration/erf-frozen-source.json",
+      "scope": "Independent original patch plus existing followups on pinned main; hooks passed. Docs and build/runtime validation still in progress."
+    },
+    "bf16": {
+      "variant": "bf16",
+      "main_commit": "e0d00e4b8eb0c89ec30921d0695cfdd409e9c211",
+      "index_tree": "8b860fc3eba99f6eccfe4b473c00a829b7ea9af3",
+      "archive": "main-source-bf16.tar.gz",
+      "sha256": "a0e956d990d50a69928d2db91a11155b5ff427db1c2ddc6c67438792d894dd96",
+      "size": 47716930,
+      "tracked_files": 8777,
+      "source_manifest": "work/main-integration/bf16-frozen-source.json",
+      "scope": "Independent original patch plus existing followups on pinned main; hooks passed. Docs and build/runtime validation still in progress."
+    },
+    "openmp": {
+      "variant": "openmp",
+      "main_commit": "e0d00e4b8eb0c89ec30921d0695cfdd409e9c211",
+      "index_tree": "2cc5383ab7ca9209554779029edb9ccc31a41432",
+      "archive": "main-source-openmp.tar.gz",
+      "sha256": "69086b660c5c6b37cdedddf680ea0f24f19f6540718a5f26237f0c0f6f2c2cba",
+      "size": 47718014,
+      "tracked_files": 8776,
+      "source_manifest": "work/main-integration/openmp-frozen-source.json",
+      "scope": "Original OpenMP patch on pinned main plus removal of obsolete test-tethering allowlist entry; hooks passed. Docs/build/runtime pending."
+    }
+  },
+  "inputs": {
+    "base-cpu.py": {
+      "variant": "base",
+      "path": "vllm/platforms/cpu.py",
+      "sha256": "bbee9ca1e3840e7933c116083b3231aaa73f5b624b1a04e853db0239a899c56e"
+    },
+    "openmp-cpu.py": {
+      "variant": "openmp",
+      "path": "vllm/platforms/cpu.py",
+      "sha256": "4894148c6cd72772bde309d3b58ea4b1e204155332004c92918c08cc063939df"
+    },
+    "openmp-test_cpu.py": {
+      "variant": "openmp",
+      "path": "tests/platforms/test_cpu.py",
+      "sha256": "374c14959046870acf6099346c1223508c802186b3dfd69c887553494dd7b790"
+    },
+    "erf-test_cpu_activation.py": {
+      "variant": "erf",
+      "path": "tests/kernels/core/test_cpu_activation.py",
+      "sha256": "08247d785b6304a712e918dde354b601f07034297b595ea61588fd0c75297707"
+    },
+    "bf16-test_cpu_activation.py": {
+      "variant": "bf16",
+      "path": "tests/kernels/core/test_cpu_activation.py",
+      "sha256": "e1ab4ecb31f706cbbc9ed9266e763ea707416c80b514b93658aa44e2bac59728"
+    },
+    "bf16-test_cpu_float_conversion.py": {
+      "variant": "bf16",
+      "path": "tests/kernels/core/test_cpu_float_conversion.py",
+      "sha256": "036f1cc808e2f20c039fd33da85667d6ea8a61ed1b35ec07b7883aaed6de468b"
+    }
+  },
+  "production_files": {
+    "base": {
+      "csrc/cpu/float_convert.hpp": "f6b511b3a6f6c29598f0bd58795d07eec52132a0e4ab1aa3ec7f3afa893b3c9d",
+      "csrc/cpu/cpu_types_riscv_impl.hpp": "7cccda7281e4b24be3193f0b772f6cdac6a74e8cc74ea9537d3449c415ec74ac",
+      "vllm/platforms/cpu.py": "bbee9ca1e3840e7933c116083b3231aaa73f5b624b1a04e853db0239a899c56e",
+      "tests/conftest.py": "341fc65a3088fbc587a1f8b578478018ab79673cfc40caa3c5a3c36137e8f769"
+    },
+    "erf": {
+      "csrc/cpu/float_convert.hpp": "f6b511b3a6f6c29598f0bd58795d07eec52132a0e4ab1aa3ec7f3afa893b3c9d",
+      "csrc/cpu/cpu_types_riscv_impl.hpp": "8c4aed1d81f4a38d5632d254e2d96eccbe03a32fe8a9590313332e45e3ce4cf9",
+      "vllm/platforms/cpu.py": "bbee9ca1e3840e7933c116083b3231aaa73f5b624b1a04e853db0239a899c56e",
+      "tests/conftest.py": "341fc65a3088fbc587a1f8b578478018ab79673cfc40caa3c5a3c36137e8f769"
+    },
+    "bf16": {
+      "csrc/cpu/float_convert.hpp": "80dd1d91ca34bc1f3e3db3ea1285403b5108591d070c10c329932ea720b4db85",
+      "csrc/cpu/cpu_types_riscv_impl.hpp": "7cccda7281e4b24be3193f0b772f6cdac6a74e8cc74ea9537d3449c415ec74ac",
+      "vllm/platforms/cpu.py": "bbee9ca1e3840e7933c116083b3231aaa73f5b624b1a04e853db0239a899c56e",
+      "tests/conftest.py": "341fc65a3088fbc587a1f8b578478018ab79673cfc40caa3c5a3c36137e8f769"
+    }
+  }
+}

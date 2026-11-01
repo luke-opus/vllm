@@ -1,0 +1,11 @@
+{
+  "variant": "erf",
+  "main_commit": "e0d00e4b8eb0c89ec30921d0695cfdd409e9c211",
+  "index_tree": "94453352d881e58ebf423b67d7ccea2ba449eef5",
+  "archive": "main-source-erf.tar.gz",
+  "sha256": "bb718659a9cb31de4c550b3c56d93c9021cef5a80eeab928e5846902dc87c804",
+  "size": 47715582,
+  "tracked_files": 8776,
+  "source_manifest": "work/main-integration/erf-frozen-source.json",
+  "scope": "Independent original patch plus existing followups on pinned main; hooks passed. Docs and build/runtime validation still in progress."
+}

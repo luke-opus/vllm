@@ -1,0 +1,470 @@
+/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-bf16-model-01/source/vllm/__init__.py:7: RuntimeWarning: Failed to read commit hash:
+No module named 'vllm._version'
+  from .version import __version__, __version_tuple__  # isort:skip
+W1101 05:04:11.190000 9297 torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+W1101 05:04:11.204000 9297 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+W1101 05:04:11.216000 9297 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+USDT:2026-11-01 05:06:29 9297:9297 SyncActivityProfilerHandler.cpp:39] profiler_start
+(MainProcess pid=9297) INFO 11-01 05:06:30 [startup.py:96] non-default args: {'dtype': 'bfloat16', 'max_model_len': 128, 'distributed_executor_backend': 'uni', 'block_size': 32, 'enable_prefix_caching': False, 'kv_cache_memory_bytes': 67108864, 'max_num_batched_tokens': 128, 'max_num_seqs': 2, 'disable_log_stats': True, 'enforce_eager': True, 'enable_chunked_prefill': False, 'model': '/home/vllmtest/vllm-validation/pythia-14m'}
+(MainProcess pid=9297) WARNING 11-01 05:06:30 [arg_utils.py:1988] The global random seed is set to 0. Since VLLM_ENABLE_V1_MULTIPROCESSING is set to False, this may affect the random state of the Python process that launched vLLM.
+W1101 05:09:24.730000 9297 torch/_library/triton.py:53] Triton not available, find_triton_kernels = []
+(MainProcess pid=9297) INFO 11-01 05:09:26 [model.py:756] Resolved architecture: GPTNeoXForCausalLM
+(MainProcess pid=9297) WARNING 11-01 05:09:26 [model.py:2540] Casting torch.float16 to torch.bfloat16.
+(MainProcess pid=9297) INFO 11-01 05:09:26 [model.py:2194] Using max model len 128
+(MainProcess pid=9297) WARNING 11-01 05:09:27 [arg_utils.py:3064] This model does not officially support disabling chunked prefill. Disabling this manually may cause the engine to crash or produce incorrect outputs.
+(MainProcess pid=9297) INFO 11-01 05:09:27 [arg_utils.py:3103] Chunked prefill is not supported forRISC-V CPUs; disabling it for V1 backend.
+(MainProcess pid=9297) INFO 11-01 05:09:27 [arg_utils.py:3109] Prefix caching is not supported for RISC-V CPUs; disabling it for V1 backend.
+(MainProcess pid=9297) WARNING 11-01 05:09:27 [vllm.py:1822] Enforce eager set, disabling torch.compile, CUDAGraphs, and JIT kernel warmup. This is equivalent to setting -cc.mode=none -cc.cudagraph_mode=none and --kernel_config.enable_jit_warmup=False
+(MainProcess pid=9297) WARNING 11-01 05:09:27 [vllm.py:1846] Inductor compilation was disabled by user settings, optimizations settings that are only active during inductor compilation will be ignored.
+(MainProcess pid=9297) INFO 11-01 05:09:27 [kernel.py:510] Final IR op priority after setting platform defaults: IrOpPriorityConfig(rms_norm=['native'], fused_add_rms_norm=['native'], gelu_and_mul_sparse=['native'])
+(MainProcess pid=9297) INFO 11-01 05:09:27 [compilation.py:317] Enabled custom fusions: norm_quant, act_quant
+(MainProcess pid=9297) INFO 11-01 05:09:44 [core.py:149] Initializing a V1 LLM engine (vdev) with config: model='/home/vllmtest/vllm-validation/pythia-14m', speculative_config=None, tokenizer='/home/vllmtest/vllm-validation/pythia-14m', skip_tokenizer_init=False, tokenizer_mode=auto, revision=None, tokenizer_revision=None, trust_remote_code=False, dtype=torch.bfloat16, max_seq_len=128, download_dir=None, load_format=auto, tensor_parallel_size=1, pipeline_parallel_size=1, data_parallel_size=1, decode_context_parallel_size=1, dcp_comm_backend=ag_rs, disable_custom_all_reduce=True, quantization=None, quantization_config=None, enforce_eager=True, aux_output_config=AuxOutputConfig(enable_return_routed_experts=False, max_bytes=None), kv_cache_dtype=auto, device_config=cpu, structured_outputs_config=StructuredOutputsConfig(backend='auto', disable_any_whitespace=False, disable_additional_properties=False, reasoning_parser='', reasoning_parser_plugin='', enable_in_reasoning=False), observability_config=ObservabilityConfig(show_hidden_metrics_for_version=None, otlp_traces_endpoint=None, collect_detailed_traces=None, per_request_spec_decode_metrics='none', kv_cache_metrics=False, kv_cache_metrics_sample=0.01, custom_histogram_buckets=None, cudagraph_metrics=False, enable_layerwise_nvtx_tracing=False, enable_mfu_metrics=False, enable_mm_processor_stats=False, enable_logging_iteration_details=False, jit_monitor_mode='warn', jit_monitor_verbose=False), seed=0, served_model_name=/home/vllmtest/vllm-validation/pythia-14m, enable_prefix_caching=False, enable_chunked_prefill=False, pooler_config=None, compilation_config={'mode': <CompilationMode.NONE: 0>, 'debug_dump_path': None, 'cache_dir': '', 'compile_cache_save_format': 'binary', 'backend': 'inductor', 'custom_ops': ['all'], 'ir_enable_torch_wrap': False, 'splitting_ops': [], 'compile_mm_encoder': False, 'cudagraph_mm_encoder': False, 'encoder_cudagraph_token_budgets': [], 'encoder_cudagraph_max_vision_items_per_batch': 0, 'encoder_cudagraph_max_frames_per_batch': None, 'cudagraph_decoder_replay': True, 'decoder_replay_cudagraph_capture_sizes': [], 'decoder_replay_trim_threshold': 768, 'compile_sizes': None, 'compile_ranges_endpoints': [128], 'inductor_compile_config': {'enable_auto_functionalized_v2': False}, 'inductor_passes': {}, 'cudagraph_mode': <CUDAGraphMode.NONE: 0>, 'cudagraph_num_of_warmups': 0, 'cudagraph_capture_sizes': [], 'cudagraph_copy_inputs': False, 'cudagraph_specialize_lora': True, 'use_inductor_graph_partition': False, 'pass_config': {'fuse_norm_quant': True, 'fuse_act_quant': True, 'fuse_attn_quant': False, 'fuse_allreduce_rms': False, 'enable_qk_norm_rope_fusion': False, 'fuse_rope_kvcache_cat_mla': False, 'fuse_act_padding': False, 'fuse_qk_norm_rope_kvcache': False}, 'max_cudagraph_capture_size': None, 'dynamic_shapes_config': {'type': <DynamicShapesType.BACKED: 'backed'>, 'evaluate_guards': False, 'assume_32_bit_indexing': False}, 'local_cache_dir': None, 'fast_moe_cold_start': False, 'static_all_moe_layers': []}, kernel_config=KernelConfig(ir_op_priority=IrOpPriorityConfig(rms_norm=['native'], fused_add_rms_norm=['native'], gelu_and_mul_sparse=['native']), enable_flashinfer_autotune=True, enable_rocm_segmented_attn_autotune=False, enable_cutedsl_warmup=True, enable_jit_warmup=False, monokernel=False, moe_backend='auto', sparse_indexer_topk_backend='auto', linear_backend='auto', linear_backend_per_quant=None, rdna_hybrid_w4a16_prefill_dequant='disable')
+/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-bf16-model-01/source/vllm/triton_utils/dispatcher.py:208: FutureWarning: `torch.distributed.reduce_op` is deprecated, please use `torch.distributed.ReduceOp` instead
+  instance_dict = vars(value)
+[W1101 05:10:07.401728516 utils.cpp:73] Warning: NUMA binding: Using MEMBIND policy for memory allocation on the NUMA nodes (0). Memory allocations will be strictly bound to these NUMA nodes. (function init_cpu_memory_env)
+(MainProcess pid=9297) WARNING 11-01 05:10:07 [cpu_worker.py:97] libtcmalloc is not found in LD_PRELOAD. For best performance, please follow the section `set LD_PRELOAD` in https://docs.vllm.ai/en/latest/getting_started/installation/cpu/ to setup required pre-loaded libraries.
+(MainProcess pid=9297) INFO 11-01 05:10:07 [parallel_state.py:1935] world_size=1 rank=0 local_rank=0 distributed_init_method=file:///home/vllmtest/vllm-validation/main-integration-runtime/runs/main-bf16-model-01/tmp/vllm_dist_fbfaadef14ad442d8d04b589b5c6d3d3 backend=gloo
+(MainProcess pid=9297) INFO 11-01 05:10:08 [parallel_state.py:2391] rank 0 in world size 1 is assigned as DP rank 0, PP rank 0, PCP rank 0, TP rank 0, ETP rank 0, EP rank N/A, EPLB rank N/A
+(MainProcess pid=9297) INFO 11-01 05:10:08 [cpu_worker.py:145] Using V2 Model Runner
+(MainProcess pid=9297) INFO 11-01 05:10:10 [standalone_model_runner.py:238] Loading model from scratch...
+(MainProcess pid=9297) INFO 11-01 05:10:11 [base.py:125] Using Transformers modeling backend.
+(MainProcess pid=9297) INFO 11-01 05:10:17 [base.py:586] Found: attention (GPTNeoXAttention) -> attention interface
+(MainProcess pid=9297) INFO 11-01 05:10:20 [base_loader.py:95] Initializing model took 9.725588 seconds
+(MainProcess pid=9297) INFO 11-01 05:10:20 [weight_utils.py:1125] Filesystem type for checkpoints: EXT4. Checkpoint size: 0.03 GiB. Available RAM: 2.64 GiB.
+(MainProcess pid=9297) INFO 11-01 05:10:20 [weight_utils.py:1148] Auto-prefetch is disabled because the filesystem (EXT4) is not a recognized network FS (NFS/Lustre). If you want to force prefetching, start vLLM with --safetensors-load-strategy=prefetch.
+Loading safetensors checkpoint shards:   0% Completed | 0/1 [00:00<?, ?it/s]
+(MainProcess pid=9297) WARNING 11-01 05:10:20 [utils.py:350] Attempted to load weight lm_head.weight with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=9297) WARNING 11-01 05:10:20 [utils.py:350] Attempted to load weight model.embed_in.weight with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=9297) WARNING 11-01 05:10:21 [utils.py:350] Attempted to load weight model.final_layer_norm.bias with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=9297) WARNING 11-01 05:10:21 [utils.py:350] Attempted to load weight model.final_layer_norm.weight with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=9297) WARNING 11-01 05:10:21 [utils.py:350] Attempted to load weight model.layers.0.attention.dense.bias with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=9297) WARNING 11-01 05:10:21 [utils.py:350] Attempted to load weight model.layers.0.attention.dense.weight with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=9297) WARNING 11-01 05:10:21 [utils.py:350] Attempted to load weight model.layers.0.attention.query_key_value.bias with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=9297) WARNING 11-01 05:10:21 [utils.py:350] Attempted to load weight model.layers.0.attention.query_key_value.weight with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=9297) WARNING 11-01 05:10:21 [utils.py:350] Attempted to load weight model.layers.0.input_layernorm.bias with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=9297) WARNING 11-01 05:10:21 [utils.py:350] Attempted to load weight model.layers.0.input_layernorm.weight with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=9297) WARNING 11-01 05:10:21 [utils.py:350] Attempted to load weight model.layers.0.mlp.dense_4h_to_h.bias with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=9297) WARNING 11-01 05:10:21 [utils.py:350] Attempted to load weight model.layers.0.mlp.dense_4h_to_h.weight with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=9297) WARNING 11-01 05:10:21 [utils.py:350] Attempted to load weight model.layers.0.mlp.dense_h_to_4h.bias with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=9297) WARNING 11-01 05:10:21 [utils.py:350] Attempted to load weight model.layers.0.mlp.dense_h_to_4h.weight with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=9297) WARNING 11-01 05:10:21 [utils.py:350] Attempted to load weight model.layers.0.post_attention_layernorm.bias with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=9297) WARNING 11-01 05:10:21 [utils.py:350] Attempted to load weight model.layers.0.post_attention_layernorm.weight with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=9297) WARNING 11-01 05:10:21 [utils.py:350] Attempted to load weight model.layers.1.attention.dense.bias with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=9297) WARNING 11-01 05:10:21 [utils.py:350] Attempted to load weight model.layers.1.attention.dense.weight with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=9297) WARNING 11-01 05:10:21 [utils.py:350] Attempted to load weight model.layers.1.attention.query_key_value.bias with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=9297) WARNING 11-01 05:10:21 [utils.py:350] Attempted to load weight model.layers.1.attention.query_key_value.weight with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=9297) WARNING 11-01 05:10:21 [utils.py:350] Attempted to load weight model.layers.1.input_layernorm.bias with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=9297) WARNING 11-01 05:10:21 [utils.py:350] Attempted to load weight model.layers.1.input_layernorm.weight with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=9297) WARNING 11-01 05:10:21 [utils.py:350] Attempted to load weight model.layers.1.mlp.dense_4h_to_h.bias with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=9297) WARNING 11-01 05:10:21 [utils.py:350] Attempted to load weight model.layers.1.mlp.dense_4h_to_h.weight with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=9297) WARNING 11-01 05:10:21 [utils.py:350] Attempted to load weight model.layers.1.mlp.dense_h_to_4h.bias with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=9297) WARNING 11-01 05:10:21 [utils.py:350] Attempted to load weight model.layers.1.mlp.dense_h_to_4h.weight with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=9297) WARNING 11-01 05:10:21 [utils.py:350] Attempted to load weight model.layers.1.post_attention_layernorm.bias with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=9297) WARNING 11-01 05:10:21 [utils.py:350] Attempted to load weight model.layers.1.post_attention_layernorm.weight with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=9297) WARNING 11-01 05:10:21 [utils.py:350] Attempted to load weight model.layers.2.attention.dense.bias with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=9297) WARNING 11-01 05:10:21 [utils.py:350] Attempted to load weight model.layers.2.attention.dense.weight with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=9297) WARNING 11-01 05:10:21 [utils.py:350] Attempted to load weight model.layers.2.attention.query_key_value.bias with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=9297) WARNING 11-01 05:10:21 [utils.py:350] Attempted to load weight model.layers.2.attention.query_key_value.weight with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=9297) WARNING 11-01 05:10:21 [utils.py:350] Attempted to load weight model.layers.2.input_layernorm.bias with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=9297) WARNING 11-01 05:10:21 [utils.py:350] Attempted to load weight model.layers.2.input_layernorm.weight with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=9297) WARNING 11-01 05:10:21 [utils.py:350] Attempted to load weight model.layers.2.mlp.dense_4h_to_h.bias with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=9297) WARNING 11-01 05:10:21 [utils.py:350] Attempted to load weight model.layers.2.mlp.dense_4h_to_h.weight with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=9297) WARNING 11-01 05:10:21 [utils.py:350] Attempted to load weight model.layers.2.mlp.dense_h_to_4h.bias with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=9297) WARNING 11-01 05:10:21 [utils.py:350] Attempted to load weight model.layers.2.mlp.dense_h_to_4h.weight with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=9297) WARNING 11-01 05:10:21 [utils.py:350] Attempted to load weight model.layers.2.post_attention_layernorm.bias with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=9297) WARNING 11-01 05:10:21 [utils.py:350] Attempted to load weight model.layers.2.post_attention_layernorm.weight with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=9297) WARNING 11-01 05:10:21 [utils.py:350] Attempted to load weight model.layers.3.attention.dense.bias with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=9297) WARNING 11-01 05:10:21 [utils.py:350] Attempted to load weight model.layers.3.attention.dense.weight with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=9297) WARNING 11-01 05:10:21 [utils.py:350] Attempted to load weight model.layers.3.attention.query_key_value.bias with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=9297) WARNING 11-01 05:10:21 [utils.py:350] Attempted to load weight model.layers.3.attention.query_key_value.weight with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=9297) WARNING 11-01 05:10:21 [utils.py:350] Attempted to load weight model.layers.3.input_layernorm.bias with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=9297) WARNING 11-01 05:10:21 [utils.py:350] Attempted to load weight model.layers.3.input_layernorm.weight with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=9297) WARNING 11-01 05:10:21 [utils.py:350] Attempted to load weight model.layers.3.mlp.dense_4h_to_h.bias with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=9297) WARNING 11-01 05:10:21 [utils.py:350] Attempted to load weight model.layers.3.mlp.dense_4h_to_h.weight with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=9297) WARNING 11-01 05:10:21 [utils.py:350] Attempted to load weight model.layers.3.mlp.dense_h_to_4h.bias with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=9297) WARNING 11-01 05:10:21 [utils.py:350] Attempted to load weight model.layers.3.mlp.dense_h_to_4h.weight with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=9297) WARNING 11-01 05:10:21 [utils.py:350] Attempted to load weight model.layers.3.post_attention_layernorm.bias with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=9297) WARNING 11-01 05:10:21 [utils.py:350] Attempted to load weight model.layers.3.post_attention_layernorm.weight with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=9297) WARNING 11-01 05:10:21 [utils.py:350] Attempted to load weight model.layers.4.attention.dense.bias with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=9297) WARNING 11-01 05:10:21 [utils.py:350] Attempted to load weight model.layers.4.attention.dense.weight with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=9297) WARNING 11-01 05:10:21 [utils.py:350] Attempted to load weight model.layers.4.attention.query_key_value.bias with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=9297) WARNING 11-01 05:10:21 [utils.py:350] Attempted to load weight model.layers.4.attention.query_key_value.weight with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=9297) WARNING 11-01 05:10:21 [utils.py:350] Attempted to load weight model.layers.4.input_layernorm.bias with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=9297) WARNING 11-01 05:10:21 [utils.py:350] Attempted to load weight model.layers.4.input_layernorm.weight with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=9297) WARNING 11-01 05:10:21 [utils.py:350] Attempted to load weight model.layers.4.mlp.dense_4h_to_h.bias with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=9297) WARNING 11-01 05:10:21 [utils.py:350] Attempted to load weight model.layers.4.mlp.dense_4h_to_h.weight with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=9297) WARNING 11-01 05:10:21 [utils.py:350] Attempted to load weight model.layers.4.mlp.dense_h_to_4h.bias with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=9297) WARNING 11-01 05:10:21 [utils.py:350] Attempted to load weight model.layers.4.mlp.dense_h_to_4h.weight with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=9297) WARNING 11-01 05:10:21 [utils.py:350] Attempted to load weight model.layers.4.post_attention_layernorm.bias with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=9297) WARNING 11-01 05:10:21 [utils.py:350] Attempted to load weight model.layers.4.post_attention_layernorm.weight with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=9297) WARNING 11-01 05:10:21 [utils.py:350] Attempted to load weight model.layers.5.attention.dense.bias with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=9297) WARNING 11-01 05:10:21 [utils.py:350] Attempted to load weight model.layers.5.attention.dense.weight with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=9297) WARNING 11-01 05:10:21 [utils.py:350] Attempted to load weight model.layers.5.attention.query_key_value.bias with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=9297) WARNING 11-01 05:10:21 [utils.py:350] Attempted to load weight model.layers.5.attention.query_key_value.weight with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=9297) WARNING 11-01 05:10:21 [utils.py:350] Attempted to load weight model.layers.5.input_layernorm.bias with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=9297) WARNING 11-01 05:10:21 [utils.py:350] Attempted to load weight model.layers.5.input_layernorm.weight with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=9297) WARNING 11-01 05:10:21 [utils.py:350] Attempted to load weight model.layers.5.mlp.dense_4h_to_h.bias with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=9297) WARNING 11-01 05:10:21 [utils.py:350] Attempted to load weight model.layers.5.mlp.dense_4h_to_h.weight with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=9297) WARNING 11-01 05:10:21 [utils.py:350] Attempted to load weight model.layers.5.mlp.dense_h_to_4h.bias with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=9297) WARNING 11-01 05:10:21 [utils.py:350] Attempted to load weight model.layers.5.mlp.dense_h_to_4h.weight with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=9297) WARNING 11-01 05:10:21 [utils.py:350] Attempted to load weight model.layers.5.post_attention_layernorm.bias with dtype torch.float16 into parameter with dtype torch.bfloat16
+(MainProcess pid=9297) WARNING 11-01 05:10:21 [utils.py:350] Attempted to load weight model.layers.5.post_attention_layernorm.weight with dtype torch.float16 into parameter with dtype torch.bfloat16
+Loading safetensors checkpoint shards: 100% Completed | 1/1 [00:01<00:00,  1.30s/it]
+Loading safetensors checkpoint shards: 100% Completed | 1/1 [00:01<00:00,  1.30s/it]
+
+(MainProcess pid=9297) INFO 11-01 05:10:21 [default_loader.py:506] Loading weights took 1.36 seconds
+(MainProcess pid=9297) WARNING 11-01 05:10:23 [utils.py:832] Failed to create oneDNN linear, fallback to torch linear. Exception: could not create a primitive descriptor for the matmul primitive. Run workload with environment variable ONEDNN_VERBOSE=all to get additional diagnostic information.
+(MainProcess pid=9297) INFO 11-01 05:10:26 [standalone_model_runner.py:253] Model loading took 0.05 GiB memory and 17.112802 seconds
+(MainProcess pid=9297) INFO 11-01 05:10:26 [utils.py:397] Using LBHNC KV cache layout.
+(MainProcess pid=9297) INFO 11-01 05:10:26 [cpu_worker.py:266] Explicitly set (0.06/3.81) GiB for KV cache on node 0.
+(MainProcess pid=9297) INFO 11-01 05:10:26 [kv_cache_utils.py:1171] CPU KV cache size: 21,824 tokens, Maximum concurrency for 128 tokens per request: 170.50x
+(MainProcess pid=9297) INFO 11-01 05:10:28 [core.py:430] init engine (profile, create kv cache, warmup model) took 1.38 s
+(MainProcess pid=9297) WARNING 11-01 05:10:29 [cpu_worker.py:123] CPU backend doesn't allow to use `torch.set_num_threads` after the thread binding, skip it.
+(MainProcess pid=9297) INFO 11-01 05:10:30 [hf.py:736] Detected the chat template content format to be 'string'. You can set `--chat-template-content-format` to override this.
+(MainProcess pid=9297) WARNING 11-01 05:10:30 [cpu_worker.py:123] CPU backend doesn't allow to use `torch.set_num_threads` after the thread binding, skip it.
+(MainProcess pid=9297) WARNING 11-01 05:10:30 [cpu_worker.py:123] CPU backend doesn't allow to use `torch.set_num_threads` after the thread binding, skip it.
+(MainProcess pid=9297) WARNING 11-01 05:10:30 [cpu_worker.py:123] CPU backend doesn't allow to use `torch.set_num_threads` after the thread binding, skip it.
+[transformers] Ignoring clean_up_tokenization_spaces=True for BPE tokenizer CachedGPTNeoXTokenizer. The clean_up_tokenization post-processing step is designed for WordPiece tokenizers and is destructive for BPE (it strips spaces before punctuation). Set clean_up_tokenization_spaces=False to suppress this warning, or set clean_up_tokenization_spaces_for_bpe_even_though_it_will_corrupt_output=True to force cleanup anyway.
+USDT:2026-11-01 05:12:27 9297:9297 SyncActivityProfilerHandler.cpp:46] profiler_stop
+{
+  "kind": "bf16",
+  "variant": "base",
+  "base_ref": "e0d00e4b8eb0c89ec30921d0695cfdd409e9c211",
+  "model": "EleutherAI/pythia-14m",
+  "revision": "cf967c0a9a04383db6f7b1108d86b2962634b4ac",
+  "parameters": {
+    "model": "/home/vllmtest/vllm-validation/pythia-14m",
+    "dtype": "bfloat16",
+    "max_model_len": 128,
+    "max_num_seqs": 2,
+    "max_num_batched_tokens": 128,
+    "block_size": 32,
+    "enforce_eager": true,
+    "tensor_parallel_size": 1,
+    "distributed_executor_backend": "uni",
+    "kv_cache_memory_bytes": 67108864,
+    "seed": 0,
+    "enable_prefix_caching": false,
+    "enable_chunked_prefill": false
+  },
+  "sampling_parameters": {
+    "temperature": 0.0,
+    "max_tokens": 4,
+    "logprobs": 5
+  },
+  "vllm_distribution_metadata": {
+    "present": false
+  },
+  "vllm_version_string": "dev",
+  "parent_pid": 9297,
+  "worker": {
+    "pid": 9297,
+    "device": "cpu",
+    "worker_class": "vllm.v1.worker.cpu_worker.CPUWorker",
+    "model_runner_class": "vllm.v1.worker.cpu.standalone_model_runner.StandaloneCPUModelRunner",
+    "use_v2_model_runner": true,
+    "vllm_file": "/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-bf16-model-01/source/vllm/__init__.py",
+    "torch_file": "/home/vllmtest/vllm-validation/main-venv/lib/python3.12/site-packages/torch/__init__.py",
+    "extension_file": "/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-bf16-model-01/source/vllm/_C.abi3.so",
+    "extension_resolved": "/home/vllmtest/vllm-validation/main-integration-build/build/base/_C.abi3.so",
+    "extension_sha256": "57f4cc187d2c6502f176333331f7ba604926aa360710872478eae021d829b444",
+    "extension_maps": [
+      "3920200000-3921168000 r-xp 00000000 fd:01 1603466                        /home/vllmtest/vllm-validation/main-integration-build/build/base/_C.abi3.so",
+      "3921168000-3921200000 r--p 00f67000 fd:01 1603466                        /home/vllmtest/vllm-validation/main-integration-build/build/base/_C.abi3.so",
+      "3921200000-3921203000 rw-p 00fff000 fd:01 1603466                        /home/vllmtest/vllm-validation/main-integration-build/build/base/_C.abi3.so"
+    ],
+    "LD_PRELOAD": "",
+    "startup_LD_PRELOAD": "",
+    "OMP_NUM_THREADS": "1",
+    "GOMP_CPU_AFFINITY": "",
+    "OMP_PLACES": "",
+    "OMP_PROC_BIND": "",
+    "torch_threads": 1,
+    "affinity": [
+      0,
+      1
+    ],
+    "loaded_openmp": [
+      "/home/vllmtest/vllm-validation/main-venv/lib/python3.12/site-packages/torch/lib/libgomp.so.1",
+      "/usr/lib/llvm-18/lib/libomp.so.5"
+    ]
+  },
+  "parent_profile_operator_counts": {
+    "_C::init_cpu_memory_env": 1,
+    "_C::create_onednn_mm_handler": 26,
+    "_C::cpu_attn_has_isa": 1,
+    "_C::prepare_prefill_inputs_cpu": 1,
+    "_C::prepare_pos_seq_lens_cpu": 4,
+    "_C::combine_sampled_and_draft_tokens_cpu": 4,
+    "_C::gather_block_table_cpu": 4,
+    "_C::compute_slot_mapping_cpu": 4,
+    "_C::get_scheduler_metadata": 4,
+    "_C::cpu_attn_reshape_and_cache": 24,
+    "_C::cpu_attention_with_kv_cache": 24,
+    "_C::gumbel_sample_cpu": 4,
+    "_C::post_update_cpu": 4
+  },
+  "outputs": [
+    {
+      "prompt": "The capital of France is",
+      "prompt_token_ids": [
+        510,
+        5347,
+        273,
+        6181,
+        310
+      ],
+      "token_ids": [
+        253,
+        1986,
+        2077,
+        15
+      ],
+      "text": " the United States.",
+      "cumulative_logprob": -7.107976913452148,
+      "finish_reason": "length",
+      "stop_reason": null,
+      "logprobs": [
+        {
+          "253": {
+            "logprob": -1.7583808898925781,
+            "rank": 1,
+            "decoded_token": " the"
+          },
+          "247": {
+            "logprob": -2.570880889892578,
+            "rank": 2,
+            "decoded_token": " a"
+          },
+          "275": {
+            "logprob": -3.820880889892578,
+            "rank": 3,
+            "decoded_token": " in"
+          },
+          "271": {
+            "logprob": -4.133380889892578,
+            "rank": 4,
+            "decoded_token": " an"
+          },
+          "581": {
+            "logprob": -4.195880889892578,
+            "rank": 5,
+            "decoded_token": " one"
+          }
+        },
+        {
+          "1986": {
+            "logprob": -3.4185924530029297,
+            "rank": 1,
+            "decoded_token": " United"
+          },
+          "5112": {
+            "logprob": -3.7935924530029297,
+            "rank": 2,
+            "decoded_token": " French"
+          },
+          "2846": {
+            "logprob": -4.23109245300293,
+            "rank": 3,
+            "decoded_token": " city"
+          },
+          "2448": {
+            "logprob": -4.35609245300293,
+            "rank": 4,
+            "decoded_token": " American"
+          },
+          "9890": {
+            "logprob": -4.41859245300293,
+            "rank": 5,
+            "decoded_token": " Italian"
+          }
+        },
+        {
+          "2077": {
+            "logprob": -0.5192813873291016,
+            "rank": 1,
+            "decoded_token": " States"
+          },
+          "11491": {
+            "logprob": -1.6442813873291016,
+            "rank": 2,
+            "decoded_token": " Kingdom"
+          },
+          "14726": {
+            "logprob": -1.7692813873291016,
+            "rank": 3,
+            "decoded_token": " Nations"
+          },
+          "8365": {
+            "logprob": -4.394281387329102,
+            "rank": 4,
+            "decoded_token": " Arab"
+          },
+          "4687": {
+            "logprob": -6.894281387329102,
+            "rank": 5,
+            "decoded_token": " Republic"
+          }
+        },
+        {
+          "15": {
+            "logprob": -1.411722183227539,
+            "rank": 1,
+            "decoded_token": "."
+          },
+          "13": {
+            "logprob": -1.474222183227539,
+            "rank": 2,
+            "decoded_token": ","
+          },
+          "285": {
+            "logprob": -1.911722183227539,
+            "rank": 3,
+            "decoded_token": " and"
+          },
+          "275": {
+            "logprob": -3.349222183227539,
+            "rank": 4,
+            "decoded_token": " in"
+          },
+          "28": {
+            "logprob": -3.724222183227539,
+            "rank": 5,
+            "decoded_token": ";"
+          }
+        }
+      ]
+    },
+    {
+      "prompt": "A computer can",
+      "prompt_token_ids": [
+        34,
+        4382,
+        476
+      ],
+      "token_ids": [
+        320,
+        908,
+        281,
+        897
+      ],
+      "text": " be used to use",
+      "cumulative_logprob": -7.520259857177734,
+      "finish_reason": "length",
+      "stop_reason": null,
+      "logprobs": [
+        {
+          "320": {
+            "logprob": -1.6175708770751953,
+            "rank": 1,
+            "decoded_token": " be"
+          },
+          "897": {
+            "logprob": -2.4925708770751953,
+            "rank": 2,
+            "decoded_token": " use"
+          },
+          "2736": {
+            "logprob": -3.8675708770751953,
+            "rank": 3,
+            "decoded_token": " detect"
+          },
+          "1361": {
+            "logprob": -3.9925708770751953,
+            "rank": 4,
+            "decoded_token": " help"
+          },
+          "1239": {
+            "logprob": -4.055070877075195,
+            "rank": 5,
+            "decoded_token": " read"
+          }
+        },
+        {
+          "908": {
+            "logprob": -2.0922183990478516,
+            "rank": 1,
+            "decoded_token": " used"
+          },
+          "27881": {
+            "logprob": -2.3422183990478516,
+            "rank": 2,
+            "decoded_token": " programmed"
+          },
+          "2104": {
+            "logprob": -3.1547183990478516,
+            "rank": 3,
+            "decoded_token": " able"
+          },
+          "1119": {
+            "logprob": -3.5297183990478516,
+            "rank": 4,
+            "decoded_token": " found"
+          },
+          "247": {
+            "logprob": -3.6547183990478516,
+            "rank": 5,
+            "decoded_token": " a"
+          }
+        },
+        {
+          "281": {
+            "logprob": -0.8643226623535156,
+            "rank": 1,
+            "decoded_token": " to"
+          },
+          "347": {
+            "logprob": -2.1768226623535156,
+            "rank": 2,
+            "decoded_token": " as"
+          },
+          "275": {
+            "logprob": -2.2393226623535156,
+            "rank": 3,
+            "decoded_token": " in"
+          },
+          "323": {
+            "logprob": -2.3018226623535156,
+            "rank": 4,
+            "decoded_token": " for"
+          },
+          "15": {
+            "logprob": -3.6768226623535156,
+            "rank": 5,
+            "decoded_token": "."
+          }
+        },
+        {
+          "897": {
+            "logprob": -2.946147918701172,
+            "rank": 1,
+            "decoded_token": " use"
+          },
+          "8415": {
+            "logprob": -3.133647918701172,
+            "rank": 2,
+            "decoded_token": " solve"
+          },
+          "1239": {
+            "logprob": -3.321147918701172,
+            "rank": 3,
+            "decoded_token": " read"
+          },
+          "2736": {
+            "logprob": -3.571147918701172,
+            "rank": 4,
+            "decoded_token": " detect"
+          },
+          "2289": {
+            "logprob": -3.758647918701172,
+            "rank": 5,
+            "decoded_token": " access"
+          }
+        }
+      ]
+    }
+  ],
+  "scope": "RISC-V Linux/QEMU, default MRV2, two prompts/four tokens each; returned top-5/chosen-token logprobs only, not full vocabulary; no quality, equivalence, performance, or physical hardware claim",
+  "shutdown_returned": true
+}
+

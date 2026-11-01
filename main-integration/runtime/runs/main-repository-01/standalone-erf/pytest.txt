@@ -1,0 +1,50 @@
+W1101 05:21:09.068000 10320 torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+W1101 05:21:09.085000 10320 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+W1101 05:21:09.098000 10320 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+/home/vllmtest/vllm-validation/main-venv/lib/python3.12/site-packages/pytest_asyncio/plugin.py:300: PytestDeprecationWarning: The configuration option "asyncio_default_fixture_loop_scope" is unset.
+The event loop scope for asynchronous fixtures will default to the "fixture" caching scope. Future versions of pytest-asyncio will default the loop scope for asynchronous fixtures to "function" scope. Set the default fixture loop scope explicitly in order to avoid unexpected behavior in the future. Valid fixture loop scopes are: "function", "class", "module", "package", "session"
+
+  warnings.warn(PytestDeprecationWarning(_DEFAULT_FIXTURE_LOOP_SCOPE_UNSET))
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-9.2.0, pluggy-1.7.0 -- /home/vllmtest/vllm-validation/main-venv/bin/python
+cachedir: .pytest_cache
+rootdir: /home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/standalone-erf/source
+configfile: pyproject.toml
+plugins: asyncio-1.4.1, anyio-4.15.1
+asyncio: mode=Mode.STRICT, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collecting ... collected 24 items
+
+tests/v1/worker/cpu/test_cpu_block_table.py::test_append_block_ids_updates_cpu_tensors_directly PASSED
+tests/v1/worker/cpu/test_cpu_block_table.py::test_append_block_ids_rejects_write_past_row_capacity PASSED
+tests/v1/worker/cpu/test_cpu_block_table.py::test_gather_block_tables_cpu PASSED
+tests/v1/worker/cpu/test_cpu_block_table.py::test_compute_slot_mappings_cpu PASSED
+tests/v1/worker/cpu/test_cpu_block_table.py::test_dummy_block_tables_clear_previous_request_rows PASSED
+tests/v1/worker/cpu/test_cpu_block_table.py::test_dummy_request_slot_mapping_is_pad PASSED
+tests/v1/worker/cpu/test_cpu_block_table.py::test_gather_nulls_blocks_below_sliding_window PASSED
+tests/v1/worker/cpu/test_cpu_block_table.py::test_shared_block_tables_clear_rows_from_larger_batch PASSED
+tests/v1/worker/cpu/test_cpu_block_table.py::test_external_block_table_output_preserves_shared_rows PASSED
+tests/v1/worker/cpu/test_cpu_input_batch.py::test_make_dummy_distributes_remainder[256-496] PASSED
+tests/v1/worker/cpu/test_cpu_input_batch.py::test_make_dummy_distributes_remainder[128-512] PASSED
+tests/v1/worker/cpu/test_cpu_input_batch.py::test_make_dummy_distributes_remainder[3-8] PASSED
+tests/v1/worker/cpu/test_cpu_input_batch.py::test_make_dummy_distributes_remainder[1-7] PASSED
+tests/v1/worker/cpu/test_cpu_input_batch.py::test_prepare_prefill_inputs_cpu PASSED
+tests/v1/worker/cpu/test_cpu_input_batch.py::test_get_prompt_logprobs_token_ids_cpu PASSED
+tests/v1/worker/cpu/test_cpu_input_batch.py::test_prepare_pos_seq_lens_cpu PASSED
+tests/v1/worker/cpu/test_cpu_input_batch.py::test_prepare_mrope_positions_cpu PASSED
+tests/v1/worker/cpu/test_cpu_input_batch.py::test_cpu_rope_state_prepares_model_positions PASSED
+tests/v1/worker/cpu/test_cpu_input_batch.py::test_combine_sampled_and_draft_tokens_cpu_basic PASSED
+tests/v1/worker/cpu/test_cpu_input_batch.py::test_post_update_cpu_without_optional_inputs PASSED
+tests/v1/worker/cpu/test_cpu_gumbel_sample.py::test_greedy_supports_dtypes_strides_and_invalid_mapping[dtype0] PASSED
+tests/v1/worker/cpu/test_cpu_gumbel_sample.py::test_greedy_supports_dtypes_strides_and_invalid_mapping[dtype1] PASSED
+tests/v1/worker/cpu/test_cpu_gumbel_sample.py::test_greedy_supports_dtypes_strides_and_invalid_mapping[dtype2] PASSED
+tests/v1/worker/cpu/test_cpu_gumbel_sample.py::test_pre_scaled_logits_match_temperature_application PASSED
+
+=============================== warnings summary ===============================
+vllm/__init__.py:7
+  /home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/standalone-erf/source/vllm/__init__.py:7: RuntimeWarning: Failed to read commit hash:
+  No module named 'vllm._version'
+    from .version import __version__, __version_tuple__  # isort:skip
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+- generated xml file: /home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/standalone-erf/pytest.xml -
+======================== 24 passed, 1 warning in 35.75s ========================

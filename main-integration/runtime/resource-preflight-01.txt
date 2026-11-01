@@ -1,0 +1,76 @@
+Sun Nov  1 04:59:38 UTC 2026
+MemTotal:        3993220 kB
+MemFree:          140680 kB
+MemAvailable:    3305740 kB
+Buffers:           76896 kB
+Cached:          2983564 kB
+SwapCached:            0 kB
+Active:           665724 kB
+Inactive:        2731552 kB
+Active(anon):     330904 kB
+Inactive(anon):    13700 kB
+Active(file):     334820 kB
+Inactive(file):  2717852 kB
+Unevictable:       25700 kB
+Mlocked:           25700 kB
+SwapTotal:             0 kB
+SwapFree:              0 kB
+Zswap:                 0 kB
+Zswapped:              0 kB
+Dirty:               420 kB
+Writeback:             0 kB
+AnonPages:        362480 kB
+Mapped:           144464 kB
+Shmem:               876 kB
+KReclaimable:     300664 kB
+Slab:             371900 kB
+SReclaimable:     300664 kB
+SUnreclaim:        71236 kB
+KernelStack:        2128 kB
+PageTables:         4224 kB
+SecPageTables:         0 kB
+NFS_Unstable:          0 kB
+Bounce:                0 kB
+WritebackTmp:          0 kB
+CommitLimit:     1996608 kB
+Committed_AS:     668048 kB
+VmallocTotal:   67108864 kB
+VmallocUsed:       12212 kB
+VmallocChunk:          0 kB
+Percpu:              896 kB
+AnonHugePages:         0 kB
+ShmemHugePages:        0 kB
+ShmemPmdMapped:        0 kB
+FileHugePages:    489472 kB
+FilePmdMapped:         0 kB
+CmaTotal:          32768 kB
+CmaFree:            1016 kB
+Balloon:               0 kB
+GPUActive:             0 kB
+GPUReclaim:            0 kB
+HugePages_Total:       0
+HugePages_Free:        0
+HugePages_Rsvd:        0
+HugePages_Surp:        0
+Hugepagesize:       2048 kB
+Hugetlb:               0 kB
+    PID    PPID   RSS     ELAPSED %CPU COMMAND
+   8999    8355 361248      01:33 99.0 /home/vllmtest/vllm-validation/main-venv/bin/python -m pytest -p main_import_probe -v -s tests/kernels/core/test_cpu_float_conversion.py --junitxml=/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/bf16-boundary-base/pytest.xml --basetemp=/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/bf16-boundary-base/pytest-tmp
+   2566       1 41068       54:06  0.1 /usr/libexec/fwupd/fwupd
+    348       1 25708    01:20:29  0.0 /sbin/multipathd -d -s
+    807       1 21188    01:19:56  0.0 /usr/bin/python3 /usr/share/unattended-upgrades/unattended-upgrade-shutdown --wait-for-signal
+   8355    8354 17776       12:03 12.7 /home/vllmtest/vllm-validation/main-venv/bin/python /home/vllmtest/vllm-validation/main-integration-runtime/run-main-repository.py --execute --run-id main-repository-01 --timeout 3600
+    288       1 17572    01:20:32  0.2 /usr/lib/systemd/systemd-journald
+   8354    8353 16380       12:04  0.8 /home/vllmtest/vllm-validation/main-venv/bin/python supervise-main.py --execute --kind repository --run-id main-repository-01
+      1       0 11748    01:20:47  0.5 /sbin/init splash
+    704       1 11516    01:20:02  0.0 /usr/libexec/udisks2/udisksd
+    838       1 11256    01:19:55  0.0 /usr/sbin/ModemManager
+    503       1 11208    01:20:17  0.0 /usr/lib/systemd/systemd-resolved
+   8235       1  9940       12:15  0.2 /usr/lib/systemd/systemd --user
+   8304     822  8200       12:05  0.0 sshd: vllmtest [priv]
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/vda1        38G   15G   24G  38% /
+procs -----------memory---------- ---swap-- -----io---- -system-- -------cpu-------
+ r  b   swpd   free   buff  cache   si   so    bi    bo   in   cs us sy id wa st gu
+ 2  0      0 140428  76964 3284412    0    0   965  1152  320    1 34 10 56  0  0  0
+ 1  0      0 139420  76964 3284480    0    0     0     0  361  120 40 11 49  0  0  0

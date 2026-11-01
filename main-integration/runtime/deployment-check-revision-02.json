@@ -1,0 +1,18 @@
+{
+  "verified_at_utc": "2026-11-01T05:33:32.120713+00:00",
+  "revision": "attempt-02",
+  "script_and_config_sha256": {
+    "main_runtime_common.py": "6840881ef007d26ab94c313170c1a7c06a1a3b2bc5d1828e809727c5eb6f5c2b",
+    "run-main-repository.py": "53fb8777f44f8d7137bde249a7ad965f055f1711fb85e033cc1168f86f063161",
+    "main_import_probe.py": "874c9aa500082510d83c11d6789b7726d92f82a8766a33e35a54e6963a83467c",
+    "check-main-model.py": "88a821ce5aba3a109357bac0428e5d15aaef20248cc237a1dc52d30d704f84ba",
+    "run-main-model-pair.py": "c30fb4f5179fd1b3e2882c3b4de90497a910d039bcbce1d7dea3d96f6027ac77",
+    "supervise-main.py": "ad1d309c0c8ab65612e1760533abe884cc4ff0772a3a3a77c523c28c9925a17c",
+    "driver-inputs.json": "c18187770fe9c58d4a56774897db9e860af3971a0612f7ddc676ba4879466f2b",
+    "model-files.json": "35c7d3088ee284276ea8d881609745dc5465d57cccdd39b05f479f31028a0889",
+    "README.txt": "cdd88d6fcf09c78c49a69344bd3994c1af4680f8f09e789ef1865e92d1132381"
+  },
+  "ast_checks_passed": true,
+  "only_functional_driver_change": "TMPDIR setup in main_runtime_common.py",
+  "actual_model_or_repository_execution_in_preflight": false
+}

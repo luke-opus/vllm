@@ -1,0 +1,94 @@
+获取完成时间（UTC）：2026-11-01T05:56:13.140619+00:00
+
+独立公开 GitHub 文档可发现性审核
+
+范围与证据边界
+- 仓库：https://github.com/luke-opus/vllm
+- ERF：ec0fbf5e9b3e9d796ccae667a437f2e97c3f9cde
+- BF16：6592612016059859dff1e93bd534edc1a5737615
+- OpenMP：dfdc85947fe914d04906f5d0206c020c208bd400
+- 只读取以上 commit 的公开 GitHub Git Trees API 和 raw.githubusercontent.com 文档源文件。未读取本地 checkout、实现、PR 描述、旧审核报告、预览站或记忆文件；未运行测试或修改仓库。
+- Web 工具直接打开 GitHub tree 页面受限，随后使用无认证公开 HTTP 获取精确 commit 的源码文档，不依赖搜索索引。三个递归 Git tree 都返回 truncated=false；逐一用 Git blob SHA-1 验证八个入口/导航/CPU 文档文件的 raw 字节与对应 commit tree 一致。
+- 结论限于“公开源码文档可找到且能回答问题”，不证明网页渲染、文档已发布上线、实现正确、模型运行或物理 RISC-V 行为。
+
+结论
+三项的核心用户问题都能从主 CPU 用户文档的 FAQ 回答。文档不是孤立文件：三份提交的入口与导航文件相同，均存在完整的相对链接路径。OpenMP 对已有 OpenMP runtime 的行为明确；若“已有 preload”包含任意非 OpenMP 条目，合并细节未在文档明确。
+
+1. ERF / GELU
+文档位置：docs/getting_started/installation/cpu.md:164-168
+https://github.com/luke-opus/vllm/blob/ec0fbf5e9b3e9d796ccae667a437f2e97c3f9cde/docs/getting_started/installation/cpu.md#L164-L168
+
+答案：RISC-V 的 fused GELU-and-multiply 同时支持 exact（approximate="none"）和 tanh（approximate="tanh"）。由模型或算子选择；GeluAndMul 默认 approximate="none"。此次修改保留模型原有选择，无需新 RISC-V CLI 选项或环境变量。不能把算子默认 none 扩张成“所有模型都默认 exact”。
+准确短引（L168）：
+- “`GeluAndMul` defaults to `approximate="none"`”
+- “requires no new RISC-V CLI option or environment variable”
+
+导航路径：
+- 文档首页 User Guide 链接（L33）：https://github.com/luke-opus/vllm/blob/ec0fbf5e9b3e9d796ccae667a437f2e97c3f9cde/docs/README.md#L30-L34
+- User Guide 的 installed 链接（L3）：https://github.com/luke-opus/vllm/blob/ec0fbf5e9b3e9d796ccae667a437f2e97c3f9cde/docs/usage/README.md#L3
+- Installation 的 CPU 链接（L10）：https://github.com/luke-opus/vllm/blob/ec0fbf5e9b3e9d796ccae667a437f2e97c3f9cde/docs/getting_started/installation/README.md#L10
+- CPU → FAQ → “Which GELU approximation is used on RISC-V?”（L164）。
+问题覆盖缺口：本题要求的选择方式、算子默认值、新开关均无缺口。文档未提供逐模型选择表，不能由本段推出每个模型采用何种 GELU。
+
+2. 软件 BF16 转换
+文档位置：docs/getting_started/installation/cpu.md:159-163
+https://github.com/luke-opus/vllm/blob/6592612016059859dff1e93bd534edc1a5737615/docs/getting_started/installation/cpu.md#L159-L163
+
+答案：RISC-V 软件 float32→bfloat16 转换采用最近值、平局取偶数（round-to-nearest-even）；NaN 保留为 canonical quiet NaN。CPU kernel 需要软件转换时自动选择，包括没有 native vector BF16 conversion 的情形；该舍入行为不需要额外 CLI 选项或环境变量。模型默认 dtype 不变。这不等于所有 CPU kernel 永远强制走软件转换，也不等于模型自动改为 BF16。
+准确短引（L163）：
+- “uses round-to-nearest-even and preserves NaNs as canonical quiet NaNs”
+- “The model's default `dtype` is unchanged.”
+
+导航路径：
+- 文档首页 User Guide（L33）：https://github.com/luke-opus/vllm/blob/6592612016059859dff1e93bd534edc1a5737615/docs/README.md#L30-L34
+- User Guide → installed（L3）：https://github.com/luke-opus/vllm/blob/6592612016059859dff1e93bd534edc1a5737615/docs/usage/README.md#L3
+- Installation → CPU（L10）：https://github.com/luke-opus/vllm/blob/6592612016059859dff1e93bd534edc1a5737615/docs/getting_started/installation/README.md#L10
+- CPU → FAQ → “Which dtype should be used?”（L159）。
+问题覆盖缺口：本题的舍入、NaN、自动选择、额外开关、模型默认 dtype 均已说明。文档未给 canonical NaN 的精确位模式或 payload/sign 保留细节，审核不从实现补充这些答案。
+
+3. OpenMP worker 预加载
+文档位置：docs/getting_started/installation/cpu.md:257-259
+https://github.com/luke-opus/vllm/blob/dfdc85947fe914d04906f5d0206c020c208bd400/docs/getting_started/installation/cpu.md#L257-L259
+
+答案（文档明确限定 Linux，包括 RISC-V）：
+- PyTorch bundled libgomp 可用时：vLLM 在启动 CPU workers 之前把它加入 LD_PRELOAD。
+- LD_PRELOAD 已有 OpenMP runtime 时：保留已有 runtime。
+- PyTorch 源码或发行版构建未捆绑 libgomp 时：使用其已经配置的 runtime。
+准确短引（L259）：
+- “PyTorch's bundled `libgomp`”
+- “An existing OpenMP runtime in `LD_PRELOAD` is preserved”
+- “use their configured runtime”
+
+导航路径：
+- 文档首页 User Guide（L33）：https://github.com/luke-opus/vllm/blob/dfdc85947fe914d04906f5d0206c020c208bd400/docs/README.md#L30-L34
+- User Guide → installed（L3）：https://github.com/luke-opus/vllm/blob/dfdc85947fe914d04906f5d0206c020c208bd400/docs/usage/README.md#L3
+- Installation → CPU（L10）：https://github.com/luke-opus/vllm/blob/dfdc85947fe914d04906f5d0206c020c208bd400/docs/getting_started/installation/README.md#L10
+- CPU → FAQ → “How to decide VLLM_CPU_OMP_THREADS_BIND?”（L257）。
+问题覆盖缺口：已有 OpenMP runtime 的场景可回答；“已有 preload”如果泛指任意非 OpenMP 库，文档没有明确说明其条目是否保留、加入顺序或分隔符合并规则。也没有列出如何判断 bundled 缺失或实际选中了哪个 runtime 的用户检查方式。不能把“configured runtime”扩张成指定某一个系统 libgomp 路径。
+
+共同的导航证据与可发现性缺口
+1. 导航配置有 User Guide → Getting Started → Installation，以及 Installation → cpu.md：
+https://github.com/luke-opus/vllm/blob/ec0fbf5e9b3e9d796ccae667a437f2e97c3f9cde/docs/.nav.yml#L2-L7
+https://github.com/luke-opus/vllm/blob/ec0fbf5e9b3e9d796ccae667a437f2e97c3f9cde/docs/getting_started/installation/.nav.yml#L1-L4
+以上文件在三个提交的 Git blob 相同，已分别获取验证。此处验证的是导航源配置，没有验证渲染后的侧栏。
+
+2. 另一条真实链接路径是 docs/README.md:32 的 Quickstart Guide → quickstart.md:113 的 installation guide → Installation:10 的 CPU；这条路径在三份提交也逐一验证了目标文件：
+https://github.com/luke-opus/vllm/blob/ec0fbf5e9b3e9d796ccae667a437f2e97c3f9cde/docs/README.md#L32
+https://github.com/luke-opus/vllm/blob/ec0fbf5e9b3e9d796ccae667a437f2e97c3f9cde/docs/getting_started/quickstart.md#L112-L113
+
+3. 从仓库根 README 的 Documentation/Installation 链接进入会去 docs.vllm.ai（包括 en/latest），不是这三个 fork commit 的源码文档。故不能声称普通用户点击根 README 已能在已发布站点看见此次新增文字：
+https://github.com/luke-opus/vllm/blob/ec0fbf5e9b3e9d796ccae667a437f2e97c3f9cde/README.md#L14
+https://github.com/luke-opus/vllm/blob/ec0fbf5e9b3e9d796ccae667a437f2e97c3f9cde/README.md#L75-L78
+这不否定源码文档链接可达，但公开站点可达性未在本审核建立。
+
+4. Installation 的 CPU 子项只有 x86、ARM、Apple silicon、IBM Z，未单列 RISC-V；CPU 页顶部 vendor tabs 也无 RISC-V。用户需进入通用 CPU 页面再定位 FAQ：
+https://github.com/luke-opus/vllm/blob/ec0fbf5e9b3e9d796ccae667a437f2e97c3f9cde/docs/getting_started/installation/README.md#L10-L14
+https://github.com/luke-opus/vllm/blob/ec0fbf5e9b3e9d796ccae667a437f2e97c3f9cde/docs/getting_started/installation/cpu.md#L7-L23
+上述入口内容在三个提交中相同。ERF 标题显式包含 RISC-V；BF16 位于通用 dtype FAQ；OpenMP 位于线程绑定 FAQ，标题没有 preload 关键词。因此后二者的目录标题对直接寻找特性名的用户提示较弱，但正文已覆盖问题。
+
+远端内容一致性记录
+- 八个文件：README.md、docs/README.md、docs/.nav.yml、docs/usage/README.md、docs/getting_started/quickstart.md、docs/getting_started/installation/README.md、docs/getting_started/installation/.nav.yml、docs/getting_started/installation/cpu.md。
+- ERF CPU 文档 Git blob：b203c6393ad7083db7cb228e6d1413f47b6cb016（358 行）。
+- BF16 CPU 文档 Git blob：ae39579ced8663ff05079aff0cc9e6929f42a4d0（353 行）。
+- OpenMP CPU 文档 Git blob：b14e5eec471cebe47f1ccc1764ecbe866f1cdc97（354 行）。
+- 其余七个入口/导航文件在三份提交内容一致。精确行号来自公开 raw 文档，不来自本地 checkout。

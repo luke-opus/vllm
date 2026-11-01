@@ -1,0 +1,42 @@
+{
+  "package_script_sha256": "228e5a50e8cdcf291a0a8dd634f60a0dbb00b062b62e7de5b54d7c671df0f0e3",
+  "variant": "bf16",
+  "source_identity": {
+    "variant": "bf16",
+    "main_commit": "e0d00e4b8eb0c89ec30921d0695cfdd409e9c211",
+    "index_tree": "8b860fc3eba99f6eccfe4b473c00a829b7ea9af3",
+    "archive": "main-source-bf16.tar.gz",
+    "sha256": "a0e956d990d50a69928d2db91a11155b5ff427db1c2ddc6c67438792d894dd96",
+    "size": 47716930,
+    "tracked_files": 8777,
+    "source_manifest": "work/main-integration/bf16-frozen-source.json",
+    "scope": "Independent original patch plus existing followups on pinned main; hooks passed. Docs and build/runtime validation still in progress."
+  },
+  "archive_sha256": "fc7c5fad5d874bbb54db53cf0ee8cbd3794a178b97202454771ec1d889b7759b",
+  "archive_bytes": 13227310,
+  "objects": {
+    "CMakeFiles/_C.dir/csrc/cpu/sgl-kernels/gemm_int4.cpp.o": "086ec76cae63e508074bb65a3fadd02a6e704dbf5b71028067c048b7290b1a0b",
+    "CMakeFiles/dnnl_ext.dir/csrc/cpu/dnnl_helper.cpp.o": "432cace84bf766fec24a85dbefed7919168223a4a8003da6905ed9b34e49d014",
+    "CMakeFiles/_C.dir/csrc/cpu/dnnl_kernels.cpp.o": "4031f89aa4e22781353fb50713757fcc0bb8a1ee469ec0b1318e0c812f6d073c",
+    "CMakeFiles/_C.dir/csrc/cpu/cpu_wna16.cpp.o": "ed05bc580d9ff5b63f15188d7ffaa110fb5b9fc16798f31805199073d7402b2b",
+    "CMakeFiles/_C.dir/csrc/cpu/activation.cpp.o": "5dcf7642ba75851e2b68a0210455f3d3c49d6f861405bce3add8b4090b8f8bf6",
+    "CMakeFiles/_C.dir/csrc/cpu/sgl-kernels/fla.cpp.o": "2c0c9b2d77ac0663599418f7bbf62ac3430568935d83f31f7c006342bab54c23",
+    "CMakeFiles/_C.dir/csrc/cpu/utils.cpp.o": "b1f2b6208fe874c5b73e188f86d6ef2b0690aa818c2c1ac3d1fe8f7ff80563cf",
+    "CMakeFiles/_C.dir/csrc/cpu/block_table.cpp.o": "12f26ea7f9ce00082a035b1790f715bc35400ae07a15955e7040226812d9a053",
+    "CMakeFiles/_C.dir/csrc/cpu/input_batch.cpp.o": "80a96480a5d55ddb3ae71254292eb3b74a7fe2876f8548ed412d5580c71b6039",
+    "CMakeFiles/_C.dir/csrc/cpu/spec_decode_utils.cpp.o": "945882396a7a7841febcc2d5ca821c0530e7034b6023c5181ab2b073a2d39583",
+    "CMakeFiles/_C.dir/csrc/cpu/layernorm.cpp.o": "2f0f8fa01c0cd52002a163d533c10b4068fd96d421a0302a1f816ff30b71a514",
+    "CMakeFiles/_C.dir/csrc/cpu/mla_decode.cpp.o": "62830f4aafedab7bf3d900df39ed50d0a6efe62174d7377bc5f086c72570e0a1",
+    "CMakeFiles/_C.dir/csrc/cpu/pos_encoding.cpp.o": "38ad6ccc19319891d0a03db2f1567e865ff5516df1e4aa262973ee164cf29646",
+    "CMakeFiles/_C.dir/csrc/cpu/mamba_cpu.cpp.o": "877671bd320310cfe50a3990fc41cff9fe18352ff176c085b33d59ef1e7d21d8",
+    "CMakeFiles/_C.dir/csrc/cpu/dynamic_4bit_int_moe_cpu.cpp.o": "aba22b84e643b84b2be85c99b1283c4407d053a15c591467f95340e15cd9af69",
+    "CMakeFiles/_C.dir/csrc/cpu/cpu_fused_moe.cpp.o": "5c1990e3593ca974a2af4fa7875af0beba6e5b09bd3ca668c02757ee12666773",
+    "CMakeFiles/_C.dir/csrc/cpu/cpu_isa.cpp.o": "52a3c7a15ec9302af105c41b08f9764f1a9e3ed1171cfff5d727ecac8bbabfd9",
+    "CMakeFiles/_C.dir/csrc/cpu/sampling_kernels.cpp.o": "3892f5e9d07c93c1a2e3e4d7f69b1fbd8f62316723416baa5bcf5a0aaabadc47",
+    "CMakeFiles/_C.dir/csrc/cpu/fp8_quant.cpp.o": "0b21afc330f04622c2dddecfda069007043b3f6cc88d376bf2fb2dfcee270af5",
+    "CMakeFiles/_C.dir/csrc/cpu/torch_bindings.cpp.o": "c4b29aa5eceb3b336d8a1e8e14e4e74f4703267109059d795afc0bb4b39d7226",
+    "CMakeFiles/_C.dir/csrc/cpu/cpu_attn.cpp.o": "aef64f9b53b6e16e01a85dbd5fa34a3ec637534e022206523b1d7f443a8f0f0a"
+  },
+  "compile_record_sha256": "80d6d8d96e339c9d21efe49ee231d56384cb4eb51ce0f48138272b48d0792148",
+  "database_sha256": "c0846ec474f0e0c9f03ebc16e5cc3c97f63205efe33a96e9096e5cffa6e0000b"
+}

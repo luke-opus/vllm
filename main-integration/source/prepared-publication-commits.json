@@ -1,0 +1,29 @@
+[
+  {
+    "variant": "erf",
+    "branch": "riscv-erf-main-20261101",
+    "old_head": "7f1353f1a5854545163d49f764552a57f836b2b2",
+    "merge_commit": "d68a0cd88c5001480efb74c1bb2ccf186314d176",
+    "head": "ec0fbf5e9b3e9d796ccae667a437f2e97c3f9cde",
+    "tree": "94453352d881e58ebf423b67d7ccea2ba449eef5",
+    "pushed": true
+  },
+  {
+    "variant": "bf16",
+    "branch": "riscv-bf16-main-20261101",
+    "old_head": "174e56854703c0b9ede89e0a41f9e04dc4c59bc1",
+    "merge_commit": "e03b5bcb83def7ee1d4036ef160d0e6354c6f1a2",
+    "head": "6592612016059859dff1e93bd534edc1a5737615",
+    "tree": "8b860fc3eba99f6eccfe4b473c00a829b7ea9af3",
+    "pushed": true
+  },
+  {
+    "variant": "openmp",
+    "branch": "riscv-openmp-main-20261101",
+    "old_head": "018ef906c8cfc72cdfa21eafac157258c63373cb",
+    "merge_commit": "3365567640de71b95aebb77a8e91c3c606ad02b4",
+    "head": "dfdc85947fe914d04906f5d0206c020c208bd400",
+    "tree": "2cc5383ab7ca9209554779029edb9ccc31a41432",
+    "pushed": true
+  }
+]

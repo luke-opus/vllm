@@ -1,0 +1,101 @@
+独立本地用户文档可发现性检查
+检查日期：2026-11-01（会话日期，Asia/Shanghai）
+检查者：独立子任务 main_docs_local_fresh
+
+范围与方法
+- 分别从三个 checkout 的 README.md、docs/README.md、安装索引开始查找。
+- 问题答案只来自对应 checkout 的用户文档；未读取 csrc、运行时代码、测试实现或 PR 描述。
+- 先读取仓库 AGENTS.md 以遵守工作规则；未运行 Python。
+- 未编辑任何 checkout 文件；唯一写入为本检查记录。
+- 以下是文档内容与链接路径的只读检查，不是运行时行为、文档构建或发布验证。
+
+共同的发现路径（已在三个 checkout 各自核对）
+设 ROOT 分别为：
+  /Users/luke/Documents/Codex/2026-10-27/chu/work/vllm-main-erf
+  /Users/luke/Documents/Codex/2026-10-27/chu/work/vllm-main-bf16
+  /Users/luke/Documents/Codex/2026-10-27/chu/work/vllm-main-openmp
+
+1. ROOT/README.md:14 有 “Documentation” 入口，:75-78 有 documentation / Installation / Quickstart 链接。
+   这些是公开网站链接；按本任务限制，没有访问网络，以本地 docs 对应入口继续。
+2. ROOT/docs/README.md:30-34 按读者类型推荐起点；:32 引导模型运行用户到：
+   “Run open-source models on vLLM, we recommend starting with the [Quickstart Guide](./getting_started/quickstart.md)”
+3. ROOT/docs/getting_started/quickstart.md:113 引导非 CUDA 用户到安装索引：
+   “For more detail and non-CUDA platforms, please refer to the [installation guide](installation/README.md)”
+4. ROOT/docs/getting_started/installation/README.md:10：
+   “- [CPU](cpu.md)”
+5. ROOT/docs/getting_started/installation/cpu.md:157 为 “## FAQ”，随后可到对应主题小节。
+
+一、ERF checkout
+发现路径：上述入口 → CPU → FAQ → “Which GELU approximation is used on RISC-V?”。
+文件：/Users/luke/Documents/Codex/2026-10-27/chu/work/vllm-main-erf/docs/getting_started/installation/cpu.md
+
+证据与准确行号：
+- :164 小节标题：“### Which GELU approximation is used on RISC-V?”
+- :166：“supports both exact GELU (`approximate="none"`) and the tanh approximation (`approximate="tanh"`) for fused GELU-and-multiply operations.”
+- :166：“On RVV builds, the exact variant uses an error-function approximation that preserves every active lane, including nonnegative inputs”
+- :166：“without depending on the processor's mask-agnostic fill policy.”
+- :168：“The model or operator selects the approximation; `GeluAndMul` defaults to `approximate="none"`.”
+- :168：“This fix preserves each model's existing selection and requires no new RISC-V CLI option or environment variable.”
+
+结论：
+- 无需用户打开新的 RISC-V CLI 选项或环境变量；模型或算子选择 exact 变体时适用。
+- GeluAndMul 的默认值是 approximate="none"；每个模型原有选择保持不变，不应把这描述为所有模型强制改用 exact GELU。
+- 文档明确范围是 RISC-V 的 fused GELU-and-multiply；RVV 构建的 exact 分支中，error-function 近似保留所有 active lane（包括非负输入），不再依赖 mask-agnostic 填充值。
+- 同一文档也明确存在 approximate="tanh" 分支；没有依据把此项修复扩展成所有 GELU 算子或所有后端的默认变化。
+可回答性：全部问题均可仅凭上述用户文档回答。
+
+二、BF16 checkout
+发现路径：上述入口 → CPU → FAQ → “Which `dtype` should be used?”。
+文件：/Users/luke/Documents/Codex/2026-10-27/chu/work/vllm-main-bf16/docs/getting_started/installation/cpu.md
+
+证据与准确行号：
+- :159 小节标题：“### Which `dtype` should be used?”
+- :161：“Currently, vLLM CPU uses model default settings as `dtype`.”
+- :163：“software conversion from `float32` to `bfloat16` uses round-to-nearest-even and preserves NaNs as canonical quiet NaNs.”
+- :163：“Software conversion is selected automatically when a CPU kernel needs it, including when native vector BF16 conversion is unavailable”
+- :163：“no additional CLI option or environment variable enables this rounding behavior.”
+- :163：“The model's default `dtype` is unchanged.”
+
+结论：
+- RISC-V 软件 float32 → bfloat16 转换使用 round-to-nearest-even（就近舍入，正中间取偶），NaN 规范化为 canonical quiet NaN。
+- CPU kernel 需要该软件转换时自动选择，包括原生向量 BF16 转换不可用的情况；无需额外 CLI 参数或环境变量启用该舍入规则。
+- 该修复不改变模型默认 dtype，也不等同于自动把所有模型改为 BF16。
+可回答性：全部问题均可仅凭上述用户文档回答。
+
+三、OpenMP checkout
+发现路径：上述入口 → CPU → FAQ → “How to decide `VLLM_CPU_OMP_THREADS_BIND`?”；变量取值可在同页“Related runtime environment variables”查到。
+文件：/Users/luke/Documents/Codex/2026-10-27/chu/work/vllm-main-openmp/docs/getting_started/installation/cpu.md
+
+证据与准确行号：
+- :257 小节标题：“### How to decide `VLLM_CPU_OMP_THREADS_BIND`?”
+- :259：“On Linux, including RISC-V, vLLM adds PyTorch's bundled `libgomp` to `LD_PRELOAD` before spawning CPU workers when it is available.”
+- :259：“An existing OpenMP runtime in `LD_PRELOAD` is preserved”
+- :259：“source or distribution builds of PyTorch without a bundled `libgomp` use their configured runtime.”
+- :261：“Default `auto` thread-binding is recommended for most cases.”
+- :152 变量可设 CPU id 列表、“`auto` (by default)” 或 “`nobind`”；nobind “disable[s] binding to individual CPU cores and [inherits] user-defined OpenMP variables”。
+- :152：“If set to `nobind`, the number of OpenMP threads is determined by the standard `OMP_NUM_THREADS` environment variable.”
+
+结论：
+- Linux（明确包括 RISC-V）在 spawn CPU workers 前，若 PyTorch bundled libgomp 可用，会自动加入 LD_PRELOAD。
+- 用户 LD_PRELOAD 中已有的 OpenMP runtime 保留。
+- PyTorch 源码或发行版构建若没有 bundled libgomp，则使用它们已配置的 runtime。
+- 默认推荐 auto 绑定；若用户希望关闭逐核绑定并沿用自定义 OpenMP 变量，同页记载了 nobind 和 OMP_NUM_THREADS。
+- 文档对“已有 preload”的明确保证限定为已有 OpenMP runtime；没有逐项解释任意非 OpenMP preload 的组合细节，不能从这段文档额外断言细节。
+可回答性：任务所问 bundled OpenMP、已有 OpenMP preload、无 bundled library 三种情况均已覆盖。
+
+发现性观察（非阻断）
+- 三个 checkout 的安装索引 docs/getting_started/installation/README.md:10-14 均提供通用 CPU 链接，但 CPU 子项只有 Intel/AMD x86、ARM AArch64、Apple silicon、IBM Z (S390X)。
+- 三个 checkout 的 CPU 页面 :7-23 顶部处理器类型入口也没有 RISC-V 专项。
+- 因此熟悉“CPU”入口的用户可由正常索引路径找到答案；只扫描硬件清单寻找 RISC-V 的用户可能不知道应继续进入通用 CPU FAQ。
+- 本检查没有发现缺失的核心答案；没有检查公开网站当前是否已包含这些本地文字。
+
+本次读取的用户文档 SHA-256（用于标识检查快照）
+三个 checkout 相同的入口文件：
+README.md                                    4dc7399323b9660117f8cc1226afb7a81cdbb912dbb4ae74b66d89052417d11c
+docs/README.md                               87681113461ee55490fa6337c0a28ca9c5fb7b9e5bc75e767a71ddf57c9677d4
+docs/getting_started/quickstart.md            93e8d32dc1f14a712059af028318a9afe6696b97f49b9eaf25fa844371f29b54
+docs/getting_started/installation/README.md   dc7a7b0d79f1fe5160636ab12c58a3d60e130c7cba9342d03b43bcc73407b865
+各自 docs/getting_started/installation/cpu.md：
+vllm-main-erf     29cbf921104d1508f3f7ff28b34c76aac4cf2264c82687d3daaf70b250a897ed
+vllm-main-bf16    61308cec1b86f02881567dc2827da75adc488c2cd4ddd82cac2db03777305896
+vllm-main-openmp  2a3f17f45fa5b183f1335639edb0d88a37d97fb503717e3fcbd60e36718eea65

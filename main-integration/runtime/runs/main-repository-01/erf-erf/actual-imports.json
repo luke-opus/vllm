@@ -1,0 +1,39 @@
+{
+  "start": {
+    "pid": 8692,
+    "sys_prefix": "/home/vllmtest/vllm-validation/main-venv",
+    "vllm_file": "/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/erf-erf/source/vllm/__init__.py",
+    "vllm_version_string": "dev",
+    "vllm_distribution_metadata": {
+      "present": false
+    },
+    "torch_file": "/home/vllmtest/vllm-validation/main-venv/lib/python3.12/site-packages/torch/__init__.py",
+    "extension_file": "/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/erf-erf/source/vllm/_C.abi3.so",
+    "extension_resolved": "/home/vllmtest/vllm-validation/main-integration-build/build/erf/_C.abi3.so",
+    "extension_sha256": "a1056a310cbfc357dfdcb18ff250be2fd8acf1d4bbb463682c6e6c492c341538",
+    "extension_maps": [
+      "3b31200000-3b32168000 r-xp 00000000 fd:01 1603500                        /home/vllmtest/vllm-validation/main-integration-build/build/erf/_C.abi3.so",
+      "3b32168000-3b32200000 r--p 00f67000 fd:01 1603500                        /home/vllmtest/vllm-validation/main-integration-build/build/erf/_C.abi3.so",
+      "3b32200000-3b32203000 rw-p 00fff000 fd:01 1603500                        /home/vllmtest/vllm-validation/main-integration-build/build/erf/_C.abi3.so"
+    ]
+  },
+  "finish": {
+    "pid": 8692,
+    "sys_prefix": "/home/vllmtest/vllm-validation/main-venv",
+    "vllm_file": "/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/erf-erf/source/vllm/__init__.py",
+    "vllm_version_string": "dev",
+    "vllm_distribution_metadata": {
+      "present": false
+    },
+    "torch_file": "/home/vllmtest/vllm-validation/main-venv/lib/python3.12/site-packages/torch/__init__.py",
+    "extension_file": "/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/erf-erf/source/vllm/_C.abi3.so",
+    "extension_resolved": "/home/vllmtest/vllm-validation/main-integration-build/build/erf/_C.abi3.so",
+    "extension_sha256": "a1056a310cbfc357dfdcb18ff250be2fd8acf1d4bbb463682c6e6c492c341538",
+    "extension_maps": [
+      "3b31200000-3b32168000 r-xp 00000000 fd:01 1603500                        /home/vllmtest/vllm-validation/main-integration-build/build/erf/_C.abi3.so",
+      "3b32168000-3b32200000 r--p 00f67000 fd:01 1603500                        /home/vllmtest/vllm-validation/main-integration-build/build/erf/_C.abi3.so",
+      "3b32200000-3b32203000 rw-p 00fff000 fd:01 1603500                        /home/vllmtest/vllm-validation/main-integration-build/build/erf/_C.abi3.so"
+    ]
+  },
+  "pytest_exit_status": 0
+}

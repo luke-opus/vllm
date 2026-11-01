@@ -1,0 +1,55 @@
+Preparation only: current-main inactive native header plan.
+Started UTC: 2026-11-01T05:48:47.985698+00:00
+No native/guest/compiler/model execution, workflow activation, installation or push.
+
+Command: bash --version
+Exit status: 0
+stdout:
+GNU bash, version 3.2.57(1)-release (arm64-apple-darwin25)
+Copyright (C) 2007 Free Software Foundation, Inc.
+
+stderr:
+
+
+Command: bash -n /Users/luke/Documents/Codex/2026-10-27/chu/work/main-integration/native-plan/run.sh
+Exit status: 0
+stdout:
+
+stderr:
+
+
+Command: bash -n < workflow jobs.header-checks.steps[0].run
+Exit status: 0
+stdout:
+
+stderr:
+
+
+Command: /Users/luke/Documents/Codex/2026-10-27/chu/work/pre-commit-cache/repob7ziy0zy/golangenv-default/bin/actionlint -version
+Exit status: 0
+stdout:
+v0.0.0-20250119115933-03d0035246f3+dirty
+installed by building from source
+built with go1.27.3 compiler for darwin/arm64
+
+stderr:
+
+
+Command: /Users/luke/Documents/Codex/2026-10-27/chu/work/pre-commit-cache/repob7ziy0zy/golangenv-default/bin/actionlint -config-file /Users/luke/Documents/Codex/2026-10-27/chu/work/main-integration/native-plan/actionlint.yaml /Users/luke/Documents/Codex/2026-10-27/chu/work/main-integration/native-plan/workflow.candidate.yml
+Exit status: 0
+stdout:
+
+stderr:
+
+
+Read-only YAML/reference assertions: exit 0.
+Three full source refs match prepared-publication-commits.json and pinned main.
+Payload URL uses main-integration/native-plan at exact GITHUB_SHA.
+Only dedicated-branch push/workflow_dispatch; repository and branch job guard retained.
+contents: read only; no third-party actions; original planned dependency setup retained.
+Both C++ files and actionlint config are byte-identical to original public files.
+All four headers across all three old/new ref pairs: 12/12 identical Git blobs and bytes.
+Original public cloud-v-header directory: all 8 file hashes unchanged.
+Historical ERF cross-compile inputs identical; no new compilation performed.
+Finished UTC: 2026-11-01T05:48:48.032000+00:00
+Preparation status: passed; prepared/inactive; native status: not run.

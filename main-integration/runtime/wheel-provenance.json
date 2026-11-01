@@ -1,0 +1,11 @@
+{
+  "name": "transformers",
+  "version": "5.22.0",
+  "source_metadata": "https://pypi.org/pypi/transformers/5.22.0/json",
+  "url": "https://files.pythonhosted.org/packages/6b/21/f9d73a82d7d7d47fccab5acb2236f67b033106df2f2d193a01e9f229968f/transformers-5.22.0-py3-none-any.whl",
+  "filename": "transformers-5.22.0-py3-none-any.whl",
+  "expected_sha256": "3cca65f94b0aa33511433c7c1a661c513e4ad8bc0504cb370d181d771e7c9aa0",
+  "actual_sha256": "3cca65f94b0aa33511433c7c1a661c513e4ad8bc0504cb370d181d771e7c9aa0",
+  "bytes": 13051755,
+  "source": "official PyPI release wheel"
+}

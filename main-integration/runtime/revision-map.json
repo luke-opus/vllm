@@ -1,0 +1,19 @@
+{
+  "revisions": {
+    "attempt-01": {
+      "manifest": "driver-revisions/attempt-01/prepared-driver-sha256.json",
+      "runs": {
+        "main-repository-01": "completed with expected baseline failures; external audit passed",
+        "main-bf16-model-01": "completed; external audit passed",
+        "main-openmp-model-01": "failed before CPUWorker startup: Unix IPC path too long; actual exit 1, no timeout, changed paths restored"
+      }
+    },
+    "attempt-02": {
+      "manifest": "driver-revisions/attempt-02/prepared-driver-sha256.json",
+      "functional_change": "Only isolated TMPDIR shortened; URI byte-length and run ownership are checked. Model parameters and test assertions unchanged.",
+      "runs": {
+        "main-openmp-model-02": "authorized retry; consult its raw result and external audit for outcome"
+      }
+    }
+  }
+}

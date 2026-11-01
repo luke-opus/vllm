@@ -1,0 +1,61 @@
+Current-main complete CPU extension build
+
+Pinned upstream: e0d00e4b8eb0c89ec30921d0695cfdd409e9c211.
+The base, ERF-only and BF16-only archives are independent source inputs. Their
+archive identities and candidate trees are recorded in config-{variant}.json
+and the parent sources/*.tar.manifest.json files. No combined-patch DSO is used.
+
+This is QEMU RISC-V Linux execution, not native RISC-V hardware or upstream CI.
+Native CMake uses the real main-venv Python, Torch, Clang 18, and oneDNN 3.13.
+The fresh database has 231 units: 21 production units and 210 oneDNN units.
+Every production unit is recompiled independently for each variant, at most two
+compiler processes at a time. Production objects are cross-compiled on the Mac
+with the real target sysroot/Torch headers, then linked inside RISC-V Linux.
+
+oneDNN is reused only after guest-cache-audit.py compares all 210 generated
+commands (normalizing relocated path prefixes only), generated oneDNN headers,
+old/new Torch headers, and the previously recorded static-library SHA256.
+Host-mirror and guest Torch headers are independently compared as well.
+The 210 oneDNN units are not claimed as freshly recompiled in this run.
+
+Disclosed environment adaptations, shared by all three variants:
+- The already-built oneDNN contains the prior std::isfinite declaration include
+  used for rvv_softmax.cpp; compat-math.hpp is retained here for full rebuilds.
+- fla.cpp is compiled with -UVLLM_HAS_OPENBLAS, selecting the repository's real
+  PyTorch reference BLAS fallback. No backend replacement or stub is supplied.
+- The native generated link command receives real LLVM OpenMP link/rpath flags.
+  Torch's real GNU OpenMP and the extension's LLVM OpenMP mappings are retained.
+- Transformers is genuinely upgraded to 5.22.0 in the isolated main-venv;
+  copied console-script wrappers are not used. Use its explicit Python path.
+
+Actual build sequence per variant (base, erf, bf16):
+1. guest-configure.py verifies/extracts the corresponding source archive, runs
+   fresh CMake and captures the actual Ninja commands/database/generated headers.
+2. guest-cache-audit.py verifies the dependency reuse conditions.
+3. Transfer configure-{variant}.tar.gz to the host and extract into mirror/.
+4. From the host workspace root:
+   work/.venv/bin/python work/main-integration/build/replay.py \
+     --config work/main-integration/build/config-{variant}.json --production-only
+5. From the host workspace root:
+   work/.venv/bin/python work/main-integration/build/package.py \
+     work/main-integration/build/compile-{variant}.json
+6. Transfer objects-{variant}.tar.gz and objects-{variant}.json to the guest.
+7. main-venv/bin/python main-integration-build/guest-link.py {variant} --reuse-onednn
+8. main-venv/bin/python main-integration-build/guest-load-check.py {variant}
+The guest scripts reside under ~/vllm-validation/main-integration-build/;
+main-venv/bin/python is relative to ~/vllm-validation/ in the invocation above.
+
+Evidence locations:
+- compile-{variant}.json: exact original/cross command, source and object SHA,
+  adaptation, actual compiler exit, timeout flag, elapsed time, object identity.
+- logs-{variant}/ and replay-{variant}-session.txt: raw compiler output/progress.
+- objects-{variant}.json: verified archive/object/database/record identities.
+- mirror/results/{variant}/: raw CMake/link logs, actual commands, dependency
+  audit, final library SHA and actual mappings/outputs from the load check.
+- link-load-{variant}-session.txt: complete native link/load output.
+- observed-session-exits.json: actual observed coordinator session exits.
+
+The direct load check calls three real current-main CPU operators and checks
+their exact output. It is a build/load smoke check, not repository-test, model,
+accuracy, performance, physical-hardware, or upstream-review evidence.
+Repository/model/worker validation is performed separately after all builds.

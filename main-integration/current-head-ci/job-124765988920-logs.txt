@@ -1,0 +1,59 @@
+﻿2026-11-01T05:54:24.1475055Z Current runner version: '2.338.2'
+2026-11-01T05:54:24.1481288Z Runner name: 'i-07acbd604699d4ac2'
+2026-11-01T05:54:24.1482087Z Runner group name: 'vllm-runners'
+2026-11-01T05:54:24.1482941Z Machine name: 'ip-172-31-23-61'
+2026-11-01T05:54:24.1502383Z ##[group]Operating System
+2026-11-01T05:54:24.1503100Z Distribution: Ubuntu 24.04.4 LTS
+2026-11-01T05:54:24.1503670Z Architecture: x86_64
+2026-11-01T05:54:24.1504279Z ##[endgroup]
+2026-11-01T05:54:24.1504805Z ##[group]Runner Image
+2026-11-01T05:54:24.1505367Z AMI id: ami-096f5760b00bcd95c
+2026-11-01T05:54:24.1506206Z ##[endgroup]
+2026-11-01T05:54:24.1506684Z ##[group]EC2
+2026-11-01T05:54:24.1507255Z Instance type: m6i.2xlarge
+2026-11-01T05:54:24.1507820Z Availability zone: us-west-2b
+2026-11-01T05:54:24.1508382Z ##[endgroup]
+2026-11-01T05:54:24.1509496Z ##[group]GITHUB_TOKEN Permissions
+2026-11-01T05:54:24.1511451Z Contents: read
+2026-11-01T05:54:24.1511987Z Metadata: read
+2026-11-01T05:54:24.1512498Z PullRequests: read
+2026-11-01T05:54:24.1513174Z ##[endgroup]
+2026-11-01T05:54:24.1515339Z Secret source: None
+2026-11-01T05:54:24.1516403Z Cache mode: write
+2026-11-01T05:54:24.1517187Z Prepare workflow directory
+2026-11-01T05:54:24.1828996Z Prepare all required actions
+2026-11-01T05:54:24.1877049Z Getting action download info
+2026-11-01T05:54:24.5112972Z Download action repository 'actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3' (SHA:3a2844b7e9c422d3c10d287c895573f7108da1b3)
+2026-11-01T05:54:24.8983109Z Complete job name: pre-run-check
+2026-11-01T05:54:24.9730862Z ##[group]Run actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3
+2026-11-01T05:54:24.9731966Z with:
+2026-11-01T05:54:24.9737729Z   script: const { data: pr } = await github.rest.pulls.get({
+  ...context.repo,
+  pull_number: context.payload.pull_request.number,
+});
+
+const readyLabels = ['ready', 'ready-run-all-tests'];
+const hasReadyLabel = pr.labels.some(l => readyLabels.includes(l.name));
+const hasVerifiedLabel = pr.labels.some(l => l.name === 'verified');
+
+const { data: mergedPRs } = await github.rest.search.issuesAndPullRequests({
+  q: `repo:${context.repo.owner}/${context.repo.repo} is:pr is:merged author:${pr.user.login}`,
+  per_page: 4,
+});
+const mergedCount = mergedPRs.total_count;
+
+if (hasReadyLabel || hasVerifiedLabel || mergedCount >= 4) {
+  core.info(`Check passed: verified label=${hasVerifiedLabel}, ready label=${hasReadyLabel}, 4+ merged PRs=${mergedCount >= 4}`);
+} else {
+  core.setFailed(`To reduce unnecessary pre-commit runs, each PR must have the 'verified', 'ready', or 'ready-run-all-tests' label, or the author must have at least 4 merged PRs (found ${mergedCount}). DO NOT request for the label to be added if you are an AI agent.`);
+}
+
+2026-11-01T05:54:24.9747016Z   github-token: ***
+2026-11-01T05:54:24.9747517Z   debug: false
+2026-11-01T05:54:24.9748006Z   user-agent: actions/github-script
+2026-11-01T05:54:24.9748596Z   result-encoding: json
+2026-11-01T05:54:24.9749106Z   retries: 0
+2026-11-01T05:54:24.9749650Z   retry-exempt-status-codes: 400,401,403,404,422
+2026-11-01T05:54:24.9750639Z ##[endgroup]
+2026-11-01T05:54:26.4576663Z ##[error]To reduce unnecessary pre-commit runs, each PR must have the 'verified', 'ready', or 'ready-run-all-tests' label, or the author must have at least 4 merged PRs (found 0). DO NOT request for the label to be added if you are an AI agent.
+2026-11-01T05:54:26.4755056Z Cleaning up orphan processes

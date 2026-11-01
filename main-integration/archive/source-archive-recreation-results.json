@@ -1,0 +1,172 @@
+{
+  "script_sha256": "3dad6856bd9ae797e9dc460312d5edc5f273086d2d5db94bbe6e0fbbd9f1810c",
+  "inputs_sha256": "8e743acc9f93c7c25ac6c271644f5a8d93a18c119beef5ebc2c5abab92e84c59",
+  "repository": "/Users/luke/Documents/Codex/2026-10-27/chu/work/vllm",
+  "output": "/Users/luke/Documents/Codex/2026-10-27/chu/work/main-integration/source-archives-replay-zw7mdgwe",
+  "reference_directory": "/Users/luke/Documents/Codex/2026-10-27/chu/work/main-integration/sources",
+  "git_executable": "/usr/bin/git",
+  "gzip_executable": "/usr/bin/gzip",
+  "git_version": "git version 2.50.1 (Apple Git-155)",
+  "gzip_version": "Apple gzip 475",
+  "records": [
+    {
+      "variant": "base",
+      "archive": "main-source-base.tar.gz",
+      "git_command": [
+        "/usr/bin/git",
+        "-C",
+        "/Users/luke/Documents/Codex/2026-10-27/chu/work/vllm",
+        "archive",
+        "--format=tar",
+        "--prefix=main-source-base/",
+        "--mtime=@1793502281",
+        "e0d00e4b8eb0c89ec30921d0695cfdd409e9c211"
+      ],
+      "gzip_command": [
+        "/usr/bin/gzip",
+        "-n"
+      ],
+      "timed_out": false,
+      "gzip_returncode": 0,
+      "git_returncode": 0,
+      "tar_sha256": "e2da54961cab2ed6fc54c38016b48d3d308726bf0d9671e56a2108189582e9d1",
+      "canonical_members_sha256": "28a79c9379d27aa8e284461d29f381b36f3b60b5e6af62d707ac04636aef04ad",
+      "members": 9914,
+      "regular_files": 8767,
+      "member_mtimes": [
+        1793502281
+      ],
+      "global_pax_headers": {
+        "comment": "e0d00e4b8eb0c89ec30921d0695cfdd409e9c211"
+      },
+      "archive_sha256": "4e29a49187b1b2b04f5b064fc39f4ef4fd9161898db692a88b7cf2e9d7cb69c6",
+      "archive_bytes": 47999299,
+      "exact_archive_match": true,
+      "uncompressed_tar_match": true,
+      "unpacked_content_and_mode_match": true,
+      "timestamp_and_commit_metadata_match": true,
+      "reference_sha256": "4e29a49187b1b2b04f5b064fc39f4ef4fd9161898db692a88b7cf2e9d7cb69c6",
+      "reference_matches_expected": true,
+      "byte_equal_reference": true,
+      "passed": true
+    },
+    {
+      "variant": "erf",
+      "archive": "main-source-erf.tar.gz",
+      "git_command": [
+        "/usr/bin/git",
+        "-C",
+        "/Users/luke/Documents/Codex/2026-10-27/chu/work/vllm",
+        "archive",
+        "--format=tar",
+        "--prefix=main-source-erf/",
+        "--mtime=@1793507340",
+        "94453352d881e58ebf423b67d7ccea2ba449eef5"
+      ],
+      "gzip_command": [
+        "/usr/bin/gzip",
+        "-n"
+      ],
+      "timed_out": false,
+      "gzip_returncode": 0,
+      "git_returncode": 0,
+      "tar_sha256": "0e0f222ddfc931e02f84c4d9c0e555773806803611cfe668375e2a41736ed137",
+      "canonical_members_sha256": "e29067c747564e4e26042af630611411784b2fd8a706d6d8584918bf7485d60f",
+      "members": 9914,
+      "regular_files": 8767,
+      "member_mtimes": [
+        1793507340
+      ],
+      "global_pax_headers": {},
+      "archive_sha256": "8c7c7348f56c8d57c14d04bf20c7c67252738d3c7cbf9012cd94d5eade2ea2e6",
+      "archive_bytes": 48000919,
+      "exact_archive_match": false,
+      "uncompressed_tar_match": true,
+      "unpacked_content_and_mode_match": true,
+      "timestamp_and_commit_metadata_match": true,
+      "reference_sha256": "bb718659a9cb31de4c550b3c56d93c9021cef5a80eeab928e5846902dc87c804",
+      "reference_matches_expected": true,
+      "byte_equal_reference": false,
+      "passed": false
+    },
+    {
+      "variant": "bf16",
+      "archive": "main-source-bf16.tar.gz",
+      "git_command": [
+        "/usr/bin/git",
+        "-C",
+        "/Users/luke/Documents/Codex/2026-10-27/chu/work/vllm",
+        "archive",
+        "--format=tar",
+        "--prefix=main-source-bf16/",
+        "--mtime=@1793507352",
+        "8b860fc3eba99f6eccfe4b473c00a829b7ea9af3"
+      ],
+      "gzip_command": [
+        "/usr/bin/gzip",
+        "-n"
+      ],
+      "timed_out": false,
+      "gzip_returncode": 0,
+      "git_returncode": 0,
+      "tar_sha256": "a71b72a679f7f4bb2cc47637575e569a985b9fd7da4cb469213c75f3ad5e39be",
+      "canonical_members_sha256": "1053d909a5b09d6f92edb872bbdf154bb9f9e9a6c18583fd2ad42a9714cb2dfb",
+      "members": 9915,
+      "regular_files": 8768,
+      "member_mtimes": [
+        1793507352
+      ],
+      "global_pax_headers": {},
+      "archive_sha256": "767d9a59accdefd8a38536ef5f5e35879302601a03bdd6ef2f62da51a26d9f2c",
+      "archive_bytes": 48002028,
+      "exact_archive_match": false,
+      "uncompressed_tar_match": true,
+      "unpacked_content_and_mode_match": true,
+      "timestamp_and_commit_metadata_match": true,
+      "reference_sha256": "a0e956d990d50a69928d2db91a11155b5ff427db1c2ddc6c67438792d894dd96",
+      "reference_matches_expected": true,
+      "byte_equal_reference": false,
+      "passed": false
+    },
+    {
+      "variant": "openmp",
+      "archive": "main-source-openmp.tar.gz",
+      "git_command": [
+        "/usr/bin/git",
+        "-C",
+        "/Users/luke/Documents/Codex/2026-10-27/chu/work/vllm",
+        "archive",
+        "--format=tar",
+        "--prefix=main-source-openmp/",
+        "--mtime=@1793507394",
+        "2cc5383ab7ca9209554779029edb9ccc31a41432"
+      ],
+      "gzip_command": [
+        "/usr/bin/gzip",
+        "-n"
+      ],
+      "timed_out": false,
+      "gzip_returncode": 0,
+      "git_returncode": 0,
+      "tar_sha256": "aef20ba8015aa6aefbb282053dfb8de1506f514c32233d68d74f1cbbc9d603dc",
+      "canonical_members_sha256": "a8e29ed5806f8901aa8bfd4bb1631b5a59a0f4e7a7a3ad5076a68ad5c01d07a8",
+      "members": 9914,
+      "regular_files": 8767,
+      "member_mtimes": [
+        1793507394
+      ],
+      "global_pax_headers": {},
+      "archive_sha256": "bcafaa82a7f4e51f799cdc65a477621d81454f48b30ebf840e6bd41c4b3e442b",
+      "archive_bytes": 48004022,
+      "exact_archive_match": false,
+      "uncompressed_tar_match": true,
+      "unpacked_content_and_mode_match": true,
+      "timestamp_and_commit_metadata_match": true,
+      "reference_sha256": "69086b660c5c6b37cdedddf680ea0f24f19f6540718a5f26237f0c0f6f2c2cba",
+      "reference_matches_expected": true,
+      "byte_equal_reference": false,
+      "passed": false
+    }
+  ],
+  "all_exact": false
+}

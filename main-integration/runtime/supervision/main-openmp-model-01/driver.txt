@@ -1,0 +1,7 @@
+Traceback (most recent call last):
+  File "/home/vllmtest/vllm-validation/main-integration-runtime/run-main-model-pair.py", line 316, in <module>
+    main()
+  File "/home/vllmtest/vllm-validation/main-integration-runtime/run-main-model-pair.py", line 247, in main
+    assert item["process"]["actual_returncode"] == 0
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError

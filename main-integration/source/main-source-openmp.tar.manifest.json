@@ -1,0 +1,11 @@
+{
+  "variant": "openmp",
+  "main_commit": "e0d00e4b8eb0c89ec30921d0695cfdd409e9c211",
+  "index_tree": "2cc5383ab7ca9209554779029edb9ccc31a41432",
+  "archive": "main-source-openmp.tar.gz",
+  "sha256": "69086b660c5c6b37cdedddf680ea0f24f19f6540718a5f26237f0c0f6f2c2cba",
+  "size": 47718014,
+  "tracked_files": 8776,
+  "source_manifest": "work/main-integration/openmp-frozen-source.json",
+  "scope": "Original OpenMP patch on pinned main plus removal of obsolete test-tethering allowlist entry; hooks passed. Docs/build/runtime pending."
+}

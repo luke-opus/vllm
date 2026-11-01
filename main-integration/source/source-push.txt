@@ -1,0 +1,5 @@
+To https://github.com/luke-opus/vllm.git
+ 	6592612016059859dff1e93bd534edc1a5737615:refs/heads/riscv-bf16-rne	174e5685..65926120
+ 	ec0fbf5e9b3e9d796ccae667a437f2e97c3f9cde:refs/heads/riscv-erf-mask	7f1353f1..ec0fbf5e
+ 	dfdc85947fe914d04906f5d0206c020c208bd400:refs/heads/riscv-openmp-preload	018ef906..dfdc8594
+Done

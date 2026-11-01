@@ -1,0 +1,22 @@
+{
+  "observed_at_utc": "2026-11-01T05:02:29.039139+00:00",
+  "mem_available_bytes": 3499139072,
+  "swap_total_bytes": 0,
+  "disk_available_bytes": 25204842496,
+  "compiler_processes": [],
+  "active_repository_processes": [
+    {
+      "pid": 8355,
+      "rss_bytes": 18202624,
+      "command": "/home/vllmtest/vllm-validation/main-venv/bin/python /home/vllmtest/vllm-validation/main-integration-runtime/run-main-repository.py --execute --run-id main-repository-01 --timeout 3600"
+    },
+    {
+      "pid": 9128,
+      "rss_bytes": 253313024,
+      "command": "/home/vllmtest/vllm-validation/main-venv/bin/python -m pytest -p main_import_probe -v -s tests/kernels/core/test_cpu_activation.py -k rounds_to_nearest_even --junitxml=/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/bf16-operator-bf16/pytest.xml --basetemp=/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/bf16-operator-bf16/pytest-tmp"
+    }
+  ],
+  "boundary_base_completed": true,
+  "decision": "authorized BF16 uni pair may start alongside repository; OpenMP waits for repository completion unless separately reassessed",
+  "performance_claim": false
+}

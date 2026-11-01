@@ -1,0 +1,39 @@
+{
+  "start": {
+    "pid": 11141,
+    "sys_prefix": "/home/vllmtest/vllm-validation/main-venv",
+    "vllm_file": "/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/standalone-bf16/source/vllm/__init__.py",
+    "vllm_version_string": "dev",
+    "vllm_distribution_metadata": {
+      "present": false
+    },
+    "torch_file": "/home/vllmtest/vllm-validation/main-venv/lib/python3.12/site-packages/torch/__init__.py",
+    "extension_file": "/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/standalone-bf16/source/vllm/_C.abi3.so",
+    "extension_resolved": "/home/vllmtest/vllm-validation/main-integration-build/build/bf16/_C.abi3.so",
+    "extension_sha256": "93c8debb5754a1ba2241d97d9adf596274a22d8c4bf7a56ed755dc8d23bf6df2",
+    "extension_maps": [
+      "3d81000000-3d81f69000 r-xp 00000000 fd:01 1603527                        /home/vllmtest/vllm-validation/main-integration-build/build/bf16/_C.abi3.so",
+      "3d81f69000-3d82001000 r--p 00f69000 fd:01 1603527                        /home/vllmtest/vllm-validation/main-integration-build/build/bf16/_C.abi3.so",
+      "3d82001000-3d82004000 rw-p 01001000 fd:01 1603527                        /home/vllmtest/vllm-validation/main-integration-build/build/bf16/_C.abi3.so"
+    ]
+  },
+  "finish": {
+    "pid": 11141,
+    "sys_prefix": "/home/vllmtest/vllm-validation/main-venv",
+    "vllm_file": "/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/standalone-bf16/source/vllm/__init__.py",
+    "vllm_version_string": "dev",
+    "vllm_distribution_metadata": {
+      "present": false
+    },
+    "torch_file": "/home/vllmtest/vllm-validation/main-venv/lib/python3.12/site-packages/torch/__init__.py",
+    "extension_file": "/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/standalone-bf16/source/vllm/_C.abi3.so",
+    "extension_resolved": "/home/vllmtest/vllm-validation/main-integration-build/build/bf16/_C.abi3.so",
+    "extension_sha256": "93c8debb5754a1ba2241d97d9adf596274a22d8c4bf7a56ed755dc8d23bf6df2",
+    "extension_maps": [
+      "3d81000000-3d81f69000 r-xp 00000000 fd:01 1603527                        /home/vllmtest/vllm-validation/main-integration-build/build/bf16/_C.abi3.so",
+      "3d81f69000-3d82001000 r--p 00f69000 fd:01 1603527                        /home/vllmtest/vllm-validation/main-integration-build/build/bf16/_C.abi3.so",
+      "3d82001000-3d82004000 rw-p 01001000 fd:01 1603527                        /home/vllmtest/vllm-validation/main-integration-build/build/bf16/_C.abi3.so"
+    ]
+  },
+  "pytest_exit_status": 0
+}

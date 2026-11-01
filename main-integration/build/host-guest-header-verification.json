@@ -1,0 +1,12 @@
+{
+  "host_torch_include": {
+    "files": 9433,
+    "sha256": "627653e3272aad9cf6dab16b8a34832174728aec29d48ce4d0d39d22fed866e1"
+  },
+  "guest_torch_include": {
+    "files": 9433,
+    "sha256": "627653e3272aad9cf6dab16b8a34832174728aec29d48ce4d0d39d22fed866e1"
+  },
+  "matched": true,
+  "scope": "Actual host-mirror Torch include tree equals the new guest runtime include tree"
+}

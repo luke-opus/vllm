@@ -1,0 +1,142 @@
+Current-main ERF changed-path checkpoint audit
+Checked 2026-11-01, approximately 04:49-04:54 UTC.
+Fixed main: e0d00e4b8eb0c89ec30921d0695cfdd409e9c211
+Independent ERF candidate tree: 94453352d881e58ebf423b67d7ccea2ba449eef5
+
+Result
+No usable unchanged public checkpoint was found among the routes and candidates
+checked below, including public tiny checkpoints. This does not establish that
+none exists anywhere on Hugging Face. The changed-path real-LLM coverage gap
+remains open. This was source/metadata inspection only: no weight download,
+guest load, model execution, activation/config/weight edits, or backend changes.
+Sizes below are actual HF file metadata, not measured resident-memory usage.
+
+Current-main source scope
+An AST scan of all model Python files found 41 direct FusedMoEFactory calls,
+41 name references, no import aliases, and no parse errors. Of these, 33 omit
+activation and use the factory's silu default. The other eight are:
+- nemotron_h.py:244: activation_without_mul(config.mlp_hidden_act)
+- gemma4.py:674: gelu_tanh
+- exaone_moe.py:138 and bailing_moe_v3.py:1206: silu
+- step3p5.py:358,371,397: silu or swiglustep
+- interns2_mobius.py:117: config.hidden_act
+- gpt_oss.py:400: swigluoai
+- transformers/moe.py:282-285,363,458: silu or swigluoai through **kwargs
+The old audit's 42-call count is not reused as the current count. Direct
+functional MoE calls in Nomic, Moondream3 and MiniCPM were checked separately;
+MiniCPM omits activation and fused_experts defaults to SILU. K2 Horizon's custom
+functional route uses F.silu and its MLP rejects activations other than silu.
+Twelve key inspected source files were compared byte-for-byte with git show
+of the fixed main ref. The principal Nomic/Moondream/InternS2/CPU activation
+routes are unchanged from the earlier ca8dbccf audit.
+
+Fixed source anchors (all refer to the exact main snapshot):
+Factory default:
+https://github.com/vllm-project/vllm/blob/e0d00e4b8eb0c89ec30921d0695cfdd409e9c211/vllm/model_executor/layers/fused_moe/layer.py#L121
+Only inspected factory route passing a potentially exact gated config activation:
+https://github.com/vllm-project/vllm/blob/e0d00e4b8eb0c89ec30921d0695cfdd409e9c211/vllm/model_executor/models/interns2_mobius.py#L105-L118
+Transformers adapter's concrete activation selection:
+https://github.com/vllm-project/vllm/blob/e0d00e4b8eb0c89ec30921d0695cfdd409e9c211/vllm/model_executor/models/transformers/moe.py#L281-L285
+MiniCPM's functional call/default:
+https://github.com/vllm-project/vllm/blob/e0d00e4b8eb0c89ec30921d0695cfdd409e9c211/vllm/model_executor/models/minicpm.py#L184-L186
+https://github.com/vllm-project/vllm/blob/e0d00e4b8eb0c89ec30921d0695cfdd409e9c211/vllm/model_executor/layers/fused_moe/fused_moe.py#L1667-L1680
+
+Nomic v2 MoE: exact dispatch audit, not an inference from the no_mul name
+1. NomicMoE converts configured gelu with activation_without_mul at
+   bert_with_rope.py:255. Its forward calls torch.ops.vllm.fused_experts at
+   :332-339; it does not instantiate CPUUnquantizedExperts.
+2. That custom op registers fused_experts_op at fused_moe.py:1601-1605;
+   the implementation calls fused_experts_impl (:1540, :1729), which invokes
+   apply_moe_activation at :1889-1891 without valid_token_counts.
+3. The actual unmasked GELU_NO_MUL branch is activation.py:398-399:
+   output.copy_(F.gelu(input)). This is PyTorch's GELU, not vLLM's RVV er().
+   The same file's _CUSTOM_OP_NAMES entry at :97 says gelu_and_mul, but that
+   symbolic name table does not replace the concrete branch just traced.
+4. Independently, CPUUnquantizedExperts rejects no-act-and-mul configurations
+   at cpu_moe.py:227-228 and only lists gated GELU at :231-237. Its C++ path
+   parses the string at cpu_fused_moe.cpp:704. get_act_type accepts only silu,
+   swigluoai, gelu, gelu_tanh; gelu_no_mul reaches the error at lines 38-39.
+   Only gated gelu selects GeluAndMul, then apply_gated_act:201-202 calls
+   gelu_and_mul, whose line 141 invokes FP32Vec16.er(). On RVV this is the
+   implementation in cpu_types_riscv_impl.hpp:842.
+Thus the 1.9 GB Nomic checkpoint cannot cover this fix through these unchanged
+routes. Its legacy functional implementation uses Triton GEMM dispatch before
+activation; no CPU runtime success/failure was experimentally claimed here.
+
+https://github.com/vllm-project/vllm/blob/e0d00e4b8eb0c89ec30921d0695cfdd409e9c211/vllm/model_executor/models/bert_with_rope.py#L255
+https://github.com/vllm-project/vllm/blob/e0d00e4b8eb0c89ec30921d0695cfdd409e9c211/vllm/model_executor/models/bert_with_rope.py#L332-L339
+https://github.com/vllm-project/vllm/blob/e0d00e4b8eb0c89ec30921d0695cfdd409e9c211/vllm/model_executor/layers/fused_moe/fused_moe.py#L1889-L1891
+https://github.com/vllm-project/vllm/blob/e0d00e4b8eb0c89ec30921d0695cfdd409e9c211/vllm/model_executor/layers/fused_moe/activation.py#L395-L401
+https://github.com/vllm-project/vllm/blob/e0d00e4b8eb0c89ec30921d0695cfdd409e9c211/vllm/model_executor/layers/fused_moe/experts/cpu_moe.py#L226-L237
+https://github.com/vllm-project/vllm/blob/e0d00e4b8eb0c89ec30921d0695cfdd409e9c211/csrc/cpu/cpu_fused_moe_activations.hpp#L29-L40
+https://github.com/vllm-project/vllm/blob/e0d00e4b8eb0c89ec30921d0695cfdd409e9c211/csrc/cpu/cpu_fused_moe_activations.hpp#L125-L143
+https://github.com/vllm-project/vllm/blob/e0d00e4b8eb0c89ec30921d0695cfdd409e9c211/csrc/cpu/cpu_types_riscv_impl.hpp#L842
+
+Public checkpoint metadata checked
+The URLs below pin the exact HF revision returned by its public model API.
+Weight-file existence and byte sizes were read from /api/models/{id}?blobs=true.
+
+Nomic's trained small candidate:
+nomic-ai/nomic-embed-text-v2-moe, rev 1066b6599d099fbb93dfcb64f9c37a7c9e503e85
+model.safetensors: 1,901,187,232 bytes; 475,292,928 F32 parameters.
+Config: activation_function=gelu, num_experts=8. Excluded by the dispatch above.
+https://huggingface.co/nomic-ai/nomic-embed-text-v2-moe/raw/1066b6599d099fbb93dfcb64f9c37a7c9e503e85/config.json
+https://huggingface.co/api/models/nomic-ai/nomic-embed-text-v2-moe/revision/1066b6599d099fbb93dfcb64f9c37a7c9e503e85?blobs=true
+
+An actual public tiny checkpoint:
+hf-tiny-v2/tiny-random-NomicBertModel, rev 3c95513b8ba979b93d02b9863beb09769f3dcf70
+model.safetensors: 3,973,464 bytes; hidden_size=32, hidden_act=gelu, two layers.
+Its config has no num_experts/MoE setup; it is dense and supplies no target-path
+coverage. Public random test weights would establish integration only, not
+trained-model quality, even if an otherwise suitable checkpoint were found.
+https://huggingface.co/hf-tiny-v2/tiny-random-NomicBertModel/raw/3c95513b8ba979b93d02b9863beb09769f3dcf70/config.json
+https://huggingface.co/api/models/hf-tiny-v2/tiny-random-NomicBertModel/revision/3c95513b8ba979b93d02b9863beb09769f3dcf70?blobs=true
+
+Intern-S2-Mobius:
+- Official BF16 rev 1b23c974ac860b182c61732299ae4fc432a8cf54:
+  text_config.hidden_act=silu; five safetensors total 72,958,724,496 bytes.
+- Official FP8 rev ea369586a687b1f31d29c8b10868acf2cb8e2889:
+  text_config.hidden_act=silu; five safetensors total 38,514,212,696 bytes.
+- Publisher nightscape's 4bit-mlx rev b23eaff8b94bb07394bc240cde637d64ea5822e3:
+  text_config.hidden_act=silu; five safetensors total 19,516,023,854 bytes.
+- Its 4bit-mlx-mtp companion rev 9ee00cd6fed6d2b8ad1089e9a1a8aeb6bd88f1a5:
+  text_config.hidden_act=silu; one safetensors 475,392,758 bytes. Being small
+  does not change its activation or establish a standalone target-path LLM.
+All four are excluded on activation; no backend/quantization support claim.
+https://huggingface.co/internlm/Intern-S2-Mobius/raw/1b23c974ac860b182c61732299ae4fc432a8cf54/config.json
+https://huggingface.co/internlm/Intern-S2-Mobius-FP8/raw/ea369586a687b1f31d29c8b10868acf2cb8e2889/config.json
+https://huggingface.co/nightscape/Intern-S2-Mobius-4bit-mlx/raw/b23eaff8b94bb07394bc240cde637d64ea5822e3/config.json
+https://huggingface.co/nightscape/Intern-S2-Mobius-4bit-mlx-mtp/raw/9ee00cd6fed6d2b8ad1089e9a1a8aeb6bd88f1a5/config.json
+
+Moondream3:
+Official rev 5112966d1a723413b1c9a1e8bea272b72e647b35 has real BF16 weights;
+the four canonical model-*.safetensors shards total 18,537,318,024 bytes.
+The second modelv2-* set is not added to that checkpoint size. More decisively,
+moondream3.py:505 requires x.is_cuda for fused exact GELU; CPU's expert loop
+uses F.gelu at :573. More RAM would not remove this path mismatch.
+https://huggingface.co/moondream/moondream3-preview/raw/5112966d1a723413b1c9a1e8bea272b72e647b35/config.json
+https://huggingface.co/api/models/moondream/moondream3-preview/revision/5112966d1a723413b1c9a1e8bea272b72e647b35?blobs=true
+https://github.com/vllm-project/vllm/blob/e0d00e4b8eb0c89ec30921d0695cfdd409e9c211/vllm/model_executor/models/moondream3.py#L505-L521
+https://github.com/vllm-project/vllm/blob/e0d00e4b8eb0c89ec30921d0695cfdd409e9c211/vllm/model_executor/models/moondream3.py#L570-L573
+
+Search boundary and minimum next evidence
+HF's public search for Intern-S2-Mobius/InternS2Mobius and filter=interns2_mobius
+returned the same four repositories above (limit 100, four results). The
+interns2_mobius_text filter and tiny-random-InternS2 search returned zero.
+tiny-random-nomic returned five repositories; one actual tiny checkpoint was
+inspected above. tiny-random-moondream returned zero. A broader mobius search
+hit the 100-result cap and was NOT treated as exhaustive absence evidence.
+https://huggingface.co/api/models?filter=interns2_mobius&limit=100&full=true
+https://huggingface.co/api/models?search=tiny-random-InternS2&limit=100&full=true
+
+The feasible next evidence is the current-main complete-extension/public CPU
+MoE regression through exact GELU plus the repository regression matrix,
+reported as operator coverage after those runs complete. Dense GELU on RISC-V returns forward_native/F.gelu
+(activation.py:447-469), so Pythia/dense smoke results cannot close this gap.
+For genuine LLM changed-path evidence, obtain an existing public checkpoint
+whose supported model route already selects gated exact GELU (for example an
+unchanged InternS2Mobius text config with hidden_act=gelu and compatible shapes),
+verify/download its real weights, then run the ordinary CPU LLM entry point and
+record the actual CPU MoE activation/path plus baseline/fixed outputs. No such
+candidate was established here. Creating random weights, rewriting activation,
+or adding a CPU backend just to make this audit green is outside this task.

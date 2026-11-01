@@ -1,0 +1,19 @@
+{
+  "verified_at_utc": "2026-11-01T05:33:32.120713+00:00",
+  "future_run_id": "main-openmp-model-02",
+  "temporary_directory": "/home/vllmtest/vllm-validation/main-integration-runtime/t5e8341",
+  "owner_marker_matches_run": true,
+  "socket_uri": "ipc:///home/vllmtest/vllm-validation/main-integration-runtime/t5e8341/1bc1c1ac-87b0-4f7c-8f14-c5a86754c202",
+  "filesystem_path_bytes": 100,
+  "full_uri_bytes": 106,
+  "limit_used": 107,
+  "filename_format": "UUID4, 36 ASCII bytes, no socket filename prefix in get_open_zmq_ipc_path",
+  "real_zmq_bind_close_passed": true,
+  "ipc_socket_removed": true,
+  "within_authorized_runtime_root": true,
+  "changed_manifest_files": [
+    "main_runtime_common.py",
+    "README.txt"
+  ],
+  "vllm_rpc_base_path_override": null
+}

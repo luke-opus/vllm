@@ -1,0 +1,19 @@
+{
+  "recorded_at_utc": "2026-11-01T04:46:01.913884+00:00",
+  "runtime_check_actual_returncode": 0,
+  "runtime_check_path": "runtime-check.json",
+  "installed_package_check": "pip-check.txt",
+  "old_environment_audit": "final-package-audit.json",
+  "inode_audit": "inode-isolation.json",
+  "vllm_metadata": "vllm-distribution-metadata.json",
+  "selected_environment_ready": true,
+  "complete_requirements_installed": false,
+  "prepared_driver_ast_checks": "passed",
+  "prepared_driver_lint": "ruff F,I passed; format applied",
+  "prepared_drivers_deployed": true,
+  "prepared_drivers_executed": false,
+  "new_main_models_executed": false,
+  "deployment_audit": "deployment-check.json",
+  "execution_authorization": "Root approved sequential repository (11 groups), BF16 pair, OpenMP pair after all three new DSO link/load gates and build-agent compilation completion",
+  "execution_status": "waiting_for_three_libraries_and_build_agent_ready"
+}

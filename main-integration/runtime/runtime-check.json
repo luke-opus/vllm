@@ -1,0 +1,31 @@
+{
+  "sys_prefix": "/home/vllmtest/vllm-validation/main-venv",
+  "sys_base_prefix": "/usr",
+  "python_executable": "/home/vllmtest/vllm-validation/main-venv/bin/python",
+  "old_new_common_regular_files_checked": 34124,
+  "old_new_shared_regular_inodes": [],
+  "package_versions": {
+    "torch": "2.14.0+cpu",
+    "transformers": "5.22.0",
+    "pytest": "9.2.0",
+    "pytest-asyncio": "1.4.1",
+    "xgrammar": "0.2.8",
+    "llguidance": "1.7.6",
+    "oss-harmony": "0.0.12",
+    "tokenizers": "0.23.3",
+    "huggingface-hub": "2.4.0",
+    "mistral-common": "1.13.0",
+    "safetensors": "0.8.0"
+  },
+  "torch_file": "/home/vllmtest/vllm-validation/main-venv/lib/python3.12/site-packages/torch/__init__.py",
+  "transformers_file": "/home/vllmtest/vllm-validation/main-venv/lib/python3.12/site-packages/transformers/__init__.py",
+  "checks": [
+    "real Torch BF16 tensor operation",
+    "AutoConfig/AutoTokenizer/AutoModelForCausalLM imports",
+    "real XGrammar regex API",
+    "real LLGuidance regex API",
+    "Harmony native module import",
+    "pytest and pytest_asyncio imports"
+  ],
+  "scope": "Selected CPU-test/runtime dependencies only; no vLLM DSO, model, or full test suite execution"
+}

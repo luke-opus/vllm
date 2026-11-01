@@ -1,0 +1,53 @@
+{
+  "driver_process": {
+    "command": [
+      "/home/vllmtest/vllm-validation/main-venv/bin/python",
+      "/home/vllmtest/vllm-validation/main-integration-runtime/run-main-model-pair.py",
+      "--execute",
+      "--run-id",
+      "main-bf16-model-01",
+      "--timeout",
+      "3600",
+      "--kind",
+      "bf16"
+    ],
+    "cwd": "/home/vllmtest/vllm-validation/main-integration-runtime",
+    "timed_out": false,
+    "interrupted": false,
+    "actual_returncode": 0,
+    "pid": 9291,
+    "seconds": 958.9664842310003
+  },
+  "independent_restoration_audit": [
+    {
+      "checks": [
+        {
+          "path": "/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-bf16-model-01/source/vllm/_C.abi3.so",
+          "expected": {
+            "kind": "absent"
+          },
+          "passed": true
+        }
+      ],
+      "passed": true,
+      "name": "base"
+    },
+    {
+      "checks": [
+        {
+          "path": "/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-bf16-model-01/source/vllm/_C.abi3.so",
+          "expected": {
+            "kind": "absent"
+          },
+          "passed": true
+        }
+      ],
+      "passed": true,
+      "name": "fixed"
+    }
+  ],
+  "passed": true,
+  "scope": "External exit/restoration observer; not assertions executed by the driver",
+  "driver_report_sha256": "a7a47cc6a9d18f36ae4cc2df3a6e7aff3feee24f35b6450f00547f1c5622b814",
+  "driver_report_completed": true
+}

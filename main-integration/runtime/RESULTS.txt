@@ -1,0 +1,113 @@
+Pinned-main QEMU runtime results
+===============================
+
+Base: e0d00e4b8eb0c89ec30921d0695cfdd409e9c211.
+All results below are independent of the earlier ca8dbccf-based runs.
+The exact input identities, complete-library provenance, actual module paths,
+DSO maps and hashes are retained in the raw reports and frozen inputs.
+
+Repository tests: main-repository-01, driver revision attempt-01
+-------------------------------------------------------------
+All 11 groups completed with the expected behavior. Actual pytest totals were
+130 executed: 116 passed, 14 expected baseline failures, 0 errors, 0 skipped.
+The 14 failures remain failures in JUnit and are not relabeled as passing tests.
+
+Group                       Executed  Failures
+erf-base                          4         2
+erf-erf                           4         0
+bf16-operator-base                1         1
+bf16-boundary-base               18         9
+bf16-operator-bf16                1         0
+bf16-boundary-bf16               18         0
+openmp-config-base                6         2
+openmp-config-openmp              6         0
+standalone-base                  24         0
+standalone-erf                   24         0
+standalone-bf16                  24         0
+
+These used the genuine repository root conftest/fixtures, the frozen candidate
+test source on both sides, matching production headers and complete DSOs. Each
+standalone group ran both complete block-table/input-batch files and the two
+explicitly selected small Gumbel tests. Large statistical Gumbel tests were not
+selected. No marks, skips or tolerances were relaxed. The driver exited 0; all
+child outcomes matched the expectations, and the independent restoration audit
+passed. See runs/main-repository-01 and supervision/main-repository-01.
+
+BF16 paired model: main-bf16-model-01, driver revision attempt-01
+----------------------------------------------------------------
+Both actual child exits and the driver exit were 0, with no timeout/interruption.
+Both engines returned from shutdown. Source restoration and the external
+restoration audit passed. Base Python source, controlled environment and pinned
+real Pythia-14m files were held constant; only the independent complete base/BF16
+DSO changed. Public collective_rpc observed the actual CPUWorker and default
+StandaloneCPUModelRunner (MRV2); the V2 override was absent.
+
+Two prompts, four generated tokens each: 7 of 8 tokens matched. Among the 39
+shared returned logprob entries at identical generated prefixes, the maximum
+absolute delta was 0.3876304626464844 and the mean was 0.08119453527988532.
+One step changed its returned top-5 token set. These are descriptive top-5/chosen
+token observations, not full-vocabulary equivalence or an accuracy measurement.
+See runs/main-bf16-model-01 and supervision/main-bf16-model-01.
+
+OpenMP attempt and retry
+-----------------------
+main-openmp-model-01 used revision attempt-01 and failed before CPUWorker startup:
+the isolated Unix IPC socket path was too long. Actual child/driver exit was 1,
+without timeout. Changed paths were restored; the external restoration checks
+passed, while the overall supervisor correctly reported failure. This was a
+harness path failure and supplies no OpenMP implementation result.
+
+Revision attempt-02 only shortened the run-owned TMPDIR inside the authorized
+runtime root. All other Python driver files were byte-identical; model settings,
+frozen source/DSO inputs and assertions were unchanged. The real PyZMQ preflight
+bound/closed the future run's socket: filesystem path 100 bytes, full ipc URI 106
+bytes, below 107. Original successful repository/BF16 runs were not repeated or
+reassigned to revision attempt-02. Both exact revision archives are retained.
+
+main-openmp-model-02 passed. Base/fixed child exits and driver exit were all 0,
+with no timeout/interruption, both shutdowns returned, and the independent final
+restoration audit passed. Actual spawned worker PIDs were 12133 and 12824, with
+parent PIDs 11934 and 12568. Both were CPUWorker + StandaloneCPUModelRunner with
+default MRV2, affinity [0], and the same complete main-base DSO SHA-256:
+57f4cc187d2c6502f176333331f7ba604926aa360710872478eae021d829b444.
+Only the frozen base/current OpenMP cpu.py file changed. Base startup LD_PRELOAD
+was empty; fixed startup LD_PRELOAD was the real main-venv Torch libgomp.so.1.
+All returned output fields, including generated tokens and returned logprobs,
+were exactly equal for these two prompts. See runs/main-openmp-model-02 and
+supervision/main-openmp-model-02; original attempt-01 raw evidence is also kept.
+
+Execution and evidence boundaries
+---------------------------------
+This is RISC-V Linux under QEMU, not physical-board, upstream CI or human review
+evidence. It covers selected regressions and a small genuine model smoke, not
+the full repository suite or model-quality/performance evaluation. Actual model
+logs retain the oneDNN linear primitive failure and Torch linear fallback.
+No vllm distribution metadata or _version.py was fabricated; actual development
+version warnings are retained. The prepared environment satisfies selected
+dependency/import checks, not all common/test requirements.
+
+After measured resource gates, BF16 and the first OpenMP attempt overlapped the
+remaining repository checks. Sampled overlap observations are in resource-bf16-
+monitor.json (05:06:20.991922Z through 05:18:18.911516Z) and resource-openmp-
+monitor.json (05:22:57.497759Z through 05:27:50.994051Z); these are observed
+sample windows, not exact full execution intervals. BF16 and OpenMP never ran
+together. The OpenMP retry ran after repository completion. Resource observers,
+read-only SSH inspection and evidence collection also added background work.
+All recorded durations are diagnostic; no performance comparison is made.
+The OpenMP retry's base worker itself also launched observed serial TorchInductor
+precompiled-header and small helper compilation under its isolated TMPDIR/cache,
+despite enforce_eager=True. These were runtime descendants, not a concurrent
+external build or repository test. No claim of completely absent dynamic
+compilation is made; the actual commands and parent PIDs are in its resource log.
+
+Successful exits and observed restoration are verified. No deliberate timeout,
+SIGTERM or crash fault-injection experiment was run; Python finally execution
+cannot be guaranteed under SIGKILL or host failure. The supervisor independently
+checks actual restoration rather than attributing its assertions to the driver.
+
+Raw report bytes are retained. Their SHA-256 values match external supervisor
+records; child JSON hashes match their pair report. publication-files.json lists
+the selected raw evidence, drivers, six frozen inputs and environment provenance
+with relative paths, exact byte counts and SHA-256. Wheels, caches, full source
+trees, model input binaries, compiled fixtures, build artifacts and bytecode are
+excluded. model-files.json retains hashes/sizes of the six genuine model files.

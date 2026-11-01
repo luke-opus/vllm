@@ -1,0 +1,16 @@
+{
+  "command": [
+    "/Users/luke/Documents/Codex/2026-10-27/chu/work/.venv/bin/python",
+    "/Users/luke/Documents/Codex/2026-10-27/chu/work/main-integration/recreate-exact-source-archives.py",
+    "--repo",
+    "/Users/luke/Documents/Codex/2026-10-27/chu/work/vllm",
+    "--output",
+    "/Users/luke/Documents/Codex/2026-10-27/chu/work/main-integration/source-archives-exact-i6_um2es",
+    "--reference-dir",
+    "/Users/luke/Documents/Codex/2026-10-27/chu/work/main-integration/sources"
+  ],
+  "output": "/Users/luke/Documents/Codex/2026-10-27/chu/work/main-integration/source-archives-exact-i6_um2es",
+  "started_utc": "2026-11-01T04:58:22.060687+00:00",
+  "completed_utc": "2026-11-01T04:58:58.742536+00:00",
+  "returncode": 0
+}

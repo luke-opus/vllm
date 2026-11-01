@@ -1,0 +1,16 @@
+Sun Nov  1 05:04:45 UTC 2026
+MemAvailable:    2929120 kB
+SwapTotal:             0 kB
+SwapFree:              0 kB
+    PID    PPID   RSS     ELAPSED %CPU COMMAND
+   9128    8355 520844      03:14 95.3 /home/vllmtest/vllm-validation/main-venv/bin/python -m pytest -p main_import_probe -v -s tests/kernels/core/test_cpu_activation.py -k rounds_to_nearest_even --junitxml=/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/bf16-operator-bf16/pytest.xml --basetemp=/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/bf16-operator-bf16/pytest-tmp
+   9297    9291 308788      01:01 89.5 /home/vllmtest/vllm-validation/main-venv/bin/python /home/vllmtest/vllm-validation/main-integration-runtime/check-main-model.py --kind bf16 --variant base --source /home/vllmtest/vllm-validation/main-integration-runtime/runs/main-bf16-model-01/source --output /home/vllmtest/vllm-validation/main-integration-runtime/runs/main-bf16-model-01/base.json --expected-library /home/vllmtest/vllm-validation/main-integration-build/build/base/_C.abi3.so --expected-sha256 57f4cc187d2c6502f176333331f7ba604926aa360710872478eae021d829b444
+   2566       1 41068       59:13  0.1 /usr/libexec/fwupd/fwupd
+    348       1 25708    01:25:36  0.0 /sbin/multipathd -d -s
+   9291    9290 23672       02:09 51.1 /home/vllmtest/vllm-validation/main-venv/bin/python /home/vllmtest/vllm-validation/main-integration-runtime/run-main-model-pair.py --execute --run-id main-bf16-model-01 --timeout 3600 --kind bf16
+    807       1 21188    01:25:03  0.0 /usr/bin/python3 /usr/share/unattended-upgrades/unattended-upgrade-shutdown --wait-for-signal
+   8355    8354 17776       17:10 11.3 /home/vllmtest/vllm-validation/main-venv/bin/python /home/vllmtest/vllm-validation/main-integration-runtime/run-main-repository.py --execute --run-id main-repository-01 --timeout 3600
+    288       1 17604    01:25:39  0.2 /usr/lib/systemd/systemd-journald
+   8354    8353 16380       17:11  0.7 /home/vllmtest/vllm-validation/main-venv/bin/python supervise-main.py --execute --kind repository --run-id main-repository-01
+   9290    9288 16316       02:10  1.2 /home/vllmtest/vllm-validation/main-venv/bin/python supervise-main.py --execute --kind bf16 --run-id main-bf16-model-01
+      1       0 11752    01:25:54  0.5 /sbin/init splash

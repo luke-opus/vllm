@@ -1,0 +1,54 @@
+{
+  "variant": "base",
+  "old_units": 210,
+  "new_units": 210,
+  "changed_commands": [],
+  "old_generated_headers": {
+    "files": 3,
+    "sha256": "70e1f0b6accdbe2ef0f236d9efd6689fad4c8f76d1bbf7b980e86fbe48e08129"
+  },
+  "new_generated_headers": {
+    "files": 3,
+    "sha256": "70e1f0b6accdbe2ef0f236d9efd6689fad4c8f76d1bbf7b980e86fbe48e08129"
+  },
+  "old_torch_include": {
+    "files": 9433,
+    "sha256": "627653e3272aad9cf6dab16b8a34832174728aec29d48ce4d0d39d22fed866e1"
+  },
+  "new_torch_include": {
+    "files": 9433,
+    "sha256": "627653e3272aad9cf6dab16b8a34832174728aec29d48ce4d0d39d22fed866e1"
+  },
+  "library": "/home/vllmtest/vllm-validation/build-base/_deps/onednn-build/src/libdnnl.a",
+  "library_sha256": "7d2a8be27c186a7f1604e25a6011822e090f695c49b50598aef60f978d5024b3",
+  "expected_prior_library_sha256": "7d2a8be27c186a7f1604e25a6011822e090f695c49b50598aef60f978d5024b3",
+  "normalization": "Only relocated build/source/main-venv path prefixes",
+  "reuse_permitted": true
+}
+{
+  "variant": "erf",
+  "old_units": 210,
+  "new_units": 210,
+  "changed_commands": [],
+  "old_generated_headers": {
+    "files": 3,
+    "sha256": "70e1f0b6accdbe2ef0f236d9efd6689fad4c8f76d1bbf7b980e86fbe48e08129"
+  },
+  "new_generated_headers": {
+    "files": 3,
+    "sha256": "70e1f0b6accdbe2ef0f236d9efd6689fad4c8f76d1bbf7b980e86fbe48e08129"
+  },
+  "old_torch_include": {
+    "files": 9433,
+    "sha256": "627653e3272aad9cf6dab16b8a34832174728aec29d48ce4d0d39d22fed866e1"
+  },
+  "new_torch_include": {
+    "files": 9433,
+    "sha256": "627653e3272aad9cf6dab16b8a34832174728aec29d48ce4d0d39d22fed866e1"
+  },
+  "library": "/home/vllmtest/vllm-validation/build-base/_deps/onednn-build/src/libdnnl.a",
+  "library_sha256": "7d2a8be27c186a7f1604e25a6011822e090f695c49b50598aef60f978d5024b3",
+  "expected_prior_library_sha256": "7d2a8be27c186a7f1604e25a6011822e090f695c49b50598aef60f978d5024b3",
+  "normalization": "Only relocated build/source/main-venv path prefixes",
+  "reuse_permitted": true
+}

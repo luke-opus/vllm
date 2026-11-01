@@ -1,0 +1,77 @@
+{
+  "recorded_utc": "2026-11-01T04:36:26.608810+00:00",
+  "repository": "vllm-project/vllm",
+  "method": "Authenticated GitHub search/issues open-PR queries; candidate pull-request files inspected. Scoped search, not an exhaustive proof of absence.",
+  "queries": [
+    {
+      "query": "riscv bf16",
+      "numbers": [
+        64080,
+        52933,
+        62440,
+        58699
+      ]
+    },
+    {
+      "query": "riscv gelu",
+      "numbers": []
+    },
+    {
+      "query": "riscv openmp",
+      "numbers": [
+        64080,
+        58257
+      ]
+    },
+    {
+      "query": "\"float_to_bf16\"",
+      "numbers": [
+        64079
+      ]
+    },
+    {
+      "query": "\"mask-agnostic\"",
+      "numbers": [
+        64078
+      ]
+    },
+    {
+      "query": "\"libgomp\" \"RISC-V\"",
+      "numbers": [
+        64080,
+        52858
+      ]
+    }
+  ],
+  "query_notes": "Plain riscv search does not reliably match hyphenated RISC-V, so exact helper/policy/library queries were also used and found each existing subject PR.",
+  "other_candidates_inspected": {
+    "52858": "Only cmake/cpu_extension.cmake; oneDNN capability gating, not preload/ERF/conversion helper.",
+    "52933": "Only cmake/cpu_extension.cmake; cross-compilation capability detection.",
+    "62440": "AArch64 top-k/top-p sampling kernels and bindings/CI/benchmarks; distinct operations.",
+    "58257": "Only csrc/cpu/cpu_attn_rvv.hpp; narrow-M attention tile performance.",
+    "58699": "[CPU] Enable WNA16 int4 GEMM on AVX2-only x86 CPUs: AVX2/x86 WNA16 enablement; five files are cmake/cpu_extension.cmake, csrc/cpu/cpu_types_x86.hpp, csrc/cpu/cpu_wna16.cpp, csrc/cpu/torch_bindings.cpp and tests/quantization/test_cpu_wna16.py. No change to float_convert.hpp, the RISC-V erf methods, or the Python bundled-OpenMP preload policy; distinct scope."
+  },
+  "result": "No matching additional open PR identified by these queries and file-scope checks.",
+  "additional_candidate_verification": {
+    "58699": {
+      "recorded_utc": "2026-11-01T04:47:36.986553+00:00",
+      "method": "Anonymous HTTPS GitHub REST GET pull and files?per_page=100; curl with normal TLS validation, both requests returned successfully. gh executable was unavailable; no authenticated fallback needed.",
+      "pull_url": "https://github.com/vllm-project/vllm/pull/58699",
+      "title": "[CPU] Enable WNA16 int4 GEMM on AVX2-only x86 CPUs",
+      "state": "open",
+      "draft": false,
+      "head": "318b3032bdf9f23c45efe033f4d4dd452259ed3a",
+      "updated_at": "2026-10-07T08:17:59Z",
+      "changed_files": 5,
+      "files_returned": 5,
+      "files": [
+        "cmake/cpu_extension.cmake",
+        "csrc/cpu/cpu_types_x86.hpp",
+        "csrc/cpu/cpu_wna16.cpp",
+        "csrc/cpu/torch_bindings.cpp",
+        "tests/quantization/test_cpu_wna16.py"
+      ],
+      "pagination": "All 5 expected changed files returned in the first page; fewer than per_page=100."
+    }
+  }
+}

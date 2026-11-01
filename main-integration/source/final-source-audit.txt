@@ -1,0 +1,97 @@
+Final source audit: authorized updates to existing draft PRs #64078/#64079/#64080
+Audit: 2026-11-01 05:47 UTC; read-only Git/source/rules/log review.
+No tests, guest operations, source edits, remote writes, or hooks were rerun.
+
+Conclusion: no code or source-integrity defect was found that blocks updating
+these same authorized drafts. This is not a declaration that every validation,
+native-hardware, upstream-CI, or human-submitter requirement is satisfied.
+OpenMP model attempt 02 remains in progress at this audit cutoff and is NOT
+counted as completed or passed here.
+
+Rules and evidence read
+AGENTS.md, tests/AGENTS.md and .agents/skills/pr-checklist/SKILL.md were read and
+byte-compared with fixed main e0d00e4b8eb0c89ec30921d0695cfdd409e9c211: identical.
+No additional nested agent rules apply to these changed paths. Also reviewed:
+prepared-publication-commits.json, prepare-publish.py, each frozen source record
+and patch, normal merge/followup commit-hook logs, and the current-main detailed
+checklist in pr-checklist-current-main.txt. That checklist supplies the complete
+contribution/template, hook, strict/API-docs, duplicate-search and PR review audit.
+
+Exact source identity and preserved history
+#64078 ERF
+  head ec0fbf5e9b3e9d796ccae667a437f2e97c3f9cde
+  tree 94453352d881e58ebf423b67d7ccea2ba449eef5
+  old  7f1353f1a5854545163d49f764552a57f836b2b2
+#64079 BF16
+  head 6592612016059859dff1e93bd534edc1a5737615
+  tree 8b860fc3eba99f6eccfe4b473c00a829b7ea9af3
+  old  174e56854703c0b9ede89e0a41f9e04dc4c59bc1
+#64080 OpenMP
+  head dfdc85947fe914d04906f5d0206c020c208bd400
+  tree 2cc5383ab7ca9209554779029edb9ccc31a41432
+  old  018ef906c8cfc72cdfa21eafac157258c63373cb
+All three independently resolved head trees exactly equal their frozen trees;
+all recorded local branch tips equal the heads above. For every head, both old
+head and fixed main are ancestors (six merge-base --is-ancestor exits = 0).
+Each normal merge has parents [old head, fixed main]; each followup has only its
+recorded merge as parent. git diff --check fixed-main..head exits 0 for all three.
+OpenMP diff bytes equal frozen.patch. ERF/BF16 patches differ only in automatic
+Git index-line SHA abbreviation length (7 versus 8); all remaining bytes match,
+and the full tree-object identities above establish identical tracked contents.
+
+Normal commits, hooks and authorship
+prepare-publish.py used ordinary git merge/commit --signoff with installed hooks;
+no --no-verify, SKIP override or synthetic commit-tree path was used. The recorded
+merge logs each show Sign-off passed; they do not show a full pre-commit rerun.
+Followup logs show ERF 8 passed/29 no-files skipped, BF16 18/19, OpenMP 8/29,
+and zero failed hooks. The full frozen-source original-config pre-commit checks
+are separately recorded in precommit-*-attempt*.txt and the detailed checklist.
+ERF's merge log contains a missing COMMIT_EDITMSG grep warning; its actual merge
+succeeded and the resulting commit trailer was independently verified below.
+All six new merge/followup commits have matching author/committer and DCO:
+  liushengtong <84731055+luke-opus@users.noreply.github.com>
+  Signed-off-by: liushengtong <84731055+luke-opus@users.noreply.github.com>
+Each also includes Co-authored-by: OpenAI Codex, satisfying the textual agent
+attribution required by these rules. No bypass is inferred from generic hook
+output that merely prints bypass advice.
+
+Scope, code review and CI selection
+ERF: 3 files, +16/-9. Both FP32Vec8/16 erf methods use unmasked sign injection,
+defining all active lanes and preserving signed zero. Exact/tanh cases extend
+real registered operator tests without tolerance changes. Docs explain default
+exact GELU and selection by the model/operator; no new switch. Existing job
+arm-cpu-test calls run-cpu-test-arm.sh; kernel shard 0 runs the activation suite
+with set -e. This Arm execution does not execute the RISC-V RVV implementation.
+BF16: 5 files, +92/-0. Real scalar helper canonicalizes any NaN to 0x7fc0 and uses
+round-to-nearest-even for other inputs. Header includes bit/cstdint. The 18-case
+C++20 fixture compiles that header with checked subprocess execution and fixed
+bit expectations; the real SiLU regression uses exact output equality. Job
+cpu-kernel-tests selects csrc/cpu/ and the added header-test path, and runs that
+suite as a separate single-path pytest command. run-cpu-test.sh sets -e/pipefail
+both outside and inside the container, so that command's failure propagates.
+The shared fallback helper affects more than RVV; output-equivalence/accuracy
+improvement claims would exceed this change's evidence.
+OpenMP: 5 files, +48/-4. RISCV joins the existing Linux bundled-libgomp policy.
+Six tests construct real VllmConfig/DeviceConfig and simulate only external
+OS/architecture/affinity/Torch-file inputs; existing unrelated fake objects are
+not new changes. Job cpu-multimodal-config selects vllm/platforms/, vllm/config/
+and the new platform-test path; its added command selects the platform suite.
+The now-obsolete tether exemption is removed, not broadened. Existing-runtime
+preservation and absent-bundled-library behavior remain explicit. No throughput
+or runtime-conflict-elimination claim is justified by this change.
+No changed source introduces skip/xfail, tolerance widening, mock model weights,
+replaced backends, weakened check configuration, or unrelated behavior changes.
+
+Publication boundaries
+prepared-publication-commits.json still records pushed=false. Saved pre-push PR
+snapshots match the old heads above, but this audit did not refresh remote state.
+Root should compare the live expected old heads before fast-forward publication,
+then refresh exact pushed-head CI/docs/body links. Do not label local success as
+upstream CI, or request trust/ready labels prohibited by the repository policy.
+Keep all three PRs draft and preserve incomplete human, native, changed-path ERF
+LLM, broader serving/quality and actual upstream execution items. Broad user
+authorization does not establish personal human review or testing, but the rules
+do not explicitly create another permission gate for every already-authorized
+update to an existing draft. New-main runtime totals/restoration/provenance must
+come from their independently audited final results, not this source audit or
+historical baseline evidence. OpenMP 02 is still pending here.

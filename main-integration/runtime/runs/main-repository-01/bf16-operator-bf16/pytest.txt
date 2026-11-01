@@ -1,0 +1,27 @@
+W1101 05:02:33.573000 9128 torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+W1101 05:02:33.615000 9128 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+W1101 05:02:33.634000 9128 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+/home/vllmtest/vllm-validation/main-venv/lib/python3.12/site-packages/pytest_asyncio/plugin.py:300: PytestDeprecationWarning: The configuration option "asyncio_default_fixture_loop_scope" is unset.
+The event loop scope for asynchronous fixtures will default to the "fixture" caching scope. Future versions of pytest-asyncio will default the loop scope for asynchronous fixtures to "function" scope. Set the default fixture loop scope explicitly in order to avoid unexpected behavior in the future. Valid fixture loop scopes are: "function", "class", "module", "package", "session"
+
+  warnings.warn(PytestDeprecationWarning(_DEFAULT_FIXTURE_LOOP_SCOPE_UNSET))
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-9.2.0, pluggy-1.7.0 -- /home/vllmtest/vllm-validation/main-venv/bin/python
+cachedir: .pytest_cache
+rootdir: /home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/bf16-operator-bf16/source
+configfile: pyproject.toml
+plugins: asyncio-1.4.1, anyio-4.15.1
+asyncio: mode=Mode.STRICT, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collecting ... collected 59 items / 58 deselected / 1 selected
+
+tests/kernels/core/test_cpu_activation.py::test_cpu_silu_and_mul_bf16_rounds_to_nearest_even PASSED
+
+=============================== warnings summary ===============================
+vllm/__init__.py:7
+  /home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/bf16-operator-bf16/source/vllm/__init__.py:7: RuntimeWarning: Failed to read commit hash:
+  No module named 'vllm._version'
+    from .version import __version__, __version_tuple__  # isort:skip
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+- generated xml file: /home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/bf16-operator-bf16/pytest.xml -
+================= 1 passed, 58 deselected, 1 warning in 16.38s =================

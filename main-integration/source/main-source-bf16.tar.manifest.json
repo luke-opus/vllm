@@ -1,0 +1,11 @@
+{
+  "variant": "bf16",
+  "main_commit": "e0d00e4b8eb0c89ec30921d0695cfdd409e9c211",
+  "index_tree": "8b860fc3eba99f6eccfe4b473c00a829b7ea9af3",
+  "archive": "main-source-bf16.tar.gz",
+  "sha256": "a0e956d990d50a69928d2db91a11155b5ff427db1c2ddc6c67438792d894dd96",
+  "size": 47716930,
+  "tracked_files": 8777,
+  "source_manifest": "work/main-integration/bf16-frozen-source.json",
+  "scope": "Independent original patch plus existing followups on pinned main; hooks passed. Docs and build/runtime validation still in progress."
+}

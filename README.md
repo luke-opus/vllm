@@ -6,6 +6,13 @@ builds, selected repository tests, actual Linux child loading and a real-weight
 model smoke comparison. Target execution uses QEMU, not physical RISC-V silicon.
 Production source is read from the exact Git refs; no candidate fix is synthesized.
 
+The [pinned-main integration records](main-integration/README.md) cover upstream
+`e0d00e4b8eb0c89ec30921d0695cfdd409e9c211` and the three updated draft heads.
+They include independently rebuilt production units, actual repository and
+default CPU model/worker comparisons, exact source-archive reproduction, and
+retained failures. Earlier-base records below remain separate. QEMU execution
+does not establish native hardware, upstream CI, or human review.
+
 ## Requirements
 
 - Node.js (tested: 24.19.0; no npm packages required).

@@ -1,0 +1,6 @@
+{
+  "sys_prefix": "/home/vllmtest/vllm-validation/main-venv",
+  "present": false,
+  "vllm_import_attempted": false,
+  "reason": "importlib.metadata.PackageNotFoundError: vllm"
+}

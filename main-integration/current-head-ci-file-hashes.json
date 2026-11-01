@@ -1,0 +1,82 @@
+[
+  {
+    "path": "current-head-ci/current-head-ci-audit.txt",
+    "bytes": 3837,
+    "sha256": "814380357debefa73c0c49c9c82b3441d150064aed1b7ccd0d631bc50ccb581d"
+  },
+  {
+    "path": "current-head-ci/job-124765985956-annotations.json",
+    "bytes": 498,
+    "sha256": "3abb88d9c81a735af20c64f3b761fc1133c7157ef5910c9cc146c3150facfdb9"
+  },
+  {
+    "path": "current-head-ci/job-124765985956-logs.txt",
+    "bytes": 3470,
+    "sha256": "9d0b3725866a3a3e8b600c897085f40ab93cc4fa3d10268b0ef8401675f5e3e1"
+  },
+  {
+    "path": "current-head-ci/job-124765986511-annotations.json",
+    "bytes": 498,
+    "sha256": "185dc46fc6436935ea736657c00edab47c7497370173fcf204e8620e01916dec"
+  },
+  {
+    "path": "current-head-ci/job-124765986511-logs.txt",
+    "bytes": 3471,
+    "sha256": "fa771974e0531b600cd4da1e1776064d3298f6e78e4b3840513ca04801052054"
+  },
+  {
+    "path": "current-head-ci/job-124765988920-annotations.json",
+    "bytes": 498,
+    "sha256": "99e7125dfbf405e99e6adef6a831a77f21bb08ac28d21aa2b67edd67d5ef7d66"
+  },
+  {
+    "path": "current-head-ci/job-124765988920-logs.txt",
+    "bytes": 3470,
+    "sha256": "fb5f80416d3a19cf0951986f8fcae0ad496d4445828920809bef02ce1c5723d8"
+  },
+  {
+    "path": "current-head-ci/job-124766081009-annotations.json",
+    "bytes": 498,
+    "sha256": "3abb88d9c81a735af20c64f3b761fc1133c7157ef5910c9cc146c3150facfdb9"
+  },
+  {
+    "path": "current-head-ci/job-124766081009-logs.txt",
+    "bytes": 3471,
+    "sha256": "b23c6c194777354c27445c27ef5f41cc85513456621ba00dbb83db0cc403c380"
+  },
+  {
+    "path": "current-head-ci/rtd-35554831-api.json",
+    "bytes": 5278,
+    "sha256": "4db1f087392cd54c83f508f97323186c927ffd67074b20f679128a70a8044a44"
+  },
+  {
+    "path": "current-head-ci/rtd-35554831-api.txt",
+    "bytes": 3229,
+    "sha256": "f61006446e0f11a8ddc3c5238b6f32c434329080f7119df90f21cc6f0403eba1"
+  },
+  {
+    "path": "current-head-ci/rtd-35554832-api.json",
+    "bytes": 5278,
+    "sha256": "1c0ebb25a816f73e911292432a2144ee1c5f76dccf27747c7e04fc21203b3edc"
+  },
+  {
+    "path": "current-head-ci/rtd-35554832-api.txt",
+    "bytes": 3229,
+    "sha256": "e68a008ffbd0f916f183dccbf1a76082972e7837ad08c8b8b0d26513e0affd32"
+  },
+  {
+    "path": "current-head-ci/rtd-35554833-api.json",
+    "bytes": 5273,
+    "sha256": "72324ac2ae382fb0ed9a7d1bea505434b748b43f9a598cbd7848363d9a5e920a"
+  },
+  {
+    "path": "current-head-ci/rtd-35554833-api.txt",
+    "bytes": 3224,
+    "sha256": "c1e7115a2b80ae9b46ed3a07c07d5605e605132701a0ca896d0164f557e0509e"
+  },
+  {
+    "path": "current-head-ci/publication-files.json",
+    "bytes": 2693,
+    "sha256": "8512ac41011d6996cae30b4fcc7041cf421a40868e33ecc57bac3fdc33df6a00"
+  }
+]

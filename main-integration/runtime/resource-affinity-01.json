@@ -1,0 +1,103 @@
+{
+  "observed_at_utc": "2026-11-01T05:12:05.464132+00:00",
+  "read_only": true,
+  "scope": "Process main-thread affinities observed without modification; not a performance benchmark",
+  "processes": [
+    {
+      "pid": 8354,
+      "ppid": 8353,
+      "command": "/home/vllmtest/vllm-validation/main-venv/bin/python supervise-main.py --execute --kind repository --run-id main-repository-01",
+      "sched_getaffinity": [
+        0,
+        1
+      ],
+      "Cpus_allowed_list": "0-1",
+      "VmRSS": "16380 kB",
+      "VmHWM": "16380 kB"
+    },
+    {
+      "pid": 8355,
+      "ppid": 8354,
+      "command": "/home/vllmtest/vllm-validation/main-venv/bin/python /home/vllmtest/vllm-validation/main-integration-runtime/run-main-repository.py --execute --run-id main-repository-01 --timeout 3600",
+      "sched_getaffinity": [
+        0,
+        1
+      ],
+      "Cpus_allowed_list": "0-1",
+      "VmRSS": "17852 kB",
+      "VmHWM": "17852 kB"
+    },
+    {
+      "pid": 9290,
+      "ppid": 9288,
+      "command": "/home/vllmtest/vllm-validation/main-venv/bin/python supervise-main.py --execute --kind bf16 --run-id main-bf16-model-01",
+      "sched_getaffinity": [
+        0,
+        1
+      ],
+      "Cpus_allowed_list": "0-1",
+      "VmRSS": "16316 kB",
+      "VmHWM": "16316 kB"
+    },
+    {
+      "pid": 9291,
+      "ppid": 9290,
+      "command": "/home/vllmtest/vllm-validation/main-venv/bin/python /home/vllmtest/vllm-validation/main-integration-runtime/run-main-model-pair.py --execute --run-id main-bf16-model-01 --timeout 3600 --kind bf16",
+      "sched_getaffinity": [
+        0,
+        1
+      ],
+      "Cpus_allowed_list": "0-1",
+      "VmRSS": "23672 kB",
+      "VmHWM": "24020 kB"
+    },
+    {
+      "pid": 9297,
+      "ppid": 9291,
+      "command": "/home/vllmtest/vllm-validation/main-venv/bin/python /home/vllmtest/vllm-validation/main-integration-runtime/check-main-model.py --kind bf16 --variant base --source /home/vllmtest/vllm-validation/main-integration-runtime/runs/main-bf16-model-01/source --output /home/vllmtest/vllm-validation/main-integration-runtime/runs/main-bf16-model-01/base.json --expected-library /home/vllmtest/vllm-validation/main-integration-build/build/base/_C.abi3.so --expected-sha256 57f4cc187d2c6502f176333331f7ba604926aa360710872478eae021d829b444",
+      "sched_getaffinity": [
+        0,
+        1
+      ],
+      "Cpus_allowed_list": "0-1",
+      "VmRSS": "782704 kB",
+      "VmHWM": "782704 kB"
+    },
+    {
+      "pid": 9578,
+      "ppid": 9573,
+      "command": "/home/vllmtest/vllm-validation/main-venv/bin/python resource-monitor.py --exit-marker /home/vllmtest/vllm-validation/main-integration-runtime/bf16-supervisor-01.exit.txt --output /home/vllmtest/vllm-validation/main-integration-runtime/resource-bf16-monitor.json",
+      "sched_getaffinity": [
+        0,
+        1
+      ],
+      "Cpus_allowed_list": "0-1",
+      "VmRSS": "12704 kB",
+      "VmHWM": "12704 kB"
+    },
+    {
+      "pid": 9727,
+      "ppid": 8355,
+      "command": "/home/vllmtest/vllm-validation/main-venv/bin/python -m pytest -p main_import_probe -v -s tests/platforms/test_cpu.py -k riscv_preloads_bundled_openmp --junitxml=/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/openmp-config-base/pytest.xml --basetemp=/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/openmp-config-base/pytest-tmp",
+      "sched_getaffinity": [
+        0,
+        1
+      ],
+      "Cpus_allowed_list": "0-1",
+      "VmRSS": "513380 kB",
+      "VmHWM": "513380 kB"
+    },
+    {
+      "pid": 9910,
+      "ppid": 9908,
+      "command": "/home/vllmtest/vllm-validation/main-venv/bin/python -",
+      "sched_getaffinity": [
+        0,
+        1
+      ],
+      "Cpus_allowed_list": "0-1",
+      "VmRSS": "10596 kB",
+      "VmHWM": "10596 kB"
+    }
+  ]
+}

@@ -1,0 +1,64 @@
+{
+  "script_sha256": "8904e4f1c8619001a422502b9063a19ccf27f87f061b4e03948f7349282bb9e8",
+  "variant": "base",
+  "source_identity": {
+    "commit": "e0d00e4b8eb0c89ec30921d0695cfdd409e9c211",
+    "archive": "main-source-base.tar.gz",
+    "sha256": "4e29a49187b1b2b04f5b064fc39f4ef4fd9161898db692a88b7cf2e9d7cb69c6",
+    "size": 47999299,
+    "members": 9914,
+    "tracked_files": 8776,
+    "command": "git archive --format=tar --prefix=main-source-base/ e0d00e4b8eb0c89ec30921d0695cfdd409e9c211 | gzip -n",
+    "scope": "Unmodified pinned upstream main source; no candidate changes; prepared for independent current-main builds."
+  },
+  "command": ": && /usr/bin/clang++-18 -fPIC -O3 -DNDEBUG   -shared  -o _C.abi3.so CMakeFiles/dnnl_ext.dir/csrc/cpu/dnnl_helper.cpp.o CMakeFiles/_C.dir/csrc/cpu/sgl-kernels/gemm_int4.cpp.o CMakeFiles/_C.dir/csrc/cpu/dnnl_kernels.cpp.o CMakeFiles/_C.dir/csrc/cpu/cpu_wna16.cpp.o CMakeFiles/_C.dir/csrc/cpu/activation.cpp.o CMakeFiles/_C.dir/csrc/cpu/sgl-kernels/fla.cpp.o CMakeFiles/_C.dir/csrc/cpu/utils.cpp.o CMakeFiles/_C.dir/csrc/cpu/block_table.cpp.o CMakeFiles/_C.dir/csrc/cpu/input_batch.cpp.o CMakeFiles/_C.dir/csrc/cpu/spec_decode_utils.cpp.o CMakeFiles/_C.dir/csrc/cpu/layernorm.cpp.o CMakeFiles/_C.dir/csrc/cpu/mla_decode.cpp.o CMakeFiles/_C.dir/csrc/cpu/pos_encoding.cpp.o CMakeFiles/_C.dir/csrc/cpu/mamba_cpu.cpp.o CMakeFiles/_C.dir/csrc/cpu/dynamic_4bit_int_moe_cpu.cpp.o CMakeFiles/_C.dir/csrc/cpu/cpu_fused_moe.cpp.o CMakeFiles/_C.dir/csrc/cpu/cpu_attn.cpp.o CMakeFiles/_C.dir/csrc/cpu/cpu_isa.cpp.o CMakeFiles/_C.dir/csrc/cpu/sampling_kernels.cpp.o CMakeFiles/_C.dir/csrc/cpu/fp8_quant.cpp.o CMakeFiles/_C.dir/csrc/cpu/torch_bindings.cpp.o  -Wl,-rpath,/home/vllmtest/vllm-validation/main-venv/lib/python3.12/site-packages/torch/lib:  -lnuma  /home/vllmtest/vllm-validation/main-venv/lib/python3.12/site-packages/torch/lib/libc10.so  -lnuma  /home/vllmtest/vllm-validation/main-venv/lib/python3.12/site-packages/torch/lib/libtorch.so  _deps/onednn-build/src/libdnnl.a  -ldl  /home/vllmtest/vllm-validation/main-venv/lib/python3.12/site-packages/torch/lib/libc10.so  -Wl,--no-as-needed,\"/home/vllmtest/vllm-validation/main-venv/lib/python3.12/site-packages/torch/lib/libtorch_cpu.so\" -Wl,--as-needed  /home/vllmtest/vllm-validation/main-venv/lib/python3.12/site-packages/torch/lib/libc10.so  -Wl,--no-as-needed,\"/home/vllmtest/vllm-validation/main-venv/lib/python3.12/site-packages/torch/lib/libtorch.so\" -Wl,--as-needed -L/usr/lib/llvm-18/lib -Wl,-rpath,/usr/lib/llvm-18/lib -lomp && :",
+  "returncode": 0,
+  "timed_out": false,
+  "object_count": 21,
+  "reused_onednn": true,
+  "library": "/home/vllmtest/vllm-validation/main-integration-build/build/base/_C.abi3.so",
+  "library_sha256": "57f4cc187d2c6502f176333331f7ba604926aa360710872478eae021d829b444",
+  "bytes": 215412368
+}
+{
+  "variant": "base",
+  "torch_version": "2.14.0+cpu",
+  "torch_file": "/home/vllmtest/vllm-validation/main-venv/lib/python3.12/site-packages/torch/__init__.py",
+  "library_sha256": "57f4cc187d2c6502f176333331f7ba604926aa360710872478eae021d829b444",
+  "gathered": [
+    [
+      5,
+      6
+    ],
+    [
+      0,
+      0
+    ]
+  ],
+  "input_ids": [
+    10,
+    11
+  ],
+  "next_prefill_tokens": [
+    [
+      12
+    ]
+  ],
+  "greedy_tokens": [
+    1,
+    0
+  ],
+  "loaded_maps": [
+    "3941400000-3942368000 r-xp 00000000 fd:01 1603466                        /home/vllmtest/vllm-validation/main-integration-build/build/base/_C.abi3.so",
+    "3942368000-3942400000 r--p 00f67000 fd:01 1603466                        /home/vllmtest/vllm-validation/main-integration-build/build/base/_C.abi3.so",
+    "3942400000-3942403000 rw-p 00fff000 fd:01 1603466                        /home/vllmtest/vllm-validation/main-integration-build/build/base/_C.abi3.so",
+    "394249a000-394258e000 r-xp 00000000 fd:01 20743                          /usr/lib/llvm-18/lib/libomp.so.5",
+    "394258e000-3942590000 r--p 000f4000 fd:01 20743                          /usr/lib/llvm-18/lib/libomp.so.5",
+    "3942590000-3942596000 rw-p 000f6000 fd:01 20743                          /usr/lib/llvm-18/lib/libomp.so.5",
+    "3957d64000-3957da7000 r-xp 00000000 fd:01 1346020                        /home/vllmtest/vllm-validation/main-venv/lib/python3.12/site-packages/torch/lib/libgomp.so.1",
+    "3957da7000-3957da8000 r--p 00042000 fd:01 1346020                        /home/vllmtest/vllm-validation/main-venv/lib/python3.12/site-packages/torch/lib/libgomp.so.1",
+    "3957da8000-3957da9000 rw-p 00043000 fd:01 1346020                        /home/vllmtest/vllm-validation/main-venv/lib/python3.12/site-packages/torch/lib/libgomp.so.1",
+    "3957da9000-3957daf000 rw-p 00047000 fd:01 1346020                        /home/vllmtest/vllm-validation/main-venv/lib/python3.12/site-packages/torch/lib/libgomp.so.1"
+  ],
+  "scope": "Real complete DSO load and three new CPU operator calls; not repository/model validation"
+}

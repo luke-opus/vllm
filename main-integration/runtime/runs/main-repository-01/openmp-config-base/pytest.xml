@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="2" skipped="0" tests="6" time="20.318" timestamp="2026-11-01T05:11:50.454377+00:00" hostname="vllm-riscv-validation"><testcase classname="tests.platforms.test_cpu" name="test_riscv_preloads_bundled_openmp_for_thread_binding[torch.libs--True]" time="7.985"><failure message="AssertionError: assert '' == '/home/vllmte.../libgomp.so.1'&#10;  &#10;  - /home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/openmp-config-base/pytest-tmp/test_riscv_preloads_bundled_op0/torch.libs/libgomp.so.1">monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x3a8c4b47a0&gt;
+tmp_path = PosixPath('/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/openmp-config-base/pytest-tmp/test_riscv_preloads_bundled_op0')
+library_dir = 'torch.libs', ld_preload = '', append_libgomp = True
+
+    @pytest.mark.parametrize(
+        ("library_dir", "ld_preload", "append_libgomp"),
+        [
+            ("torch.libs", "", True),
+            ("torch/lib", "/opt/lib/libcustom.so", True),
+            ("torch/lib", "/opt/lib/libgomp.so.1", False),
+            ("torch/lib", "/opt/lib/libomp.so", False),
+            ("torch/lib", "/opt/lib/libiomp5.so", False),
+            (None, "/opt/lib/libcustom.so", False),
+        ],
+    )
+    def test_riscv_preloads_bundled_openmp_for_thread_binding(
+        monkeypatch: pytest.MonkeyPatch,
+        tmp_path: Path,
+        library_dir: str | None,
+        ld_preload: str,
+        append_libgomp: bool,
+    ) -&gt; None:
+        monkeypatch.setattr(os, "environ", os.environ.copy())
+        config = VllmConfig(device_config=DeviceConfig(device="cpu"))
+        torch_pkg = tmp_path / "torch"
+        torch_pkg.mkdir()
+        libgomp = None
+        if library_dir is not None:
+            libgomp = tmp_path / library_dir / "libgomp.so.1"
+            libgomp.parent.mkdir(parents=True, exist_ok=True)
+            libgomp.touch()
+        monkeypatch.setattr(torch, "__file__", str(torch_pkg / "__init__.py"))
+        monkeypatch.setattr("platform.system", lambda: "Linux")
+        monkeypatch.setattr("platform.machine", lambda: "riscv64")
+        monkeypatch.setattr(os, "sched_getaffinity", lambda pid: {0, 1}, raising=False)
+        monkeypatch.setenv("LD_PRELOAD", ld_preload)
+    
+        CpuPlatform.check_and_update_config(config)
+    
+        expected = ld_preload
+        if append_libgomp:
+            expected = ":".join(filter(None, (ld_preload, str(libgomp))))
+&gt;       assert os.environ["LD_PRELOAD"] == expected
+E       AssertionError: assert '' == '/home/vllmte.../libgomp.so.1'
+E         
+E         - /home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/openmp-config-base/pytest-tmp/test_riscv_preloads_bundled_op0/torch.libs/libgomp.so.1
+
+tests/platforms/test_cpu.py:53: AssertionError</failure></testcase><testcase classname="tests.platforms.test_cpu" name="test_riscv_preloads_bundled_openmp_for_thread_binding[torch/lib-/opt/lib/libcustom.so-True]" time="1.709"><failure message="AssertionError: assert '/opt/lib/libcustom.so' == '/opt/lib/lib.../libgomp.so.1'&#10;  &#10;  - /opt/lib/libcustom.so:/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/openmp-config-base/pytest-tmp/test_riscv_preloads_bundled_op1/torch/lib/libgomp.so.1&#10;  + /opt/lib/libcustom.so">monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x3a8c86df10&gt;
+tmp_path = PosixPath('/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/openmp-config-base/pytest-tmp/test_riscv_preloads_bundled_op1')
+library_dir = 'torch/lib', ld_preload = '/opt/lib/libcustom.so'
+append_libgomp = True
+
+    @pytest.mark.parametrize(
+        ("library_dir", "ld_preload", "append_libgomp"),
+        [
+            ("torch.libs", "", True),
+            ("torch/lib", "/opt/lib/libcustom.so", True),
+            ("torch/lib", "/opt/lib/libgomp.so.1", False),
+            ("torch/lib", "/opt/lib/libomp.so", False),
+            ("torch/lib", "/opt/lib/libiomp5.so", False),
+            (None, "/opt/lib/libcustom.so", False),
+        ],
+    )
+    def test_riscv_preloads_bundled_openmp_for_thread_binding(
+        monkeypatch: pytest.MonkeyPatch,
+        tmp_path: Path,
+        library_dir: str | None,
+        ld_preload: str,
+        append_libgomp: bool,
+    ) -&gt; None:
+        monkeypatch.setattr(os, "environ", os.environ.copy())
+        config = VllmConfig(device_config=DeviceConfig(device="cpu"))
+        torch_pkg = tmp_path / "torch"
+        torch_pkg.mkdir()
+        libgomp = None
+        if library_dir is not None:
+            libgomp = tmp_path / library_dir / "libgomp.so.1"
+            libgomp.parent.mkdir(parents=True, exist_ok=True)
+            libgomp.touch()
+        monkeypatch.setattr(torch, "__file__", str(torch_pkg / "__init__.py"))
+        monkeypatch.setattr("platform.system", lambda: "Linux")
+        monkeypatch.setattr("platform.machine", lambda: "riscv64")
+        monkeypatch.setattr(os, "sched_getaffinity", lambda pid: {0, 1}, raising=False)
+        monkeypatch.setenv("LD_PRELOAD", ld_preload)
+    
+        CpuPlatform.check_and_update_config(config)
+    
+        expected = ld_preload
+        if append_libgomp:
+            expected = ":".join(filter(None, (ld_preload, str(libgomp))))
+&gt;       assert os.environ["LD_PRELOAD"] == expected
+E       AssertionError: assert '/opt/lib/libcustom.so' == '/opt/lib/lib.../libgomp.so.1'
+E         
+E         - /opt/lib/libcustom.so:/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/openmp-config-base/pytest-tmp/test_riscv_preloads_bundled_op1/torch/lib/libgomp.so.1
+E         + /opt/lib/libcustom.so
+
+tests/platforms/test_cpu.py:53: AssertionError</failure></testcase><testcase classname="tests.platforms.test_cpu" name="test_riscv_preloads_bundled_openmp_for_thread_binding[torch/lib-/opt/lib/libgomp.so.1-False]" time="1.016" /><testcase classname="tests.platforms.test_cpu" name="test_riscv_preloads_bundled_openmp_for_thread_binding[torch/lib-/opt/lib/libomp.so-False]" time="1.059" /><testcase classname="tests.platforms.test_cpu" name="test_riscv_preloads_bundled_openmp_for_thread_binding[torch/lib-/opt/lib/libiomp5.so-False]" time="1.106" /><testcase classname="tests.platforms.test_cpu" name="test_riscv_preloads_bundled_openmp_for_thread_binding[None-/opt/lib/libcustom.so-False]" time="0.966" /></testsuite></testsuites>

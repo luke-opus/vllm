@@ -1,0 +1,12 @@
+{
+  "old_inventory_unchanged": true,
+  "old_freeze_unchanged": true,
+  "changed_packages": {
+    "transformers": [
+      "5.20.2",
+      "5.22.0"
+    ]
+  },
+  "torch_files_unchanged": true,
+  "torch_files_checked": 9439
+}

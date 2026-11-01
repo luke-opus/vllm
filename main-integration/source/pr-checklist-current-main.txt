@@ -1,0 +1,266 @@
+PR checklist: pinned-main integration of vLLM RISC-V drafts #64078, #64079, #64080
+Audit date: 2026-11-01. Read-only source/PR review; this report, the companion
+cloud-v-monitor-20261101.json, and the authorized #58699 disposition appended to
+duplicate-scan.json are the only local evidence files written by this audit.
+
+Overall: the frozen candidates have complete applicable local hook and strict/API
+documentation results. The existing drafts still describe the old source heads.
+New-main repository/model validation is running or awaiting its final audited
+results; no result is inferred from preparation, an old build, or a queued native
+job. Physical RVV, upstream CI, broader model/serving validation, and the human
+submitter's personal review/test confirmation remain unfulfilled. This is not an
+all-requirements-complete or ready-for-review declaration.
+
+Inputs reviewed
+---------------
+Current rules at e0d00e4b8eb0c89ec30921d0695cfdd409e9c211: AGENTS.md,
+tests/AGENTS.md, .agents/skills/pr-checklist/SKILL.md, contributing README,
+.github/PULL_REQUEST_TEMPLATE.md, and the unmodified .pre-commit-config.yaml.
+Also reviewed: all three *-frozen.patch and *-frozen-source.json records,
+candidate-check-results.json, check-environment.json, duplicate-scan.json,
+prepared-publication-commits.json, actual new commit metadata, and all nine
+paginated pre-push comments/reviews/inline JSON files supplied by the root agent.
+
+Frozen source identity, relative to the pinned main above:
+  ERF:    tree 94453352d881e58ebf423b67d7ccea2ba449eef5; 3 files, +16/-9.
+  BF16:   tree 8b860fc3eba99f6eccfe4b473c00a829b7ea9af3; 5 files, +92/-0.
+  OpenMP: tree 2cc5383ab7ca9209554779029edb9ccc31a41432; 5 files, +48/-4.
+At audit, each candidate's tracked worktree equals its index, its tree matches
+the frozen record, and it has no untracked files. Temporary docs configurations
+were removed. The new local publication heads exactly reproduce these trees:
+  #64078 ec0fbf5e9b3e9d796ccae667a437f2e97c3f9cde
+  #64079 6592612016059859dff1e93bd534edc1a5737615
+  #64080 dfdc85947fe914d04906f5d0206c020c208bd400
+prepared-publication-commits.json says pushed=false. Each has a normal merge of
+the old PR head and pinned main followed by a small follow-up, preserving history.
+
+1. Design Fit
+-------------
+1.1 Core impact: small targeted correctness/policy changes; no scheduler,
+model-runner, public interface, new backend, or synchronization changes.
+
+1.2 Reuse: ERF expands the existing activation suite. BF16 uses the shared
+production conversion helper, an existing operator regression, and a small new
+compiled-header test because activation outputs cannot cover all NaN/tie/overflow
+bit cases. OpenMP adds RISCV to the existing Linux policy and extends the existing
+platform suite; it does not add another preload implementation.
+
+1.3 Complexity: each production-code change is under 50 lines. The 72-line BF16
+fixture compiles the actual header, with 18 independent expected bit patterns,
+per-module temporary storage, and checked compiler execution. It introduces no
+runtime package dependency. Requiring a working C++20 compiler is a test/runtime
+environment constraint, not something hidden by a skip.
+
+1.4 Correctness, compatibility, and precise claims:
+  #64078: vfsgnj defines every active output lane in both FP32 vector erf methods
+  and copies the input sign, including negative zero. It removes dependence on
+  masked-off lane contents. The exact and tanh public operator paths share the
+  existing deterministic regression setup. This is not a new GELU mode or a
+  performance claim. A physical implementation may choose undisturbed agnostic
+  lanes; a native base run need not reproduce the QEMU all-ones NaNs. Preserve
+  native base results and require fixed numerical/special-value checks, without
+  manufacturing a hardware failure. Changed-path real-model coverage remains
+  unproved; a dense model using Torch GELU is not ERF coverage.
+
+  #64079: finite software FP32-to-BF16 conversion uses round-to-nearest-even;
+  FP32 NaNs become canonical positive quiet BF16 NaNs. NaN sign/payload retention
+  is not promised. All helper users, including scalar fallback users beyond RVV,
+  get this behavior, so output changes are expected and shared-path compatibility
+  matters. The SiLU test distinguishes 0x3d87 truncation from 0x3d88 rounding;
+  the compiled-header cases cover signed zero, infinities, small-payload/negative
+  NaNs, both tie parities/signs, subnormals and finite overflow. The claim is the
+  conversion contract, not end-to-end accuracy improvement or logprob equality.
+
+  #64080: RISC-V uses the existing bundled-libgomp search and preload policy on
+  Linux. Existing OpenMP preload choices and absent bundled libraries remain
+  respected. Real VllmConfig/DeviceConfig construction and the CpuPlatform entry
+  point are used; only external OS/architecture/affinity/Torch-file inputs are
+  simulated in the unit test. Loading both GOMP and LLVM in prior actual Linux
+  runs means no conflict-elimination or throughput claim is justified.
+
+1.5 Tradeoffs: no measured speedup claimed and no new steady-state device/host
+synchronization. VLLM_GPU_SYNC_CHECK is not applicable to these CPU-only changes.
+BF16 intentionally changes outputs. OpenMP alters child startup environment;
+multi-thread, NUMA, full-server, and physical-machine behavior remain separate
+coverage gaps. ERF and BF16 are independently scoped, so neither PR alone claims
+to fix the other's bug.
+
+1.6 MRV2: no model-runner code is changed. Pinned main introduces a new default
+CPU MRV2 path; old-model evidence cannot certify this integration. New runtime
+validation must identify the actual main source, complete DSO, and runner used.
+
+Duplicate-work/significance: duplicate-scan.json records the 04:36 UTC scoped
+open-PR search and inspected alternatives. Exact helper/policy searches find the
+three subject PRs and no additional matching fix. #52858, #52933, #62440 and
+#58257 have distinct inspected file/operation scopes. The missing #58699
+disposition has now been closed with current anonymous GitHub API reads: it is
+"[CPU] Enable WNA16 int4 GEMM on AVX2-only x86 CPUs", and all five changed files
+were returned. Its x86 WNA16 scope does not touch the conversion helper, RISC-V
+erf methods, or Python preload policy. The original queries and non-exhaustive
+search limitation remain in the JSON. These changes address observable
+correctness/startup behavior, not mechanical busywork.
+
+2. Testing and Validation
+-------------------------
+2.1 Meaningful behavior: existing exact/tanh GELU tests exercise real registered
+operators; SiLU uses exact BF16 output equality; the boundary suite compiles the
+real helper without a stand-in. OpenMP's six configuration cases assert the exact
+resulting LD_PRELOAD, not only calls or absence of exceptions. Existing fake
+objects elsewhere in that platform file were not added by this diff. The new
+tests do not change tolerances, add reruns, skip/xfail, or hide a compiler failure.
+
+2.2 Verified local source checks:
+  All applicable original-config pre-commit hooks pass. ERF/BF16 passed first
+  attempts; OpenMP passed again after removing the obsolete tether allowlist
+  entry for the newly selected platform suite. No check configuration or SKIP
+  setting was used to weaken the result. See precommit-*-attempt*.txt.
+  All three complete strict MkDocs builds with API generation pass (exit 0):
+  ERF 225.62 s, BF16 223.61 s, OpenMP 219.05 s; 3026 API entries each. Original
+  mkdocs.yaml was unchanged. The temporary build configuration uses the verified
+  official NumPy inventory cache with its real base URL. Existing main INFO
+  broken-anchor diagnostics remain visible; strict success does not mean every
+  pre-existing unrelated link is repaired. See docs-*-strict.txt.
+
+2.3 Runtime evidence status:
+  Current-main complete-extension/repository/model runs: pending final results
+  and independent provenance/restoration audit at this report's cutoff. Do not
+  copy the old baseline's counts into a table labeled as these new source trees.
+  Record commands, actual OS exit codes, timeout state, DSO/source identities,
+  import probes, runner/backend/fallback, and both base/fixed outputs.
+
+  Prior immutable evidence remains useful historical support only:
+  - ERF old base 2 fail/2 pass versus fix 4 pass, complete operator failures and
+    fixes, plus independent header numerical/special-value checks.
+  - BF16 old base SiLU failure versus fixed pass; header 18 cases base 9 fail/
+    9 pass versus fixed 18 pass; old paired Pythia output changed 1 of 8 tokens,
+    one top-5 set, and 39 shared-prefix common logprobs max/mean absolute delta
+    0.387638/0.081195. This is output-change evidence, not numerical equivalence
+    or accuracy gain. Fixed live DSO maps exist; base live maps were not captured.
+    Inline-helper coverage is source tracing, not direct instrumentation.
+  - The separate old fixed-vs-HF smoke has 7/8 matching tokens and one warning;
+    check_logprobs_close's default top-k condition is not numeric logprob
+    equivalence. Its original terminal exit code is unknown.
+  - OpenMP old real mp/spawn comparison preserves all 8 tokens, texts and 40
+    returned logprobs with one fixed BF16 DSO. Both variants pass, map GOMP+LLVM,
+    use one Torch thread and affinity [0]. This is no reproduced baseline model
+    failure, multi-thread result or performance benchmark.
+  These model runs use the Transformers backend and existing Torch linear
+  fallback. Broader quality/serving checks and an ERF changed-path model remain
+  outstanding. Do not infer coverage from a model simply finishing.
+
+2.4 CI integration: the existing Arm CPU hardware job selects activation tests,
+but does not execute the RISC-V RVV path. BF16 explicitly adds the header suite
+command and source dependency in .buildkite/hardware_tests/cpu.yaml. OpenMP adds
+its platform suite and dependency in the existing CPU configuration job; its old
+tether exemption is removed. Upstream actual execution at the eventual pushed
+head remains pending. Remote pre-commit has a trust gate that explicitly forbids
+AI agents requesting verified/ready labels; do not request them or represent
+local hook success as upstream CI success.
+
+2.5 Native availability: cloud-v-monitor-20261101.json records recent anonymous
+public metric samples, including 30 advertised banana-pi-f3 free slots and fresh
+BPI telemetry. This is not assignment/eligibility, ISA proof, or native test
+execution. Global queue age cannot be attributed to this fork. The native job's
+own runner/log/result evidence is still required; no provider outage diagnosed.
+
+3. Code Quality and Style
+-------------------------
+3.1 Comments/helpers/format: production changes are concise; no redundant wrapper
+or new abstraction. Tests state the regression intent. No unrelated formatting
+change or tolerance modification. The only main-integration-specific cleanup is
+removing the now-obsolete OpenMP test tether exemption, required by actual wiring.
+
+3.2 Documentation: all three frozen trees contain CPU-page rendered documentation.
+ERF explicitly states approximate=none as GeluAndMul's default, selection by the
+model/operator, and no new switch. BF16 states automatic software conversion,
+canonical quiet NaNs, no new switch, and unchanged default dtype. OpenMP states
+Linux/RISC-V preload and the existing-runtime/no-bundled-library fallback.
+The CPU page is part of the established docs navigation. Earlier candidate preview
+and independent read/search evidence is retained, but the current remote ERF/BF16
+heads still lack their follow-up wording and BF16 boundary test. After pushing,
+refresh the exact new PR-branch/preview discoverability checks required by
+contributing README lines 273-287; a locally prepared tree is not a published PR
+head, and the independent preview is not upstream RTD success.
+
+3.3 Hook and commit rules, with exact execution environment:
+  AGENTS.md lines 59-61: "Always make sure `pre-commit` and its hooks are
+  installed" followed by `pre-commit install`.
+  contributing README lines 84-91 describes installation and automatic execution
+  on every commit. .pre-commit-config.yaml installs pre-commit and commit-msg;
+  its commit-msg signoff hook checks the configured name/email trailer.
+  The relevant AGENTS/.agents/.github/contributing rules contain no explicit
+  `commit-tree` prohibition. That absence is not a reason to bypass the mandatory
+  installed-hook workflow. Normal merge/commit is available and has been used.
+  Both shared hooks now exist and point to work/.venv/bin/python; new follow-up
+  logs show pre-commit and Sign-off Commit passing. No no-verify/SKIP bypass was
+  used. All six new commits have Codex attribution and a Signed-off-by matching
+  the author. Their ancestry and final trees were read from Git, not inferred.
+
+  Successful manual staged-check command (cwd each candidate):
+    PRE_COMMIT_HOME=/Users/luke/Documents/Codex/2026-10-27/chu/work/pre-commit-cache \
+      /Users/luke/Documents/Codex/2026-10-27/chu/work/.venv/bin/pre-commit run --show-diff-on-failure
+  No PATH override was required for those checks. Versions: pre-commit 4.7.0,
+  clang-format 23.1.3, Node 24.22.1, original pinned hook revisions.
+  Equivalent publication environment, used with normal commits:
+    export PATH="/Users/luke/Documents/Codex/2026-10-27/chu/work/.venv/bin:$PATH"
+    export PRE_COMMIT_HOME=/Users/luke/Documents/Codex/2026-10-27/chu/work/pre-commit-cache
+    /Users/luke/Documents/Codex/2026-10-27/chu/work/.venv/bin/pre-commit install --install-hooks
+  The actual installed hook embeds the venv interpreter, so no system Python is
+  required. No further reinstall is needed while these verified hooks remain.
+
+4. Pull Request Contents
+------------------------
+4.1 Current snapshots: all three are open drafts, mergeable=true and
+mergeable_state=blocked, with bug/documentation/cpu labels (OpenMP also ci/build).
+The REST body snapshots were saved around 04:43:22 UTC; this is a point-in-time
+read, not current-head CI certification. Their base metadata a9b727a is an ancestor
+of pinned e0d00e4, verified locally. Do not describe a pinned snapshot as a promise
+to match the indefinitely moving upstream main.
+
+4.2 Feedback: the newly fetched paginated conversations have exactly two bot
+comments each and no submitted reviews or inline comments. Welcome/CI-policy
+and RTD-preview notices create no unaddressed human code concern. Preview URLs
+in comments do not prove availability or build success. Existing descriptions
+already cover the important root causes, narrow claims, related work, AI use and
+evidence limits. There is no new substantive comment requiring a reply; no
+external message or re-review request was sent by this audit.
+
+4.3 Required body refresh when the new heads are pushed:
+  Keep Overview / Claims / Validation / Details and the template checklist.
+  Keep current bracketed Bugfix/CPU/RISC-V title tags. Summarize new-main results
+  separately from old ca8dbccf evidence, with exact source/head/tree and immutable
+  evidence links. Do not repeat long low-level logs in the body.
+  #64078: replace the claim that default/enablement docs are only a candidate
+  after the pushed head actually contains them. Preserve changed-path model gap.
+  #64079: likewise update docs and 18-case/CI follow-up status only after push.
+  Keep conversion/output-change limits; do not imply same tokens or accuracy.
+  #64080: describe the main-only obsolete tether-exemption removal, with final
+  current-main worker results when audited. Preserve dual-runtime and no-perf
+  caveats. Do not claim the old model comparison establishes new MRV2 behavior.
+  Keep AI disclosure, draft state, and incomplete Testing and Validation. Code
+  Quality can be checked only with the actual published source/docs state and
+  corresponding required reading checks. Recheck DCO/head/checks after push.
+
+4.4 Human responsibility versus permission to improve an existing draft:
+  AGENTS.md 27-28: "Pure code-agent PRs are not allowed" and "The submitting human
+  must review every changed line and run relevant tests."
+  AGENTS.md 37 calls for this checklist "Before opening a PR (drafts included) or
+  requesting re-review". Skill frontmatter line 3 additionally includes "pushing
+  review fixes", so this report is required before such an update.
+  Skill line 124 says "the human submitter must confirm the required validation
+  before publishing the PR". Contributing README 208-217 assigns human review,
+  end-to-end validation, tests and AI disclosure responsibilities.
+  These are real unmet human facts; broad user authorization does not prove they
+  happened. The text does not explicitly impose a new prior-human-confirmation
+  gate on every code push to an already existing draft. Treating each follow-up
+  push as a new publishing event would be an additional interpretation. The user
+  authorized improvement/push of these patches. Accordingly, audited changes may
+  be pushed to the same drafts for review while keeping human/native/CI items
+  honestly incomplete; this does not waive the human rule or justify marking all
+  requirements satisfied, marking ready, opening another PR, or requesting review.
+
+Remaining concrete actions: finish and audit the running new-main results;
+publish validated same-draft source updates with preserved history; refresh
+bodies/immutable evidence and exact-head
+docs/CI checks. Physical allocation/execution, upstream trust/CI and human
+review/test facts cannot be manufactured by local code or general authorization.

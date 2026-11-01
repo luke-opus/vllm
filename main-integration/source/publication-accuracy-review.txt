@@ -1,0 +1,61 @@
+Independent publication accuracy review
+=======================================
+Review scope: local read-only inspection of prepare-pr-bodies.py, README.draft.md,
+stage-public-evidence.py, retained PR overview/claims/details, completed repository
+and BF16 model records, prepared source commit trees, and staged text manifests.
+No source edits, guest access, new tests, external messages or pushes were made.
+Only this report was written.
+
+Finding: no concrete accuracy defect requiring a change was found in the reviewed
+completed-result prose or the conditional PR generator. OpenMP02 was still active:
+its pair-results.json was absent at this inspection, and it is not counted as pass.
+
+Verified completed evidence:
+- Repository has 11 groups, 130 executions, 116 passes, 14 expected baseline
+  assertion failures, zero errors/skips. Every group's expected behavior was
+  confirmed. Actual outer exit is 0, timeout=false, independent audit passed.
+  The report SHA256 matches the independent supervisor's recorded hash.
+- BF16 base and fixed children exit 0, timeout=false, restore their changed path,
+  and report shutdown_returned=true. Independent outer audit passes and its
+  recorded report hash matches the actual pair report.
+- The actual worker class on both sides is CPUWorker, with default
+  StandaloneCPUModelRunner and use_v2_model_runner=true. Both have one Torch
+  thread, affinity [0, 1] and empty runtime/startup LD_PRELOAD. Source and fixed
+  model parameters match; base/fixed resolve to their distinct complete DSOs.
+- Outputs match at 7/8 token positions. The first output's token 15 changes to
+  13 (period to comma); the second output is identical. The 39 common returned
+  logprobs at matching prefixes have maximum absolute difference
+  0.3876304626464844 and mean 0.08119453527988532. One returned top-5 set changes.
+- Both actual profiles record 24 cache and 24 attention calls plus standalone
+  input/block/sampling operators. Prose correctly avoids equating 26 oneDNN
+  handler constructions with proof of a specific oneDNN forward kernel.
+- Three prepared commit trees match their frozen tree IDs exactly.
+- All currently staged manifest entries were rehashed: build 147, source 30,
+  archive 11; zero byte-count/hash mismatches and zero file symlinks.
+
+Claim boundaries checked:
+- No completed prose promotes model smoke to quality improvement, numerical
+  equivalence, or full-vocabulary evaluation.
+- Baseline pytest failures remain explicit failures, not passing tests.
+- QEMU is explicitly distinguished from native hardware and upstream CI.
+- CPU CI command selection is described separately from actual native execution.
+- ERF changed-path model coverage remains unproved; the bounded model search is
+  not presented as universal absence, and the BF16 smoke does not substitute.
+- Human review/test confirmation remains unchecked and the PRs remain drafts.
+- Prepared PR text is not written until repository, BF16 and OpenMP02 reports
+  say completed and independent audits pass with real exit 0; OpenMP additionally
+  requires equality of all returned output fields. This is a preparation gate,
+  not current evidence that OpenMP02 has passed.
+
+Publication reminders (pending work, not defects in completed evidence):
+- Replace the remaining {{OPENMP_MODEL}} only from actual final OpenMP02 output
+  and supervisor records, retaining attempt01's real harness failure.
+- Before publishing generated PR text, independently inspect OpenMP02, verify
+  runtime file manifests, complete source/evidence push and preview deployment,
+  and verify the public immutable links. This review does not attest those
+  not-yet-completed publication steps.
+- stage-public-evidence.py uses explicit path allowlists, rejects absolute/..
+  entries and file symlinks, checks UTF-8/size/known credential prefixes, verifies
+  source and copied hashes. The credential regex is a guard, not an exhaustive
+  secret detector; no credential-like content or path escape was identified in
+  the reviewed explicit staged manifests.

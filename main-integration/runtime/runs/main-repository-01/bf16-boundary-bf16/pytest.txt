@@ -1,0 +1,44 @@
+W1101 05:06:10.886000 9420 torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+W1101 05:06:10.907000 9420 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+W1101 05:06:10.922000 9420 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+/home/vllmtest/vllm-validation/main-venv/lib/python3.12/site-packages/pytest_asyncio/plugin.py:300: PytestDeprecationWarning: The configuration option "asyncio_default_fixture_loop_scope" is unset.
+The event loop scope for asynchronous fixtures will default to the "fixture" caching scope. Future versions of pytest-asyncio will default the loop scope for asynchronous fixtures to "function" scope. Set the default fixture loop scope explicitly in order to avoid unexpected behavior in the future. Valid fixture loop scopes are: "function", "class", "module", "package", "session"
+
+  warnings.warn(PytestDeprecationWarning(_DEFAULT_FIXTURE_LOOP_SCOPE_UNSET))
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-9.2.0, pluggy-1.7.0 -- /home/vllmtest/vllm-validation/main-venv/bin/python
+cachedir: .pytest_cache
+rootdir: /home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/bf16-boundary-bf16/source
+configfile: pyproject.toml
+plugins: asyncio-1.4.1, anyio-4.15.1
+asyncio: mode=Mode.STRICT, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collecting ... collected 18 items
+
+tests/kernels/core/test_cpu_float_conversion.py::test_software_bf16_rounding_and_special_values[0-0] PASSED
+tests/kernels/core/test_cpu_float_conversion.py::test_software_bf16_rounding_and_special_values[2147483648-32768] PASSED
+tests/kernels/core/test_cpu_float_conversion.py::test_software_bf16_rounding_and_special_values[2139095040-32640] PASSED
+tests/kernels/core/test_cpu_float_conversion.py::test_software_bf16_rounding_and_special_values[4286578688-65408] PASSED
+tests/kernels/core/test_cpu_float_conversion.py::test_software_bf16_rounding_and_special_values[2139095041-32704] PASSED
+tests/kernels/core/test_cpu_float_conversion.py::test_software_bf16_rounding_and_special_values[4294967295-32704] PASSED
+tests/kernels/core/test_cpu_float_conversion.py::test_software_bf16_rounding_and_special_values[2143289344-32704] PASSED
+tests/kernels/core/test_cpu_float_conversion.py::test_software_bf16_rounding_and_special_values[1065385983-16256] PASSED
+tests/kernels/core/test_cpu_float_conversion.py::test_software_bf16_rounding_and_special_values[1065385984-16256] PASSED
+tests/kernels/core/test_cpu_float_conversion.py::test_software_bf16_rounding_and_special_values[1065385985-16257] PASSED
+tests/kernels/core/test_cpu_float_conversion.py::test_software_bf16_rounding_and_special_values[1065451520-16258] PASSED
+tests/kernels/core/test_cpu_float_conversion.py::test_software_bf16_rounding_and_special_values[3212869632-49024] PASSED
+tests/kernels/core/test_cpu_float_conversion.py::test_software_bf16_rounding_and_special_values[3212935168-49026] PASSED
+tests/kernels/core/test_cpu_float_conversion.py::test_software_bf16_rounding_and_special_values[32768-0] PASSED
+tests/kernels/core/test_cpu_float_conversion.py::test_software_bf16_rounding_and_special_values[32769-1] PASSED
+tests/kernels/core/test_cpu_float_conversion.py::test_software_bf16_rounding_and_special_values[98304-2] PASSED
+tests/kernels/core/test_cpu_float_conversion.py::test_software_bf16_rounding_and_special_values[2139062272-32640] PASSED
+tests/kernels/core/test_cpu_float_conversion.py::test_software_bf16_rounding_and_special_values[4286545920-65408] PASSED
+
+=============================== warnings summary ===============================
+vllm/__init__.py:7
+  /home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/bf16-boundary-bf16/source/vllm/__init__.py:7: RuntimeWarning: Failed to read commit hash:
+  No module named 'vllm._version'
+    from .version import __version__, __version_tuple__  # isort:skip
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+- generated xml file: /home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/bf16-boundary-bf16/pytest.xml -
+======================== 18 passed, 1 warning in 24.66s ========================

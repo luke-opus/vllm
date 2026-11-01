@@ -1,0 +1,20 @@
+Sun Nov  1 05:04:24 UTC 2026
+bash: line 2: rg: command not found
+    PID    PPID   RSS     ELAPSED %CPU COMMAND
+   9128    8355 503236      02:53 95.7 /home/vllmtest/vllm-validation/main-venv/bin/python -m pytest -p main_import_probe -v -s tests/kernels/core/test_cpu_activation.py -k rounds_to_nearest_even --junitxml=/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/bf16-operator-bf16/pytest.xml --basetemp=/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/bf16-operator-bf16/pytest-tmp
+   9297    9291 265384      00:41 88.0 /home/vllmtest/vllm-validation/main-venv/bin/python /home/vllmtest/vllm-validation/main-integration-runtime/check-main-model.py --kind bf16 --variant base --source /home/vllmtest/vllm-validation/main-integration-runtime/runs/main-bf16-model-01/source --output /home/vllmtest/vllm-validation/main-integration-runtime/runs/main-bf16-model-01/base.json --expected-library /home/vllmtest/vllm-validation/main-integration-build/build/base/_C.abi3.so --expected-sha256 57f4cc187d2c6502f176333331f7ba604926aa360710872478eae021d829b444
+   2566       1 41068       58:52  0.1 /usr/libexec/fwupd/fwupd
+    348       1 25708    01:25:15  0.0 /sbin/multipathd -d -s
+   9291    9290 23672       01:49 60.7 /home/vllmtest/vllm-validation/main-venv/bin/python /home/vllmtest/vllm-validation/main-integration-runtime/run-main-model-pair.py --execute --run-id main-bf16-model-01 --timeout 3600 --kind bf16
+    807       1 21188    01:24:43  0.0 /usr/bin/python3 /usr/share/unattended-upgrades/unattended-upgrade-shutdown --wait-for-signal
+   8355    8354 17776       16:49 11.6 /home/vllmtest/vllm-validation/main-venv/bin/python /home/vllmtest/vllm-validation/main-integration-runtime/run-main-repository.py --execute --run-id main-repository-01 --timeout 3600
+    288       1 17596    01:25:18  0.2 /usr/lib/systemd/systemd-journald
+   8354    8353 16380       16:50  0.8 /home/vllmtest/vllm-validation/main-venv/bin/python supervise-main.py --execute --kind repository --run-id main-repository-01
+   9290    9288 16316       01:49  1.3 /home/vllmtest/vllm-validation/main-venv/bin/python supervise-main.py --execute --kind bf16 --run-id main-bf16-model-01
+      1       0 11752    01:25:33  0.5 /sbin/init splash
+/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-bf16-model-01/source/vllm/__init__.py:7: RuntimeWarning: Failed to read commit hash:
+No module named 'vllm._version'
+  from .version import __version__, __version_tuple__  # isort:skip
+W1101 05:04:11.190000 9297 torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+W1101 05:04:11.204000 9297 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+W1101 05:04:11.216000 9297 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead

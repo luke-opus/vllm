@@ -1,0 +1,341 @@
+{
+  "kind": "bf16",
+  "variant": "fixed",
+  "base_ref": "e0d00e4b8eb0c89ec30921d0695cfdd409e9c211",
+  "model": "EleutherAI/pythia-14m",
+  "revision": "cf967c0a9a04383db6f7b1108d86b2962634b4ac",
+  "parameters": {
+    "model": "/home/vllmtest/vllm-validation/pythia-14m",
+    "dtype": "bfloat16",
+    "max_model_len": 128,
+    "max_num_seqs": 2,
+    "max_num_batched_tokens": 128,
+    "block_size": 32,
+    "enforce_eager": true,
+    "tensor_parallel_size": 1,
+    "distributed_executor_backend": "uni",
+    "kv_cache_memory_bytes": 67108864,
+    "seed": 0,
+    "enable_prefix_caching": false,
+    "enable_chunked_prefill": false
+  },
+  "sampling_parameters": {
+    "temperature": 0.0,
+    "max_tokens": 4,
+    "logprobs": 5
+  },
+  "vllm_distribution_metadata": {
+    "present": false
+  },
+  "vllm_version_string": "dev",
+  "parent_pid": 9919,
+  "worker": {
+    "pid": 9919,
+    "device": "cpu",
+    "worker_class": "vllm.v1.worker.cpu_worker.CPUWorker",
+    "model_runner_class": "vllm.v1.worker.cpu.standalone_model_runner.StandaloneCPUModelRunner",
+    "use_v2_model_runner": true,
+    "vllm_file": "/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-bf16-model-01/source/vllm/__init__.py",
+    "torch_file": "/home/vllmtest/vllm-validation/main-venv/lib/python3.12/site-packages/torch/__init__.py",
+    "extension_file": "/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-bf16-model-01/source/vllm/_C.abi3.so",
+    "extension_resolved": "/home/vllmtest/vllm-validation/main-integration-build/build/bf16/_C.abi3.so",
+    "extension_sha256": "93c8debb5754a1ba2241d97d9adf596274a22d8c4bf7a56ed755dc8d23bf6df2",
+    "extension_maps": [
+      "3477800000-3478769000 r-xp 00000000 fd:01 1603527                        /home/vllmtest/vllm-validation/main-integration-build/build/bf16/_C.abi3.so",
+      "3478769000-3478801000 r--p 00f69000 fd:01 1603527                        /home/vllmtest/vllm-validation/main-integration-build/build/bf16/_C.abi3.so",
+      "3478801000-3478804000 rw-p 01001000 fd:01 1603527                        /home/vllmtest/vllm-validation/main-integration-build/build/bf16/_C.abi3.so"
+    ],
+    "LD_PRELOAD": "",
+    "startup_LD_PRELOAD": "",
+    "OMP_NUM_THREADS": "1",
+    "GOMP_CPU_AFFINITY": "",
+    "OMP_PLACES": "",
+    "OMP_PROC_BIND": "",
+    "torch_threads": 1,
+    "affinity": [
+      0,
+      1
+    ],
+    "loaded_openmp": [
+      "/home/vllmtest/vllm-validation/main-venv/lib/python3.12/site-packages/torch/lib/libgomp.so.1",
+      "/usr/lib/llvm-18/lib/libomp.so.5"
+    ]
+  },
+  "parent_profile_operator_counts": {
+    "_C::init_cpu_memory_env": 1,
+    "_C::create_onednn_mm_handler": 26,
+    "_C::cpu_attn_has_isa": 1,
+    "_C::prepare_prefill_inputs_cpu": 1,
+    "_C::prepare_pos_seq_lens_cpu": 4,
+    "_C::combine_sampled_and_draft_tokens_cpu": 4,
+    "_C::gather_block_table_cpu": 4,
+    "_C::compute_slot_mapping_cpu": 4,
+    "_C::get_scheduler_metadata": 4,
+    "_C::cpu_attn_reshape_and_cache": 24,
+    "_C::cpu_attention_with_kv_cache": 24,
+    "_C::gumbel_sample_cpu": 4,
+    "_C::post_update_cpu": 4
+  },
+  "outputs": [
+    {
+      "prompt": "The capital of France is",
+      "prompt_token_ids": [
+        510,
+        5347,
+        273,
+        6181,
+        310
+      ],
+      "token_ids": [
+        253,
+        1986,
+        2077,
+        13
+      ],
+      "text": " the United States,",
+      "cumulative_logprob": -7.261765480041504,
+      "finish_reason": "length",
+      "stop_reason": null,
+      "logprobs": [
+        {
+          "253": {
+            "logprob": -1.7403364181518555,
+            "rank": 1,
+            "decoded_token": " the"
+          },
+          "247": {
+            "logprob": -2.4903364181518555,
+            "rank": 2,
+            "decoded_token": " a"
+          },
+          "275": {
+            "logprob": -3.8653364181518555,
+            "rank": 3,
+            "decoded_token": " in"
+          },
+          "581": {
+            "logprob": -4.1153364181518555,
+            "rank": 4,
+            "decoded_token": " one"
+          },
+          "271": {
+            "logprob": -4.1153364181518555,
+            "rank": 5,
+            "decoded_token": " an"
+          }
+        },
+        {
+          "1986": {
+            "logprob": -3.5425548553466797,
+            "rank": 1,
+            "decoded_token": " United"
+          },
+          "5112": {
+            "logprob": -4.16755485534668,
+            "rank": 2,
+            "decoded_token": " French"
+          },
+          "2846": {
+            "logprob": -4.16755485534668,
+            "rank": 3,
+            "decoded_token": " city"
+          },
+          "2448": {
+            "logprob": -4.48005485534668,
+            "rank": 4,
+            "decoded_token": " American"
+          },
+          "5347": {
+            "logprob": -4.54255485534668,
+            "rank": 5,
+            "decoded_token": " capital"
+          }
+        },
+        {
+          "2077": {
+            "logprob": -0.5542831420898438,
+            "rank": 1,
+            "decoded_token": " States"
+          },
+          "11491": {
+            "logprob": -1.5542831420898438,
+            "rank": 2,
+            "decoded_token": " Kingdom"
+          },
+          "14726": {
+            "logprob": -1.7417831420898438,
+            "rank": 3,
+            "decoded_token": " Nations"
+          },
+          "8365": {
+            "logprob": -4.491783142089844,
+            "rank": 4,
+            "decoded_token": " Arab"
+          },
+          "4687": {
+            "logprob": -6.866783142089844,
+            "rank": 5,
+            "decoded_token": " Republic"
+          }
+        },
+        {
+          "13": {
+            "logprob": -1.424591064453125,
+            "rank": 1,
+            "decoded_token": ","
+          },
+          "15": {
+            "logprob": -1.487091064453125,
+            "rank": 2,
+            "decoded_token": "."
+          },
+          "285": {
+            "logprob": -1.924591064453125,
+            "rank": 3,
+            "decoded_token": " and"
+          },
+          "275": {
+            "logprob": -3.362091064453125,
+            "rank": 4,
+            "decoded_token": " in"
+          },
+          "28": {
+            "logprob": -3.737091064453125,
+            "rank": 5,
+            "decoded_token": ";"
+          }
+        }
+      ]
+    },
+    {
+      "prompt": "A computer can",
+      "prompt_token_ids": [
+        34,
+        4382,
+        476
+      ],
+      "token_ids": [
+        320,
+        908,
+        281,
+        897
+      ],
+      "text": " be used to use",
+      "cumulative_logprob": -7.8507537841796875,
+      "finish_reason": "length",
+      "stop_reason": null,
+      "logprobs": [
+        {
+          "320": {
+            "logprob": -1.621185302734375,
+            "rank": 1,
+            "decoded_token": " be"
+          },
+          "897": {
+            "logprob": -2.496185302734375,
+            "rank": 2,
+            "decoded_token": " use"
+          },
+          "2736": {
+            "logprob": -3.808685302734375,
+            "rank": 3,
+            "decoded_token": " detect"
+          },
+          "1361": {
+            "logprob": -3.996185302734375,
+            "rank": 4,
+            "decoded_token": " help"
+          },
+          "1239": {
+            "logprob": -4.058685302734375,
+            "rank": 5,
+            "decoded_token": " read"
+          }
+        },
+        {
+          "908": {
+            "logprob": -2.1582183837890625,
+            "rank": 1,
+            "decoded_token": " used"
+          },
+          "27881": {
+            "logprob": -2.3457183837890625,
+            "rank": 2,
+            "decoded_token": " programmed"
+          },
+          "2104": {
+            "logprob": -3.2207183837890625,
+            "rank": 3,
+            "decoded_token": " able"
+          },
+          "1119": {
+            "logprob": -3.5332183837890625,
+            "rank": 4,
+            "decoded_token": " found"
+          },
+          "247": {
+            "logprob": -3.6582183837890625,
+            "rank": 5,
+            "decoded_token": " a"
+          }
+        },
+        {
+          "281": {
+            "logprob": -1.1641921997070312,
+            "rank": 1,
+            "decoded_token": " to"
+          },
+          "347": {
+            "logprob": -1.7891921997070312,
+            "rank": 2,
+            "decoded_token": " as"
+          },
+          "275": {
+            "logprob": -2.0391921997070312,
+            "rank": 3,
+            "decoded_token": " in"
+          },
+          "323": {
+            "logprob": -2.4141921997070312,
+            "rank": 4,
+            "decoded_token": " for"
+          },
+          "15": {
+            "logprob": -3.2891921997070312,
+            "rank": 5,
+            "decoded_token": "."
+          }
+        },
+        {
+          "897": {
+            "logprob": -2.9071578979492188,
+            "rank": 1,
+            "decoded_token": " use"
+          },
+          "8415": {
+            "logprob": -3.0946578979492188,
+            "rank": 2,
+            "decoded_token": " solve"
+          },
+          "1239": {
+            "logprob": -3.2821578979492188,
+            "rank": 3,
+            "decoded_token": " read"
+          },
+          "2736": {
+            "logprob": -3.5321578979492188,
+            "rank": 4,
+            "decoded_token": " detect"
+          },
+          "2289": {
+            "logprob": -3.7196578979492188,
+            "rank": 5,
+            "decoded_token": " access"
+          }
+        }
+      ]
+    }
+  ],
+  "scope": "RISC-V Linux/QEMU, default MRV2, two prompts/four tokens each; returned top-5/chosen-token logprobs only, not full vocabulary; no quality, equivalence, performance, or physical hardware claim",
+  "shutdown_returned": true
+}

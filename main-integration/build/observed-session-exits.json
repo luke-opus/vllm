@@ -1,0 +1,60 @@
+{
+  "scope": "Actual unified-exec session completion statuses observed by the build coordinator. Per-compiler and native-link child exits are recorded separately in the corresponding JSON files.",
+  "sessions": [
+    {
+      "phase": "configure-base",
+      "session_id": 84906,
+      "returncode": 0
+    },
+    {
+      "phase": "configure-erf",
+      "session_id": 27497,
+      "returncode": 0
+    },
+    {
+      "phase": "configure-bf16",
+      "session_id": 53904,
+      "returncode": 0
+    },
+    {
+      "phase": "dependency-audit-base-and-erf",
+      "session_id": 96198,
+      "returncode": 0
+    },
+    {
+      "phase": "dependency-audit-bf16",
+      "session_id": 35793,
+      "returncode": 0
+    },
+    {
+      "phase": "compile-base",
+      "session_id": 84887,
+      "returncode": 0
+    },
+    {
+      "phase": "compile-erf",
+      "session_id": 37684,
+      "returncode": 0
+    },
+    {
+      "phase": "link-and-load-base",
+      "session_id": 27801,
+      "returncode": 0
+    },
+    {
+      "phase": "compile-bf16",
+      "session_id": 82930,
+      "returncode": 0
+    },
+    {
+      "phase": "link-and-load-erf",
+      "session_id": 77611,
+      "returncode": 0
+    },
+    {
+      "phase": "link-and-load-bf16",
+      "session_id": 24790,
+      "returncode": 0
+    }
+  ]
+}

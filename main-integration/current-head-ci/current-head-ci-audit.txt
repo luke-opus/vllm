@@ -1,0 +1,36 @@
+新 head CI 失败原因只读审计
+取证完成时间：2026-11-01T05:57:24.607592+00:00
+
+结论：所审查的四个 GitHub pre-run-check 均因运行资格门槛失败；三个 Read the Docs 构建随后在 post_checkout 门禁停止。没有从这些失败中观察到 patch 编译、测试或 MkDocs 内容构建错误。当前这些检查也没有通过。
+
+范围与固定身份：
+  #64078: ec0fbf5e9b3e9d796ccae667a437f2e97c3f9cde; RTD build 35554833; pre-run-check jobs 124765988920.
+  #64079: 6592612016059859dff1e93bd534edc1a5737615; RTD build 35554832; pre-run-check jobs 124766081009, 124765985956.
+  #64080: dfdc85947fe914d04906f5d0206c020c208bd400; RTD build 35554831; pre-run-check jobs 124765986511.
+
+GitHub Actions：
+四个 job 的 annotations 和完整 job 日志均已通过 GODEBUG=http2client=0 node work/gh.mjs api 读取成功。共同失败条件为：PR 需要 verified / ready / ready-run-all-tests 中一个标签，或作者至少有 4 个已合入 PR；日志实际查得 merged PR 数为 0。每个 job 都在该 github-script 门禁调用 setFailed。日志还明确表示 AI agent 不应索要这些标签；本审计未请求或修改标签。
+所提供的新 head check-runs 快照中，pre-commit 和 Check format 为 skipped，DCO 为 success。不能把 skipped 当作格式检查通过，也不能把门禁失败归因于补丁代码测试失败。
+
+  #64078 job 124765988920: https://github.com/vllm-project/vllm/actions/runs/41278693090/job/124765988920
+  #64079 job 124766081009: https://github.com/vllm-project/vllm/actions/runs/41278725879/job/124766081009
+  #64079 job 124765985956: https://github.com/vllm-project/vllm/actions/runs/41278691973/job/124765985956
+  #64080 job 124765986511: https://github.com/vllm-project/vllm/actions/runs/41278692155/job/124765986511
+
+Read the Docs：
+三个 build 页面、页面中实际提供的 /api/v2/build/{id}/ JSON 与 .txt 日志均匿名 HTTP 200；无需登录，也没有使用浏览器或猜测私有接口。API commit 与上面三个新 head 逐一精确相等。
+三个构建都成功完成 clone、PR fetch、精确 commit checkout、配置读取和 main fetch，随后 bash docs/pre_run_check.sh 实际退出 1。脚本确认存在影响文档的文件变化，再读到 pre-commit/pre-run-check conclusion=failure，明确记录：
+  "pre-commit/pre-run-check did not pass; skipping docs build."
+因此本次 RTD 停止原因已直接查明：依赖的运行资格门禁未过。命令记录没有进入 Python 环境创建、依赖安装或 MkDocs 构建；success=false、is_uploaded=false。不能据此声明 upstream 文档构建通过，也没有证据将其归因为 FAQ/MkDocs 内容错误。
+
+  #64078 build 35554833: https://app.readthedocs.org/projects/vllm/builds/35554833/
+    原始日志：https://app.readthedocs.org/api/v2/build/35554833.txt
+    门禁明确链接：https://github.com/vllm-project/vllm/actions/runs/41278693090/job/124765988920
+  #64079 build 35554832: https://app.readthedocs.org/projects/vllm/builds/35554832/
+    原始日志：https://app.readthedocs.org/api/v2/build/35554832.txt
+    门禁明确链接：https://github.com/vllm-project/vllm/actions/runs/41278691973/job/124765985956
+  #64080 build 35554831: https://app.readthedocs.org/projects/vllm/builds/35554831/
+    原始日志：https://app.readthedocs.org/api/v2/build/35554831.txt
+    门禁明确链接：https://github.com/vllm-project/vllm/actions/runs/41278692155/job/124765986511
+
+本次只读 GET，没有重跑/触发 CI、评论、信任标签或源码修改。报告仅覆盖上述新 head；没有沿用旧 head 的结果。原始 annotations、job 日志、RTD 页面/API/文本日志、HTTP headers 和取回结果均保留在 work/main-integration/current-head-ci/。runtime/ 及其冻结 publication-files.json 未改。

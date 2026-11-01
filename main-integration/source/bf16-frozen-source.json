@@ -1,0 +1,21 @@
+{
+  "variant": "bf16",
+  "base": "e0d00e4b8eb0c89ec30921d0695cfdd409e9c211",
+  "index_tree": "8b860fc3eba99f6eccfe4b473c00a829b7ea9af3",
+  "tracked_worktree_matches_index": true,
+  "untracked_during_docs": [
+    ".mkdocs-inventory-lqw3zydq.yaml"
+  ],
+  "staged_stat": " .buildkite/hardware_tests/cpu.yaml              |  2 +\n csrc/cpu/float_convert.hpp                      |  4 ++\n docs/getting_started/installation/cpu.md        |  1 +\n tests/kernels/core/test_cpu_activation.py       | 13 +++++\n tests/kernels/core/test_cpu_float_conversion.py | 72 +++++++++++++++++++++++++\n 5 files changed, 92 insertions(+)\n",
+  "patch_sha256": "c20fd84a1279a35f194c954b2e8bedb0934f7b446166d65eb0523472ff9c3089",
+  "file_sha256": {
+    ".buildkite/hardware_tests/cpu.yaml": "a4b71e63662ef8ce2cfc5a76a619c376878ba56959a493c74018d7d0a1bb826b",
+    "csrc/cpu/float_convert.hpp": "80dd1d91ca34bc1f3e3db3ea1285403b5108591d070c10c329932ea720b4db85",
+    "docs/getting_started/installation/cpu.md": "61308cec1b86f02881567dc2827da75adc488c2cd4ddd82cac2db03777305896",
+    "tests/kernels/core/test_cpu_activation.py": "e1ab4ecb31f706cbbc9ed9266e763ea707416c80b514b93658aa44e2bac59728",
+    "tests/kernels/core/test_cpu_float_conversion.py": "036f1cc808e2f20c039fd33da85667d6ea8a61ed1b35ec07b7883aaed6de468b"
+  },
+  "pre_commit_exit_code": 0,
+  "pre_commit_log": "precommit-bf16-attempt1.txt",
+  "source_status": "frozen for archive; docs builds running read-only over tracked sources"
+}

@@ -1,0 +1,256 @@
+{
+  "driver_process": {
+    "command": [
+      "/home/vllmtest/vllm-validation/main-venv/bin/python",
+      "/home/vllmtest/vllm-validation/main-integration-runtime/run-main-repository.py",
+      "--execute",
+      "--run-id",
+      "main-repository-01",
+      "--timeout",
+      "3600"
+    ],
+    "cwd": "/home/vllmtest/vllm-validation/main-integration-runtime",
+    "timed_out": false,
+    "interrupted": false,
+    "actual_returncode": 0,
+    "pid": 8355,
+    "seconds": 2416.892474497
+  },
+  "independent_restoration_audit": [
+    {
+      "checks": [
+        {
+          "path": "/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/erf-base/source/tests/kernels/core/test_cpu_activation.py",
+          "expected": {
+            "kind": "file",
+            "sha256": "736ab431d0096f43a226cf748efa5131820bf18fe03703f760226920f15d013c",
+            "mode": 33188
+          },
+          "passed": true
+        },
+        {
+          "path": "/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/erf-base/source/vllm/_C.abi3.so",
+          "expected": {
+            "kind": "absent"
+          },
+          "passed": true
+        }
+      ],
+      "passed": true,
+      "name": "erf-base"
+    },
+    {
+      "checks": [
+        {
+          "path": "/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/erf-erf/source/tests/kernels/core/test_cpu_activation.py",
+          "expected": {
+            "kind": "file",
+            "sha256": "08247d785b6304a712e918dde354b601f07034297b595ea61588fd0c75297707",
+            "mode": 33188
+          },
+          "passed": true
+        },
+        {
+          "path": "/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/erf-erf/source/vllm/_C.abi3.so",
+          "expected": {
+            "kind": "absent"
+          },
+          "passed": true
+        }
+      ],
+      "passed": true,
+      "name": "erf-erf"
+    },
+    {
+      "checks": [
+        {
+          "path": "/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/bf16-operator-base/source/tests/kernels/core/test_cpu_activation.py",
+          "expected": {
+            "kind": "file",
+            "sha256": "736ab431d0096f43a226cf748efa5131820bf18fe03703f760226920f15d013c",
+            "mode": 33188
+          },
+          "passed": true
+        },
+        {
+          "path": "/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/bf16-operator-base/source/vllm/_C.abi3.so",
+          "expected": {
+            "kind": "absent"
+          },
+          "passed": true
+        }
+      ],
+      "passed": true,
+      "name": "bf16-operator-base"
+    },
+    {
+      "checks": [
+        {
+          "path": "/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/bf16-boundary-base/source/tests/kernels/core/test_cpu_float_conversion.py",
+          "expected": {
+            "kind": "absent"
+          },
+          "passed": true
+        },
+        {
+          "path": "/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/bf16-boundary-base/source/vllm/_C.abi3.so",
+          "expected": {
+            "kind": "absent"
+          },
+          "passed": true
+        }
+      ],
+      "passed": true,
+      "name": "bf16-boundary-base"
+    },
+    {
+      "checks": [
+        {
+          "path": "/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/bf16-operator-bf16/source/tests/kernels/core/test_cpu_activation.py",
+          "expected": {
+            "kind": "file",
+            "sha256": "e1ab4ecb31f706cbbc9ed9266e763ea707416c80b514b93658aa44e2bac59728",
+            "mode": 33188
+          },
+          "passed": true
+        },
+        {
+          "path": "/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/bf16-operator-bf16/source/vllm/_C.abi3.so",
+          "expected": {
+            "kind": "absent"
+          },
+          "passed": true
+        }
+      ],
+      "passed": true,
+      "name": "bf16-operator-bf16"
+    },
+    {
+      "checks": [
+        {
+          "path": "/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/bf16-boundary-bf16/source/tests/kernels/core/test_cpu_float_conversion.py",
+          "expected": {
+            "kind": "file",
+            "sha256": "036f1cc808e2f20c039fd33da85667d6ea8a61ed1b35ec07b7883aaed6de468b",
+            "mode": 33188
+          },
+          "passed": true
+        },
+        {
+          "path": "/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/bf16-boundary-bf16/source/vllm/_C.abi3.so",
+          "expected": {
+            "kind": "absent"
+          },
+          "passed": true
+        }
+      ],
+      "passed": true,
+      "name": "bf16-boundary-bf16"
+    },
+    {
+      "checks": [
+        {
+          "path": "/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/openmp-config-base/source/tests/platforms/test_cpu.py",
+          "expected": {
+            "kind": "file",
+            "sha256": "b4d85f3840403143b3b2cfe5d5b0d8cf3ce1c9daa2cb0445c952dbeae8e4c528",
+            "mode": 33188
+          },
+          "passed": true
+        },
+        {
+          "path": "/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/openmp-config-base/source/vllm/platforms/cpu.py",
+          "expected": {
+            "kind": "file",
+            "sha256": "bbee9ca1e3840e7933c116083b3231aaa73f5b624b1a04e853db0239a899c56e",
+            "mode": 33188
+          },
+          "passed": true
+        },
+        {
+          "path": "/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/openmp-config-base/source/vllm/_C.abi3.so",
+          "expected": {
+            "kind": "absent"
+          },
+          "passed": true
+        }
+      ],
+      "passed": true,
+      "name": "openmp-config-base"
+    },
+    {
+      "checks": [
+        {
+          "path": "/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/openmp-config-openmp/source/tests/platforms/test_cpu.py",
+          "expected": {
+            "kind": "file",
+            "sha256": "b4d85f3840403143b3b2cfe5d5b0d8cf3ce1c9daa2cb0445c952dbeae8e4c528",
+            "mode": 33188
+          },
+          "passed": true
+        },
+        {
+          "path": "/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/openmp-config-openmp/source/vllm/platforms/cpu.py",
+          "expected": {
+            "kind": "file",
+            "sha256": "bbee9ca1e3840e7933c116083b3231aaa73f5b624b1a04e853db0239a899c56e",
+            "mode": 33188
+          },
+          "passed": true
+        },
+        {
+          "path": "/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/openmp-config-openmp/source/vllm/_C.abi3.so",
+          "expected": {
+            "kind": "absent"
+          },
+          "passed": true
+        }
+      ],
+      "passed": true,
+      "name": "openmp-config-openmp"
+    },
+    {
+      "checks": [
+        {
+          "path": "/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/standalone-base/source/vllm/_C.abi3.so",
+          "expected": {
+            "kind": "absent"
+          },
+          "passed": true
+        }
+      ],
+      "passed": true,
+      "name": "standalone-base"
+    },
+    {
+      "checks": [
+        {
+          "path": "/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/standalone-erf/source/vllm/_C.abi3.so",
+          "expected": {
+            "kind": "absent"
+          },
+          "passed": true
+        }
+      ],
+      "passed": true,
+      "name": "standalone-erf"
+    },
+    {
+      "checks": [
+        {
+          "path": "/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/standalone-bf16/source/vllm/_C.abi3.so",
+          "expected": {
+            "kind": "absent"
+          },
+          "passed": true
+        }
+      ],
+      "passed": true,
+      "name": "standalone-bf16"
+    }
+  ],
+  "passed": true,
+  "scope": "External exit/restoration observer; not assertions executed by the driver",
+  "driver_report_sha256": "b32c71b7d0b8ee70cf2915287ce57c18d8da3a5181a0632bbcd4dc0fb2dfb0b2",
+  "driver_report_completed": true
+}

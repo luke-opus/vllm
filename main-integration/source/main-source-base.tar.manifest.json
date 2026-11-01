@@ -1,0 +1,10 @@
+{
+  "commit": "e0d00e4b8eb0c89ec30921d0695cfdd409e9c211",
+  "archive": "main-source-base.tar.gz",
+  "sha256": "4e29a49187b1b2b04f5b064fc39f4ef4fd9161898db692a88b7cf2e9d7cb69c6",
+  "size": 47999299,
+  "members": 9914,
+  "tracked_files": 8776,
+  "command": "git archive --format=tar --prefix=main-source-base/ e0d00e4b8eb0c89ec30921d0695cfdd409e9c211 | gzip -n",
+  "scope": "Unmodified pinned upstream main source; no candidate changes; prepared for independent current-main builds."
+}

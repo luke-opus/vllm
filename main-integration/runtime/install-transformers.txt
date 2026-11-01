@@ -1,0 +1,7 @@
+Using Python 3.12.3 environment at: main-venv
+Resolved 26 packages in 327ms
+Prepared 1 package in 2.24s
+Uninstalled 1 package in 1.87s
+Installed 1 package in 5.56s
+ - transformers==5.20.2
+ + transformers==5.22.0 (from file:///home/vllmtest/vllm-validation/main-integration-runtime/transformers-5.22.0-py3-none-any.whl)

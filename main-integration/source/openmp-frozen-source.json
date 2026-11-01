@@ -1,0 +1,20 @@
+{
+  "variant": "openmp",
+  "base": "e0d00e4b8eb0c89ec30921d0695cfdd409e9c211",
+  "index_tree": "2cc5383ab7ca9209554779029edb9ccc31a41432",
+  "tracked_worktree_matches_index": true,
+  "untracked_during_docs": [],
+  "staged_stat": " .buildkite/test_areas/misc.yaml               |  2 ++\n docs/getting_started/installation/cpu.md      |  2 ++\n tests/platforms/test_cpu.py                   | 44 ++++++++++++++++++++++++++-\n tools/pre_commit/test_tethering_allowlist.txt |  3 --\n vllm/platforms/cpu.py                         |  1 +\n 5 files changed, 48 insertions(+), 4 deletions(-)\n",
+  "patch_sha256": "9a64258e7a245b739807b3b398b01540e5acc8e9660d7a2f4db0cb1ed3493246",
+  "file_sha256": {
+    ".buildkite/test_areas/misc.yaml": "e6983328550704d33a2a4215f678fccc797a8bc1362406d185ab362ed50dc738",
+    "docs/getting_started/installation/cpu.md": "2a3f17f45fa5b183f1335639edb0d88a37d97fb503717e3fcbd60e36718eea65",
+    "tests/platforms/test_cpu.py": "374c14959046870acf6099346c1223508c802186b3dfd69c887553494dd7b790",
+    "tools/pre_commit/test_tethering_allowlist.txt": "94e78dd313c55d07fea227dd814403d1ec22833206d46c5a1a2bcbae04241f94",
+    "vllm/platforms/cpu.py": "4894148c6cd72772bde309d3b58ea4b1e204155332004c92918c08cc063939df"
+  },
+  "pre_commit_exit_code": 0,
+  "pre_commit_log": "precommit-openmp-attempt2.txt",
+  "main_integration_adjustment": "Removed the obsolete tests/platforms/test_cpu.py allowlist entry and its empty group: the patch already wires this test into CI, as the new-main tethering hook noted. No product code or thresholds changed.",
+  "source_status": "frozen for archive; strict/API docs will read tracked sources without modifications"
+}

@@ -1,0 +1,47 @@
+[
+  {
+    "path": "native-plan/README.md",
+    "bytes": 6560,
+    "sha256": "44796e2eee34f9ea5b9d5342a923922ef99ece0ad7eeb116a16f5b1a3defb0b6"
+  },
+  {
+    "path": "native-plan/run.sh",
+    "bytes": 3579,
+    "sha256": "13391d2bda18452e483b51bbe007d5716176182c939ed5336db962a5ead1c161"
+  },
+  {
+    "path": "native-plan/workflow.candidate.yml",
+    "bytes": 7035,
+    "sha256": "5c00cabfcc2e65db7e8a5feac7b0535a241b7d4ae04b08f79a02636e9fa76bfe"
+  },
+  {
+    "path": "native-plan/convert_test.cpp",
+    "bytes": 2387,
+    "sha256": "9686df80d16f5c1acc3dec665b3883b96f11c95faaf8c177891f06f4413c1966"
+  },
+  {
+    "path": "native-plan/erf_header_test.cpp",
+    "bytes": 3169,
+    "sha256": "b22c456d6f0c2452b5a9309f0d0fe890c67d661481a74738ca52ce158a22dc13"
+  },
+  {
+    "path": "native-plan/actionlint.yaml",
+    "bytes": 49,
+    "sha256": "b13813b0136a58db8cbe6fa663ba7b837b5eafbb5f57d3ce84001de1d702de45"
+  },
+  {
+    "path": "native-plan/header-blob-comparison.json",
+    "bytes": 11477,
+    "sha256": "dd8da8c29e37b83bc9b5d6c7c748af5401d16d3768f58991a4d703dfc433a106"
+  },
+  {
+    "path": "native-plan/preparation-checks.txt",
+    "bytes": 2039,
+    "sha256": "cd622d703fe803bba7881c3adb0ac8c5ad2a3770858373af2ad28325967e3176"
+  },
+  {
+    "path": "native-plan/publication-files.json",
+    "bytes": 1619,
+    "sha256": "64eb4587b5f6db1e76e46bc061e8045af2c9027fab027ba9e057ce0aeca3203c"
+  }
+]

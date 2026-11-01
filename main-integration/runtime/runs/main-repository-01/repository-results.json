@@ -1,0 +1,1878 @@
+{
+  "base_ref": "e0d00e4b8eb0c89ec30921d0695cfdd409e9c211",
+  "completed": true,
+  "cases": [
+    {
+      "name": "erf-base",
+      "source_variant": "base",
+      "expected": {
+        "tests": 4,
+        "failures": 2
+      },
+      "restoration": {
+        "original_states": {
+          "/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/erf-base/source/tests/kernels/core/test_cpu_activation.py": {
+            "kind": "file",
+            "sha256": "736ab431d0096f43a226cf748efa5131820bf18fe03703f760226920f15d013c",
+            "mode": 33188
+          },
+          "/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/erf-base/source/vllm/_C.abi3.so": {
+            "kind": "absent"
+          }
+        },
+        "checked": true,
+        "restored": true,
+        "errors": [],
+        "paths": [
+          "/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/erf-base/source/tests/kernels/core/test_cpu_activation.py",
+          "/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/erf-base/source/vllm/_C.abi3.so"
+        ]
+      },
+      "process": {
+        "command": [
+          "/home/vllmtest/vllm-validation/main-venv/bin/python",
+          "-m",
+          "pytest",
+          "-p",
+          "main_import_probe",
+          "-v",
+          "-s",
+          "tests/kernels/core/test_cpu_activation.py",
+          "-k",
+          "test_cpu_gelu_and_mul",
+          "--junitxml=/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/erf-base/pytest.xml",
+          "--basetemp=/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/erf-base/pytest-tmp"
+        ],
+        "cwd": "/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/erf-base/source",
+        "timed_out": false,
+        "interrupted": false,
+        "actual_returncode": 1,
+        "pid": 8407,
+        "seconds": 189.46491514299942
+      },
+      "executed_test_sha256": {
+        "tests/kernels/core/test_cpu_activation.py": "08247d785b6304a712e918dde354b601f07034297b595ea61588fd0c75297707"
+      },
+      "production_header_sha256": "f6b511b3a6f6c29598f0bd58795d07eec52132a0e4ab1aa3ec7f3afa893b3c9d",
+      "root_conftest_sha256": "341fc65a3088fbc587a1f8b578478018ab79673cfc40caa3c5a3c36137e8f769",
+      "observed": {
+        "tests": 4,
+        "failures": 2,
+        "errors": 0,
+        "skipped": 0,
+        "failure_details": [
+          {
+            "message": "AssertionError: Tensor-likes are not close!\n\nMismatched elements: 16 / 32 (50.0%)\nGreatest absolute difference: nan at index (0, 0) (up to 0.001 allowed)\nGreatest relative difference: nan at index (0, 0) (up to 0.016 allowed)",
+            "text": "default_vllm_config = VllmConfig(model_config=None, cache_config=CacheConfig(block_size=16, user_specified_block_size=False, kv_cache_layout..._transfer_config=None, watchdog_config=WatchdogConfig(timeout=300, check_interval=10, dump_dir=''), shutdown_timeout=0)\ndtype = torch.bfloat16, approximate = 'none'\n\n    @pytest.mark.parametrize(\"dtype\", DTYPES)\n    @pytest.mark.parametrize(\"approximate\", [\"none\", \"tanh\"])\n    @torch.inference_mode()\n    def test_cpu_gelu_and_mul(\n        default_vllm_config,\n        dtype: torch.dtype,\n        approximate: str,\n    ) -> None:\n        gate = torch.tensor(\n            [\n                [\n                    -12.0,\n                    -10.0,\n                    -9.01,\n                    -5.0,\n                    -2.0,\n                    -1.0,\n                    -0.0,\n                    0.0,\n                    0.5,\n                    1.0,\n                    2.0,\n                    5.0,\n                    9.01,\n                    10.0,\n                    12.0,\n                    11.0,\n                ],\n                [\n                    -7.5,\n                    -4.5,\n                    -3.0,\n                    -1.5,\n                    -0.75,\n                    -0.25,\n                    0.25,\n                    0.75,\n                    1.5,\n                    3.0,\n                    4.5,\n                    7.5,\n                    -11.0,\n                    11.0,\n                    8.75,\n                    -8.75,\n                ],\n            ],\n            dtype=dtype,\n        )\n        val = torch.tensor(\n            [\n                [\n                    0.25,\n                    -0.5,\n                    0.75,\n                    -1.0,\n                    1.25,\n                    -1.5,\n                    1.75,\n                    -2.0,\n                    2.25,\n                    -2.5,\n                    2.75,\n                    -3.0,\n                    3.25,\n                    -3.5,\n                    3.75,\n                    -4.0,\n                ],\n                [\n                    -0.4,\n                    0.6,\n                    -0.8,\n                    1.0,\n                    -1.2,\n                    1.4,\n                    -1.6,\n                    1.8,\n                    -2.0,\n                    2.2,\n                    -2.4,\n                    2.6,\n                    -2.8,\n                    3.0,\n                    -3.2,\n                    3.4,\n                ],\n            ],\n            dtype=dtype,\n        )\n    \n        x = torch.cat((val, gate), dim=-1).contiguous()\n        kernel_out = torch.empty_like(val)\n        if approximate == \"none\":\n            torch.ops._C.gelu_and_mul(kernel_out, x)\n        else:\n            torch.ops._C.gelu_tanh_and_mul(kernel_out, x)\n    \n        torch_ref = torch.nn.functional.gelu(val, approximate=approximate) * gate\n    \n        atol = get_default_atol(kernel_out)\n        rtol = get_default_rtol(kernel_out)\n>       torch.testing.assert_close(kernel_out, torch_ref, atol=atol, rtol=rtol)\nE       AssertionError: Tensor-likes are not close!\nE       \nE       Mismatched elements: 16 / 32 (50.0%)\nE       Greatest absolute difference: nan at index (0, 0) (up to 0.001 allowed)\nE       Greatest relative difference: nan at index (0, 0) (up to 0.016 allowed)\n\ntests/kernels/core/test_cpu_activation.py:217: AssertionError"
+          },
+          {
+            "message": "AssertionError: Tensor-likes are not close!\n\nMismatched elements: 16 / 32 (50.0%)\nGreatest absolute difference: nan at index (0, 0) (up to 1e-05 allowed)\nGreatest relative difference: nan at index (0, 0) (up to 1.3e-06 allowed)",
+            "text": "default_vllm_config = VllmConfig(model_config=None, cache_config=CacheConfig(block_size=16, user_specified_block_size=False, kv_cache_layout..._transfer_config=None, watchdog_config=WatchdogConfig(timeout=300, check_interval=10, dump_dir=''), shutdown_timeout=0)\ndtype = torch.float32, approximate = 'none'\n\n    @pytest.mark.parametrize(\"dtype\", DTYPES)\n    @pytest.mark.parametrize(\"approximate\", [\"none\", \"tanh\"])\n    @torch.inference_mode()\n    def test_cpu_gelu_and_mul(\n        default_vllm_config,\n        dtype: torch.dtype,\n        approximate: str,\n    ) -> None:\n        gate = torch.tensor(\n            [\n                [\n                    -12.0,\n                    -10.0,\n                    -9.01,\n                    -5.0,\n                    -2.0,\n                    -1.0,\n                    -0.0,\n                    0.0,\n                    0.5,\n                    1.0,\n                    2.0,\n                    5.0,\n                    9.01,\n                    10.0,\n                    12.0,\n                    11.0,\n                ],\n                [\n                    -7.5,\n                    -4.5,\n                    -3.0,\n                    -1.5,\n                    -0.75,\n                    -0.25,\n                    0.25,\n                    0.75,\n                    1.5,\n                    3.0,\n                    4.5,\n                    7.5,\n                    -11.0,\n                    11.0,\n                    8.75,\n                    -8.75,\n                ],\n            ],\n            dtype=dtype,\n        )\n        val = torch.tensor(\n            [\n                [\n                    0.25,\n                    -0.5,\n                    0.75,\n                    -1.0,\n                    1.25,\n                    -1.5,\n                    1.75,\n                    -2.0,\n                    2.25,\n                    -2.5,\n                    2.75,\n                    -3.0,\n                    3.25,\n                    -3.5,\n                    3.75,\n                    -4.0,\n                ],\n                [\n                    -0.4,\n                    0.6,\n                    -0.8,\n                    1.0,\n                    -1.2,\n                    1.4,\n                    -1.6,\n                    1.8,\n                    -2.0,\n                    2.2,\n                    -2.4,\n                    2.6,\n                    -2.8,\n                    3.0,\n                    -3.2,\n                    3.4,\n                ],\n            ],\n            dtype=dtype,\n        )\n    \n        x = torch.cat((val, gate), dim=-1).contiguous()\n        kernel_out = torch.empty_like(val)\n        if approximate == \"none\":\n            torch.ops._C.gelu_and_mul(kernel_out, x)\n        else:\n            torch.ops._C.gelu_tanh_and_mul(kernel_out, x)\n    \n        torch_ref = torch.nn.functional.gelu(val, approximate=approximate) * gate\n    \n        atol = get_default_atol(kernel_out)\n        rtol = get_default_rtol(kernel_out)\n>       torch.testing.assert_close(kernel_out, torch_ref, atol=atol, rtol=rtol)\nE       AssertionError: Tensor-likes are not close!\nE       \nE       Mismatched elements: 16 / 32 (50.0%)\nE       Greatest absolute difference: nan at index (0, 0) (up to 1e-05 allowed)\nE       Greatest relative difference: nan at index (0, 0) (up to 1.3e-06 allowed)\n\ntests/kernels/core/test_cpu_activation.py:217: AssertionError"
+          }
+        ],
+        "nodeids": [
+          {
+            "classname": "tests.kernels.core.test_cpu_activation",
+            "name": "test_cpu_gelu_and_mul[none-dtype0]",
+            "time": "1.203"
+          },
+          {
+            "classname": "tests.kernels.core.test_cpu_activation",
+            "name": "test_cpu_gelu_and_mul[none-dtype1]",
+            "time": "1.005"
+          },
+          {
+            "classname": "tests.kernels.core.test_cpu_activation",
+            "name": "test_cpu_gelu_and_mul[tanh-dtype0]",
+            "time": "0.824"
+          },
+          {
+            "classname": "tests.kernels.core.test_cpu_activation",
+            "name": "test_cpu_gelu_and_mul[tanh-dtype1]",
+            "time": "0.851"
+          }
+        ]
+      },
+      "actual_imports": {
+        "start": {
+          "pid": 8407,
+          "sys_prefix": "/home/vllmtest/vllm-validation/main-venv",
+          "vllm_file": "/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/erf-base/source/vllm/__init__.py",
+          "vllm_version_string": "dev",
+          "vllm_distribution_metadata": {
+            "present": false
+          },
+          "torch_file": "/home/vllmtest/vllm-validation/main-venv/lib/python3.12/site-packages/torch/__init__.py",
+          "extension_file": "/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/erf-base/source/vllm/_C.abi3.so",
+          "extension_resolved": "/home/vllmtest/vllm-validation/main-integration-build/build/base/_C.abi3.so",
+          "extension_sha256": "57f4cc187d2c6502f176333331f7ba604926aa360710872478eae021d829b444",
+          "extension_maps": [
+            "3be6600000-3be7568000 r-xp 00000000 fd:01 1603466                        /home/vllmtest/vllm-validation/main-integration-build/build/base/_C.abi3.so",
+            "3be7568000-3be7600000 r--p 00f67000 fd:01 1603466                        /home/vllmtest/vllm-validation/main-integration-build/build/base/_C.abi3.so",
+            "3be7600000-3be7603000 rw-p 00fff000 fd:01 1603466                        /home/vllmtest/vllm-validation/main-integration-build/build/base/_C.abi3.so"
+          ]
+        },
+        "finish": {
+          "pid": 8407,
+          "sys_prefix": "/home/vllmtest/vllm-validation/main-venv",
+          "vllm_file": "/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/erf-base/source/vllm/__init__.py",
+          "vllm_version_string": "dev",
+          "vllm_distribution_metadata": {
+            "present": false
+          },
+          "torch_file": "/home/vllmtest/vllm-validation/main-venv/lib/python3.12/site-packages/torch/__init__.py",
+          "extension_file": "/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/erf-base/source/vllm/_C.abi3.so",
+          "extension_resolved": "/home/vllmtest/vllm-validation/main-integration-build/build/base/_C.abi3.so",
+          "extension_sha256": "57f4cc187d2c6502f176333331f7ba604926aa360710872478eae021d829b444",
+          "extension_maps": [
+            "3be6600000-3be7568000 r-xp 00000000 fd:01 1603466                        /home/vllmtest/vllm-validation/main-integration-build/build/base/_C.abi3.so",
+            "3be7568000-3be7600000 r--p 00f67000 fd:01 1603466                        /home/vllmtest/vllm-validation/main-integration-build/build/base/_C.abi3.so",
+            "3be7600000-3be7603000 rw-p 00fff000 fd:01 1603466                        /home/vllmtest/vllm-validation/main-integration-build/build/base/_C.abi3.so"
+          ]
+        },
+        "pytest_exit_status": 1
+      },
+      "expected_behavior_confirmed": true
+    },
+    {
+      "name": "erf-erf",
+      "source_variant": "erf",
+      "expected": {
+        "tests": 4,
+        "failures": 0
+      },
+      "restoration": {
+        "original_states": {
+          "/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/erf-erf/source/tests/kernels/core/test_cpu_activation.py": {
+            "kind": "file",
+            "sha256": "08247d785b6304a712e918dde354b601f07034297b595ea61588fd0c75297707",
+            "mode": 33188
+          },
+          "/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/erf-erf/source/vllm/_C.abi3.so": {
+            "kind": "absent"
+          }
+        },
+        "checked": true,
+        "restored": true,
+        "errors": [],
+        "paths": [
+          "/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/erf-erf/source/tests/kernels/core/test_cpu_activation.py",
+          "/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/erf-erf/source/vllm/_C.abi3.so"
+        ]
+      },
+      "process": {
+        "command": [
+          "/home/vllmtest/vllm-validation/main-venv/bin/python",
+          "-m",
+          "pytest",
+          "-p",
+          "main_import_probe",
+          "-v",
+          "-s",
+          "tests/kernels/core/test_cpu_activation.py",
+          "-k",
+          "test_cpu_gelu_and_mul",
+          "--junitxml=/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/erf-erf/pytest.xml",
+          "--basetemp=/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/erf-erf/pytest-tmp"
+        ],
+        "cwd": "/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/erf-erf/source",
+        "timed_out": false,
+        "interrupted": false,
+        "actual_returncode": 0,
+        "pid": 8692,
+        "seconds": 176.6411866340004
+      },
+      "executed_test_sha256": {
+        "tests/kernels/core/test_cpu_activation.py": "08247d785b6304a712e918dde354b601f07034297b595ea61588fd0c75297707"
+      },
+      "production_header_sha256": "f6b511b3a6f6c29598f0bd58795d07eec52132a0e4ab1aa3ec7f3afa893b3c9d",
+      "root_conftest_sha256": "341fc65a3088fbc587a1f8b578478018ab79673cfc40caa3c5a3c36137e8f769",
+      "observed": {
+        "tests": 4,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "failure_details": [],
+        "nodeids": [
+          {
+            "classname": "tests.kernels.core.test_cpu_activation",
+            "name": "test_cpu_gelu_and_mul[none-dtype0]",
+            "time": "0.921"
+          },
+          {
+            "classname": "tests.kernels.core.test_cpu_activation",
+            "name": "test_cpu_gelu_and_mul[none-dtype1]",
+            "time": "0.828"
+          },
+          {
+            "classname": "tests.kernels.core.test_cpu_activation",
+            "name": "test_cpu_gelu_and_mul[tanh-dtype0]",
+            "time": "0.820"
+          },
+          {
+            "classname": "tests.kernels.core.test_cpu_activation",
+            "name": "test_cpu_gelu_and_mul[tanh-dtype1]",
+            "time": "0.822"
+          }
+        ]
+      },
+      "actual_imports": {
+        "start": {
+          "pid": 8692,
+          "sys_prefix": "/home/vllmtest/vllm-validation/main-venv",
+          "vllm_file": "/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/erf-erf/source/vllm/__init__.py",
+          "vllm_version_string": "dev",
+          "vllm_distribution_metadata": {
+            "present": false
+          },
+          "torch_file": "/home/vllmtest/vllm-validation/main-venv/lib/python3.12/site-packages/torch/__init__.py",
+          "extension_file": "/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/erf-erf/source/vllm/_C.abi3.so",
+          "extension_resolved": "/home/vllmtest/vllm-validation/main-integration-build/build/erf/_C.abi3.so",
+          "extension_sha256": "a1056a310cbfc357dfdcb18ff250be2fd8acf1d4bbb463682c6e6c492c341538",
+          "extension_maps": [
+            "3b31200000-3b32168000 r-xp 00000000 fd:01 1603500                        /home/vllmtest/vllm-validation/main-integration-build/build/erf/_C.abi3.so",
+            "3b32168000-3b32200000 r--p 00f67000 fd:01 1603500                        /home/vllmtest/vllm-validation/main-integration-build/build/erf/_C.abi3.so",
+            "3b32200000-3b32203000 rw-p 00fff000 fd:01 1603500                        /home/vllmtest/vllm-validation/main-integration-build/build/erf/_C.abi3.so"
+          ]
+        },
+        "finish": {
+          "pid": 8692,
+          "sys_prefix": "/home/vllmtest/vllm-validation/main-venv",
+          "vllm_file": "/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/erf-erf/source/vllm/__init__.py",
+          "vllm_version_string": "dev",
+          "vllm_distribution_metadata": {
+            "present": false
+          },
+          "torch_file": "/home/vllmtest/vllm-validation/main-venv/lib/python3.12/site-packages/torch/__init__.py",
+          "extension_file": "/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/erf-erf/source/vllm/_C.abi3.so",
+          "extension_resolved": "/home/vllmtest/vllm-validation/main-integration-build/build/erf/_C.abi3.so",
+          "extension_sha256": "a1056a310cbfc357dfdcb18ff250be2fd8acf1d4bbb463682c6e6c492c341538",
+          "extension_maps": [
+            "3b31200000-3b32168000 r-xp 00000000 fd:01 1603500                        /home/vllmtest/vllm-validation/main-integration-build/build/erf/_C.abi3.so",
+            "3b32168000-3b32200000 r--p 00f67000 fd:01 1603500                        /home/vllmtest/vllm-validation/main-integration-build/build/erf/_C.abi3.so",
+            "3b32200000-3b32203000 rw-p 00fff000 fd:01 1603500                        /home/vllmtest/vllm-validation/main-integration-build/build/erf/_C.abi3.so"
+          ]
+        },
+        "pytest_exit_status": 0
+      },
+      "expected_behavior_confirmed": true
+    },
+    {
+      "name": "bf16-operator-base",
+      "source_variant": "base",
+      "expected": {
+        "tests": 1,
+        "failures": 1
+      },
+      "restoration": {
+        "original_states": {
+          "/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/bf16-operator-base/source/tests/kernels/core/test_cpu_activation.py": {
+            "kind": "file",
+            "sha256": "736ab431d0096f43a226cf748efa5131820bf18fe03703f760226920f15d013c",
+            "mode": 33188
+          },
+          "/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/bf16-operator-base/source/vllm/_C.abi3.so": {
+            "kind": "absent"
+          }
+        },
+        "checked": true,
+        "restored": true,
+        "errors": [],
+        "paths": [
+          "/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/bf16-operator-base/source/tests/kernels/core/test_cpu_activation.py",
+          "/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/bf16-operator-base/source/vllm/_C.abi3.so"
+        ]
+      },
+      "process": {
+        "command": [
+          "/home/vllmtest/vllm-validation/main-venv/bin/python",
+          "-m",
+          "pytest",
+          "-p",
+          "main_import_probe",
+          "-v",
+          "-s",
+          "tests/kernels/core/test_cpu_activation.py",
+          "-k",
+          "rounds_to_nearest_even",
+          "--junitxml=/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/bf16-operator-base/pytest.xml",
+          "--basetemp=/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/bf16-operator-base/pytest-tmp"
+        ],
+        "cwd": "/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/bf16-operator-base/source",
+        "timed_out": false,
+        "interrupted": false,
+        "actual_returncode": 1,
+        "pid": 8869,
+        "seconds": 170.98384139300015
+      },
+      "executed_test_sha256": {
+        "tests/kernels/core/test_cpu_activation.py": "e1ab4ecb31f706cbbc9ed9266e763ea707416c80b514b93658aa44e2bac59728"
+      },
+      "production_header_sha256": "f6b511b3a6f6c29598f0bd58795d07eec52132a0e4ab1aa3ec7f3afa893b3c9d",
+      "root_conftest_sha256": "341fc65a3088fbc587a1f8b578478018ab79673cfc40caa3c5a3c36137e8f769",
+      "observed": {
+        "tests": 1,
+        "failures": 1,
+        "errors": 0,
+        "skipped": 0,
+        "failure_details": [
+          {
+            "message": "AssertionError: Tensor-likes are not equal!\n\nMismatched elements: 128 / 128 (100.0%)\nGreatest absolute difference: 0.00048828125 at index (0, 0)\nGreatest relative difference: 0.007354736328125 at index (0, 0)",
+            "text": "@torch.inference_mode()\n    def test_cpu_silu_and_mul_bf16_rounds_to_nearest_even() -> None:\n        \"\"\"Software BF16 stores must round the FP32 activation, not truncate it.\"\"\"\n        values = torch.full((1, 128), 0.125, dtype=torch.bfloat16)\n        x = torch.cat((values, torch.ones_like(values)), dim=-1)\n        out = torch.empty_like(values)\n    \n        torch.ops._C.silu_and_mul(out, x)\n    \n        expected = torch.nn.functional.silu(values.float()).to(torch.bfloat16)\n>       torch.testing.assert_close(out, expected, atol=0, rtol=0)\nE       AssertionError: Tensor-likes are not equal!\nE       \nE       Mismatched elements: 128 / 128 (100.0%)\nE       Greatest absolute difference: 0.00048828125 at index (0, 0)\nE       Greatest relative difference: 0.007354736328125 at index (0, 0)\n\ntests/kernels/core/test_cpu_activation.py:41: AssertionError"
+          }
+        ],
+        "nodeids": [
+          {
+            "classname": "tests.kernels.core.test_cpu_activation",
+            "name": "test_cpu_silu_and_mul_bf16_rounds_to_nearest_even",
+            "time": "1.376"
+          }
+        ]
+      },
+      "actual_imports": {
+        "start": {
+          "pid": 8869,
+          "sys_prefix": "/home/vllmtest/vllm-validation/main-venv",
+          "vllm_file": "/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/bf16-operator-base/source/vllm/__init__.py",
+          "vllm_version_string": "dev",
+          "vllm_distribution_metadata": {
+            "present": false
+          },
+          "torch_file": "/home/vllmtest/vllm-validation/main-venv/lib/python3.12/site-packages/torch/__init__.py",
+          "extension_file": "/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/bf16-operator-base/source/vllm/_C.abi3.so",
+          "extension_resolved": "/home/vllmtest/vllm-validation/main-integration-build/build/base/_C.abi3.so",
+          "extension_sha256": "57f4cc187d2c6502f176333331f7ba604926aa360710872478eae021d829b444",
+          "extension_maps": [
+            "3552e00000-3553d68000 r-xp 00000000 fd:01 1603466                        /home/vllmtest/vllm-validation/main-integration-build/build/base/_C.abi3.so",
+            "3553d68000-3553e00000 r--p 00f67000 fd:01 1603466                        /home/vllmtest/vllm-validation/main-integration-build/build/base/_C.abi3.so",
+            "3553e00000-3553e03000 rw-p 00fff000 fd:01 1603466                        /home/vllmtest/vllm-validation/main-integration-build/build/base/_C.abi3.so"
+          ]
+        },
+        "finish": {
+          "pid": 8869,
+          "sys_prefix": "/home/vllmtest/vllm-validation/main-venv",
+          "vllm_file": "/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/bf16-operator-base/source/vllm/__init__.py",
+          "vllm_version_string": "dev",
+          "vllm_distribution_metadata": {
+            "present": false
+          },
+          "torch_file": "/home/vllmtest/vllm-validation/main-venv/lib/python3.12/site-packages/torch/__init__.py",
+          "extension_file": "/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/bf16-operator-base/source/vllm/_C.abi3.so",
+          "extension_resolved": "/home/vllmtest/vllm-validation/main-integration-build/build/base/_C.abi3.so",
+          "extension_sha256": "57f4cc187d2c6502f176333331f7ba604926aa360710872478eae021d829b444",
+          "extension_maps": [
+            "3552e00000-3553d68000 r-xp 00000000 fd:01 1603466                        /home/vllmtest/vllm-validation/main-integration-build/build/base/_C.abi3.so",
+            "3553d68000-3553e00000 r--p 00f67000 fd:01 1603466                        /home/vllmtest/vllm-validation/main-integration-build/build/base/_C.abi3.so",
+            "3553e00000-3553e03000 rw-p 00fff000 fd:01 1603466                        /home/vllmtest/vllm-validation/main-integration-build/build/base/_C.abi3.so"
+          ]
+        },
+        "pytest_exit_status": 1
+      },
+      "expected_behavior_confirmed": true
+    },
+    {
+      "name": "bf16-boundary-base",
+      "source_variant": "base",
+      "expected": {
+        "tests": 18,
+        "failures": 9
+      },
+      "restoration": {
+        "original_states": {
+          "/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/bf16-boundary-base/source/tests/kernels/core/test_cpu_float_conversion.py": {
+            "kind": "absent"
+          },
+          "/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/bf16-boundary-base/source/vllm/_C.abi3.so": {
+            "kind": "absent"
+          }
+        },
+        "checked": true,
+        "restored": true,
+        "errors": [],
+        "paths": [
+          "/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/bf16-boundary-base/source/tests/kernels/core/test_cpu_float_conversion.py",
+          "/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/bf16-boundary-base/source/vllm/_C.abi3.so"
+        ]
+      },
+      "process": {
+        "command": [
+          "/home/vllmtest/vllm-validation/main-venv/bin/python",
+          "-m",
+          "pytest",
+          "-p",
+          "main_import_probe",
+          "-v",
+          "-s",
+          "tests/kernels/core/test_cpu_float_conversion.py",
+          "--junitxml=/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/bf16-boundary-base/pytest.xml",
+          "--basetemp=/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/bf16-boundary-base/pytest-tmp"
+        ],
+        "cwd": "/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/bf16-boundary-base/source",
+        "timed_out": false,
+        "interrupted": false,
+        "actual_returncode": 1,
+        "pid": 8999,
+        "seconds": 181.2371441969999
+      },
+      "executed_test_sha256": {
+        "tests/kernels/core/test_cpu_float_conversion.py": "036f1cc808e2f20c039fd33da85667d6ea8a61ed1b35ec07b7883aaed6de468b"
+      },
+      "production_header_sha256": "f6b511b3a6f6c29598f0bd58795d07eec52132a0e4ab1aa3ec7f3afa893b3c9d",
+      "root_conftest_sha256": "341fc65a3088fbc587a1f8b578478018ab79673cfc40caa3c5a3c36137e8f769",
+      "observed": {
+        "tests": 18,
+        "failures": 9,
+        "errors": 0,
+        "skipped": 0,
+        "failure_details": [
+          {
+            "message": "AssertionError: assert 32640 == 32704\n +  where 32640 = <_FuncPtr object at 0x3066e4b7d0>(2139095041)\n +    where <_FuncPtr object at 0x3066e4b7d0> = <CDLL '/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/bf16-boundary-base/pytest-tmp/bf16_conversion0/conversion.so', handle 3f744e20 at 0x3066e63620>.convert",
+            "text": "bf16_conversion = <CDLL '/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/bf16-boundary-base/pytest-tmp/bf16_conversion0/conversion.so', handle 3f744e20 at 0x3066e63620>\nbits = 2139095041, expected = 32704\n\n    @pytest.mark.parametrize(\n        (\"bits\", \"expected\"),\n        [\n            (0x00000000, 0x0000),\n            (0x80000000, 0x8000),\n            (0x7F800000, 0x7F80),\n            (0xFF800000, 0xFF80),\n            (0x7F800001, 0x7FC0),\n            (0xFFFFFFFF, 0x7FC0),\n            (0x7FC00000, 0x7FC0),\n            (0x3F807FFF, 0x3F80),\n            (0x3F808000, 0x3F80),\n            (0x3F808001, 0x3F81),\n            (0x3F818000, 0x3F82),\n            (0xBF808000, 0xBF80),\n            (0xBF818000, 0xBF82),\n            (0x00008000, 0x0000),\n            (0x00008001, 0x0001),\n            (0x00018000, 0x0002),\n            (0x7F7F8000, 0x7F80),\n            (0xFF7F8000, 0xFF80),\n        ],\n    )\n    def test_software_bf16_rounding_and_special_values(\n        bf16_conversion: ctypes.CDLL, bits: int, expected: int\n    ) -> None:\n>       assert bf16_conversion.convert(bits) == expected\nE       AssertionError: assert 32640 == 32704\nE        +  where 32640 = <_FuncPtr object at 0x3066e4b7d0>(2139095041)\nE        +    where <_FuncPtr object at 0x3066e4b7d0> = <CDLL '/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/bf16-boundary-base/pytest-tmp/bf16_conversion0/conversion.so', handle 3f744e20 at 0x3066e63620>.convert\n\ntests/kernels/core/test_cpu_float_conversion.py:72: AssertionError"
+          },
+          {
+            "message": "AssertionError: assert 65535 == 32704\n +  where 65535 = <_FuncPtr object at 0x3066e4b7d0>(4294967295)\n +    where <_FuncPtr object at 0x3066e4b7d0> = <CDLL '/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/bf16-boundary-base/pytest-tmp/bf16_conversion0/conversion.so', handle 3f744e20 at 0x3066e63620>.convert",
+            "text": "bf16_conversion = <CDLL '/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/bf16-boundary-base/pytest-tmp/bf16_conversion0/conversion.so', handle 3f744e20 at 0x3066e63620>\nbits = 4294967295, expected = 32704\n\n    @pytest.mark.parametrize(\n        (\"bits\", \"expected\"),\n        [\n            (0x00000000, 0x0000),\n            (0x80000000, 0x8000),\n            (0x7F800000, 0x7F80),\n            (0xFF800000, 0xFF80),\n            (0x7F800001, 0x7FC0),\n            (0xFFFFFFFF, 0x7FC0),\n            (0x7FC00000, 0x7FC0),\n            (0x3F807FFF, 0x3F80),\n            (0x3F808000, 0x3F80),\n            (0x3F808001, 0x3F81),\n            (0x3F818000, 0x3F82),\n            (0xBF808000, 0xBF80),\n            (0xBF818000, 0xBF82),\n            (0x00008000, 0x0000),\n            (0x00008001, 0x0001),\n            (0x00018000, 0x0002),\n            (0x7F7F8000, 0x7F80),\n            (0xFF7F8000, 0xFF80),\n        ],\n    )\n    def test_software_bf16_rounding_and_special_values(\n        bf16_conversion: ctypes.CDLL, bits: int, expected: int\n    ) -> None:\n>       assert bf16_conversion.convert(bits) == expected\nE       AssertionError: assert 65535 == 32704\nE        +  where 65535 = <_FuncPtr object at 0x3066e4b7d0>(4294967295)\nE        +    where <_FuncPtr object at 0x3066e4b7d0> = <CDLL '/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/bf16-boundary-base/pytest-tmp/bf16_conversion0/conversion.so', handle 3f744e20 at 0x3066e63620>.convert\n\ntests/kernels/core/test_cpu_float_conversion.py:72: AssertionError"
+          },
+          {
+            "message": "AssertionError: assert 16256 == 16257\n +  where 16256 = <_FuncPtr object at 0x3066e4b7d0>(1065385985)\n +    where <_FuncPtr object at 0x3066e4b7d0> = <CDLL '/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/bf16-boundary-base/pytest-tmp/bf16_conversion0/conversion.so', handle 3f744e20 at 0x3066e63620>.convert",
+            "text": "bf16_conversion = <CDLL '/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/bf16-boundary-base/pytest-tmp/bf16_conversion0/conversion.so', handle 3f744e20 at 0x3066e63620>\nbits = 1065385985, expected = 16257\n\n    @pytest.mark.parametrize(\n        (\"bits\", \"expected\"),\n        [\n            (0x00000000, 0x0000),\n            (0x80000000, 0x8000),\n            (0x7F800000, 0x7F80),\n            (0xFF800000, 0xFF80),\n            (0x7F800001, 0x7FC0),\n            (0xFFFFFFFF, 0x7FC0),\n            (0x7FC00000, 0x7FC0),\n            (0x3F807FFF, 0x3F80),\n            (0x3F808000, 0x3F80),\n            (0x3F808001, 0x3F81),\n            (0x3F818000, 0x3F82),\n            (0xBF808000, 0xBF80),\n            (0xBF818000, 0xBF82),\n            (0x00008000, 0x0000),\n            (0x00008001, 0x0001),\n            (0x00018000, 0x0002),\n            (0x7F7F8000, 0x7F80),\n            (0xFF7F8000, 0xFF80),\n        ],\n    )\n    def test_software_bf16_rounding_and_special_values(\n        bf16_conversion: ctypes.CDLL, bits: int, expected: int\n    ) -> None:\n>       assert bf16_conversion.convert(bits) == expected\nE       AssertionError: assert 16256 == 16257\nE        +  where 16256 = <_FuncPtr object at 0x3066e4b7d0>(1065385985)\nE        +    where <_FuncPtr object at 0x3066e4b7d0> = <CDLL '/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/bf16-boundary-base/pytest-tmp/bf16_conversion0/conversion.so', handle 3f744e20 at 0x3066e63620>.convert\n\ntests/kernels/core/test_cpu_float_conversion.py:72: AssertionError"
+          },
+          {
+            "message": "AssertionError: assert 16257 == 16258\n +  where 16257 = <_FuncPtr object at 0x3066e4b7d0>(1065451520)\n +    where <_FuncPtr object at 0x3066e4b7d0> = <CDLL '/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/bf16-boundary-base/pytest-tmp/bf16_conversion0/conversion.so', handle 3f744e20 at 0x3066e63620>.convert",
+            "text": "bf16_conversion = <CDLL '/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/bf16-boundary-base/pytest-tmp/bf16_conversion0/conversion.so', handle 3f744e20 at 0x3066e63620>\nbits = 1065451520, expected = 16258\n\n    @pytest.mark.parametrize(\n        (\"bits\", \"expected\"),\n        [\n            (0x00000000, 0x0000),\n            (0x80000000, 0x8000),\n            (0x7F800000, 0x7F80),\n            (0xFF800000, 0xFF80),\n            (0x7F800001, 0x7FC0),\n            (0xFFFFFFFF, 0x7FC0),\n            (0x7FC00000, 0x7FC0),\n            (0x3F807FFF, 0x3F80),\n            (0x3F808000, 0x3F80),\n            (0x3F808001, 0x3F81),\n            (0x3F818000, 0x3F82),\n            (0xBF808000, 0xBF80),\n            (0xBF818000, 0xBF82),\n            (0x00008000, 0x0000),\n            (0x00008001, 0x0001),\n            (0x00018000, 0x0002),\n            (0x7F7F8000, 0x7F80),\n            (0xFF7F8000, 0xFF80),\n        ],\n    )\n    def test_software_bf16_rounding_and_special_values(\n        bf16_conversion: ctypes.CDLL, bits: int, expected: int\n    ) -> None:\n>       assert bf16_conversion.convert(bits) == expected\nE       AssertionError: assert 16257 == 16258\nE        +  where 16257 = <_FuncPtr object at 0x3066e4b7d0>(1065451520)\nE        +    where <_FuncPtr object at 0x3066e4b7d0> = <CDLL '/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/bf16-boundary-base/pytest-tmp/bf16_conversion0/conversion.so', handle 3f744e20 at 0x3066e63620>.convert\n\ntests/kernels/core/test_cpu_float_conversion.py:72: AssertionError"
+          },
+          {
+            "message": "AssertionError: assert 49025 == 49026\n +  where 49025 = <_FuncPtr object at 0x3066e4b7d0>(3212935168)\n +    where <_FuncPtr object at 0x3066e4b7d0> = <CDLL '/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/bf16-boundary-base/pytest-tmp/bf16_conversion0/conversion.so', handle 3f744e20 at 0x3066e63620>.convert",
+            "text": "bf16_conversion = <CDLL '/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/bf16-boundary-base/pytest-tmp/bf16_conversion0/conversion.so', handle 3f744e20 at 0x3066e63620>\nbits = 3212935168, expected = 49026\n\n    @pytest.mark.parametrize(\n        (\"bits\", \"expected\"),\n        [\n            (0x00000000, 0x0000),\n            (0x80000000, 0x8000),\n            (0x7F800000, 0x7F80),\n            (0xFF800000, 0xFF80),\n            (0x7F800001, 0x7FC0),\n            (0xFFFFFFFF, 0x7FC0),\n            (0x7FC00000, 0x7FC0),\n            (0x3F807FFF, 0x3F80),\n            (0x3F808000, 0x3F80),\n            (0x3F808001, 0x3F81),\n            (0x3F818000, 0x3F82),\n            (0xBF808000, 0xBF80),\n            (0xBF818000, 0xBF82),\n            (0x00008000, 0x0000),\n            (0x00008001, 0x0001),\n            (0x00018000, 0x0002),\n            (0x7F7F8000, 0x7F80),\n            (0xFF7F8000, 0xFF80),\n        ],\n    )\n    def test_software_bf16_rounding_and_special_values(\n        bf16_conversion: ctypes.CDLL, bits: int, expected: int\n    ) -> None:\n>       assert bf16_conversion.convert(bits) == expected\nE       AssertionError: assert 49025 == 49026\nE        +  where 49025 = <_FuncPtr object at 0x3066e4b7d0>(3212935168)\nE        +    where <_FuncPtr object at 0x3066e4b7d0> = <CDLL '/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/bf16-boundary-base/pytest-tmp/bf16_conversion0/conversion.so', handle 3f744e20 at 0x3066e63620>.convert\n\ntests/kernels/core/test_cpu_float_conversion.py:72: AssertionError"
+          },
+          {
+            "message": "AssertionError: assert 0 == 1\n +  where 0 = <_FuncPtr object at 0x3066e4b7d0>(32769)\n +    where <_FuncPtr object at 0x3066e4b7d0> = <CDLL '/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/bf16-boundary-base/pytest-tmp/bf16_conversion0/conversion.so', handle 3f744e20 at 0x3066e63620>.convert",
+            "text": "bf16_conversion = <CDLL '/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/bf16-boundary-base/pytest-tmp/bf16_conversion0/conversion.so', handle 3f744e20 at 0x3066e63620>\nbits = 32769, expected = 1\n\n    @pytest.mark.parametrize(\n        (\"bits\", \"expected\"),\n        [\n            (0x00000000, 0x0000),\n            (0x80000000, 0x8000),\n            (0x7F800000, 0x7F80),\n            (0xFF800000, 0xFF80),\n            (0x7F800001, 0x7FC0),\n            (0xFFFFFFFF, 0x7FC0),\n            (0x7FC00000, 0x7FC0),\n            (0x3F807FFF, 0x3F80),\n            (0x3F808000, 0x3F80),\n            (0x3F808001, 0x3F81),\n            (0x3F818000, 0x3F82),\n            (0xBF808000, 0xBF80),\n            (0xBF818000, 0xBF82),\n            (0x00008000, 0x0000),\n            (0x00008001, 0x0001),\n            (0x00018000, 0x0002),\n            (0x7F7F8000, 0x7F80),\n            (0xFF7F8000, 0xFF80),\n        ],\n    )\n    def test_software_bf16_rounding_and_special_values(\n        bf16_conversion: ctypes.CDLL, bits: int, expected: int\n    ) -> None:\n>       assert bf16_conversion.convert(bits) == expected\nE       AssertionError: assert 0 == 1\nE        +  where 0 = <_FuncPtr object at 0x3066e4b7d0>(32769)\nE        +    where <_FuncPtr object at 0x3066e4b7d0> = <CDLL '/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/bf16-boundary-base/pytest-tmp/bf16_conversion0/conversion.so', handle 3f744e20 at 0x3066e63620>.convert\n\ntests/kernels/core/test_cpu_float_conversion.py:72: AssertionError"
+          },
+          {
+            "message": "AssertionError: assert 1 == 2\n +  where 1 = <_FuncPtr object at 0x3066e4b7d0>(98304)\n +    where <_FuncPtr object at 0x3066e4b7d0> = <CDLL '/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/bf16-boundary-base/pytest-tmp/bf16_conversion0/conversion.so', handle 3f744e20 at 0x3066e63620>.convert",
+            "text": "bf16_conversion = <CDLL '/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/bf16-boundary-base/pytest-tmp/bf16_conversion0/conversion.so', handle 3f744e20 at 0x3066e63620>\nbits = 98304, expected = 2\n\n    @pytest.mark.parametrize(\n        (\"bits\", \"expected\"),\n        [\n            (0x00000000, 0x0000),\n            (0x80000000, 0x8000),\n            (0x7F800000, 0x7F80),\n            (0xFF800000, 0xFF80),\n            (0x7F800001, 0x7FC0),\n            (0xFFFFFFFF, 0x7FC0),\n            (0x7FC00000, 0x7FC0),\n            (0x3F807FFF, 0x3F80),\n            (0x3F808000, 0x3F80),\n            (0x3F808001, 0x3F81),\n            (0x3F818000, 0x3F82),\n            (0xBF808000, 0xBF80),\n            (0xBF818000, 0xBF82),\n            (0x00008000, 0x0000),\n            (0x00008001, 0x0001),\n            (0x00018000, 0x0002),\n            (0x7F7F8000, 0x7F80),\n            (0xFF7F8000, 0xFF80),\n        ],\n    )\n    def test_software_bf16_rounding_and_special_values(\n        bf16_conversion: ctypes.CDLL, bits: int, expected: int\n    ) -> None:\n>       assert bf16_conversion.convert(bits) == expected\nE       AssertionError: assert 1 == 2\nE        +  where 1 = <_FuncPtr object at 0x3066e4b7d0>(98304)\nE        +    where <_FuncPtr object at 0x3066e4b7d0> = <CDLL '/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/bf16-boundary-base/pytest-tmp/bf16_conversion0/conversion.so', handle 3f744e20 at 0x3066e63620>.convert\n\ntests/kernels/core/test_cpu_float_conversion.py:72: AssertionError"
+          },
+          {
+            "message": "AssertionError: assert 32639 == 32640\n +  where 32639 = <_FuncPtr object at 0x3066e4b7d0>(2139062272)\n +    where <_FuncPtr object at 0x3066e4b7d0> = <CDLL '/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/bf16-boundary-base/pytest-tmp/bf16_conversion0/conversion.so', handle 3f744e20 at 0x3066e63620>.convert",
+            "text": "bf16_conversion = <CDLL '/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/bf16-boundary-base/pytest-tmp/bf16_conversion0/conversion.so', handle 3f744e20 at 0x3066e63620>\nbits = 2139062272, expected = 32640\n\n    @pytest.mark.parametrize(\n        (\"bits\", \"expected\"),\n        [\n            (0x00000000, 0x0000),\n            (0x80000000, 0x8000),\n            (0x7F800000, 0x7F80),\n            (0xFF800000, 0xFF80),\n            (0x7F800001, 0x7FC0),\n            (0xFFFFFFFF, 0x7FC0),\n            (0x7FC00000, 0x7FC0),\n            (0x3F807FFF, 0x3F80),\n            (0x3F808000, 0x3F80),\n            (0x3F808001, 0x3F81),\n            (0x3F818000, 0x3F82),\n            (0xBF808000, 0xBF80),\n            (0xBF818000, 0xBF82),\n            (0x00008000, 0x0000),\n            (0x00008001, 0x0001),\n            (0x00018000, 0x0002),\n            (0x7F7F8000, 0x7F80),\n            (0xFF7F8000, 0xFF80),\n        ],\n    )\n    def test_software_bf16_rounding_and_special_values(\n        bf16_conversion: ctypes.CDLL, bits: int, expected: int\n    ) -> None:\n>       assert bf16_conversion.convert(bits) == expected\nE       AssertionError: assert 32639 == 32640\nE        +  where 32639 = <_FuncPtr object at 0x3066e4b7d0>(2139062272)\nE        +    where <_FuncPtr object at 0x3066e4b7d0> = <CDLL '/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/bf16-boundary-base/pytest-tmp/bf16_conversion0/conversion.so', handle 3f744e20 at 0x3066e63620>.convert\n\ntests/kernels/core/test_cpu_float_conversion.py:72: AssertionError"
+          },
+          {
+            "message": "AssertionError: assert 65407 == 65408\n +  where 65407 = <_FuncPtr object at 0x3066e4b7d0>(4286545920)\n +    where <_FuncPtr object at 0x3066e4b7d0> = <CDLL '/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/bf16-boundary-base/pytest-tmp/bf16_conversion0/conversion.so', handle 3f744e20 at 0x3066e63620>.convert",
+            "text": "bf16_conversion = <CDLL '/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/bf16-boundary-base/pytest-tmp/bf16_conversion0/conversion.so', handle 3f744e20 at 0x3066e63620>\nbits = 4286545920, expected = 65408\n\n    @pytest.mark.parametrize(\n        (\"bits\", \"expected\"),\n        [\n            (0x00000000, 0x0000),\n            (0x80000000, 0x8000),\n            (0x7F800000, 0x7F80),\n            (0xFF800000, 0xFF80),\n            (0x7F800001, 0x7FC0),\n            (0xFFFFFFFF, 0x7FC0),\n            (0x7FC00000, 0x7FC0),\n            (0x3F807FFF, 0x3F80),\n            (0x3F808000, 0x3F80),\n            (0x3F808001, 0x3F81),\n            (0x3F818000, 0x3F82),\n            (0xBF808000, 0xBF80),\n            (0xBF818000, 0xBF82),\n            (0x00008000, 0x0000),\n            (0x00008001, 0x0001),\n            (0x00018000, 0x0002),\n            (0x7F7F8000, 0x7F80),\n            (0xFF7F8000, 0xFF80),\n        ],\n    )\n    def test_software_bf16_rounding_and_special_values(\n        bf16_conversion: ctypes.CDLL, bits: int, expected: int\n    ) -> None:\n>       assert bf16_conversion.convert(bits) == expected\nE       AssertionError: assert 65407 == 65408\nE        +  where 65407 = <_FuncPtr object at 0x3066e4b7d0>(4286545920)\nE        +    where <_FuncPtr object at 0x3066e4b7d0> = <CDLL '/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/bf16-boundary-base/pytest-tmp/bf16_conversion0/conversion.so', handle 3f744e20 at 0x3066e63620>.convert\n\ntests/kernels/core/test_cpu_float_conversion.py:72: AssertionError"
+          }
+        ],
+        "nodeids": [
+          {
+            "classname": "tests.kernels.core.test_cpu_float_conversion",
+            "name": "test_software_bf16_rounding_and_special_values[0-0]",
+            "time": "3.315"
+          },
+          {
+            "classname": "tests.kernels.core.test_cpu_float_conversion",
+            "name": "test_software_bf16_rounding_and_special_values[2147483648-32768]",
+            "time": "0.878"
+          },
+          {
+            "classname": "tests.kernels.core.test_cpu_float_conversion",
+            "name": "test_software_bf16_rounding_and_special_values[2139095040-32640]",
+            "time": "0.812"
+          },
+          {
+            "classname": "tests.kernels.core.test_cpu_float_conversion",
+            "name": "test_software_bf16_rounding_and_special_values[4286578688-65408]",
+            "time": "0.805"
+          },
+          {
+            "classname": "tests.kernels.core.test_cpu_float_conversion",
+            "name": "test_software_bf16_rounding_and_special_values[2139095041-32704]",
+            "time": "0.811"
+          },
+          {
+            "classname": "tests.kernels.core.test_cpu_float_conversion",
+            "name": "test_software_bf16_rounding_and_special_values[4294967295-32704]",
+            "time": "0.789"
+          },
+          {
+            "classname": "tests.kernels.core.test_cpu_float_conversion",
+            "name": "test_software_bf16_rounding_and_special_values[2143289344-32704]",
+            "time": "0.783"
+          },
+          {
+            "classname": "tests.kernels.core.test_cpu_float_conversion",
+            "name": "test_software_bf16_rounding_and_special_values[1065385983-16256]",
+            "time": "0.750"
+          },
+          {
+            "classname": "tests.kernels.core.test_cpu_float_conversion",
+            "name": "test_software_bf16_rounding_and_special_values[1065385984-16256]",
+            "time": "0.749"
+          },
+          {
+            "classname": "tests.kernels.core.test_cpu_float_conversion",
+            "name": "test_software_bf16_rounding_and_special_values[1065385985-16257]",
+            "time": "0.751"
+          },
+          {
+            "classname": "tests.kernels.core.test_cpu_float_conversion",
+            "name": "test_software_bf16_rounding_and_special_values[1065451520-16258]",
+            "time": "0.778"
+          },
+          {
+            "classname": "tests.kernels.core.test_cpu_float_conversion",
+            "name": "test_software_bf16_rounding_and_special_values[3212869632-49024]",
+            "time": "0.781"
+          },
+          {
+            "classname": "tests.kernels.core.test_cpu_float_conversion",
+            "name": "test_software_bf16_rounding_and_special_values[3212935168-49026]",
+            "time": "0.782"
+          },
+          {
+            "classname": "tests.kernels.core.test_cpu_float_conversion",
+            "name": "test_software_bf16_rounding_and_special_values[32768-0]",
+            "time": "0.784"
+          },
+          {
+            "classname": "tests.kernels.core.test_cpu_float_conversion",
+            "name": "test_software_bf16_rounding_and_special_values[32769-1]",
+            "time": "0.771"
+          },
+          {
+            "classname": "tests.kernels.core.test_cpu_float_conversion",
+            "name": "test_software_bf16_rounding_and_special_values[98304-2]",
+            "time": "0.792"
+          },
+          {
+            "classname": "tests.kernels.core.test_cpu_float_conversion",
+            "name": "test_software_bf16_rounding_and_special_values[2139062272-32640]",
+            "time": "0.798"
+          },
+          {
+            "classname": "tests.kernels.core.test_cpu_float_conversion",
+            "name": "test_software_bf16_rounding_and_special_values[4286545920-65408]",
+            "time": "0.805"
+          }
+        ]
+      },
+      "actual_imports": {
+        "start": {
+          "pid": 8999,
+          "sys_prefix": "/home/vllmtest/vllm-validation/main-venv",
+          "vllm_file": "/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/bf16-boundary-base/source/vllm/__init__.py",
+          "vllm_version_string": "dev",
+          "vllm_distribution_metadata": {
+            "present": false
+          },
+          "torch_file": "/home/vllmtest/vllm-validation/main-venv/lib/python3.12/site-packages/torch/__init__.py",
+          "extension_file": "/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/bf16-boundary-base/source/vllm/_C.abi3.so",
+          "extension_resolved": "/home/vllmtest/vllm-validation/main-integration-build/build/base/_C.abi3.so",
+          "extension_sha256": "57f4cc187d2c6502f176333331f7ba604926aa360710872478eae021d829b444",
+          "extension_maps": [
+            "3065a00000-3066968000 r-xp 00000000 fd:01 1603466                        /home/vllmtest/vllm-validation/main-integration-build/build/base/_C.abi3.so",
+            "3066968000-3066a00000 r--p 00f67000 fd:01 1603466                        /home/vllmtest/vllm-validation/main-integration-build/build/base/_C.abi3.so",
+            "3066a00000-3066a03000 rw-p 00fff000 fd:01 1603466                        /home/vllmtest/vllm-validation/main-integration-build/build/base/_C.abi3.so"
+          ]
+        },
+        "finish": {
+          "pid": 8999,
+          "sys_prefix": "/home/vllmtest/vllm-validation/main-venv",
+          "vllm_file": "/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/bf16-boundary-base/source/vllm/__init__.py",
+          "vllm_version_string": "dev",
+          "vllm_distribution_metadata": {
+            "present": false
+          },
+          "torch_file": "/home/vllmtest/vllm-validation/main-venv/lib/python3.12/site-packages/torch/__init__.py",
+          "extension_file": "/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/bf16-boundary-base/source/vllm/_C.abi3.so",
+          "extension_resolved": "/home/vllmtest/vllm-validation/main-integration-build/build/base/_C.abi3.so",
+          "extension_sha256": "57f4cc187d2c6502f176333331f7ba604926aa360710872478eae021d829b444",
+          "extension_maps": [
+            "3065a00000-3066968000 r-xp 00000000 fd:01 1603466                        /home/vllmtest/vllm-validation/main-integration-build/build/base/_C.abi3.so",
+            "3066968000-3066a00000 r--p 00f67000 fd:01 1603466                        /home/vllmtest/vllm-validation/main-integration-build/build/base/_C.abi3.so",
+            "3066a00000-3066a03000 rw-p 00fff000 fd:01 1603466                        /home/vllmtest/vllm-validation/main-integration-build/build/base/_C.abi3.so"
+          ]
+        },
+        "pytest_exit_status": 1
+      },
+      "expected_behavior_confirmed": true
+    },
+    {
+      "name": "bf16-operator-bf16",
+      "source_variant": "bf16",
+      "expected": {
+        "tests": 1,
+        "failures": 0
+      },
+      "restoration": {
+        "original_states": {
+          "/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/bf16-operator-bf16/source/tests/kernels/core/test_cpu_activation.py": {
+            "kind": "file",
+            "sha256": "e1ab4ecb31f706cbbc9ed9266e763ea707416c80b514b93658aa44e2bac59728",
+            "mode": 33188
+          },
+          "/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/bf16-operator-bf16/source/vllm/_C.abi3.so": {
+            "kind": "absent"
+          }
+        },
+        "checked": true,
+        "restored": true,
+        "errors": [],
+        "paths": [
+          "/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/bf16-operator-bf16/source/tests/kernels/core/test_cpu_activation.py",
+          "/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/bf16-operator-bf16/source/vllm/_C.abi3.so"
+        ]
+      },
+      "process": {
+        "command": [
+          "/home/vllmtest/vllm-validation/main-venv/bin/python",
+          "-m",
+          "pytest",
+          "-p",
+          "main_import_probe",
+          "-v",
+          "-s",
+          "tests/kernels/core/test_cpu_activation.py",
+          "-k",
+          "rounds_to_nearest_even",
+          "--junitxml=/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/bf16-operator-bf16/pytest.xml",
+          "--basetemp=/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/bf16-operator-bf16/pytest-tmp"
+        ],
+        "cwd": "/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/bf16-operator-bf16/source",
+        "timed_out": false,
+        "interrupted": false,
+        "actual_returncode": 0,
+        "pid": 9128,
+        "seconds": 196.45004587899984
+      },
+      "executed_test_sha256": {
+        "tests/kernels/core/test_cpu_activation.py": "e1ab4ecb31f706cbbc9ed9266e763ea707416c80b514b93658aa44e2bac59728"
+      },
+      "production_header_sha256": "80dd1d91ca34bc1f3e3db3ea1285403b5108591d070c10c329932ea720b4db85",
+      "root_conftest_sha256": "341fc65a3088fbc587a1f8b578478018ab79673cfc40caa3c5a3c36137e8f769",
+      "observed": {
+        "tests": 1,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "failure_details": [],
+        "nodeids": [
+          {
+            "classname": "tests.kernels.core.test_cpu_activation",
+            "name": "test_cpu_silu_and_mul_bf16_rounds_to_nearest_even",
+            "time": "1.149"
+          }
+        ]
+      },
+      "actual_imports": {
+        "start": {
+          "pid": 9128,
+          "sys_prefix": "/home/vllmtest/vllm-validation/main-venv",
+          "vllm_file": "/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/bf16-operator-bf16/source/vllm/__init__.py",
+          "vllm_version_string": "dev",
+          "vllm_distribution_metadata": {
+            "present": false
+          },
+          "torch_file": "/home/vllmtest/vllm-validation/main-venv/lib/python3.12/site-packages/torch/__init__.py",
+          "extension_file": "/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/bf16-operator-bf16/source/vllm/_C.abi3.so",
+          "extension_resolved": "/home/vllmtest/vllm-validation/main-integration-build/build/bf16/_C.abi3.so",
+          "extension_sha256": "93c8debb5754a1ba2241d97d9adf596274a22d8c4bf7a56ed755dc8d23bf6df2",
+          "extension_maps": [
+            "3300c00000-3301b69000 r-xp 00000000 fd:01 1603527                        /home/vllmtest/vllm-validation/main-integration-build/build/bf16/_C.abi3.so",
+            "3301b69000-3301c01000 r--p 00f69000 fd:01 1603527                        /home/vllmtest/vllm-validation/main-integration-build/build/bf16/_C.abi3.so",
+            "3301c01000-3301c04000 rw-p 01001000 fd:01 1603527                        /home/vllmtest/vllm-validation/main-integration-build/build/bf16/_C.abi3.so"
+          ]
+        },
+        "finish": {
+          "pid": 9128,
+          "sys_prefix": "/home/vllmtest/vllm-validation/main-venv",
+          "vllm_file": "/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/bf16-operator-bf16/source/vllm/__init__.py",
+          "vllm_version_string": "dev",
+          "vllm_distribution_metadata": {
+            "present": false
+          },
+          "torch_file": "/home/vllmtest/vllm-validation/main-venv/lib/python3.12/site-packages/torch/__init__.py",
+          "extension_file": "/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/bf16-operator-bf16/source/vllm/_C.abi3.so",
+          "extension_resolved": "/home/vllmtest/vllm-validation/main-integration-build/build/bf16/_C.abi3.so",
+          "extension_sha256": "93c8debb5754a1ba2241d97d9adf596274a22d8c4bf7a56ed755dc8d23bf6df2",
+          "extension_maps": [
+            "3300c00000-3301b69000 r-xp 00000000 fd:01 1603527                        /home/vllmtest/vllm-validation/main-integration-build/build/bf16/_C.abi3.so",
+            "3301b69000-3301c01000 r--p 00f69000 fd:01 1603527                        /home/vllmtest/vllm-validation/main-integration-build/build/bf16/_C.abi3.so",
+            "3301c01000-3301c04000 rw-p 01001000 fd:01 1603527                        /home/vllmtest/vllm-validation/main-integration-build/build/bf16/_C.abi3.so"
+          ]
+        },
+        "pytest_exit_status": 0
+      },
+      "expected_behavior_confirmed": true
+    },
+    {
+      "name": "bf16-boundary-bf16",
+      "source_variant": "bf16",
+      "expected": {
+        "tests": 18,
+        "failures": 0
+      },
+      "restoration": {
+        "original_states": {
+          "/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/bf16-boundary-bf16/source/tests/kernels/core/test_cpu_float_conversion.py": {
+            "kind": "file",
+            "sha256": "036f1cc808e2f20c039fd33da85667d6ea8a61ed1b35ec07b7883aaed6de468b",
+            "mode": 33188
+          },
+          "/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/bf16-boundary-bf16/source/vllm/_C.abi3.so": {
+            "kind": "absent"
+          }
+        },
+        "checked": true,
+        "restored": true,
+        "errors": [],
+        "paths": [
+          "/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/bf16-boundary-bf16/source/tests/kernels/core/test_cpu_float_conversion.py",
+          "/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/bf16-boundary-bf16/source/vllm/_C.abi3.so"
+        ]
+      },
+      "process": {
+        "command": [
+          "/home/vllmtest/vllm-validation/main-venv/bin/python",
+          "-m",
+          "pytest",
+          "-p",
+          "main_import_probe",
+          "-v",
+          "-s",
+          "tests/kernels/core/test_cpu_float_conversion.py",
+          "--junitxml=/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/bf16-boundary-bf16/pytest.xml",
+          "--basetemp=/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/bf16-boundary-bf16/pytest-tmp"
+        ],
+        "cwd": "/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/bf16-boundary-bf16/source",
+        "timed_out": false,
+        "interrupted": false,
+        "actual_returncode": 0,
+        "pid": 9420,
+        "seconds": 206.787172415
+      },
+      "executed_test_sha256": {
+        "tests/kernels/core/test_cpu_float_conversion.py": "036f1cc808e2f20c039fd33da85667d6ea8a61ed1b35ec07b7883aaed6de468b"
+      },
+      "production_header_sha256": "80dd1d91ca34bc1f3e3db3ea1285403b5108591d070c10c329932ea720b4db85",
+      "root_conftest_sha256": "341fc65a3088fbc587a1f8b578478018ab79673cfc40caa3c5a3c36137e8f769",
+      "observed": {
+        "tests": 18,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "failure_details": [],
+        "nodeids": [
+          {
+            "classname": "tests.kernels.core.test_cpu_float_conversion",
+            "name": "test_software_bf16_rounding_and_special_values[0-0]",
+            "time": "3.227"
+          },
+          {
+            "classname": "tests.kernels.core.test_cpu_float_conversion",
+            "name": "test_software_bf16_rounding_and_special_values[2147483648-32768]",
+            "time": "0.874"
+          },
+          {
+            "classname": "tests.kernels.core.test_cpu_float_conversion",
+            "name": "test_software_bf16_rounding_and_special_values[2139095040-32640]",
+            "time": "0.892"
+          },
+          {
+            "classname": "tests.kernels.core.test_cpu_float_conversion",
+            "name": "test_software_bf16_rounding_and_special_values[4286578688-65408]",
+            "time": "0.912"
+          },
+          {
+            "classname": "tests.kernels.core.test_cpu_float_conversion",
+            "name": "test_software_bf16_rounding_and_special_values[2139095041-32704]",
+            "time": "0.848"
+          },
+          {
+            "classname": "tests.kernels.core.test_cpu_float_conversion",
+            "name": "test_software_bf16_rounding_and_special_values[4294967295-32704]",
+            "time": "0.983"
+          },
+          {
+            "classname": "tests.kernels.core.test_cpu_float_conversion",
+            "name": "test_software_bf16_rounding_and_special_values[2143289344-32704]",
+            "time": "0.832"
+          },
+          {
+            "classname": "tests.kernels.core.test_cpu_float_conversion",
+            "name": "test_software_bf16_rounding_and_special_values[1065385983-16256]",
+            "time": "0.892"
+          },
+          {
+            "classname": "tests.kernels.core.test_cpu_float_conversion",
+            "name": "test_software_bf16_rounding_and_special_values[1065385984-16256]",
+            "time": "0.815"
+          },
+          {
+            "classname": "tests.kernels.core.test_cpu_float_conversion",
+            "name": "test_software_bf16_rounding_and_special_values[1065385985-16257]",
+            "time": "0.801"
+          },
+          {
+            "classname": "tests.kernels.core.test_cpu_float_conversion",
+            "name": "test_software_bf16_rounding_and_special_values[1065451520-16258]",
+            "time": "0.829"
+          },
+          {
+            "classname": "tests.kernels.core.test_cpu_float_conversion",
+            "name": "test_software_bf16_rounding_and_special_values[3212869632-49024]",
+            "time": "0.953"
+          },
+          {
+            "classname": "tests.kernels.core.test_cpu_float_conversion",
+            "name": "test_software_bf16_rounding_and_special_values[3212935168-49026]",
+            "time": "0.897"
+          },
+          {
+            "classname": "tests.kernels.core.test_cpu_float_conversion",
+            "name": "test_software_bf16_rounding_and_special_values[32768-0]",
+            "time": "0.939"
+          },
+          {
+            "classname": "tests.kernels.core.test_cpu_float_conversion",
+            "name": "test_software_bf16_rounding_and_special_values[32769-1]",
+            "time": "0.892"
+          },
+          {
+            "classname": "tests.kernels.core.test_cpu_float_conversion",
+            "name": "test_software_bf16_rounding_and_special_values[98304-2]",
+            "time": "0.903"
+          },
+          {
+            "classname": "tests.kernels.core.test_cpu_float_conversion",
+            "name": "test_software_bf16_rounding_and_special_values[2139062272-32640]",
+            "time": "1.390"
+          },
+          {
+            "classname": "tests.kernels.core.test_cpu_float_conversion",
+            "name": "test_software_bf16_rounding_and_special_values[4286545920-65408]",
+            "time": "1.387"
+          }
+        ]
+      },
+      "actual_imports": {
+        "start": {
+          "pid": 9420,
+          "sys_prefix": "/home/vllmtest/vllm-validation/main-venv",
+          "vllm_file": "/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/bf16-boundary-bf16/source/vllm/__init__.py",
+          "vllm_version_string": "dev",
+          "vllm_distribution_metadata": {
+            "present": false
+          },
+          "torch_file": "/home/vllmtest/vllm-validation/main-venv/lib/python3.12/site-packages/torch/__init__.py",
+          "extension_file": "/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/bf16-boundary-bf16/source/vllm/_C.abi3.so",
+          "extension_resolved": "/home/vllmtest/vllm-validation/main-integration-build/build/bf16/_C.abi3.so",
+          "extension_sha256": "93c8debb5754a1ba2241d97d9adf596274a22d8c4bf7a56ed755dc8d23bf6df2",
+          "extension_maps": [
+            "33eee00000-33efd69000 r-xp 00000000 fd:01 1603527                        /home/vllmtest/vllm-validation/main-integration-build/build/bf16/_C.abi3.so",
+            "33efd69000-33efe01000 r--p 00f69000 fd:01 1603527                        /home/vllmtest/vllm-validation/main-integration-build/build/bf16/_C.abi3.so",
+            "33efe01000-33efe04000 rw-p 01001000 fd:01 1603527                        /home/vllmtest/vllm-validation/main-integration-build/build/bf16/_C.abi3.so"
+          ]
+        },
+        "finish": {
+          "pid": 9420,
+          "sys_prefix": "/home/vllmtest/vllm-validation/main-venv",
+          "vllm_file": "/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/bf16-boundary-bf16/source/vllm/__init__.py",
+          "vllm_version_string": "dev",
+          "vllm_distribution_metadata": {
+            "present": false
+          },
+          "torch_file": "/home/vllmtest/vllm-validation/main-venv/lib/python3.12/site-packages/torch/__init__.py",
+          "extension_file": "/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/bf16-boundary-bf16/source/vllm/_C.abi3.so",
+          "extension_resolved": "/home/vllmtest/vllm-validation/main-integration-build/build/bf16/_C.abi3.so",
+          "extension_sha256": "93c8debb5754a1ba2241d97d9adf596274a22d8c4bf7a56ed755dc8d23bf6df2",
+          "extension_maps": [
+            "33eee00000-33efd69000 r-xp 00000000 fd:01 1603527                        /home/vllmtest/vllm-validation/main-integration-build/build/bf16/_C.abi3.so",
+            "33efd69000-33efe01000 r--p 00f69000 fd:01 1603527                        /home/vllmtest/vllm-validation/main-integration-build/build/bf16/_C.abi3.so",
+            "33efe01000-33efe04000 rw-p 01001000 fd:01 1603527                        /home/vllmtest/vllm-validation/main-integration-build/build/bf16/_C.abi3.so"
+          ]
+        },
+        "pytest_exit_status": 0
+      },
+      "expected_behavior_confirmed": true
+    },
+    {
+      "name": "openmp-config-base",
+      "source_variant": "base",
+      "expected": {
+        "tests": 6,
+        "failures": 2
+      },
+      "restoration": {
+        "original_states": {
+          "/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/openmp-config-base/source/tests/platforms/test_cpu.py": {
+            "kind": "file",
+            "sha256": "b4d85f3840403143b3b2cfe5d5b0d8cf3ce1c9daa2cb0445c952dbeae8e4c528",
+            "mode": 33188
+          },
+          "/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/openmp-config-base/source/vllm/platforms/cpu.py": {
+            "kind": "file",
+            "sha256": "bbee9ca1e3840e7933c116083b3231aaa73f5b624b1a04e853db0239a899c56e",
+            "mode": 33188
+          },
+          "/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/openmp-config-base/source/vllm/_C.abi3.so": {
+            "kind": "absent"
+          }
+        },
+        "checked": true,
+        "restored": true,
+        "errors": [],
+        "paths": [
+          "/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/openmp-config-base/source/tests/platforms/test_cpu.py",
+          "/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/openmp-config-base/source/vllm/platforms/cpu.py",
+          "/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/openmp-config-base/source/vllm/_C.abi3.so"
+        ]
+      },
+      "process": {
+        "command": [
+          "/home/vllmtest/vllm-validation/main-venv/bin/python",
+          "-m",
+          "pytest",
+          "-p",
+          "main_import_probe",
+          "-v",
+          "-s",
+          "tests/platforms/test_cpu.py",
+          "-k",
+          "riscv_preloads_bundled_openmp",
+          "--junitxml=/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/openmp-config-base/pytest.xml",
+          "--basetemp=/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/openmp-config-base/pytest-tmp"
+        ],
+        "cwd": "/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/openmp-config-base/source",
+        "timed_out": false,
+        "interrupted": false,
+        "actual_returncode": 1,
+        "pid": 9727,
+        "seconds": 209.91507548699974
+      },
+      "executed_test_sha256": {
+        "tests/platforms/test_cpu.py": "374c14959046870acf6099346c1223508c802186b3dfd69c887553494dd7b790"
+      },
+      "production_header_sha256": "f6b511b3a6f6c29598f0bd58795d07eec52132a0e4ab1aa3ec7f3afa893b3c9d",
+      "root_conftest_sha256": "341fc65a3088fbc587a1f8b578478018ab79673cfc40caa3c5a3c36137e8f769",
+      "observed": {
+        "tests": 6,
+        "failures": 2,
+        "errors": 0,
+        "skipped": 0,
+        "failure_details": [
+          {
+            "message": "AssertionError: assert '' == '/home/vllmte.../libgomp.so.1'\n  \n  - /home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/openmp-config-base/pytest-tmp/test_riscv_preloads_bundled_op0/torch.libs/libgomp.so.1",
+            "text": "monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x3a8c4b47a0>\ntmp_path = PosixPath('/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/openmp-config-base/pytest-tmp/test_riscv_preloads_bundled_op0')\nlibrary_dir = 'torch.libs', ld_preload = '', append_libgomp = True\n\n    @pytest.mark.parametrize(\n        (\"library_dir\", \"ld_preload\", \"append_libgomp\"),\n        [\n            (\"torch.libs\", \"\", True),\n            (\"torch/lib\", \"/opt/lib/libcustom.so\", True),\n            (\"torch/lib\", \"/opt/lib/libgomp.so.1\", False),\n            (\"torch/lib\", \"/opt/lib/libomp.so\", False),\n            (\"torch/lib\", \"/opt/lib/libiomp5.so\", False),\n            (None, \"/opt/lib/libcustom.so\", False),\n        ],\n    )\n    def test_riscv_preloads_bundled_openmp_for_thread_binding(\n        monkeypatch: pytest.MonkeyPatch,\n        tmp_path: Path,\n        library_dir: str | None,\n        ld_preload: str,\n        append_libgomp: bool,\n    ) -> None:\n        monkeypatch.setattr(os, \"environ\", os.environ.copy())\n        config = VllmConfig(device_config=DeviceConfig(device=\"cpu\"))\n        torch_pkg = tmp_path / \"torch\"\n        torch_pkg.mkdir()\n        libgomp = None\n        if library_dir is not None:\n            libgomp = tmp_path / library_dir / \"libgomp.so.1\"\n            libgomp.parent.mkdir(parents=True, exist_ok=True)\n            libgomp.touch()\n        monkeypatch.setattr(torch, \"__file__\", str(torch_pkg / \"__init__.py\"))\n        monkeypatch.setattr(\"platform.system\", lambda: \"Linux\")\n        monkeypatch.setattr(\"platform.machine\", lambda: \"riscv64\")\n        monkeypatch.setattr(os, \"sched_getaffinity\", lambda pid: {0, 1}, raising=False)\n        monkeypatch.setenv(\"LD_PRELOAD\", ld_preload)\n    \n        CpuPlatform.check_and_update_config(config)\n    \n        expected = ld_preload\n        if append_libgomp:\n            expected = \":\".join(filter(None, (ld_preload, str(libgomp))))\n>       assert os.environ[\"LD_PRELOAD\"] == expected\nE       AssertionError: assert '' == '/home/vllmte.../libgomp.so.1'\nE         \nE         - /home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/openmp-config-base/pytest-tmp/test_riscv_preloads_bundled_op0/torch.libs/libgomp.so.1\n\ntests/platforms/test_cpu.py:53: AssertionError"
+          },
+          {
+            "message": "AssertionError: assert '/opt/lib/libcustom.so' == '/opt/lib/lib.../libgomp.so.1'\n  \n  - /opt/lib/libcustom.so:/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/openmp-config-base/pytest-tmp/test_riscv_preloads_bundled_op1/torch/lib/libgomp.so.1\n  + /opt/lib/libcustom.so",
+            "text": "monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x3a8c86df10>\ntmp_path = PosixPath('/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/openmp-config-base/pytest-tmp/test_riscv_preloads_bundled_op1')\nlibrary_dir = 'torch/lib', ld_preload = '/opt/lib/libcustom.so'\nappend_libgomp = True\n\n    @pytest.mark.parametrize(\n        (\"library_dir\", \"ld_preload\", \"append_libgomp\"),\n        [\n            (\"torch.libs\", \"\", True),\n            (\"torch/lib\", \"/opt/lib/libcustom.so\", True),\n            (\"torch/lib\", \"/opt/lib/libgomp.so.1\", False),\n            (\"torch/lib\", \"/opt/lib/libomp.so\", False),\n            (\"torch/lib\", \"/opt/lib/libiomp5.so\", False),\n            (None, \"/opt/lib/libcustom.so\", False),\n        ],\n    )\n    def test_riscv_preloads_bundled_openmp_for_thread_binding(\n        monkeypatch: pytest.MonkeyPatch,\n        tmp_path: Path,\n        library_dir: str | None,\n        ld_preload: str,\n        append_libgomp: bool,\n    ) -> None:\n        monkeypatch.setattr(os, \"environ\", os.environ.copy())\n        config = VllmConfig(device_config=DeviceConfig(device=\"cpu\"))\n        torch_pkg = tmp_path / \"torch\"\n        torch_pkg.mkdir()\n        libgomp = None\n        if library_dir is not None:\n            libgomp = tmp_path / library_dir / \"libgomp.so.1\"\n            libgomp.parent.mkdir(parents=True, exist_ok=True)\n            libgomp.touch()\n        monkeypatch.setattr(torch, \"__file__\", str(torch_pkg / \"__init__.py\"))\n        monkeypatch.setattr(\"platform.system\", lambda: \"Linux\")\n        monkeypatch.setattr(\"platform.machine\", lambda: \"riscv64\")\n        monkeypatch.setattr(os, \"sched_getaffinity\", lambda pid: {0, 1}, raising=False)\n        monkeypatch.setenv(\"LD_PRELOAD\", ld_preload)\n    \n        CpuPlatform.check_and_update_config(config)\n    \n        expected = ld_preload\n        if append_libgomp:\n            expected = \":\".join(filter(None, (ld_preload, str(libgomp))))\n>       assert os.environ[\"LD_PRELOAD\"] == expected\nE       AssertionError: assert '/opt/lib/libcustom.so' == '/opt/lib/lib.../libgomp.so.1'\nE         \nE         - /opt/lib/libcustom.so:/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/openmp-config-base/pytest-tmp/test_riscv_preloads_bundled_op1/torch/lib/libgomp.so.1\nE         + /opt/lib/libcustom.so\n\ntests/platforms/test_cpu.py:53: AssertionError"
+          }
+        ],
+        "nodeids": [
+          {
+            "classname": "tests.platforms.test_cpu",
+            "name": "test_riscv_preloads_bundled_openmp_for_thread_binding[torch.libs--True]",
+            "time": "7.985"
+          },
+          {
+            "classname": "tests.platforms.test_cpu",
+            "name": "test_riscv_preloads_bundled_openmp_for_thread_binding[torch/lib-/opt/lib/libcustom.so-True]",
+            "time": "1.709"
+          },
+          {
+            "classname": "tests.platforms.test_cpu",
+            "name": "test_riscv_preloads_bundled_openmp_for_thread_binding[torch/lib-/opt/lib/libgomp.so.1-False]",
+            "time": "1.016"
+          },
+          {
+            "classname": "tests.platforms.test_cpu",
+            "name": "test_riscv_preloads_bundled_openmp_for_thread_binding[torch/lib-/opt/lib/libomp.so-False]",
+            "time": "1.059"
+          },
+          {
+            "classname": "tests.platforms.test_cpu",
+            "name": "test_riscv_preloads_bundled_openmp_for_thread_binding[torch/lib-/opt/lib/libiomp5.so-False]",
+            "time": "1.106"
+          },
+          {
+            "classname": "tests.platforms.test_cpu",
+            "name": "test_riscv_preloads_bundled_openmp_for_thread_binding[None-/opt/lib/libcustom.so-False]",
+            "time": "0.966"
+          }
+        ]
+      },
+      "actual_imports": {
+        "start": {
+          "pid": 9727,
+          "sys_prefix": "/home/vllmtest/vllm-validation/main-venv",
+          "vllm_file": "/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/openmp-config-base/source/vllm/__init__.py",
+          "vllm_version_string": "dev",
+          "vllm_distribution_metadata": {
+            "present": false
+          },
+          "torch_file": "/home/vllmtest/vllm-validation/main-venv/lib/python3.12/site-packages/torch/__init__.py",
+          "extension_file": "/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/openmp-config-base/source/vllm/_C.abi3.so",
+          "extension_resolved": "/home/vllmtest/vllm-validation/main-integration-build/build/base/_C.abi3.so",
+          "extension_sha256": "57f4cc187d2c6502f176333331f7ba604926aa360710872478eae021d829b444",
+          "extension_maps": [
+            "3a86e00000-3a87d68000 r-xp 00000000 fd:01 1603466                        /home/vllmtest/vllm-validation/main-integration-build/build/base/_C.abi3.so",
+            "3a87d68000-3a87e00000 r--p 00f67000 fd:01 1603466                        /home/vllmtest/vllm-validation/main-integration-build/build/base/_C.abi3.so",
+            "3a87e00000-3a87e03000 rw-p 00fff000 fd:01 1603466                        /home/vllmtest/vllm-validation/main-integration-build/build/base/_C.abi3.so"
+          ]
+        },
+        "finish": {
+          "pid": 9727,
+          "sys_prefix": "/home/vllmtest/vllm-validation/main-venv",
+          "vllm_file": "/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/openmp-config-base/source/vllm/__init__.py",
+          "vllm_version_string": "dev",
+          "vllm_distribution_metadata": {
+            "present": false
+          },
+          "torch_file": "/home/vllmtest/vllm-validation/main-venv/lib/python3.12/site-packages/torch/__init__.py",
+          "extension_file": "/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/openmp-config-base/source/vllm/_C.abi3.so",
+          "extension_resolved": "/home/vllmtest/vllm-validation/main-integration-build/build/base/_C.abi3.so",
+          "extension_sha256": "57f4cc187d2c6502f176333331f7ba604926aa360710872478eae021d829b444",
+          "extension_maps": [
+            "3a86e00000-3a87d68000 r-xp 00000000 fd:01 1603466                        /home/vllmtest/vllm-validation/main-integration-build/build/base/_C.abi3.so",
+            "3a87d68000-3a87e00000 r--p 00f67000 fd:01 1603466                        /home/vllmtest/vllm-validation/main-integration-build/build/base/_C.abi3.so",
+            "3a87e00000-3a87e03000 rw-p 00fff000 fd:01 1603466                        /home/vllmtest/vllm-validation/main-integration-build/build/base/_C.abi3.so"
+          ]
+        },
+        "pytest_exit_status": 1
+      },
+      "expected_behavior_confirmed": true
+    },
+    {
+      "name": "openmp-config-openmp",
+      "source_variant": "base",
+      "expected": {
+        "tests": 6,
+        "failures": 0
+      },
+      "restoration": {
+        "original_states": {
+          "/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/openmp-config-openmp/source/tests/platforms/test_cpu.py": {
+            "kind": "file",
+            "sha256": "b4d85f3840403143b3b2cfe5d5b0d8cf3ce1c9daa2cb0445c952dbeae8e4c528",
+            "mode": 33188
+          },
+          "/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/openmp-config-openmp/source/vllm/platforms/cpu.py": {
+            "kind": "file",
+            "sha256": "bbee9ca1e3840e7933c116083b3231aaa73f5b624b1a04e853db0239a899c56e",
+            "mode": 33188
+          },
+          "/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/openmp-config-openmp/source/vllm/_C.abi3.so": {
+            "kind": "absent"
+          }
+        },
+        "checked": true,
+        "restored": true,
+        "errors": [],
+        "paths": [
+          "/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/openmp-config-openmp/source/tests/platforms/test_cpu.py",
+          "/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/openmp-config-openmp/source/vllm/platforms/cpu.py",
+          "/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/openmp-config-openmp/source/vllm/_C.abi3.so"
+        ]
+      },
+      "process": {
+        "command": [
+          "/home/vllmtest/vllm-validation/main-venv/bin/python",
+          "-m",
+          "pytest",
+          "-p",
+          "main_import_probe",
+          "-v",
+          "-s",
+          "tests/platforms/test_cpu.py",
+          "-k",
+          "riscv_preloads_bundled_openmp",
+          "--junitxml=/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/openmp-config-openmp/pytest.xml",
+          "--basetemp=/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/openmp-config-openmp/pytest-tmp"
+        ],
+        "cwd": "/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/openmp-config-openmp/source",
+        "timed_out": false,
+        "interrupted": false,
+        "actual_returncode": 0,
+        "pid": 9918,
+        "seconds": 195.6437657689994
+      },
+      "executed_test_sha256": {
+        "tests/platforms/test_cpu.py": "374c14959046870acf6099346c1223508c802186b3dfd69c887553494dd7b790"
+      },
+      "production_header_sha256": "f6b511b3a6f6c29598f0bd58795d07eec52132a0e4ab1aa3ec7f3afa893b3c9d",
+      "root_conftest_sha256": "341fc65a3088fbc587a1f8b578478018ab79673cfc40caa3c5a3c36137e8f769",
+      "observed": {
+        "tests": 6,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "failure_details": [],
+        "nodeids": [
+          {
+            "classname": "tests.platforms.test_cpu",
+            "name": "test_riscv_preloads_bundled_openmp_for_thread_binding[torch.libs--True]",
+            "time": "4.257"
+          },
+          {
+            "classname": "tests.platforms.test_cpu",
+            "name": "test_riscv_preloads_bundled_openmp_for_thread_binding[torch/lib-/opt/lib/libcustom.so-True]",
+            "time": "0.933"
+          },
+          {
+            "classname": "tests.platforms.test_cpu",
+            "name": "test_riscv_preloads_bundled_openmp_for_thread_binding[torch/lib-/opt/lib/libgomp.so.1-False]",
+            "time": "0.917"
+          },
+          {
+            "classname": "tests.platforms.test_cpu",
+            "name": "test_riscv_preloads_bundled_openmp_for_thread_binding[torch/lib-/opt/lib/libomp.so-False]",
+            "time": "0.944"
+          },
+          {
+            "classname": "tests.platforms.test_cpu",
+            "name": "test_riscv_preloads_bundled_openmp_for_thread_binding[torch/lib-/opt/lib/libiomp5.so-False]",
+            "time": "0.957"
+          },
+          {
+            "classname": "tests.platforms.test_cpu",
+            "name": "test_riscv_preloads_bundled_openmp_for_thread_binding[None-/opt/lib/libcustom.so-False]",
+            "time": "1.142"
+          }
+        ]
+      },
+      "actual_imports": {
+        "start": {
+          "pid": 9918,
+          "sys_prefix": "/home/vllmtest/vllm-validation/main-venv",
+          "vllm_file": "/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/openmp-config-openmp/source/vllm/__init__.py",
+          "vllm_version_string": "dev",
+          "vllm_distribution_metadata": {
+            "present": false
+          },
+          "torch_file": "/home/vllmtest/vllm-validation/main-venv/lib/python3.12/site-packages/torch/__init__.py",
+          "extension_file": "/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/openmp-config-openmp/source/vllm/_C.abi3.so",
+          "extension_resolved": "/home/vllmtest/vllm-validation/main-integration-build/build/base/_C.abi3.so",
+          "extension_sha256": "57f4cc187d2c6502f176333331f7ba604926aa360710872478eae021d829b444",
+          "extension_maps": [
+            "395ae00000-395bd68000 r-xp 00000000 fd:01 1603466                        /home/vllmtest/vllm-validation/main-integration-build/build/base/_C.abi3.so",
+            "395bd68000-395be00000 r--p 00f67000 fd:01 1603466                        /home/vllmtest/vllm-validation/main-integration-build/build/base/_C.abi3.so",
+            "395be00000-395be03000 rw-p 00fff000 fd:01 1603466                        /home/vllmtest/vllm-validation/main-integration-build/build/base/_C.abi3.so"
+          ]
+        },
+        "finish": {
+          "pid": 9918,
+          "sys_prefix": "/home/vllmtest/vllm-validation/main-venv",
+          "vllm_file": "/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/openmp-config-openmp/source/vllm/__init__.py",
+          "vllm_version_string": "dev",
+          "vllm_distribution_metadata": {
+            "present": false
+          },
+          "torch_file": "/home/vllmtest/vllm-validation/main-venv/lib/python3.12/site-packages/torch/__init__.py",
+          "extension_file": "/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/openmp-config-openmp/source/vllm/_C.abi3.so",
+          "extension_resolved": "/home/vllmtest/vllm-validation/main-integration-build/build/base/_C.abi3.so",
+          "extension_sha256": "57f4cc187d2c6502f176333331f7ba604926aa360710872478eae021d829b444",
+          "extension_maps": [
+            "395ae00000-395bd68000 r-xp 00000000 fd:01 1603466                        /home/vllmtest/vllm-validation/main-integration-build/build/base/_C.abi3.so",
+            "395bd68000-395be00000 r--p 00f67000 fd:01 1603466                        /home/vllmtest/vllm-validation/main-integration-build/build/base/_C.abi3.so",
+            "395be00000-395be03000 rw-p 00fff000 fd:01 1603466                        /home/vllmtest/vllm-validation/main-integration-build/build/base/_C.abi3.so"
+          ]
+        },
+        "pytest_exit_status": 0
+      },
+      "expected_behavior_confirmed": true
+    },
+    {
+      "name": "standalone-base",
+      "source_variant": "base",
+      "expected": {
+        "failures": 0
+      },
+      "restoration": {
+        "original_states": {
+          "/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/standalone-base/source/vllm/_C.abi3.so": {
+            "kind": "absent"
+          }
+        },
+        "checked": true,
+        "restored": true,
+        "errors": [],
+        "paths": [
+          "/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/standalone-base/source/vllm/_C.abi3.so"
+        ]
+      },
+      "process": {
+        "command": [
+          "/home/vllmtest/vllm-validation/main-venv/bin/python",
+          "-m",
+          "pytest",
+          "-p",
+          "main_import_probe",
+          "-v",
+          "-s",
+          "tests/v1/worker/cpu/test_cpu_block_table.py",
+          "tests/v1/worker/cpu/test_cpu_input_batch.py",
+          "tests/v1/worker/cpu/test_cpu_gumbel_sample.py::test_greedy_supports_dtypes_strides_and_invalid_mapping",
+          "tests/v1/worker/cpu/test_cpu_gumbel_sample.py::test_pre_scaled_logits_match_temperature_application",
+          "--junitxml=/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/standalone-base/pytest.xml",
+          "--basetemp=/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/standalone-base/pytest-tmp"
+        ],
+        "cwd": "/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/standalone-base/source",
+        "timed_out": false,
+        "interrupted": false,
+        "actual_returncode": 0,
+        "pid": 10052,
+        "seconds": 206.04362001200025
+      },
+      "executed_test_sha256": {},
+      "production_header_sha256": "f6b511b3a6f6c29598f0bd58795d07eec52132a0e4ab1aa3ec7f3afa893b3c9d",
+      "root_conftest_sha256": "341fc65a3088fbc587a1f8b578478018ab79673cfc40caa3c5a3c36137e8f769",
+      "observed": {
+        "tests": 24,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "failure_details": [],
+        "nodeids": [
+          {
+            "classname": "tests.v1.worker.cpu.test_cpu_block_table",
+            "name": "test_append_block_ids_updates_cpu_tensors_directly",
+            "time": "0.919"
+          },
+          {
+            "classname": "tests.v1.worker.cpu.test_cpu_block_table",
+            "name": "test_append_block_ids_rejects_write_past_row_capacity",
+            "time": "0.866"
+          },
+          {
+            "classname": "tests.v1.worker.cpu.test_cpu_block_table",
+            "name": "test_gather_block_tables_cpu",
+            "time": "0.846"
+          },
+          {
+            "classname": "tests.v1.worker.cpu.test_cpu_block_table",
+            "name": "test_compute_slot_mappings_cpu",
+            "time": "0.867"
+          },
+          {
+            "classname": "tests.v1.worker.cpu.test_cpu_block_table",
+            "name": "test_dummy_block_tables_clear_previous_request_rows",
+            "time": "0.828"
+          },
+          {
+            "classname": "tests.v1.worker.cpu.test_cpu_block_table",
+            "name": "test_dummy_request_slot_mapping_is_pad",
+            "time": "0.840"
+          },
+          {
+            "classname": "tests.v1.worker.cpu.test_cpu_block_table",
+            "name": "test_gather_nulls_blocks_below_sliding_window",
+            "time": "0.857"
+          },
+          {
+            "classname": "tests.v1.worker.cpu.test_cpu_block_table",
+            "name": "test_shared_block_tables_clear_rows_from_larger_batch",
+            "time": "0.822"
+          },
+          {
+            "classname": "tests.v1.worker.cpu.test_cpu_block_table",
+            "name": "test_external_block_table_output_preserves_shared_rows",
+            "time": "0.799"
+          },
+          {
+            "classname": "tests.v1.worker.cpu.test_cpu_input_batch",
+            "name": "test_make_dummy_distributes_remainder[256-496]",
+            "time": "0.835"
+          },
+          {
+            "classname": "tests.v1.worker.cpu.test_cpu_input_batch",
+            "name": "test_make_dummy_distributes_remainder[128-512]",
+            "time": "0.817"
+          },
+          {
+            "classname": "tests.v1.worker.cpu.test_cpu_input_batch",
+            "name": "test_make_dummy_distributes_remainder[3-8]",
+            "time": "0.797"
+          },
+          {
+            "classname": "tests.v1.worker.cpu.test_cpu_input_batch",
+            "name": "test_make_dummy_distributes_remainder[1-7]",
+            "time": "0.792"
+          },
+          {
+            "classname": "tests.v1.worker.cpu.test_cpu_input_batch",
+            "name": "test_prepare_prefill_inputs_cpu",
+            "time": "0.838"
+          },
+          {
+            "classname": "tests.v1.worker.cpu.test_cpu_input_batch",
+            "name": "test_get_prompt_logprobs_token_ids_cpu",
+            "time": "0.786"
+          },
+          {
+            "classname": "tests.v1.worker.cpu.test_cpu_input_batch",
+            "name": "test_prepare_pos_seq_lens_cpu",
+            "time": "0.813"
+          },
+          {
+            "classname": "tests.v1.worker.cpu.test_cpu_input_batch",
+            "name": "test_prepare_mrope_positions_cpu",
+            "time": "0.844"
+          },
+          {
+            "classname": "tests.v1.worker.cpu.test_cpu_input_batch",
+            "name": "test_cpu_rope_state_prepares_model_positions",
+            "time": "0.792"
+          },
+          {
+            "classname": "tests.v1.worker.cpu.test_cpu_input_batch",
+            "name": "test_combine_sampled_and_draft_tokens_cpu_basic",
+            "time": "0.780"
+          },
+          {
+            "classname": "tests.v1.worker.cpu.test_cpu_input_batch",
+            "name": "test_post_update_cpu_without_optional_inputs",
+            "time": "0.796"
+          },
+          {
+            "classname": "tests.v1.worker.cpu.test_cpu_gumbel_sample",
+            "name": "test_greedy_supports_dtypes_strides_and_invalid_mapping[dtype0]",
+            "time": "0.866"
+          },
+          {
+            "classname": "tests.v1.worker.cpu.test_cpu_gumbel_sample",
+            "name": "test_greedy_supports_dtypes_strides_and_invalid_mapping[dtype1]",
+            "time": "0.808"
+          },
+          {
+            "classname": "tests.v1.worker.cpu.test_cpu_gumbel_sample",
+            "name": "test_greedy_supports_dtypes_strides_and_invalid_mapping[dtype2]",
+            "time": "0.776"
+          },
+          {
+            "classname": "tests.v1.worker.cpu.test_cpu_gumbel_sample",
+            "name": "test_pre_scaled_logits_match_temperature_application",
+            "time": "0.810"
+          }
+        ]
+      },
+      "actual_imports": {
+        "start": {
+          "pid": 10052,
+          "sys_prefix": "/home/vllmtest/vllm-validation/main-venv",
+          "vllm_file": "/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/standalone-base/source/vllm/__init__.py",
+          "vllm_version_string": "dev",
+          "vllm_distribution_metadata": {
+            "present": false
+          },
+          "torch_file": "/home/vllmtest/vllm-validation/main-venv/lib/python3.12/site-packages/torch/__init__.py",
+          "extension_file": "/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/standalone-base/source/vllm/_C.abi3.so",
+          "extension_resolved": "/home/vllmtest/vllm-validation/main-integration-build/build/base/_C.abi3.so",
+          "extension_sha256": "57f4cc187d2c6502f176333331f7ba604926aa360710872478eae021d829b444",
+          "extension_maps": [
+            "3e1e000000-3e1ef68000 r-xp 00000000 fd:01 1603466                        /home/vllmtest/vllm-validation/main-integration-build/build/base/_C.abi3.so",
+            "3e1ef68000-3e1f000000 r--p 00f67000 fd:01 1603466                        /home/vllmtest/vllm-validation/main-integration-build/build/base/_C.abi3.so",
+            "3e1f000000-3e1f003000 rw-p 00fff000 fd:01 1603466                        /home/vllmtest/vllm-validation/main-integration-build/build/base/_C.abi3.so"
+          ]
+        },
+        "finish": {
+          "pid": 10052,
+          "sys_prefix": "/home/vllmtest/vllm-validation/main-venv",
+          "vllm_file": "/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/standalone-base/source/vllm/__init__.py",
+          "vllm_version_string": "dev",
+          "vllm_distribution_metadata": {
+            "present": false
+          },
+          "torch_file": "/home/vllmtest/vllm-validation/main-venv/lib/python3.12/site-packages/torch/__init__.py",
+          "extension_file": "/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/standalone-base/source/vllm/_C.abi3.so",
+          "extension_resolved": "/home/vllmtest/vllm-validation/main-integration-build/build/base/_C.abi3.so",
+          "extension_sha256": "57f4cc187d2c6502f176333331f7ba604926aa360710872478eae021d829b444",
+          "extension_maps": [
+            "3e1e000000-3e1ef68000 r-xp 00000000 fd:01 1603466                        /home/vllmtest/vllm-validation/main-integration-build/build/base/_C.abi3.so",
+            "3e1ef68000-3e1f000000 r--p 00f67000 fd:01 1603466                        /home/vllmtest/vllm-validation/main-integration-build/build/base/_C.abi3.so",
+            "3e1f000000-3e1f003000 rw-p 00fff000 fd:01 1603466                        /home/vllmtest/vllm-validation/main-integration-build/build/base/_C.abi3.so"
+          ]
+        },
+        "pytest_exit_status": 0
+      },
+      "expected_behavior_confirmed": true
+    },
+    {
+      "name": "standalone-erf",
+      "source_variant": "erf",
+      "expected": {
+        "failures": 0
+      },
+      "restoration": {
+        "original_states": {
+          "/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/standalone-erf/source/vllm/_C.abi3.so": {
+            "kind": "absent"
+          }
+        },
+        "checked": true,
+        "restored": true,
+        "errors": [],
+        "paths": [
+          "/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/standalone-erf/source/vllm/_C.abi3.so"
+        ]
+      },
+      "process": {
+        "command": [
+          "/home/vllmtest/vllm-validation/main-venv/bin/python",
+          "-m",
+          "pytest",
+          "-p",
+          "main_import_probe",
+          "-v",
+          "-s",
+          "tests/v1/worker/cpu/test_cpu_block_table.py",
+          "tests/v1/worker/cpu/test_cpu_input_batch.py",
+          "tests/v1/worker/cpu/test_cpu_gumbel_sample.py::test_greedy_supports_dtypes_strides_and_invalid_mapping",
+          "tests/v1/worker/cpu/test_cpu_gumbel_sample.py::test_pre_scaled_logits_match_temperature_application",
+          "--junitxml=/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/standalone-erf/pytest.xml",
+          "--basetemp=/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/standalone-erf/pytest-tmp"
+        ],
+        "cwd": "/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/standalone-erf/source",
+        "timed_out": false,
+        "interrupted": false,
+        "actual_returncode": 0,
+        "pid": 10320,
+        "seconds": 219.7726672030003
+      },
+      "executed_test_sha256": {},
+      "production_header_sha256": "f6b511b3a6f6c29598f0bd58795d07eec52132a0e4ab1aa3ec7f3afa893b3c9d",
+      "root_conftest_sha256": "341fc65a3088fbc587a1f8b578478018ab79673cfc40caa3c5a3c36137e8f769",
+      "observed": {
+        "tests": 24,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "failure_details": [],
+        "nodeids": [
+          {
+            "classname": "tests.v1.worker.cpu.test_cpu_block_table",
+            "name": "test_append_block_ids_updates_cpu_tensors_directly",
+            "time": "0.966"
+          },
+          {
+            "classname": "tests.v1.worker.cpu.test_cpu_block_table",
+            "name": "test_append_block_ids_rejects_write_past_row_capacity",
+            "time": "0.918"
+          },
+          {
+            "classname": "tests.v1.worker.cpu.test_cpu_block_table",
+            "name": "test_gather_block_tables_cpu",
+            "time": "0.944"
+          },
+          {
+            "classname": "tests.v1.worker.cpu.test_cpu_block_table",
+            "name": "test_compute_slot_mappings_cpu",
+            "time": "1.192"
+          },
+          {
+            "classname": "tests.v1.worker.cpu.test_cpu_block_table",
+            "name": "test_dummy_block_tables_clear_previous_request_rows",
+            "time": "0.924"
+          },
+          {
+            "classname": "tests.v1.worker.cpu.test_cpu_block_table",
+            "name": "test_dummy_request_slot_mapping_is_pad",
+            "time": "0.961"
+          },
+          {
+            "classname": "tests.v1.worker.cpu.test_cpu_block_table",
+            "name": "test_gather_nulls_blocks_below_sliding_window",
+            "time": "0.929"
+          },
+          {
+            "classname": "tests.v1.worker.cpu.test_cpu_block_table",
+            "name": "test_shared_block_tables_clear_rows_from_larger_batch",
+            "time": "0.934"
+          },
+          {
+            "classname": "tests.v1.worker.cpu.test_cpu_block_table",
+            "name": "test_external_block_table_output_preserves_shared_rows",
+            "time": "0.917"
+          },
+          {
+            "classname": "tests.v1.worker.cpu.test_cpu_input_batch",
+            "name": "test_make_dummy_distributes_remainder[256-496]",
+            "time": "1.220"
+          },
+          {
+            "classname": "tests.v1.worker.cpu.test_cpu_input_batch",
+            "name": "test_make_dummy_distributes_remainder[128-512]",
+            "time": "0.975"
+          },
+          {
+            "classname": "tests.v1.worker.cpu.test_cpu_input_batch",
+            "name": "test_make_dummy_distributes_remainder[3-8]",
+            "time": "0.946"
+          },
+          {
+            "classname": "tests.v1.worker.cpu.test_cpu_input_batch",
+            "name": "test_make_dummy_distributes_remainder[1-7]",
+            "time": "0.933"
+          },
+          {
+            "classname": "tests.v1.worker.cpu.test_cpu_input_batch",
+            "name": "test_prepare_prefill_inputs_cpu",
+            "time": "1.034"
+          },
+          {
+            "classname": "tests.v1.worker.cpu.test_cpu_input_batch",
+            "name": "test_get_prompt_logprobs_token_ids_cpu",
+            "time": "1.131"
+          },
+          {
+            "classname": "tests.v1.worker.cpu.test_cpu_input_batch",
+            "name": "test_prepare_pos_seq_lens_cpu",
+            "time": "0.910"
+          },
+          {
+            "classname": "tests.v1.worker.cpu.test_cpu_input_batch",
+            "name": "test_prepare_mrope_positions_cpu",
+            "time": "0.991"
+          },
+          {
+            "classname": "tests.v1.worker.cpu.test_cpu_input_batch",
+            "name": "test_cpu_rope_state_prepares_model_positions",
+            "time": "1.012"
+          },
+          {
+            "classname": "tests.v1.worker.cpu.test_cpu_input_batch",
+            "name": "test_combine_sampled_and_draft_tokens_cpu_basic",
+            "time": "0.889"
+          },
+          {
+            "classname": "tests.v1.worker.cpu.test_cpu_input_batch",
+            "name": "test_post_update_cpu_without_optional_inputs",
+            "time": "0.943"
+          },
+          {
+            "classname": "tests.v1.worker.cpu.test_cpu_gumbel_sample",
+            "name": "test_greedy_supports_dtypes_strides_and_invalid_mapping[dtype0]",
+            "time": "1.110"
+          },
+          {
+            "classname": "tests.v1.worker.cpu.test_cpu_gumbel_sample",
+            "name": "test_greedy_supports_dtypes_strides_and_invalid_mapping[dtype1]",
+            "time": "0.917"
+          },
+          {
+            "classname": "tests.v1.worker.cpu.test_cpu_gumbel_sample",
+            "name": "test_greedy_supports_dtypes_strides_and_invalid_mapping[dtype2]",
+            "time": "0.864"
+          },
+          {
+            "classname": "tests.v1.worker.cpu.test_cpu_gumbel_sample",
+            "name": "test_pre_scaled_logits_match_temperature_application",
+            "time": "0.888"
+          }
+        ]
+      },
+      "actual_imports": {
+        "start": {
+          "pid": 10320,
+          "sys_prefix": "/home/vllmtest/vllm-validation/main-venv",
+          "vllm_file": "/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/standalone-erf/source/vllm/__init__.py",
+          "vllm_version_string": "dev",
+          "vllm_distribution_metadata": {
+            "present": false
+          },
+          "torch_file": "/home/vllmtest/vllm-validation/main-venv/lib/python3.12/site-packages/torch/__init__.py",
+          "extension_file": "/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/standalone-erf/source/vllm/_C.abi3.so",
+          "extension_resolved": "/home/vllmtest/vllm-validation/main-integration-build/build/erf/_C.abi3.so",
+          "extension_sha256": "a1056a310cbfc357dfdcb18ff250be2fd8acf1d4bbb463682c6e6c492c341538",
+          "extension_maps": [
+            "36ad600000-36ae568000 r-xp 00000000 fd:01 1603500                        /home/vllmtest/vllm-validation/main-integration-build/build/erf/_C.abi3.so",
+            "36ae568000-36ae600000 r--p 00f67000 fd:01 1603500                        /home/vllmtest/vllm-validation/main-integration-build/build/erf/_C.abi3.so",
+            "36ae600000-36ae603000 rw-p 00fff000 fd:01 1603500                        /home/vllmtest/vllm-validation/main-integration-build/build/erf/_C.abi3.so"
+          ]
+        },
+        "finish": {
+          "pid": 10320,
+          "sys_prefix": "/home/vllmtest/vllm-validation/main-venv",
+          "vllm_file": "/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/standalone-erf/source/vllm/__init__.py",
+          "vllm_version_string": "dev",
+          "vllm_distribution_metadata": {
+            "present": false
+          },
+          "torch_file": "/home/vllmtest/vllm-validation/main-venv/lib/python3.12/site-packages/torch/__init__.py",
+          "extension_file": "/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/standalone-erf/source/vllm/_C.abi3.so",
+          "extension_resolved": "/home/vllmtest/vllm-validation/main-integration-build/build/erf/_C.abi3.so",
+          "extension_sha256": "a1056a310cbfc357dfdcb18ff250be2fd8acf1d4bbb463682c6e6c492c341538",
+          "extension_maps": [
+            "36ad600000-36ae568000 r-xp 00000000 fd:01 1603500                        /home/vllmtest/vllm-validation/main-integration-build/build/erf/_C.abi3.so",
+            "36ae568000-36ae600000 r--p 00f67000 fd:01 1603500                        /home/vllmtest/vllm-validation/main-integration-build/build/erf/_C.abi3.so",
+            "36ae600000-36ae603000 rw-p 00fff000 fd:01 1603500                        /home/vllmtest/vllm-validation/main-integration-build/build/erf/_C.abi3.so"
+          ]
+        },
+        "pytest_exit_status": 0
+      },
+      "expected_behavior_confirmed": true
+    },
+    {
+      "name": "standalone-bf16",
+      "source_variant": "bf16",
+      "expected": {
+        "failures": 0
+      },
+      "restoration": {
+        "original_states": {
+          "/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/standalone-bf16/source/vllm/_C.abi3.so": {
+            "kind": "absent"
+          }
+        },
+        "checked": true,
+        "restored": true,
+        "errors": [],
+        "paths": [
+          "/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/standalone-bf16/source/vllm/_C.abi3.so"
+        ]
+      },
+      "process": {
+        "command": [
+          "/home/vllmtest/vllm-validation/main-venv/bin/python",
+          "-m",
+          "pytest",
+          "-p",
+          "main_import_probe",
+          "-v",
+          "-s",
+          "tests/v1/worker/cpu/test_cpu_block_table.py",
+          "tests/v1/worker/cpu/test_cpu_input_batch.py",
+          "tests/v1/worker/cpu/test_cpu_gumbel_sample.py::test_greedy_supports_dtypes_strides_and_invalid_mapping",
+          "tests/v1/worker/cpu/test_cpu_gumbel_sample.py::test_pre_scaled_logits_match_temperature_application",
+          "--junitxml=/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/standalone-bf16/pytest.xml",
+          "--basetemp=/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/standalone-bf16/pytest-tmp"
+        ],
+        "cwd": "/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/standalone-bf16/source",
+        "timed_out": false,
+        "interrupted": false,
+        "actual_returncode": 0,
+        "pid": 11141,
+        "seconds": 219.28014659100063
+      },
+      "executed_test_sha256": {},
+      "production_header_sha256": "80dd1d91ca34bc1f3e3db3ea1285403b5108591d070c10c329932ea720b4db85",
+      "root_conftest_sha256": "341fc65a3088fbc587a1f8b578478018ab79673cfc40caa3c5a3c36137e8f769",
+      "observed": {
+        "tests": 24,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "failure_details": [],
+        "nodeids": [
+          {
+            "classname": "tests.v1.worker.cpu.test_cpu_block_table",
+            "name": "test_append_block_ids_updates_cpu_tensors_directly",
+            "time": "0.990"
+          },
+          {
+            "classname": "tests.v1.worker.cpu.test_cpu_block_table",
+            "name": "test_append_block_ids_rejects_write_past_row_capacity",
+            "time": "0.972"
+          },
+          {
+            "classname": "tests.v1.worker.cpu.test_cpu_block_table",
+            "name": "test_gather_block_tables_cpu",
+            "time": "0.992"
+          },
+          {
+            "classname": "tests.v1.worker.cpu.test_cpu_block_table",
+            "name": "test_compute_slot_mappings_cpu",
+            "time": "1.165"
+          },
+          {
+            "classname": "tests.v1.worker.cpu.test_cpu_block_table",
+            "name": "test_dummy_block_tables_clear_previous_request_rows",
+            "time": "0.905"
+          },
+          {
+            "classname": "tests.v1.worker.cpu.test_cpu_block_table",
+            "name": "test_dummy_request_slot_mapping_is_pad",
+            "time": "1.011"
+          },
+          {
+            "classname": "tests.v1.worker.cpu.test_cpu_block_table",
+            "name": "test_gather_nulls_blocks_below_sliding_window",
+            "time": "0.970"
+          },
+          {
+            "classname": "tests.v1.worker.cpu.test_cpu_block_table",
+            "name": "test_shared_block_tables_clear_rows_from_larger_batch",
+            "time": "0.924"
+          },
+          {
+            "classname": "tests.v1.worker.cpu.test_cpu_block_table",
+            "name": "test_external_block_table_output_preserves_shared_rows",
+            "time": "1.119"
+          },
+          {
+            "classname": "tests.v1.worker.cpu.test_cpu_input_batch",
+            "name": "test_make_dummy_distributes_remainder[256-496]",
+            "time": "0.972"
+          },
+          {
+            "classname": "tests.v1.worker.cpu.test_cpu_input_batch",
+            "name": "test_make_dummy_distributes_remainder[128-512]",
+            "time": "0.975"
+          },
+          {
+            "classname": "tests.v1.worker.cpu.test_cpu_input_batch",
+            "name": "test_make_dummy_distributes_remainder[3-8]",
+            "time": "1.138"
+          },
+          {
+            "classname": "tests.v1.worker.cpu.test_cpu_input_batch",
+            "name": "test_make_dummy_distributes_remainder[1-7]",
+            "time": "1.018"
+          },
+          {
+            "classname": "tests.v1.worker.cpu.test_cpu_input_batch",
+            "name": "test_prepare_prefill_inputs_cpu",
+            "time": "1.260"
+          },
+          {
+            "classname": "tests.v1.worker.cpu.test_cpu_input_batch",
+            "name": "test_get_prompt_logprobs_token_ids_cpu",
+            "time": "0.887"
+          },
+          {
+            "classname": "tests.v1.worker.cpu.test_cpu_input_batch",
+            "name": "test_prepare_pos_seq_lens_cpu",
+            "time": "0.931"
+          },
+          {
+            "classname": "tests.v1.worker.cpu.test_cpu_input_batch",
+            "name": "test_prepare_mrope_positions_cpu",
+            "time": "0.957"
+          },
+          {
+            "classname": "tests.v1.worker.cpu.test_cpu_input_batch",
+            "name": "test_cpu_rope_state_prepares_model_positions",
+            "time": "0.977"
+          },
+          {
+            "classname": "tests.v1.worker.cpu.test_cpu_input_batch",
+            "name": "test_combine_sampled_and_draft_tokens_cpu_basic",
+            "time": "0.923"
+          },
+          {
+            "classname": "tests.v1.worker.cpu.test_cpu_input_batch",
+            "name": "test_post_update_cpu_without_optional_inputs",
+            "time": "1.154"
+          },
+          {
+            "classname": "tests.v1.worker.cpu.test_cpu_gumbel_sample",
+            "name": "test_greedy_supports_dtypes_strides_and_invalid_mapping[dtype0]",
+            "time": "0.970"
+          },
+          {
+            "classname": "tests.v1.worker.cpu.test_cpu_gumbel_sample",
+            "name": "test_greedy_supports_dtypes_strides_and_invalid_mapping[dtype1]",
+            "time": "0.953"
+          },
+          {
+            "classname": "tests.v1.worker.cpu.test_cpu_gumbel_sample",
+            "name": "test_greedy_supports_dtypes_strides_and_invalid_mapping[dtype2]",
+            "time": "1.134"
+          },
+          {
+            "classname": "tests.v1.worker.cpu.test_cpu_gumbel_sample",
+            "name": "test_pre_scaled_logits_match_temperature_application",
+            "time": "0.928"
+          }
+        ]
+      },
+      "actual_imports": {
+        "start": {
+          "pid": 11141,
+          "sys_prefix": "/home/vllmtest/vllm-validation/main-venv",
+          "vllm_file": "/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/standalone-bf16/source/vllm/__init__.py",
+          "vllm_version_string": "dev",
+          "vllm_distribution_metadata": {
+            "present": false
+          },
+          "torch_file": "/home/vllmtest/vllm-validation/main-venv/lib/python3.12/site-packages/torch/__init__.py",
+          "extension_file": "/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/standalone-bf16/source/vllm/_C.abi3.so",
+          "extension_resolved": "/home/vllmtest/vllm-validation/main-integration-build/build/bf16/_C.abi3.so",
+          "extension_sha256": "93c8debb5754a1ba2241d97d9adf596274a22d8c4bf7a56ed755dc8d23bf6df2",
+          "extension_maps": [
+            "3d81000000-3d81f69000 r-xp 00000000 fd:01 1603527                        /home/vllmtest/vllm-validation/main-integration-build/build/bf16/_C.abi3.so",
+            "3d81f69000-3d82001000 r--p 00f69000 fd:01 1603527                        /home/vllmtest/vllm-validation/main-integration-build/build/bf16/_C.abi3.so",
+            "3d82001000-3d82004000 rw-p 01001000 fd:01 1603527                        /home/vllmtest/vllm-validation/main-integration-build/build/bf16/_C.abi3.so"
+          ]
+        },
+        "finish": {
+          "pid": 11141,
+          "sys_prefix": "/home/vllmtest/vllm-validation/main-venv",
+          "vllm_file": "/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/standalone-bf16/source/vllm/__init__.py",
+          "vllm_version_string": "dev",
+          "vllm_distribution_metadata": {
+            "present": false
+          },
+          "torch_file": "/home/vllmtest/vllm-validation/main-venv/lib/python3.12/site-packages/torch/__init__.py",
+          "extension_file": "/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/standalone-bf16/source/vllm/_C.abi3.so",
+          "extension_resolved": "/home/vllmtest/vllm-validation/main-integration-build/build/bf16/_C.abi3.so",
+          "extension_sha256": "93c8debb5754a1ba2241d97d9adf596274a22d8c4bf7a56ed755dc8d23bf6df2",
+          "extension_maps": [
+            "3d81000000-3d81f69000 r-xp 00000000 fd:01 1603527                        /home/vllmtest/vllm-validation/main-integration-build/build/bf16/_C.abi3.so",
+            "3d81f69000-3d82001000 r--p 00f69000 fd:01 1603527                        /home/vllmtest/vllm-validation/main-integration-build/build/bf16/_C.abi3.so",
+            "3d82001000-3d82004000 rw-p 01001000 fd:01 1603527                        /home/vllmtest/vllm-validation/main-integration-build/build/bf16/_C.abi3.so"
+          ]
+        },
+        "pytest_exit_status": 0
+      },
+      "expected_behavior_confirmed": true
+    }
+  ],
+  "scope": "Real root conftest; selected tests; explicit expected baseline regressions",
+  "libraries": {
+    "base": {
+      "path": "/home/vllmtest/vllm-validation/main-integration-build/build/base/_C.abi3.so",
+      "sha256": "57f4cc187d2c6502f176333331f7ba604926aa360710872478eae021d829b444",
+      "source_identity": {
+        "commit": "e0d00e4b8eb0c89ec30921d0695cfdd409e9c211",
+        "archive": "main-source-base.tar.gz",
+        "sha256": "4e29a49187b1b2b04f5b064fc39f4ef4fd9161898db692a88b7cf2e9d7cb69c6",
+        "size": 47999299,
+        "members": 9914,
+        "tracked_files": 8776,
+        "command": "git archive --format=tar --prefix=main-source-base/ e0d00e4b8eb0c89ec30921d0695cfdd409e9c211 | gzip -n",
+        "scope": "Unmodified pinned upstream main source; no candidate changes; prepared for independent current-main builds."
+      }
+    },
+    "erf": {
+      "path": "/home/vllmtest/vllm-validation/main-integration-build/build/erf/_C.abi3.so",
+      "sha256": "a1056a310cbfc357dfdcb18ff250be2fd8acf1d4bbb463682c6e6c492c341538",
+      "source_identity": {
+        "variant": "erf",
+        "main_commit": "e0d00e4b8eb0c89ec30921d0695cfdd409e9c211",
+        "index_tree": "94453352d881e58ebf423b67d7ccea2ba449eef5",
+        "archive": "main-source-erf.tar.gz",
+        "sha256": "bb718659a9cb31de4c550b3c56d93c9021cef5a80eeab928e5846902dc87c804",
+        "size": 47715582,
+        "tracked_files": 8776,
+        "source_manifest": "work/main-integration/erf-frozen-source.json",
+        "scope": "Independent original patch plus existing followups on pinned main; hooks passed. Docs and build/runtime validation still in progress."
+      }
+    },
+    "bf16": {
+      "path": "/home/vllmtest/vllm-validation/main-integration-build/build/bf16/_C.abi3.so",
+      "sha256": "93c8debb5754a1ba2241d97d9adf596274a22d8c4bf7a56ed755dc8d23bf6df2",
+      "source_identity": {
+        "variant": "bf16",
+        "main_commit": "e0d00e4b8eb0c89ec30921d0695cfdd409e9c211",
+        "index_tree": "8b860fc3eba99f6eccfe4b473c00a829b7ea9af3",
+        "archive": "main-source-bf16.tar.gz",
+        "sha256": "a0e956d990d50a69928d2db91a11155b5ff427db1c2ddc6c67438792d894dd96",
+        "size": 47716930,
+        "tracked_files": 8777,
+        "source_manifest": "work/main-integration/bf16-frozen-source.json",
+        "scope": "Independent original patch plus existing followups on pinned main; hooks passed. Docs and build/runtime validation still in progress."
+      }
+    }
+  }
+}

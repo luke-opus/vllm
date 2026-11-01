@@ -1,0 +1,80 @@
+Final checklist record for the existing three draft updates, 2026-11-01
+====================================================================
+
+Outcome: source updates are pushed and verified. Locally controllable build,
+regression and paired-model work is complete at the pinned source identities.
+This is not a claim that every submission requirement is satisfied. Native
+hardware, upstream execution, the submitting human's own review/test confirmation
+and an ERF changed-path real-model result remain unestablished. No ready-for-review
+promotion, reviewer request, trust-label request or new PR is included.
+
+1. Design fit
+-------------
+The changes stay independent: ERF/RVV lane preservation, software BF16 rounding,
+and Linux RISC-V membership in the existing OpenMP preload policy. They retain
+the existing interfaces and default model selections. Each new source tree
+exactly matches its frozen tested tree; the old PR head and pinned upstream main
+are ancestors. See final-source-audit.txt and source-publication.json. The scoped
+duplicate search in duplicate-scan.json found no additional matching open fix;
+it is not an exhaustive proof about every repository issue.
+
+2. Testing and validation
+-------------------------
+All 63 production compilation units, three full links and three actual load/new
+operator checks completed. The 210 oneDNN compilation units were reused after
+explicit identity checks, not recompiled. Environment adaptations and real
+production fallbacks are disclosed in the build and runtime records.
+
+Real repository execution retained the root conftest and fixtures: 130 cases,
+116 passes, 14 expected baseline assertion failures, no errors or skips. Fixed
+counterparts passed. The 18-case BF16 compiled production-header regression is
+persistent in the PR and selected by CPU CI. No assertion tolerance, skip, mock
+backend or fake version metadata was introduced to obtain a pass.
+
+The real-weight BF16 pair uses the default StandaloneCPUModelRunner and changes
+only the complete DSO. Seven of eight tokens match; all numerical differences
+are reported without a quality/equivalence claim. The real mp/spawn OpenMP pair
+uses the same base DSO and only changes the exact one-line current cpu.py policy;
+all returned outputs match, with actual startup preload inheritance verified.
+Both pairs have actual child/driver exit 0, shutdown and independent restoration
+proof. The first OpenMP IPC-path failure remains in the evidence. The retry
+changes only the isolated TMPDIR setup. TorchInductor's own helper compilation
+and oneDNN-to-Torch linear fallback are explicitly disclosed.
+
+All execution above is QEMU. The Cloud-V inventory still needs a real assigned
+runner. The bounded ERF model-route audit does not establish a public unchanged
+checkpoint using the modified gated exact-GELU CPU/RVV path. Other GELU paths
+cannot be substituted. Upstream contributor eligibility failed and RTD stopped
+on that prerequisite; skipped format/lint checks are not passes. DCO passed on
+all three new heads. See current-head-ci-audit.txt and original logs.
+
+3. Code quality and documentation
+---------------------------------
+Original-config applicable hooks and normal commit hooks passed. Three full
+strict MkDocs/API builds passed, each generating 3,026 API entries; retained
+INFO-level diagnostics are not hidden. Documentation is in each source PR and
+explains the relevant defaults and enablement. Independent local and public
+GitHub readers found the core answers through the CPU installation entry.
+The independent preview deployment is built at
+1db1c44b0b5bb33261d3da4ee637e6d5ca43c111; its final browser inspection is recorded
+separately in docs-web-fresh.txt. All three actual installation-index CPU links
+and all three search-result clicks reached the correct FAQ in Chrome. This
+preview is not upstream RTD success.
+The generic CPU entry remains the navigation route; no unsupported RISC-V
+installation/support-matrix claim is added merely to create a dedicated tab.
+
+4. Pull request contents and accountability
+-------------------------------------------
+The three existing drafts preserve the repository template, focused claims,
+root cause/tradeoffs, exact tested-source identity, reproduction commands, raw
+evidence, AI disclosure and DCO attribution. Public evidence has explicit file
+allowlists, byte counts and SHA256 checks. Historical scripts/logs and earlier
+base results remain unchanged and separately identified.
+
+The PR body update is generated only after completed repository/BF16/OpenMP
+reports and successful independent audits exist. The Testing and Validation
+checkbox remains unchecked. Authorization to continue does not prove the human
+has personally reviewed every line or run tests, and cannot be used to attest
+those facts. The repository's current AGENTS.md, tests/AGENTS.md, contribution
+guide, PR template and pr-checklist were read and applied; no extra permission
+veto was invented for these already-authorized draft updates.

@@ -1,0 +1,40 @@
+{
+  "push_exit": 0,
+  "mode": "normal atomic fast-forward; no force",
+  "pull_requests": [
+    {
+      "pr": 64078,
+      "url": "https://github.com/vllm-project/vllm/pull/64078",
+      "state": "open",
+      "draft": true,
+      "head": "ec0fbf5e9b3e9d796ccae667a437f2e97c3f9cde",
+      "tree": "94453352d881e58ebf423b67d7ccea2ba449eef5",
+      "branch": "riscv-erf-mask",
+      "maintainer_can_modify": true,
+      "source_commit_api_updated_at": "2026-11-01T05:54:15Z"
+    },
+    {
+      "pr": 64079,
+      "url": "https://github.com/vllm-project/vllm/pull/64079",
+      "state": "open",
+      "draft": true,
+      "head": "6592612016059859dff1e93bd534edc1a5737615",
+      "tree": "8b860fc3eba99f6eccfe4b473c00a829b7ea9af3",
+      "branch": "riscv-bf16-rne",
+      "maintainer_can_modify": true,
+      "source_commit_api_updated_at": "2026-11-01T05:54:15Z"
+    },
+    {
+      "pr": 64080,
+      "url": "https://github.com/vllm-project/vllm/pull/64080",
+      "state": "open",
+      "draft": true,
+      "head": "dfdc85947fe914d04906f5d0206c020c208bd400",
+      "tree": "2cc5383ab7ca9209554779029edb9ccc31a41432",
+      "branch": "riscv-openmp-preload",
+      "maintainer_can_modify": true,
+      "source_commit_api_updated_at": "2026-11-01T05:54:15Z"
+    }
+  ],
+  "receipt_created_utc": "2026-11-01T05:56:11.557651+00:00"
+}

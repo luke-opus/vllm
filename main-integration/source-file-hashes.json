@@ -1,0 +1,192 @@
+[
+  {
+    "path": "source/candidate-check-results.json",
+    "bytes": 9425,
+    "sha256": "7046b08d3b4688e8e57b90554eb8ab53fc05b4110120a622449f1f48d9812613"
+  },
+  {
+    "path": "source/prepared-publication-commits.json",
+    "bytes": 992,
+    "sha256": "ca2f32d95ddf175226188e7cfc3c8a2f487bd3d7e27db4dc9710ea304daa4e2a"
+  },
+  {
+    "path": "source/duplicate-scan.json",
+    "bytes": 2921,
+    "sha256": "b733ef555f872ebe07e649257fc891a12febae8717643cdc7338efaf5ea56282"
+  },
+  {
+    "path": "source/pr-checklist-current-main.txt",
+    "bytes": 17607,
+    "sha256": "64075ef6530905557768eabc5b770788f0a4c060c6af170aaa19529fc3fbbb3f"
+  },
+  {
+    "path": "source/docs-local-fresh.txt",
+    "bytes": 8039,
+    "sha256": "12bd9cbcfc6bd1a75111c4f571fa633db18fea7cf737a7462fa9e0f7922543ec"
+  },
+  {
+    "path": "source/export-main-preview.py",
+    "bytes": 5208,
+    "sha256": "b9141095c625428d4f14421c95ac9d3c9191f4460791bd402a7425149578dd8d"
+  },
+  {
+    "path": "source/erf-model-coverage-current-main.txt",
+    "bytes": 10398,
+    "sha256": "9683be13ef7d4b6aa813007414ce035f8eb19b46da5119ef13bac8c1b47160d9"
+  },
+  {
+    "path": "source/final-source-audit.txt",
+    "bytes": 6357,
+    "sha256": "d05a8d7fac9f1778f7221a34461d1fa2792381d93c2e06491e1a5acf4dedd72a"
+  },
+  {
+    "path": "source/publication-accuracy-review.txt",
+    "bytes": 4041,
+    "sha256": "49b88ddb9072ac8a931c712e9a4994aa1f7abeadd1f807b90f4181b17e68ed0b"
+  },
+  {
+    "path": "source/source-publication.json",
+    "bytes": 1327,
+    "sha256": "6b3c08fd88ca3b24d0cfbcd43a55fc3afc621a4a28fa500107df33b952d7763f"
+  },
+  {
+    "path": "source/source-push.txt",
+    "bytes": 316,
+    "sha256": "5595d902ef70c5828bc3ff06719905a863f41aad484fec42b0e627482730c843"
+  },
+  {
+    "path": "source/docs-github-fresh.txt",
+    "bytes": 8882,
+    "sha256": "707981df74948f654056f6324c7e44cdc92911e5ad5da1b38431cdc72f72e967"
+  },
+  {
+    "path": "source/current-head-ci-audit.txt",
+    "bytes": 3837,
+    "sha256": "814380357debefa73c0c49c9c82b3441d150064aed1b7ccd0d631bc50ccb581d"
+  },
+  {
+    "path": "source/docs-web-fresh.txt",
+    "bytes": 6708,
+    "sha256": "d84bffec7b8cd409351f6ba9743f62f0cc855899c7027c65a1b4b2006d0ca168"
+  },
+  {
+    "path": "source/pr-checklist-final.txt",
+    "bytes": 4989,
+    "sha256": "f95d5bb2e08fc2b7ef30b595f5beeea1790e69990c6c22f4b72f9851a9eef1e2"
+  },
+  {
+    "path": "source/erf-frozen-source.json",
+    "bytes": 1122,
+    "sha256": "18f8a64a6efb0d3e575e70675e0fc0b5abb9963479c63736dbdd8aae6e685d6f"
+  },
+  {
+    "path": "source/erf-frozen.patch",
+    "bytes": 4128,
+    "sha256": "e305cc930a03b94c82aabe703a0ae91fa7f5470ffb9966e5e149c5dc6ef1168e"
+  },
+  {
+    "path": "source/erf-followup-commit.txt",
+    "bytes": 5198,
+    "sha256": "9fa659b9e476510e4a18cad8253f2662f0e997c503734bc40b3ee810ec053628"
+  },
+  {
+    "path": "source/erf-merge-commit.txt",
+    "bytes": 114555,
+    "sha256": "6a28de7f1f8db8dc7c9b823345ef5e26b0fbb71b80ade9c4313bf6b1aa008842"
+  },
+  {
+    "path": "source/docs-erf-strict.txt",
+    "bytes": 471893,
+    "sha256": "0c0fd70e3f93d753b62f750318a9fbab934285cf09ef56e114589485f20edb8b"
+  },
+  {
+    "path": "source/bf16-frozen-source.json",
+    "bytes": 1473,
+    "sha256": "dfa902b11c4f15be17856483bc6e00c433f211c57569260c45d3bc7ce4fd0ce2"
+  },
+  {
+    "path": "source/bf16-frozen.patch",
+    "bytes": 5787,
+    "sha256": "c20fd84a1279a35f194c954b2e8bedb0934f7b446166d65eb0523472ff9c3089"
+  },
+  {
+    "path": "source/bf16-followup-commit.txt",
+    "bytes": 4447,
+    "sha256": "356d93e418b405b8fa5c12730c1d698097893ac095d26da3b70f65216e77fea8"
+  },
+  {
+    "path": "source/bf16-merge-commit.txt",
+    "bytes": 114419,
+    "sha256": "044a7bc4cb656f02adff3a5de9f82311b98233e9ea1dc61d0b0afb3897982c53"
+  },
+  {
+    "path": "source/docs-bf16-strict.txt",
+    "bytes": 471894,
+    "sha256": "440b62b8d83d4401009996a95f2b4195ea42ca3f3c765c09115234e58e418f2f"
+  },
+  {
+    "path": "source/openmp-frozen-source.json",
+    "bytes": 1673,
+    "sha256": "432ac7cf0c3cdbcced28ba5388407e5480e42b1879b7d03ded32ca5a2f418cef"
+  },
+  {
+    "path": "source/openmp-frozen.patch",
+    "bytes": 5523,
+    "sha256": "9a64258e7a245b739807b3b398b01540e5acc8e9660d7a2f4db0cb1ed3493246"
+  },
+  {
+    "path": "source/openmp-followup-commit.txt",
+    "bytes": 4363,
+    "sha256": "207e68c76eb79e4f1c3646cc734f99c107b53946b20c3eeff992c5adf560820f"
+  },
+  {
+    "path": "source/openmp-merge-commit.txt",
+    "bytes": 114499,
+    "sha256": "fba670bcc113bfc684c608a2b17d1393743884276a49869f946739817e5a9256"
+  },
+  {
+    "path": "source/docs-openmp-strict.txt",
+    "bytes": 471896,
+    "sha256": "0ac02e4d6e40154a7bd265257e93b7e16e613746c135549bb38406b560fe5cc3"
+  },
+  {
+    "path": "source/precommit-erf-attempt1.txt",
+    "bytes": 6851,
+    "sha256": "8fbabd2a129143d1d546df39fce2d65172146645cfdceca3cabc39fce3b73f4d"
+  },
+  {
+    "path": "source/precommit-bf16-attempt1.txt",
+    "bytes": 4109,
+    "sha256": "f3be1ae697830a9d47619513d1073329e243ac9e7a6cb23ae90de0b9a0b4557d"
+  },
+  {
+    "path": "source/precommit-openmp-attempt1.txt",
+    "bytes": 4192,
+    "sha256": "308f3c1f693b3136abfcc6597a3a3555963fc66fe20f2ab054f732dfb8227ac0"
+  },
+  {
+    "path": "source/precommit-openmp-attempt2.txt",
+    "bytes": 4109,
+    "sha256": "9a49f362e8dca00cf759c82f6236dfb340bb636b7ee9e4148f37575450e040fa"
+  },
+  {
+    "path": "source/main-source-base.tar.manifest.json",
+    "bytes": 484,
+    "sha256": "a5e10062dfdc365b721139ca4ddb6bc751b902507e6f609b7f58f639a2c9070e"
+  },
+  {
+    "path": "source/main-source-bf16.tar.manifest.json",
+    "bytes": 528,
+    "sha256": "66399bccbc44222aba622ca6900010975f4ddeeaf31eaa67d15696afc7b2e0f3"
+  },
+  {
+    "path": "source/main-source-erf.tar.manifest.json",
+    "bytes": 525,
+    "sha256": "13388341c551cc974a541eceec7ab0c5b52d5fe211aae81ee59e6d83e348573f"
+  },
+  {
+    "path": "source/main-source-openmp.tar.manifest.json",
+    "bytes": 536,
+    "sha256": "7f649e4ec9408e864560fa38f80d8ef6dc321799427434d74685ad7779af2e0c"
+  }
+]

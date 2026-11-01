@@ -1,0 +1,19 @@
+{
+  "variant": "erf",
+  "base": "e0d00e4b8eb0c89ec30921d0695cfdd409e9c211",
+  "index_tree": "94453352d881e58ebf423b67d7ccea2ba449eef5",
+  "tracked_worktree_matches_index": true,
+  "untracked_during_docs": [
+    ".mkdocs-inventory-3qt9m7qw.yaml"
+  ],
+  "staged_stat": " csrc/cpu/cpu_types_riscv_impl.hpp         |  8 ++------\n docs/getting_started/installation/cpu.md  |  6 ++++++\n tests/kernels/core/test_cpu_activation.py | 11 ++++++++---\n 3 files changed, 16 insertions(+), 9 deletions(-)\n",
+  "patch_sha256": "e305cc930a03b94c82aabe703a0ae91fa7f5470ffb9966e5e149c5dc6ef1168e",
+  "file_sha256": {
+    "csrc/cpu/cpu_types_riscv_impl.hpp": "8c4aed1d81f4a38d5632d254e2d96eccbe03a32fe8a9590313332e45e3ce4cf9",
+    "docs/getting_started/installation/cpu.md": "29cbf921104d1508f3f7ff28b34c76aac4cf2264c82687d3daaf70b250a897ed",
+    "tests/kernels/core/test_cpu_activation.py": "08247d785b6304a712e918dde354b601f07034297b595ea61588fd0c75297707"
+  },
+  "pre_commit_exit_code": 0,
+  "pre_commit_log": "precommit-erf-attempt1.txt",
+  "source_status": "frozen for archive; docs builds running read-only over tracked sources"
+}

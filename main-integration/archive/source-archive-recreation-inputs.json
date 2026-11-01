@@ -1,0 +1,61 @@
+{
+  "canonical_algorithm": "SHA256 of ordered newline-delimited compact sorted-key ASCII JSON records with name,type,mode,linkname,size and sha256 for regular-file content. Archive order is retained; timestamps, uid/gid, owner/group names and PAX layout are excluded. No extraction is performed.",
+  "variants": [
+    {
+      "variant": "base",
+      "ref": "e0d00e4b8eb0c89ec30921d0695cfdd409e9c211",
+      "object_type": "commit",
+      "prefix": "main-source-base/",
+      "mtime": 1793502281,
+      "expected_archive_sha256": "4e29a49187b1b2b04f5b064fc39f4ef4fd9161898db692a88b7cf2e9d7cb69c6",
+      "expected_archive_bytes": 47999299,
+      "expected_tar_sha256": "e2da54961cab2ed6fc54c38016b48d3d308726bf0d9671e56a2108189582e9d1",
+      "expected_canonical_members_sha256": "28a79c9379d27aa8e284461d29f381b36f3b60b5e6af62d707ac04636aef04ad",
+      "expected_members": 9914,
+      "expected_regular_files": 8767,
+      "expected_global_pax_comment": "e0d00e4b8eb0c89ec30921d0695cfdd409e9c211"
+    },
+    {
+      "variant": "erf",
+      "ref": "94453352d881e58ebf423b67d7ccea2ba449eef5",
+      "object_type": "tree",
+      "prefix": "main-source-erf/",
+      "mtime": 1793507340,
+      "expected_archive_sha256": "bb718659a9cb31de4c550b3c56d93c9021cef5a80eeab928e5846902dc87c804",
+      "expected_archive_bytes": 47715582,
+      "expected_tar_sha256": "0e0f222ddfc931e02f84c4d9c0e555773806803611cfe668375e2a41736ed137",
+      "expected_canonical_members_sha256": "e29067c747564e4e26042af630611411784b2fd8a706d6d8584918bf7485d60f",
+      "expected_members": 9914,
+      "expected_regular_files": 8767,
+      "expected_global_pax_comment": null
+    },
+    {
+      "variant": "bf16",
+      "ref": "8b860fc3eba99f6eccfe4b473c00a829b7ea9af3",
+      "object_type": "tree",
+      "prefix": "main-source-bf16/",
+      "mtime": 1793507352,
+      "expected_archive_sha256": "a0e956d990d50a69928d2db91a11155b5ff427db1c2ddc6c67438792d894dd96",
+      "expected_archive_bytes": 47716930,
+      "expected_tar_sha256": "a71b72a679f7f4bb2cc47637575e569a985b9fd7da4cb469213c75f3ad5e39be",
+      "expected_canonical_members_sha256": "1053d909a5b09d6f92edb872bbdf154bb9f9e9a6c18583fd2ad42a9714cb2dfb",
+      "expected_members": 9915,
+      "expected_regular_files": 8768,
+      "expected_global_pax_comment": null
+    },
+    {
+      "variant": "openmp",
+      "ref": "2cc5383ab7ca9209554779029edb9ccc31a41432",
+      "object_type": "tree",
+      "prefix": "main-source-openmp/",
+      "mtime": 1793507394,
+      "expected_archive_sha256": "69086b660c5c6b37cdedddf680ea0f24f19f6540718a5f26237f0c0f6f2c2cba",
+      "expected_archive_bytes": 47718014,
+      "expected_tar_sha256": "aef20ba8015aa6aefbb282053dfb8de1506f514c32233d68d74f1cbbc9d603dc",
+      "expected_canonical_members_sha256": "a8e29ed5806f8901aa8bfd4bb1631b5a59a0f4e7a7a3ad5076a68ad5c01d07a8",
+      "expected_members": 9914,
+      "expected_regular_files": 8767,
+      "expected_global_pax_comment": null
+    }
+  ]
+}

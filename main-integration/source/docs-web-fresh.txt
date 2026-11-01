@@ -1,0 +1,75 @@
+Independent deployed-preview review (fresh browser evidence)
+Reviewed: 2026-11-01, Asia/Shanghai
+Scope: https://luke-opus.github.io/vllm/ only. No local documentation, GitHub source/PR description, or earlier review conclusions were read for this review. Only this report was written locally.
+
+Method and boundaries
+- web.open could not access the four supplied preview URLs. The Chrome browser connector was unavailable; IAB creation in the subagent was unavailable/timed out. Native Google Chrome through the supported CUA API worked, so the checks below are actual browser navigation and actual site-search queries, not an HTTP-only substitute.
+- A new Chrome tab was opened at the preview entrance. For each preview, I clicked its entrance link, clicked the Installation navigation item, clicked the CPU link in the installation index body, then used the site's Search field and clicked its FAQ result.
+- The deployment commit 1db1c44b0b5bb33261d3da4ee637e6d5ca43c111 was supplied by the parent task. Its Git identity was not independently inspected here. The live page source-head banners were independently observed as below.
+- Banner build-success text is a statement on the preview page, not independent build/CI evidence. This review proves public preview content/navigation/search only. It does not establish upstream Read the Docs, upstream CI approval, human review, or physical RISC-V behavior.
+
+Live entrance and banners
+Entrance: https://luke-opus.github.io/vllm/
+It displayed the three current CPU links, with short heads ec0fbf5e9b3e, 659261201605, and dfdc85947fe9. It explicitly described independent previews and separate native-hardware/CI/human-review requirements.
+CPU page banners showed:
+- 64078-main: ec0fbf5e9b3e9d796ccae667a437f2e97c3f9cde
+- 64079-main: 6592612016059859dff1e93bd534edc1a5737615
+- 64080-main: dfdc85947fe914d04906f5d0206c020c208bd400
+All three displayed upstream base e0d00e4b8eb0c89ec30921d0695cfdd409e9c211 and explicitly separated the preview from upstream CI approval. The heads match the requested prefixes.
+
+1. GELU exact/tanh: discoverable and answered
+Actual navigation:
+https://luke-opus.github.io/vllm/
+  -> clicked PR #64078: erf
+https://luke-opus.github.io/vllm/64078-main/getting_started/installation/cpu/
+  -> clicked Installation
+https://luke-opus.github.io/vllm/64078-main/getting_started/installation/
+  -> clicked the CPU link in the index body
+https://luke-opus.github.io/vllm/64078-main/getting_started/installation/cpu/
+Result: CPU index link returned to the correct 64078-main CPU page.
+Site search: entered GELU; observed 1 matching document and the visible FAQ title Which GELU approximation is used on RISC-V?; clicked the result.
+Observed final URL:
+https://luke-opus.github.io/vllm/64078-main/getting_started/installation/cpu/?h=gelu#which-gelu-approximation-is-used-on-risc-v
+Answer from this FAQ: fused GELU-and-multiply supports exact approximate="none" and tanh approximate="tanh". The model/operator selects the mode; GeluAndMul defaults to exact. Existing model selection is preserved and no new RISC-V CLI option or environment variable is required. For RVV exact GELU, the page explains preservation of all active lanes, including nonnegative inputs, independent of mask-agnostic fill behavior.
+Short excerpt: GeluAndMul "defaults to approximate=\"none\"".
+Stable FAQ URL:
+https://luke-opus.github.io/vllm/64078-main/getting_started/installation/cpu/#which-gelu-approximation-is-used-on-risc-v
+
+2. Software BF16: discoverable and answered
+Actual navigation:
+https://luke-opus.github.io/vllm/
+  -> clicked PR #64079: bf16
+https://luke-opus.github.io/vllm/64079-main/getting_started/installation/cpu/
+  -> clicked Installation
+https://luke-opus.github.io/vllm/64079-main/getting_started/installation/
+  -> clicked the CPU link in the index body
+https://luke-opus.github.io/vllm/64079-main/getting_started/installation/cpu/
+Result: CPU index link returned to the correct 64079-main CPU page.
+Site search: entered round-to-nearest-even; observed 1 matching document, visible Which dtype should be used? result with the RISC-V paragraph, and clicked it.
+Observed final URL:
+https://luke-opus.github.io/vllm/64079-main/getting_started/installation/cpu/?h=round+nearest+even#which-dtype-should-be-used
+Answer from this FAQ: RISC-V software float32-to-bfloat16 conversion rounds to nearest even and keeps NaNs as canonical quiet NaNs. It is selected automatically when a CPU kernel needs it, including when native vector BF16 conversion is unavailable. It does not need an enabling CLI option/environment variable and does not change the model's default dtype. The surrounding FAQ still says CPU uses model default dtype settings and recommends an explicit bfloat16 choice if float16 performance/accuracy causes problems.
+Short excerpts: "round-to-nearest-even"; "canonical quiet NaNs"; "The model's default dtype is unchanged."
+Stable FAQ URL:
+https://luke-opus.github.io/vllm/64079-main/getting_started/installation/cpu/#which-dtype-should-be-used
+
+3. OpenMP: discoverable and answered
+Actual navigation:
+https://luke-opus.github.io/vllm/
+  -> clicked PR #64080: openmp
+https://luke-opus.github.io/vllm/64080-main/getting_started/installation/cpu/
+  -> clicked Installation
+https://luke-opus.github.io/vllm/64080-main/getting_started/installation/
+  -> clicked the CPU link in the index body
+https://luke-opus.github.io/vllm/64080-main/getting_started/installation/cpu/
+Result: CPU index link returned to the correct 64080-main CPU page.
+Site search: entered libgomp; observed 1 matching document and clicked its FAQ result.
+Observed final URL:
+https://luke-opus.github.io/vllm/64080-main/getting_started/installation/cpu/?h=libgomp#how-to-decide-vllm_cpu_omp_threads_bind
+Answer from this FAQ: On Linux, including RISC-V, available PyTorch-bundled libgomp is added to LD_PRELOAD before CPU workers are spawned. An existing OpenMP runtime in LD_PRELOAD is preserved. PyTorch source/distribution builds lacking bundled libgomp use their configured runtime.
+Short excerpt: "use their configured runtime."
+Stable FAQ URL:
+https://luke-opus.github.io/vllm/64080-main/getting_started/installation/cpu/#how-to-decide-vllm_cpu_omp_threads_bind
+
+Result
+All three requested questions can be answered from the deployed pages alone. All three Installation index CPU links and all three site-search result clicks were actually exercised in Chrome and reached the correct preview/FAQ. No blocker was found in the requested reader flow. Other navigation links intentionally point to official latest documentation; they were not followed for this review. No production data, repository content, PR, deployment, or external communication was changed.

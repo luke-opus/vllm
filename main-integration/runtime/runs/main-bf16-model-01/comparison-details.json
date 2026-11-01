@@ -1,0 +1,280 @@
+{
+  "scope": "Descriptive paired-run observations only. Aggregate deltas use only shared returned tokens at identical generated prefixes; no full-vocabulary, numerical equivalence, or model quality claim.",
+  "same_prefix_common_returned_logprob_values": 39,
+  "same_prefix_max_abs_logprob_difference": 0.3876304626464844,
+  "same_prefix_mean_abs_logprob_difference": 0.08119453527988532,
+  "steps_with_top5_set_changes": 1,
+  "comparisons": [
+    {
+      "prompt": "The capital of France is",
+      "base_tokens": [
+        253,
+        1986,
+        2077,
+        15
+      ],
+      "fixed_tokens": [
+        253,
+        1986,
+        2077,
+        13
+      ],
+      "base_text": " the United States.",
+      "fixed_text": " the United States,",
+      "matching_tokens": 3,
+      "steps": [
+        {
+          "step": 0,
+          "same_generated_prefix": true,
+          "common_returned_logprob_abs_differences": {
+            "247": 0.08054447174072266,
+            "253": 0.018044471740722656,
+            "271": 0.018044471740722656,
+            "275": 0.044455528259277344,
+            "581": 0.08054447174072266
+          },
+          "base_returned_token_count": 5,
+          "fixed_returned_token_count": 5,
+          "top5_set_equal": true,
+          "base_top5": [
+            "247",
+            "253",
+            "271",
+            "275",
+            "581"
+          ],
+          "fixed_top5": [
+            "247",
+            "253",
+            "271",
+            "275",
+            "581"
+          ],
+          "all_returned_token_set_equal": true
+        },
+        {
+          "step": 1,
+          "same_generated_prefix": true,
+          "common_returned_logprob_abs_differences": {
+            "1986": 0.12396240234375,
+            "2448": 0.12396240234375,
+            "2846": 0.06353759765625,
+            "5112": 0.37396240234375
+          },
+          "base_returned_token_count": 5,
+          "fixed_returned_token_count": 5,
+          "top5_set_equal": false,
+          "base_top5": [
+            "1986",
+            "2448",
+            "2846",
+            "5112",
+            "9890"
+          ],
+          "fixed_top5": [
+            "1986",
+            "2448",
+            "2846",
+            "5112",
+            "5347"
+          ],
+          "all_returned_token_set_equal": false
+        },
+        {
+          "step": 2,
+          "same_generated_prefix": true,
+          "common_returned_logprob_abs_differences": {
+            "2077": 0.03500175476074219,
+            "4687": 0.027498245239257812,
+            "8365": 0.09750175476074219,
+            "11491": 0.08999824523925781,
+            "14726": 0.027498245239257812
+          },
+          "base_returned_token_count": 5,
+          "fixed_returned_token_count": 5,
+          "top5_set_equal": true,
+          "base_top5": [
+            "2077",
+            "4687",
+            "8365",
+            "11491",
+            "14726"
+          ],
+          "fixed_top5": [
+            "2077",
+            "4687",
+            "8365",
+            "11491",
+            "14726"
+          ],
+          "all_returned_token_set_equal": true
+        },
+        {
+          "step": 3,
+          "same_generated_prefix": true,
+          "common_returned_logprob_abs_differences": {
+            "13": 0.04963111877441406,
+            "15": 0.07536888122558594,
+            "28": 0.012868881225585938,
+            "275": 0.012868881225585938,
+            "285": 0.012868881225585938
+          },
+          "base_returned_token_count": 5,
+          "fixed_returned_token_count": 5,
+          "top5_set_equal": true,
+          "base_top5": [
+            "13",
+            "15",
+            "28",
+            "275",
+            "285"
+          ],
+          "fixed_top5": [
+            "13",
+            "15",
+            "28",
+            "275",
+            "285"
+          ],
+          "all_returned_token_set_equal": true
+        }
+      ]
+    },
+    {
+      "prompt": "A computer can",
+      "base_tokens": [
+        320,
+        908,
+        281,
+        897
+      ],
+      "fixed_tokens": [
+        320,
+        908,
+        281,
+        897
+      ],
+      "base_text": " be used to use",
+      "fixed_text": " be used to use",
+      "matching_tokens": 4,
+      "steps": [
+        {
+          "step": 0,
+          "same_generated_prefix": true,
+          "common_returned_logprob_abs_differences": {
+            "320": 0.0036144256591796875,
+            "897": 0.0036144256591796875,
+            "1239": 0.0036144256591796875,
+            "1361": 0.0036144256591796875,
+            "2736": 0.05888557434082031
+          },
+          "base_returned_token_count": 5,
+          "fixed_returned_token_count": 5,
+          "top5_set_equal": true,
+          "base_top5": [
+            "320",
+            "897",
+            "1239",
+            "1361",
+            "2736"
+          ],
+          "fixed_top5": [
+            "320",
+            "897",
+            "1239",
+            "1361",
+            "2736"
+          ],
+          "all_returned_token_set_equal": true
+        },
+        {
+          "step": 1,
+          "same_generated_prefix": true,
+          "common_returned_logprob_abs_differences": {
+            "247": 0.0034999847412109375,
+            "908": 0.06599998474121094,
+            "1119": 0.0034999847412109375,
+            "2104": 0.06599998474121094,
+            "27881": 0.0034999847412109375
+          },
+          "base_returned_token_count": 5,
+          "fixed_returned_token_count": 5,
+          "top5_set_equal": true,
+          "base_top5": [
+            "247",
+            "908",
+            "1119",
+            "2104",
+            "27881"
+          ],
+          "fixed_top5": [
+            "247",
+            "908",
+            "1119",
+            "2104",
+            "27881"
+          ],
+          "all_returned_token_set_equal": true
+        },
+        {
+          "step": 2,
+          "same_generated_prefix": true,
+          "common_returned_logprob_abs_differences": {
+            "15": 0.3876304626464844,
+            "275": 0.20013046264648438,
+            "281": 0.2998695373535156,
+            "323": 0.11236953735351562,
+            "347": 0.3876304626464844
+          },
+          "base_returned_token_count": 5,
+          "fixed_returned_token_count": 5,
+          "top5_set_equal": true,
+          "base_top5": [
+            "15",
+            "275",
+            "281",
+            "323",
+            "347"
+          ],
+          "fixed_top5": [
+            "15",
+            "275",
+            "281",
+            "323",
+            "347"
+          ],
+          "all_returned_token_set_equal": true
+        },
+        {
+          "step": 3,
+          "same_generated_prefix": true,
+          "common_returned_logprob_abs_differences": {
+            "897": 0.038990020751953125,
+            "1239": 0.038990020751953125,
+            "2289": 0.038990020751953125,
+            "2736": 0.038990020751953125,
+            "8415": 0.038990020751953125
+          },
+          "base_returned_token_count": 5,
+          "fixed_returned_token_count": 5,
+          "top5_set_equal": true,
+          "base_top5": [
+            "897",
+            "1239",
+            "2289",
+            "2736",
+            "8415"
+          ],
+          "fixed_top5": [
+            "897",
+            "1239",
+            "2289",
+            "2736",
+            "8415"
+          ],
+          "all_returned_token_set_equal": true
+        }
+      ]
+    }
+  ]
+}

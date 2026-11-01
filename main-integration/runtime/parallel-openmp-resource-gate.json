@@ -1,0 +1,25 @@
+{
+  "observed_at_utc": "2026-11-01T05:20:37.860847+00:00",
+  "mem_available_bytes": 3507482624,
+  "swap_total_bytes": 0,
+  "observed_bf16_max_VmHWM_bytes": 864096256,
+  "conservative_two_process_footprint_plus_256MiB_bytes": 1996627968,
+  "remaining_headroom_under_estimate_bytes": 1510854656,
+  "compiler_processes": [],
+  "active_model_processes": [],
+  "active_repository_processes": [
+    {
+      "pid": 8355,
+      "command": "/home/vllmtest/vllm-validation/main-venv/bin/python /home/vllmtest/vllm-validation/main-integration-runtime/run-main-repository.py --execute --run-id main-repository-01 --timeout 3600"
+    },
+    {
+      "pid": 10320,
+      "command": "/home/vllmtest/vllm-validation/main-venv/bin/python -m pytest -p main_import_probe -v -s tests/v1/worker/cpu/test_cpu_block_table.py tests/v1/worker/cpu/test_cpu_input_batch.py tests/v1/worker/cpu/test_cpu_gumbel_sample.py::test_greedy_supports_dtypes_strides_and_invalid_mapping tests/v1/worker/cpu/test_cpu_gumbel_sample.py::test_pre_scaled_logits_match_temperature_application --junitxml=/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/standalone-erf/pytest.xml --basetemp=/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-repository-01/standalone-erf/pytest-tmp"
+    }
+  ],
+  "repository_completed": false,
+  "completed_repository_groups": 9,
+  "bf16_external_audit_passed": true,
+  "decision": "Start original OpenMP pair alongside remaining repository; memory estimate is conservative planning, not an observed OpenMP peak",
+  "performance_claim": false
+}
