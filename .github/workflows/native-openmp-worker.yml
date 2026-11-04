@@ -1,0 +1,75 @@
+name: Native scalar CPU build and OpenMP workers
+
+"on":
+  workflow_dispatch:
+  push:
+    branches:
+      - riscv-native-openmp-worker
+
+permissions:
+  contents: read
+
+concurrency:
+  group: native-openmp-worker-validation
+  cancel-in-progress: false
+
+jobs:
+  native-worker:
+    if: github.repository == 'luke-opus/vllm' && github.ref == 'refs/heads/riscv-native-openmp-worker'
+    runs-on: ubuntu-24.04-riscv
+    timeout-minutes: 180
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - name: Build the pinned scalar CPU backend and compare actual spawned workers
+        env:
+          LC_ALL: C
+        run: |
+          set -euo pipefail
+          ulimit -c 0
+          task_root="$GITHUB_WORKSPACE/native-worker-work/$GITHUB_RUN_ID-$GITHUB_RUN_ATTEMPT"
+          mkdir -p "$task_root"/{machine,payload,logs,results}
+          finish() {
+            result=$?
+            trap - EXIT INT TERM
+            set +e
+            for logfile in "$task_root"/machine/*.txt "$task_root"/logs/*.txt \
+                "$task_root"/results/*.tsv "$task_root"/worker-results/*.txt \
+                "$task_root"/worker-results/*.json; do
+              [[ -f "$logfile" ]] || continue
+              printf '\n--- %s ---\n' "${logfile#"$task_root/"}"
+              if ! cat "$logfile"; then
+                if [[ "$result" == 0 ]]; then result=1; fi
+              fi
+            done
+            {
+              echo '## Native scalar worker validation'
+              echo "- Actual workflow exit: $result"
+              echo '- Standard source build, real dependencies, real weights and LLM/spawn entry points.'
+              echo '- No RVV, ERF, quality, utilization, throughput or independent silicon-attestation claim.'
+              echo '- Setup, build or worker failures remain visible; no skips or assertion relaxation.'
+            } >> "$GITHUB_STEP_SUMMARY"
+            exit "$result"
+          }
+          trap finish EXIT
+          trap 'exit 130' INT
+          trap 'exit 143' TERM
+          uname -a > "$task_root/machine/uname.txt"
+          cat /etc/os-release > "$task_root/machine/os-release.txt"
+          cat /proc/cpuinfo > "$task_root/machine/cpuinfo.txt"
+          awk '/^(MemTotal|MemAvailable|SwapTotal):/ {print}' /proc/meminfo > "$task_root/machine/memory.txt"
+          for name in memory.max cpu.max; do
+            if [[ -r "/sys/fs/cgroup/$name" ]]; then
+              printf '%s\n' "$name" >> "$task_root/machine/cgroup-limits.txt"
+              cat "/sys/fs/cgroup/$name" >> "$task_root/machine/cgroup-limits.txt"
+            fi
+          done
+          for filename in bootstrap.sh native-openmp-pair.py check-native-openmp.py model-files.json; do
+            curl --http1.1 --fail --location --silent --show-error --retry 3 \
+              --retry-delay 3 --connect-timeout 30 --max-time 600 \
+              "https://raw.githubusercontent.com/luke-opus/vllm/$GITHUB_SHA/native-runtime/$filename" \
+              -o "$task_root/payload/$filename"
+            sha256sum "$task_root/payload/$filename" >> "$task_root/machine/payload-sha256.txt"
+          done
+          bash "$task_root/payload/bootstrap.sh" "$task_root" "$task_root/payload"

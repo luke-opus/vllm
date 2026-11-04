@@ -1,0 +1,5 @@
+{
+  "original_sha256": "88a821ce5aba3a109357bac0428e5d15aaef20248cc237a1dc52d30d704f84ba",
+  "native_sha256": "2e28ff2ba689a7f9a591b45d7190a3454622d08e755453e8560ce6b91c480471",
+  "changes": "Parameterize genuine model path and >=2 threads, clarify native/policy/build provenance, and compare libgomp affinity with its actual space-separated format. No production backend or LLM/spawn assertions replaced."
+}

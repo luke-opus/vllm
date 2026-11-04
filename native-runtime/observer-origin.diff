@@ -1,0 +1,74 @@
+--- check-main-model.py (prior observer)
++++ check-native-openmp.py
+@@ -89,7 +89,10 @@
+     parser.add_argument("--output", type=Path, required=True)
+     parser.add_argument("--expected-library", type=Path, required=True)
+     parser.add_argument("--expected-sha256", required=True)
++    parser.add_argument("--model", type=Path, required=True)
++    parser.add_argument("--threads", type=int, required=True)
+     args = parser.parse_args()
++    assert args.threads >= 2
+     assert not os.environ.get("LD_PRELOAD"), "Parent must start without forced preload"
+     assert "VLLM_USE_V2_MODEL_RUNNER" not in os.environ, "Exercise the real default"
+     assert os.environ["VLLM_ENABLE_V1_MULTIPROCESSING"] == "0"
+@@ -103,9 +106,9 @@
+     assert current_platform.get_cpu_architecture() == CpuArchEnum.RISCV
+     assert Path(vllm.__file__).resolve() == args.source / "vllm/__init__.py"
+     assert Path(vllm._C.__file__).resolve() == args.expected_library
+-    torch.set_num_threads(1)
++    torch.set_num_threads(args.threads)
+     parameters = {
+-        "model": "/home/vllmtest/vllm-validation/pythia-14m",
++        "model": str(args.model),
+         "dtype": "bfloat16",
+         "max_model_len": 128,
+         "max_num_seqs": 2,
+@@ -167,7 +170,7 @@
+                 }
+             )
+         (worker,) = llm.collective_rpc(worker_state, timeout=120)
+-        assert worker["device"] == "cpu" and worker["torch_threads"] == 1
++        assert worker["device"] == "cpu" and worker["torch_threads"] == args.threads
+         assert worker["use_v2_model_runner"] is True
+         assert worker["model_runner_class"] == (
+             "vllm.v1.worker.cpu.standalone_model_runner.StandaloneCPUModelRunner"
+@@ -189,7 +192,7 @@
+         else:
+             assert os.environ["VLLM_WORKER_MULTIPROC_METHOD"] == "spawn"
+             assert worker["pid"] != os.getpid()
+-            assert worker["OMP_NUM_THREADS"] == "1"
++            assert worker["OMP_NUM_THREADS"] == str(args.threads)
+             assert bundled_openmp.is_file()
+             assert any(
+                 Path(path).resolve() == bundled_openmp.resolve()
+@@ -198,14 +201,13 @@
+             preload = str(bundled_openmp) if args.variant == "fixed" else ""
+             assert worker["LD_PRELOAD"] == worker["startup_LD_PRELOAD"] == preload
+             if args.variant == "fixed":
+-                assert (
+-                    worker["GOMP_CPU_AFFINITY"]
+-                    == os.environ["VLLM_CPU_OMP_THREADS_BIND"]
+-                )
++                expected_cpus = os.environ["VLLM_CPU_OMP_THREADS_BIND"].split(",")
++                assert worker["GOMP_CPU_AFFINITY"].split() == expected_cpus
+         result = {
+             "kind": args.kind,
+             "variant": args.variant,
+-            "base_ref": "e0d00e4b8eb0c89ec30921d0695cfdd409e9c211",
++            "policy_base_ref": "e0d00e4b8eb0c89ec30921d0695cfdd409e9c211",
++            "build_ref": "dfdc85947fe914d04906f5d0206c020c208bd400",
+             "model": "EleutherAI/pythia-14m",
+             "revision": "cf967c0a9a04383db6f7b1108d86b2962634b4ac",
+             "parameters": parameters,
+@@ -217,9 +219,9 @@
+             "parent_profile_operator_counts": operators,
+             "outputs": outputs,
+             "scope": (
+-                "RISC-V Linux/QEMU, default MRV2, two prompts/four tokens each; "
++                "RISE native-provider job, default MRV2, two prompts/four tokens each; "
+                 "returned top-5/chosen-token logprobs only, not full vocabulary; "
+-                "no quality, equivalence, performance, or physical hardware claim"
++                "no quality, performance, or independent physical attestation claim"
+             ),
+         }
+     finally:
