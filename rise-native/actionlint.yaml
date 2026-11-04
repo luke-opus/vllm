@@ -1,4 +1,5 @@
 self-hosted-runner:
   labels:
-    - ubuntu-24.04-riscv
-    - rva23
+  - ubuntu-24.04-riscv
+  - rva23
+  - ubuntu-26.04-riscv

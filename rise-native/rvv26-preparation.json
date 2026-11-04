@@ -1,0 +1,7 @@
+{
+  "actionlint": 0,
+  "bash_syntax": 0,
+  "workflow_sha256": "9f815707daabff6995620255dee51d0a7a577579da12de92e63c08a4eff45a9b",
+  "production_header_payload_unchanged": true,
+  "scope": "Official Ubuntu26.04 label and compiler packages; same full header tests; no hardware execution inferred"
+}
