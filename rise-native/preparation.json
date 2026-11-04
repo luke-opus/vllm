@@ -1,0 +1,12 @@
+{
+  "status": "prepared and locally checked; no native execution claimed",
+  "workflow_sha256": "a65b4cf97073ebcdc4983efe512f03cba165284768f5f3ea90680f5f9ccdf12f",
+  "actionlint": 0,
+  "bash_syntax": 0,
+  "original_native_plan_payload_unchanged": true,
+  "labels": [
+    "ubuntu-24.04-riscv",
+    "rva23"
+  ],
+  "source_prs_changed": false
+}

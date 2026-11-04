@@ -1,0 +1,143 @@
+name: RISE K3 production-header comparisons
+
+"on":
+  workflow_dispatch:
+  push:
+    branches:
+      - riscv-rise-native-validation
+
+permissions:
+  contents: read
+
+concurrency:
+  group: rise-k3-header-tests
+  cancel-in-progress: false
+
+jobs:
+  header-checks:
+    if: github.repository == 'luke-opus/vllm' && github.ref == 'refs/heads/riscv-rise-native-validation'
+    runs-on: [ubuntu-24.04-riscv, rva23]
+    timeout-minutes: 45
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - name: Record machine, prepare real dependencies, and compare headers
+        env:
+          LC_ALL: C
+        run: |
+          set -euo pipefail
+          ulimit -c 0
+          task_root="$GITHUB_WORKSPACE/cloud-v-header-work/$GITHUB_RUN_ID-$GITHUB_RUN_ATTEMPT"
+          mkdir -p "$task_root"/{machine,setup,cloud-v-header,results-bf16,results-erf}
+
+          finish() {
+            result=$?
+            trap - EXIT INT TERM
+            set +e
+            for logfile in "$task_root"/machine/*.txt "$task_root"/setup/*.txt \
+                "$task_root"/results-bf16/*.txt "$task_root"/results-bf16/*.tsv \
+                "$task_root"/results-erf/*.txt "$task_root"/results-erf/*.tsv; do
+              [[ -f "$logfile" ]] || continue
+              printf '\n--- %s ---\n' "${logfile#"$task_root/"}"
+              if ! cat "$logfile"; then
+                if [[ "$result" == 0 ]]; then result=1; fi
+              fi
+            done
+            {
+              echo '## Header comparison execution'
+              echo "- Workflow step exit status: $result"
+              echo '- Raw setup, compiler, run, source-manifest and status logs are printed above.'
+              echo '- ERF base may pass on this implementation; inspect its raw result separately.'
+              echo '- Fixed failures remain failures. No model, performance or full-vLLM result is implied.'
+              echo '- Runner labels and CPU metadata do not independently attest physical silicon.'
+            } >> "$GITHUB_STEP_SUMMARY"
+            exit "$result"
+          }
+          trap finish EXIT
+          trap 'exit 130' INT
+          trap 'exit 143' TERM
+
+          uname -a > "$task_root/machine/uname.txt"
+          cat /etc/os-release > "$task_root/machine/os-release.txt"
+          cat /proc/cpuinfo > "$task_root/machine/cpuinfo.txt"
+          awk '/^(MemTotal|MemAvailable|SwapTotal):/ { print }' /proc/meminfo \
+            > "$task_root/machine/memory.txt"
+          df -h "$task_root" > "$task_root/machine/disk.txt"
+          for node in /proc/device-tree/model /proc/device-tree/compatible; do
+            if [[ -r "$node" ]]; then
+              printf '%s\n' "$node" >> "$task_root/machine/device-tree.txt"
+              tr '\0' '\n' < "$node" >> "$task_root/machine/device-tree.txt"
+            fi
+          done
+          {
+            for compiler in gcc g++ g++-13 clang clang++ clang++-18; do
+              if command -v "$compiler" >/dev/null 2>&1; then
+                command -v "$compiler"
+                "$compiler" --version
+              fi
+            done
+          } > "$task_root/machine/initial-compilers.txt" 2>&1
+          [[ "$(uname -s)" == Linux && "$(uname -m)" == riscv64 ]]
+          grep -qx 'ID=ubuntu' /etc/os-release
+          grep -qx 'VERSION_ID="24.04"' /etc/os-release
+          [[ "$GITHUB_SHA" =~ ^[0-9a-f]{40}$ ]]
+          printf 'payload_commit=%s\n' "$GITHUB_SHA" > "$task_root/setup/payload-source.txt"
+
+          missing=()
+          for package in g++-13 clang-18 git curl ca-certificates unzip binutils coreutils; do
+            if ! dpkg-query -W -f='${Status}\n' "$package" 2>/dev/null \
+                | grep -qx 'install ok installed'; then
+              missing+=("$package")
+            fi
+          done
+          if (( ${#missing[@]} )); then
+            printf '%s\n' "${missing[@]}" > "$task_root/setup/missing-packages.txt"
+            timeout 900 sudo -n apt-get -o Acquire::Retries=3 update \
+              > "$task_root/setup/apt-update.txt" 2>&1
+            timeout 900 sudo -n env DEBIAN_FRONTEND=noninteractive \
+              apt-get -o Acquire::Retries=3 install -y --no-install-recommends "${missing[@]}" \
+              > "$task_root/setup/apt-install.txt" 2>&1
+          fi
+
+          for filename in run.sh convert_test.cpp erf_header_test.cpp; do
+            printf 'file=%s\n' "$filename" >> "$task_root/setup/payload-download.txt"
+            curl --http1.1 --fail --location --silent --show-error \
+              --retry 3 --retry-delay 3 --retry-all-errors --connect-timeout 20 --max-time 600 \
+              "https://raw.githubusercontent.com/luke-opus/vllm/$GITHUB_SHA/main-integration/native-plan/$filename" \
+              -o "$task_root/cloud-v-header/$filename" \
+              >> "$task_root/setup/payload-download.txt" 2>&1
+            sha256sum "$task_root/cloud-v-header/$filename" >> "$task_root/setup/payload-source.txt"
+          done
+          {
+            git init "$task_root/source-refs"
+            git -C "$task_root/source-refs" remote add origin https://github.com/luke-opus/vllm.git
+            git -C "$task_root/source-refs" config remote.origin.promisor true
+            git -C "$task_root/source-refs" config remote.origin.partialclonefilter blob:none
+            timeout 600 git -C "$task_root/source-refs" fetch --filter=blob:none --depth=1 origin \
+              e0d00e4b8eb0c89ec30921d0695cfdd409e9c211 \
+              ec0fbf5e9b3e9d796ccae667a437f2e97c3f9cde \
+              6592612016059859dff1e93bd534edc1a5737615
+          } > "$task_root/setup/source-fetch.txt" 2>&1
+          CXX_BF16=g++-13 bash "$task_root/cloud-v-header/run.sh" \
+            "$task_root/source-refs" "$task_root/results-bf16" \
+            > "$task_root/setup/bf16-driver.txt" 2>&1
+
+          curl --http1.1 --fail --location --silent --show-error \
+            --retry 3 --retry-delay 3 --retry-all-errors --connect-timeout 20 --max-time 600 \
+            'https://github.com/riseproject-dev/python-wheels/releases/download/torch-v2.14.0%2Bcpu-20260905085853/torch-2.14.0%2Bcpu-cp312-cp312-manylinux_2_39_riscv64.whl' \
+            -o "$task_root/torch-headers-source.whl" \
+            > "$task_root/setup/torch-download.txt" 2>&1
+          printf '%s  %s\n' \
+            23da9af03ed3d293814721f0e9fdf50d5f49d1c4dfd922c6b547829d78783c12 \
+            "$task_root/torch-headers-source.whl" | sha256sum -c - \
+            > "$task_root/setup/torch-checksum.txt" 2>&1
+          wheel_size="$(stat -c %s "$task_root/torch-headers-source.whl")"
+          printf 'size_bytes=%s\n' "$wheel_size" >> "$task_root/setup/torch-checksum.txt"
+          [[ "$wheel_size" == 133517449 ]]
+          unzip -q "$task_root/torch-headers-source.whl" 'torch/include/*' \
+            -d "$task_root/torch-headers" > "$task_root/setup/torch-extract.txt" 2>&1
+          CXX_RVV=clang++-18 bash "$task_root/cloud-v-header/run.sh" \
+            "$task_root/source-refs" "$task_root/results-erf" \
+            "$task_root/torch-headers/torch/include" \
+            > "$task_root/setup/erf-driver.txt" 2>&1
