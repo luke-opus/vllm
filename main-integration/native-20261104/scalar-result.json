@@ -1,0 +1,50 @@
+{
+  "run_id": 41830864789,
+  "job_id": 126577392408,
+  "run_url": "https://github.com/luke-opus/vllm/actions/runs/41830864789",
+  "workflow_head": "5beb1df43497ec58832522493c93286990f7b2cc",
+  "runner_id": 21,
+  "runner_name": "rise-riscv-runner-ztmjesjc3",
+  "job_completed_at": "2026-11-04T12:38:17Z",
+  "job_conclusion": "success",
+  "architecture": "riscv64",
+  "cpu_isa_observed": "rv64imafdcsu",
+  "compiler": "g++-13 Ubuntu13.3.0-6ubuntu2~24.04.1",
+  "source_inputs": [
+    {
+      "variant": "base",
+      "commit": "e0d00e4b8eb0c89ec30921d0695cfdd409e9c211",
+      "path": "csrc/cpu/float_convert.hpp",
+      "git_blob": "0682ef402837fa8799fd4a53659367dfd61fdc5b",
+      "sha256": "f6b511b3a6f6c29598f0bd58795d07eec52132a0e4ab1aa3ec7f3afa893b3c9d"
+    },
+    {
+      "variant": "fixed",
+      "commit": "6592612016059859dff1e93bd534edc1a5737615",
+      "path": "csrc/cpu/float_convert.hpp",
+      "git_blob": "c934ad85373789097d3b2964b618ea944ba94251",
+      "sha256": "80dd1d91ca34bc1f3e3db3ea1285403b5108591d070c10c329932ea720b4db85"
+    }
+  ],
+  "base": {
+    "conversions": 1458753,
+    "mismatches": 667067,
+    "actual_exit": 1
+  },
+  "fixed": {
+    "conversions": 1458753,
+    "mismatches": 0,
+    "actual_exit": 0
+  },
+  "raw_log": {
+    "name": "scalar-job-126577392408.log",
+    "bytes": 20872,
+    "sha256": "d2b27af9904a456749427ff60caa125ef4d2d6fea422b12dd314398ee8062823",
+    "published_archive": "scalar-job-126577392408.log.gz",
+    "archive_bytes": 5728,
+    "archive_sha256": "99db05dd9ab53a5b213ddaf0afb7583c2b4dd45afb90084592398117f1b79e51",
+    "encoding": "lossless gzip; decompressed bytes preserve the original log including trailing whitespace"
+  },
+  "scope": "Provider-advertised native RISC-V scalar production-helper coverage. No emulator invoked by workflow. Physical silicon not independently attested. No RVV1/ERF/full-vLLM/model/OpenMP/performance/upstream-CI result implied.",
+  "independent_checks": "Raw status rows, actual assigned runner/job success and source blobs/hashes checked against local original Git objects."
+}

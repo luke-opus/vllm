@@ -1,0 +1,57 @@
+{
+  "total_count": 1,
+  "jobs": [
+    {
+      "id": 126577392408,
+      "run_id": 41830864789,
+      "workflow_name": "RISE native scalar BF16 comparisons",
+      "head_branch": "riscv-rise-scalar-validation",
+      "run_url": "https://api.github.com/repos/luke-opus/vllm/actions/runs/41830864789",
+      "run_attempt": 1,
+      "node_id": "CR_kwDOVZYd-c8AAAAdeJm7GA",
+      "head_sha": "5beb1df43497ec58832522493c93286990f7b2cc",
+      "url": "https://api.github.com/repos/luke-opus/vllm/actions/jobs/126577392408",
+      "html_url": "https://github.com/luke-opus/vllm/actions/runs/41830864789/job/126577392408",
+      "status": "completed",
+      "conclusion": "success",
+      "created_at": "2026-11-04T12:37:25Z",
+      "started_at": "2026-11-04T12:37:57Z",
+      "completed_at": "2026-11-04T12:38:17Z",
+      "name": "scalar-bf16",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1,
+          "started_at": "2026-11-04T12:38:02Z",
+          "completed_at": "2026-11-04T12:38:03Z"
+        },
+        {
+          "name": "Record the machine and compare the real scalar conversion headers",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2,
+          "started_at": "2026-11-04T12:38:03Z",
+          "completed_at": "2026-11-04T12:38:13Z"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3,
+          "started_at": "2026-11-04T12:38:13Z",
+          "completed_at": "2026-11-04T12:38:13Z"
+        }
+      ],
+      "check_run_url": "https://api.github.com/repos/luke-opus/vllm/check-runs/126577392408",
+      "labels": [
+        "ubuntu-24.04-riscv"
+      ],
+      "runner_id": 21,
+      "runner_name": "rise-riscv-runner-ztmjesjc3",
+      "runner_group_id": 1,
+      "runner_group_name": "Default"
+    }
+  ]
+}

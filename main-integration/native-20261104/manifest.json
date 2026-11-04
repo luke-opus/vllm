@@ -1,0 +1,45 @@
+{
+  "files": [
+    {
+      "path": "README.md",
+      "bytes": 2337,
+      "sha256": "5173fdf31edb57f7b81570953cd0107900c66b778f7c3471f0b76e9e245cff53"
+    },
+    {
+      "path": "convert_test.cpp",
+      "bytes": 2387,
+      "sha256": "9686df80d16f5c1acc3dec665b3883b96f11c95faaf8c177891f06f4413c1966"
+    },
+    {
+      "path": "rise-scalar-jobs-41830864789.json",
+      "bytes": 1944,
+      "sha256": "43065c981061d92952d10b7efbbedcadfd479d94cd6c875cb12daf644e8362e4"
+    },
+    {
+      "path": "run-metadata.json",
+      "bytes": 13325,
+      "sha256": "3d77d6fb675c13f31c44049617fac40d453da12a52f788955514a3e82be13991"
+    },
+    {
+      "path": "run.sh",
+      "bytes": 3579,
+      "sha256": "13391d2bda18452e483b51bbe007d5716176182c939ed5336db962a5ead1c161"
+    },
+    {
+      "path": "scalar-job-126577392408.log.gz",
+      "bytes": 5728,
+      "sha256": "99db05dd9ab53a5b213ddaf0afb7583c2b4dd45afb90084592398117f1b79e51"
+    },
+    {
+      "path": "scalar-result.json",
+      "bytes": 2069,
+      "sha256": "6852e02eb96ceb6f40de60ffebc5b8b265cabe4967bc53c09df11d6a3f583612"
+    },
+    {
+      "path": "workflow.yml",
+      "bytes": 5086,
+      "sha256": "e35655a6f07688fedd3354f95029d0a4b50ffd87868ed57a9e37bd2e295281b1"
+    }
+  ],
+  "rule": "Explicit evidence files only; original raw log published as verified lossless gzip; manifest excludes itself"
+}
