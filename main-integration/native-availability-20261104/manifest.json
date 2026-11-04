@@ -1,0 +1,14 @@
+{
+  "files": [
+    {
+      "path": "README.md",
+      "bytes": 2600,
+      "sha256": "71ca10758bb280f8b917a21387bae2eae8636945cd5ad6fea2deb85469bb15da"
+    },
+    {
+      "path": "scheduler-snapshot.json",
+      "bytes": 3730,
+      "sha256": "d7bbc81791ccb279ca7d2d4ddb629878cd8d07d873fe34d96e4e8661a10d221d"
+    }
+  ]
+}

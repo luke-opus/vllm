@@ -1,0 +1,145 @@
+{
+  "checked_at": "2026-11-04T13:52:01.737482+00:00",
+  "source": "https://riseriscvrunnerappqdvknz9s-scheduler.functions.fnc.fr-par.scw.cloud/usage.json",
+  "source_sha256": "9bd5007285f9a2c35ae02f5e99390e97a8079fb2a52b397fd4d6ec70d22bb228",
+  "jobs": [
+    {
+      "job_id": 126573405618,
+      "job_name": "header-checks",
+      "job_created_at": "2026-11-04T12:29:24Z",
+      "status": "pending",
+      "repo_full_name": "luke-opus/vllm",
+      "job_labels": [
+        "rva23",
+        "ubuntu-24.04-riscv"
+      ],
+      "k8s_selector": {
+        "board": "spacemit-k3",
+        "provider": "rise"
+      },
+      "html_url": "https://github.com/luke-opus/vllm/actions/runs/41829702428/job/126573405618",
+      "created_at": "2026-11-04T12:29:25.607608Z",
+      "updated_at": "2026-11-04T12:29:25.607608Z"
+    },
+    {
+      "job_id": 126588627817,
+      "job_name": "header-checks",
+      "job_created_at": "2026-11-04T13:00:19Z",
+      "status": "pending",
+      "repo_full_name": "luke-opus/vllm",
+      "job_labels": [
+        "ubuntu-26.04-riscv"
+      ],
+      "k8s_selector": {
+        "board": "spacemit-k3",
+        "provider": "rise"
+      },
+      "html_url": "https://github.com/luke-opus/vllm/actions/runs/41834148442/job/126588627817",
+      "created_at": "2026-11-04T13:00:22.250111Z",
+      "updated_at": "2026-11-04T13:00:22.250111Z"
+    },
+    {
+      "job_id": 126609603829,
+      "job_name": "native-worker",
+      "job_created_at": "2026-11-04T13:40:26Z",
+      "status": "pending",
+      "repo_full_name": "luke-opus/vllm",
+      "job_labels": [
+        "ubuntu-24.04-riscv"
+      ],
+      "k8s_selector": {
+        "board": "scaleway-em-rv1",
+        "provider": "scaleway"
+      },
+      "html_url": "https://github.com/luke-opus/vllm/actions/runs/41840242348/job/126609603829",
+      "created_at": "2026-11-04T13:40:27.840591Z",
+      "updated_at": "2026-11-04T13:40:27.840591Z"
+    }
+  ],
+  "assigned_workers_for_this_account": 0,
+  "global_jobs_by_selector_status": [
+    {
+      "selector": {
+        "board": "scaleway-em-rv1",
+        "provider": "scaleway"
+      },
+      "status": "pending",
+      "count": 1675
+    },
+    {
+      "selector": {
+        "board": "scaleway-em-rv1",
+        "provider": "scaleway"
+      },
+      "status": "running",
+      "count": 48
+    },
+    {
+      "selector": {
+        "board": "spacemit-k1",
+        "provider": "cloudv10x"
+      },
+      "status": "pending",
+      "count": 1
+    },
+    {
+      "selector": {
+        "board": "spacemit-k1",
+        "provider": "cloudv10x"
+      },
+      "status": "running",
+      "count": 1
+    },
+    {
+      "selector": {
+        "board": "spacemit-k3",
+        "provider": "rise"
+      },
+      "status": "pending",
+      "count": 3
+    },
+    {
+      "selector": {
+        "board": "spacemit-v100",
+        "provider": "iscas"
+      },
+      "status": "pending",
+      "count": 3
+    }
+  ],
+  "global_workers_by_selector_status": [
+    {
+      "selector": {
+        "board": "scaleway-em-rv1",
+        "provider": "scaleway"
+      },
+      "status": "pending",
+      "count": 7
+    },
+    {
+      "selector": {
+        "board": "scaleway-em-rv1",
+        "provider": "scaleway"
+      },
+      "status": "running",
+      "count": 48
+    },
+    {
+      "selector": {
+        "board": "spacemit-k1",
+        "provider": "cloudv10x"
+      },
+      "status": "running",
+      "count": 1
+    },
+    {
+      "selector": {
+        "board": "spacemit-v100",
+        "provider": "iscas"
+      },
+      "status": "running",
+      "count": 1
+    }
+  ],
+  "scope": "Filtered rows for this fork plus aggregate counts from the public read-only scheduler. Not a full raw response, node-capacity inventory or native test result."
+}
