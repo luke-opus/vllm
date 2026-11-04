@@ -1,0 +1,105 @@
+{
+  "files": [
+    {
+      "path": "PLAN.md",
+      "bytes": 2107,
+      "sha256": "f911de3545ee5bba11f6b98747dc64f1f87b5f8734e99b902c4bf8c38188ac07"
+    },
+    {
+      "path": "README.md",
+      "bytes": 4584,
+      "sha256": "c2cb6ee32b9dc65f05aa4f1d453442ac624a4146d05ab7d768b492ed9f63cddd"
+    },
+    {
+      "path": "base.json",
+      "bytes": 185937,
+      "sha256": "71bcd5238a5381165d2a462f9f63688d4dca03c5f9407838df06b091dd923313"
+    },
+    {
+      "path": "base.txt.gz",
+      "bytes": 4792,
+      "sha256": "e52fe7cee76bc4a5d9e5c88d897f2d2b4b9bff31b8605ce6808f4e9da0610212"
+    },
+    {
+      "path": "check-main-ppl.py",
+      "bytes": 7439,
+      "sha256": "2cf9f7dbe41c2627dc5b2538b9d74b8d9c3e07b7266a20e01d7401b351bf9960"
+    },
+    {
+      "path": "corpus-selection.json",
+      "bytes": 14959,
+      "sha256": "fc8090ff4de237462c3cd6aace03c9674a859e1267b6bb29c1003b64f99aa9a3"
+    },
+    {
+      "path": "dataset-file.json",
+      "bytes": 879,
+      "sha256": "0f6d027cba05e7fdc81cd38decaf51c8190fa9f76901255699e1427dd03800b2"
+    },
+    {
+      "path": "driver-exit-and-restoration.json",
+      "bytes": 1871,
+      "sha256": "725480846dfad4ae17206cc3d08c82a7597689b35cff8a8200c12f0862b50cab"
+    },
+    {
+      "path": "driver.txt.gz",
+      "bytes": 129,
+      "sha256": "d9825a998aac33bc01a63a116e63ab51be1afd64a5e0e0dd94e6fe3c79c41851"
+    },
+    {
+      "path": "fixed.json",
+      "bytes": 186012,
+      "sha256": "f1c44f873be32d99dc1c830d5b04109a08345f26bddac281bb56b5aba5275b19"
+    },
+    {
+      "path": "fixed.txt.gz",
+      "bytes": 4802,
+      "sha256": "c2168c360d5e96f035d7244d67ee7faf25d3f508dfacada4847f14c25d8f483b"
+    },
+    {
+      "path": "pair-results.json",
+      "bytes": 398310,
+      "sha256": "5d306337b2cc02ca5383ac88674e9699a44942dafdd58038931d9e47934be261"
+    },
+    {
+      "path": "prepare-corpus.py",
+      "bytes": 2680,
+      "sha256": "4613eefdb3a4f3d51b9d8aa554b66f5adb3c14e6be02dc75b1e82c0dd9002a23"
+    },
+    {
+      "path": "prepare-public-evidence.py",
+      "bytes": 6204,
+      "sha256": "91145e856b35971210626bb1b0d62f741d53382227018019af4e9ded17ca5f6f"
+    },
+    {
+      "path": "reference-fp32.json",
+      "bytes": 186057,
+      "sha256": "604fd9aec0a5e4ed8f14007dbbbfa886e57a15604c9163f4dce402cf204abc46"
+    },
+    {
+      "path": "reference-fp32.txt.gz",
+      "bytes": 4186,
+      "sha256": "ed08ab15c1297d991fa11d401214d1af19b2b5a53c3d365387d2d4dce283fe42"
+    },
+    {
+      "path": "run-main-ppl-pair.py",
+      "bytes": 8174,
+      "sha256": "7fb35464936d526d403e4fb78b6c082701f9536dc365ea33f7ccafd76712fa6b"
+    },
+    {
+      "path": "summary.json",
+      "bytes": 2050,
+      "sha256": "97aea3d4ff3e8f647b86306682b0eb103b7e7ad244cb70f169956d401309d42d"
+    },
+    {
+      "path": "supervise-main-ppl.py",
+      "bytes": 2796,
+      "sha256": "6134d0415f4e9507d0b2f890f9517cfff90d0812c37cc8edb8447f4490f949d1"
+    },
+    {
+      "path": "tools-freeze.txt",
+      "bytes": 276,
+      "sha256": "719d7ff53c1ef8c969622d797a22267c63b501e40927e93e7b52ad47b8281352"
+    }
+  ],
+  "rule": "Explicit files only; raw corpus text/token inputs and dataset bytes are not redistributed. Original logs retained losslessly."
+}

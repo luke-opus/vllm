@@ -1,0 +1,24 @@
+{
+  "repo": "Salesforce/wikitext",
+  "revision": "b08601e04326c79dfdd32d625aee71d232d685c3",
+  "path": "wikitext-2-raw-v1/test-00000-of-00001.parquet",
+  "url": "https://huggingface.co/datasets/Salesforce/wikitext/resolve/b08601e04326c79dfdd32d625aee71d232d685c3/wikitext-2-raw-v1/test-00000-of-00001.parquet",
+  "bytes": 732610,
+  "sha256": "5f1bea067869d04849c0f975a2b29c4ff47d867f484f5010ea5e861eab246d91",
+  "api_file_metadata": {
+    "type": "file",
+    "oid": "6ba58cb2514e5816aa401f841c34a0e3a6b727b4",
+    "size": 732610,
+    "lfs": {
+      "oid": "5f1bea067869d04849c0f975a2b29c4ff47d867f484f5010ea5e861eab246d91",
+      "size": 732610,
+      "pointerSize": 131
+    },
+    "xetHash": "7de3dcce1cea5e705855da1066e35fa2936b25bfeda0133d1cb6662410de1561",
+    "path": "wikitext-2-raw-v1/test-00000-of-00001.parquet"
+  },
+  "licenses": [
+    "cc-by-sa-3.0",
+    "gfdl"
+  ]
+}

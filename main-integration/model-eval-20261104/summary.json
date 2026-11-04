@@ -1,0 +1,64 @@
+{
+  "metrics": {
+    "base": {
+      "samples": 64,
+      "scored_tokens": 4032,
+      "mean_negative_log_likelihood": 5.812015818461539,
+      "perplexity": 334.29231955759235,
+      "top1_correct": 673,
+      "top1_accuracy": 0.16691468253968253
+    },
+    "fixed": {
+      "samples": 64,
+      "scored_tokens": 4032,
+      "mean_negative_log_likelihood": 5.807431694770616,
+      "perplexity": 332.7633892959669,
+      "top1_correct": 671,
+      "top1_accuracy": 0.16641865079365079
+    },
+    "reference-fp32": {
+      "samples": 64,
+      "scored_tokens": 4032,
+      "mean_negative_log_likelihood": 5.695088943318715,
+      "perplexity": 297.4032444413344,
+      "top1_correct": 701,
+      "top1_accuracy": 0.17385912698412698
+    }
+  },
+  "differences_vs_fp32": {
+    "base": {
+      "target_logprob_mae_vs_fp32": 0.3826270138933545,
+      "target_logprob_rmse_vs_fp32": 0.630162184921742,
+      "target_logprob_max_abs_delta_vs_fp32": 5.757638931274414
+    },
+    "fixed": {
+      "target_logprob_mae_vs_fp32": 0.3912314152906811,
+      "target_logprob_rmse_vs_fp32": 0.6432709846261174,
+      "target_logprob_max_abs_delta_vs_fp32": 5.509117126464844
+    }
+  },
+  "independent_numeric_recalculation": "passed",
+  "raw_logs": [
+    {
+      "path": "base.txt.gz",
+      "uncompressed_bytes": 26062,
+      "uncompressed_sha256": "62a2427733f2d364fede6ef596150a998a3f457cc8bf233ae35d191bb795512b"
+    },
+    {
+      "path": "fixed.txt.gz",
+      "uncompressed_bytes": 26062,
+      "uncompressed_sha256": "89330dbae66ab881ed0938417a3ac1057940303e69e2baf9721bce215869e743"
+    },
+    {
+      "path": "reference-fp32.txt.gz",
+      "uncompressed_bytes": 11182,
+      "uncompressed_sha256": "902db630f8fcb188b70308a0d26e5904aae2de1ae2a8a1ae4eb9b6a3f538643e"
+    },
+    {
+      "path": "driver.txt.gz",
+      "uncompressed_bytes": 340,
+      "uncompressed_sha256": "f87fbd5dfd092a2ccceab08ff2c5087572b9e43ee41f5b4095bee5c67a74a6c3"
+    }
+  ],
+  "scope": "QEMU-only finite-subset language-model evaluation; no native or general model quality claim"
+}

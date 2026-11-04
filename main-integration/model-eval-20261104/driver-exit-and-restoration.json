@@ -1,0 +1,67 @@
+{
+  "driver_process": {
+    "command": [
+      "/home/vllmtest/vllm-validation/main-venv/bin/python",
+      "/home/vllmtest/vllm-validation/main-integration-runtime/run-main-ppl-pair.py",
+      "--execute",
+      "--run-id",
+      "main-bf16-wikitext-01",
+      "--corpus",
+      "/home/vllmtest/vllm-validation/main-integration-runtime/corpus-inputs.json",
+      "--corpus-sha256",
+      "3d4702a0be87574ffcd3788869cceb000b1d3f720e170a0beb74031d37f90a2c",
+      "--timeout",
+      "3600"
+    ],
+    "cwd": "/home/vllmtest/vllm-validation/main-integration-runtime",
+    "timed_out": false,
+    "interrupted": false,
+    "actual_returncode": 0,
+    "pid": 1593,
+    "seconds": 5292.576945012001
+  },
+  "independent_restoration_audit": [
+    {
+      "checks": [
+        {
+          "path": "/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-bf16-wikitext-01/source/vllm/_C.abi3.so",
+          "expected": {
+            "kind": "absent"
+          },
+          "passed": true
+        }
+      ],
+      "passed": true,
+      "variant": "base"
+    },
+    {
+      "checks": [
+        {
+          "path": "/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-bf16-wikitext-01/source/vllm/_C.abi3.so",
+          "expected": {
+            "kind": "absent"
+          },
+          "passed": true
+        }
+      ],
+      "passed": true,
+      "variant": "fixed"
+    },
+    {
+      "checks": [
+        {
+          "path": "/home/vllmtest/vllm-validation/main-integration-runtime/runs/main-bf16-wikitext-01/source/vllm/_C.abi3.so",
+          "expected": {
+            "kind": "absent"
+          },
+          "passed": true
+        }
+      ],
+      "passed": true,
+      "variant": "reference-fp32"
+    }
+  ],
+  "passed": true,
+  "driver_report_sha256": "5d306337b2cc02ca5383ac88674e9699a44942dafdd58038931d9e47934be261",
+  "driver_report_completed": true
+}
