@@ -9,8 +9,8 @@ workflow is `.github/workflows/rise-native-validation.yml`, limited to
 ## Resource selection
 
 The RISE personal-account App must be installed on **only luke-opus/vllm**.
-It requests repository Administration read/write to register ephemeral runners,
-and Metadata read. Installation requires the user's explicit action-time
+The actual installation page requests Actions and Metadata read, and repository
+Administration read/write to register ephemeral runners. Installation requires the user's explicit action-time
 confirmation; the existing Cloud-V grant does not authorize a different App.
 
 The exact label set is `[ubuntu-24.04-riscv, rva23]`. The RISE control-plane
