@@ -1,0 +1,130 @@
+{
+  "checked_at": "2026-11-04T13:42:54.379189+00:00",
+  "main": "59519ec0ee0bc6b124c60fd50a82e94de98933e1",
+  "tested_base": "e0d00e4b8eb0c89ec30921d0695cfdd409e9c211",
+  "scope": "Patch applicability only; not a build/test/native/CI result against newer main. Existing complete results stay pinned to tested_base.",
+  "prs": [
+    {
+      "pr": 64078,
+      "head": "ec0fbf5e9b3e9d796ccae667a437f2e97c3f9cde",
+      "patch_sha256": "79642a90ae183a1c25e27327d1e9d83f0b254ba0928a2b752fde45d8b6c4cec3",
+      "actual_apply_check_exit": 0,
+      "files": [
+        {
+          "path": "csrc/cpu/cpu_types_riscv_impl.hpp",
+          "base_blob": "9a14d1c3386629dea11c6b6807110d259864f5be",
+          "current_main_blob": "9a14d1c3386629dea11c6b6807110d259864f5be",
+          "upstream_changed_since_test_base": false
+        },
+        {
+          "path": "docs/getting_started/installation/cpu.md",
+          "base_blob": "ebf9ebcdfd5ed2b950feb95336d9f4e077814305",
+          "current_main_blob": "ebf9ebcdfd5ed2b950feb95336d9f4e077814305",
+          "upstream_changed_since_test_base": false
+        },
+        {
+          "path": "tests/kernels/core/test_cpu_activation.py",
+          "base_blob": "110c92042e0c903983bfb341128679f8f621b95a",
+          "current_main_blob": "110c92042e0c903983bfb341128679f8f621b95a",
+          "upstream_changed_since_test_base": false
+        }
+      ]
+    },
+    {
+      "pr": 64079,
+      "head": "6592612016059859dff1e93bd534edc1a5737615",
+      "patch_sha256": "4d0f15b85d9379ae454ccb943a135d198a7cc751788e3b042c6b35a186624e26",
+      "actual_apply_check_exit": 0,
+      "files": [
+        {
+          "path": ".buildkite/hardware_tests/cpu.yaml",
+          "base_blob": "d4d90eeaa6eb22ed990082c3b87aff733f66ccb9",
+          "current_main_blob": "d4d90eeaa6eb22ed990082c3b87aff733f66ccb9",
+          "upstream_changed_since_test_base": false
+        },
+        {
+          "path": "csrc/cpu/float_convert.hpp",
+          "base_blob": "0682ef402837fa8799fd4a53659367dfd61fdc5b",
+          "current_main_blob": "0682ef402837fa8799fd4a53659367dfd61fdc5b",
+          "upstream_changed_since_test_base": false
+        },
+        {
+          "path": "docs/getting_started/installation/cpu.md",
+          "base_blob": "ebf9ebcdfd5ed2b950feb95336d9f4e077814305",
+          "current_main_blob": "ebf9ebcdfd5ed2b950feb95336d9f4e077814305",
+          "upstream_changed_since_test_base": false
+        },
+        {
+          "path": "tests/kernels/core/test_cpu_activation.py",
+          "base_blob": "110c92042e0c903983bfb341128679f8f621b95a",
+          "current_main_blob": "110c92042e0c903983bfb341128679f8f621b95a",
+          "upstream_changed_since_test_base": false
+        },
+        {
+          "path": "tests/kernels/core/test_cpu_float_conversion.py",
+          "base_blob": null,
+          "current_main_blob": null,
+          "upstream_changed_since_test_base": false
+        }
+      ]
+    },
+    {
+      "pr": 64080,
+      "head": "dfdc85947fe914d04906f5d0206c020c208bd400",
+      "patch_sha256": "9a64258e7a245b739807b3b398b01540e5acc8e9660d7a2f4db0cb1ed3493246",
+      "actual_apply_check_exit": 0,
+      "files": [
+        {
+          "path": ".buildkite/test_areas/misc.yaml",
+          "base_blob": "3f162810a3d4f7d637ebd2f9eb4e4d7fc2fe23c2",
+          "current_main_blob": "fd85f22ddb95d1b2563805bc0765a71d8de5b9b1",
+          "upstream_changed_since_test_base": true
+        },
+        {
+          "path": "docs/getting_started/installation/cpu.md",
+          "base_blob": "ebf9ebcdfd5ed2b950feb95336d9f4e077814305",
+          "current_main_blob": "ebf9ebcdfd5ed2b950feb95336d9f4e077814305",
+          "upstream_changed_since_test_base": false
+        },
+        {
+          "path": "tests/platforms/test_cpu.py",
+          "base_blob": "956436297c5c4f695ee3ee6cef0e1ea322b201b4",
+          "current_main_blob": "956436297c5c4f695ee3ee6cef0e1ea322b201b4",
+          "upstream_changed_since_test_base": false
+        },
+        {
+          "path": "tools/pre_commit/test_tethering_allowlist.txt",
+          "base_blob": "6a900d7f871c40b75c274c4769a2bd502c099ab5",
+          "current_main_blob": "f4c974fb69bc784b1ba714a5bd492b8fcef12d76",
+          "upstream_changed_since_test_base": true
+        },
+        {
+          "path": "vllm/platforms/cpu.py",
+          "base_blob": "9d13e6eb8fb9834d117298b858bd5cfd563611bc",
+          "current_main_blob": "9d13e6eb8fb9834d117298b858bd5cfd563611bc",
+          "upstream_changed_since_test_base": false
+        }
+      ],
+      "first_actual_apply_check_exit": 128,
+      "first_check_note": "Missing promisor blobs could not be fetched under restricted network; original diagnostic retained. Retried with network available."
+    }
+  ],
+  "instruction_changes": [
+    {
+      "path": "AGENTS.md",
+      "changed": false,
+      "current_sha256": "79e8f075ebc79eb8167a1d57d75c67a4a514ef0c1c0acd8d5ec6dd9583c7f860"
+    },
+    {
+      "path": ".agents/skills/pr-checklist/SKILL.md",
+      "changed": false,
+      "current_sha256": "135c14fa5a20dc9744711060f00687985d6eb78987bcb38d42f5aadc21e11ca1"
+    },
+    {
+      "path": "tests/AGENTS.md",
+      "changed": false,
+      "current_sha256": "7ed41073d3a0492fab0462593903365d412d39e23e78b22cc56d9450e9972506"
+    }
+  ],
+  "refreshed_at": "2026-11-04T13:43:21.509582+00:00"
+}

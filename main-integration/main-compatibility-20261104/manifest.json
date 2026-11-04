@@ -1,0 +1,50 @@
+{
+  "files": [
+    {
+      "path": "64078-apply.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "64078.patch.gz",
+      "bytes": 1700,
+      "sha256": "361885e44e304278362eaf5ea0c63063307e861f5243e2df54ed89dafa4e41a2"
+    },
+    {
+      "path": "64079-apply.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "64079.patch.gz",
+      "bytes": 2386,
+      "sha256": "333d8ac5190e5f4b1504d1c2410f4112952610e3d580d3b8a0fa9cc55dc7425f"
+    },
+    {
+      "path": "64080-apply-network-available.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "64080-apply.txt",
+      "bytes": 234,
+      "sha256": "96487d59a5781a61d7cdca403837a803d410b343dd15bf640f2d7e0e3e125552"
+    },
+    {
+      "path": "64080.patch.gz",
+      "bytes": 2244,
+      "sha256": "1e7ef331c60dd76ac720218e14176d823c15b7e133d831b4c961228e14556666"
+    },
+    {
+      "path": "README.md",
+      "bytes": 1737,
+      "sha256": "782f9ecc3eb6f0cc7f5868237d1ad145b0d0f79d3e6ad40e9d46b8034535c12b"
+    },
+    {
+      "path": "summary.json",
+      "bytes": 5310,
+      "sha256": "ee7b19a1e30c10561dce818338b29af232f5f077099eb092308720bd89f04bed"
+    }
+  ],
+  "scope": "Patch applicability only, not newer-main test execution."
+}
