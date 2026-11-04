@@ -1,0 +1,8 @@
+{
+  "workflow_sha256": "e35655a6f07688fedd3354f95029d0a4b50ffd87868ed57a9e37bd2e295281b1",
+  "actionlint": 0,
+  "bash_syntax": 0,
+  "original_payload_unchanged": true,
+  "native_run_result": "not yet run",
+  "scope": "additional scalar BF16; K3 RVV job preserved"
+}
